@@ -435,49 +435,21 @@
         <div class="swiper reviewsSwiper">
           <div class="swiper-wrapper">
 
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-              <div class="review-card p-4 text-center">
-                <div class="review-icon mb-3" aria-hidden="true">💬</div>
-                <blockquote class="review-quote mb-3">
-                  “The staff are incredibly caring — our child’s confidence has blossomed in just a few months. We love the daily updates and photos.”
-                </blockquote>
-                <div class="fw-semibold review-author">— Sarah &amp; Tom, Colchester</div>
-              </div>
-            </div>
+            @foreach ($reviews as $key => $review)
+                <div class="swiper-slide">
+                  <div class="review-card p-4 text-center">
+                      <div class="review-icon mb-3" aria-hidden="true">
+                        {{ ['💬', '🌟', '🧸', '🏅', '👶', '🎨', '🌈', '🎭'][array_rand(['💬', '🌟', '🧸', '🏅', '👶', '🎨', '🌈', '🎭'])] }}
+                      </div>
+                    <blockquote class="review-quote mb-3">
+                      {{ $review->review }}
+                    </blockquote>
+                    <div class="fw-semibold review-author">— {{ $review->name }}</div>
+                  </div>
+                </div>
+            @endforeach
 
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div class="review-card p-4 text-center">
-                <div class="review-icon mb-3" aria-hidden="true">🌟</div>
-                <blockquote class="review-quote mb-3">
-                  “A beautiful balance of structure and play. Teachers take time to understand every child's needs — highly recommended.”
-                </blockquote>
-                <div class="fw-semibold review-author">— Louise P.</div>
-              </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="swiper-slide">
-              <div class="review-card p-4 text-center">
-                <div class="review-icon mb-3" aria-hidden="true">🧸</div>
-                <blockquote class="review-quote mb-3">
-                  “Lovely outdoor spaces and creative indoor activities. My son comes home excited every day — what more could you ask for?”
-                </blockquote>
-                <div class="fw-semibold review-author">— Ahmed K.</div>
-              </div>
-            </div>
-
-            <!-- Slide 4 -->
-            <div class="swiper-slide">
-              <div class="review-card p-4 text-center">
-                <div class="review-icon mb-3" aria-hidden="true">🏅</div>
-                <blockquote class="review-quote mb-3">
-                  “Organised, friendly and reliable team. The care here gives us peace of mind while we’re at work.”
-                </blockquote>
-                <div class="fw-semibold review-author">— Emma R.</div>
-              </div>
-            </div>
+            
 
           </div>
 
