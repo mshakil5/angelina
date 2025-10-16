@@ -629,92 +629,18 @@
       <div class="container">
         <div id="galleryGrid" class="row g-3">
 
-          <!-- Each item: data-full holds full-size image -->
-          <!-- We'll render 8 visible images initially (index 0..7) -->
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="0" tabindex="0">
-              <img src="https://picsum.photos/seed/g1/800/600" alt="Gallery 1" loading="lazy" data-full="https://picsum.photos/seed/g1/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
 
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="1" tabindex="0">
-              <img src="https://picsum.photos/seed/g2/800/600" alt="Gallery 2" loading="lazy" data-full="https://picsum.photos/seed/g2/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
+          @foreach ($galleries as $gallery)
+              <div class="col-6 col-md-3">
+                <div class="gallery-item" data-index="0" tabindex="0">
+                  <img src="{{ asset('images/content/'.$gallery->feature_image)}}" alt="{{$gallery->short_title}}" loading="lazy" data-full="{{ asset('images/content/'.$gallery->feature_image)}}">
+                  <div class="thumb-overlay"><span>View</span></div>
+                </div>
+              </div>
+          @endforeach
 
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="2" tabindex="0">
-              <img src="https://picsum.photos/seed/g3/800/600" alt="Gallery 3" loading="lazy" data-full="https://picsum.photos/seed/g3/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
+          
 
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="3" tabindex="0">
-              <img src="https://picsum.photos/seed/g4/800/600" alt="Gallery 4" loading="lazy" data-full="https://picsum.photos/seed/g4/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="4" tabindex="0">
-              <img src="https://picsum.photos/seed/g5/800/600" alt="Gallery 5" loading="lazy" data-full="https://picsum.photos/seed/g5/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="5" tabindex="0">
-              <img src="https://picsum.photos/seed/g6/800/600" alt="Gallery 6" loading="lazy" data-full="https://picsum.photos/seed/g6/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="6" tabindex="0">
-              <img src="https://picsum.photos/seed/g7/800/600" alt="Gallery 7" loading="lazy" data-full="https://picsum.photos/seed/g7/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3">
-            <div class="gallery-item" data-index="7" tabindex="0">
-              <img src="https://picsum.photos/seed/g8/800/600" alt="Gallery 8" loading="lazy" data-full="https://picsum.photos/seed/g8/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <!-- Hidden additional images (revealed by See more) -->
-          <div class="col-6 col-md-3 more-item d-none">
-            <div class="gallery-item" data-index="8" tabindex="0">
-              <img src="https://picsum.photos/seed/g9/800/600" alt="Gallery 9" loading="lazy" data-full="https://picsum.photos/seed/g9/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3 more-item d-none">
-            <div class="gallery-item" data-index="9" tabindex="0">
-              <img src="https://picsum.photos/seed/g10/800/600" alt="Gallery 10" loading="lazy" data-full="https://picsum.photos/seed/g10/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3 more-item d-none">
-            <div class="gallery-item" data-index="10" tabindex="0">
-              <img src="https://picsum.photos/seed/g11/800/600" alt="Gallery 11" loading="lazy" data-full="https://picsum.photos/seed/g11/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-3 more-item d-none">
-            <div class="gallery-item" data-index="11" tabindex="0">
-              <img src="https://picsum.photos/seed/g12/800/600" alt="Gallery 12" loading="lazy" data-full="https://picsum.photos/seed/g12/1600/1200">
-              <div class="thumb-overlay"><span>View</span></div>
-            </div>
-          </div>
 
         </div> <!-- /.row -->
       </div> <!-- /.container -->

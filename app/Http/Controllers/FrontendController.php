@@ -65,6 +65,8 @@ class FrontendController extends Controller
             return ClientReview::where('status', 1)->latest()->get();
         });
 
+        $galleries = Content::with('category')->where('type', 1)->latest()->get();
+
         $plans = Plan::where('status', 1)->get();
 
         $sections = Section::where('status', 1)
@@ -77,7 +79,7 @@ class FrontendController extends Controller
             $company?->meta_keywords ?? '',
             $company?->meta_image ? asset('images/company/meta/' . $company->meta_image) : null
         );
-      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'plans'));
+      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'plans','galleries'));
     }
 
     public function type($slug)
