@@ -22,31 +22,12 @@
             <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                 <img src="{{'images/slider/'.$slider->image}}" class="d-block w-100" alt="Play area">
                 <div class="carousel-caption text-start text-white">
-                    {{-- <h1 class="display-5 fw-bold">A Brighter Future For All</h1>
-                    <p class="lead">A safe, playful and caring environment where little learners thrive.</p>
-                    <p><a class="btn btn-primary btn-lg" href="#about">Learn more</a></p> --}}
+                    @if ($slider->title)<h1 class="display-5 fw-bold">{{ $slider->title ?? '' }}</h1>@endif
+                    @if($slider->description)<p class="lead">{{ $slider->description ?? '' }}</p>@endif
+                    @if($slider->link)<p><a class="btn btn-primary btn-lg" href="{{ $slider->link ?? '' }}">Learn more</a></p>@endif
                 </div>
             </div>
         @endforeach
-
-
-        
-
-        {{-- <div class="carousel-item">
-          <img src="https://picsum.photos/seed/nursery2/1600/700" class="d-block w-100" alt="Indoor play">
-          <div class="carousel-caption text-white">
-            <h2 class="fw-bold">Play-based Learning</h2>
-            <p>Exploration, creativity and early social development through play.</p>
-          </div>
-        </div>
-
-        <div class="carousel-item">
-          <img src="https://picsum.photos/seed/nursery3/1600/700" class="d-block w-100" alt="Outdoor time">
-          <div class="carousel-caption text-white">
-            <h2 class="fw-bold">Confidence & Independence</h2>
-            <p>Preparing children for their next big step — school readiness with care.</p>
-          </div>
-        </div> --}}
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
