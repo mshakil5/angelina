@@ -101,13 +101,13 @@
             <div class="about-left">
               <!-- large left image -->
               <div class="single">
-                <img src="https://picsum.photos/seed/left1/800/800" alt="Nursery photo 1">
+                <img src="{{asset('images/service/' .$toddlers->image )}}" alt="{{$toddlers->title}}">
               </div>
 
               <!-- stacked two images on the right -->
               <div class="stack">
-                <img src="https://picsum.photos/seed/right1/800/400" alt="Nursery photo 2">
-                <img src="https://picsum.photos/seed/right2/800/400" alt="Nursery photo 3">
+                <img src="{{asset('images/service/' .$twothrees->image )}}" alt="{{$twothrees->title}}">
+                <img src="{{asset('images/service/' .$preschool->image )}}" alt="{{$preschool->title}}">
               </div>
             </div>
           </div>
@@ -175,64 +175,15 @@
             <!-- Tab panes -->
             <div class="tab-content mt-3" id="ageTabsContent">
               <div class="tab-pane fade show active" id="toddlers" role="tabpanel" aria-labelledby="toddlers-tab">
-                <h5 class="mt-2">Welcome to Angelina’s Day Care – Toddler Room (3 to 12 Months)</h5>
-                <p>
-                  Our Toddler Room offers a warm, caring space tailored for babies aged 3 to 12 months.
-                  We support each child’s rapid development with gentle care and meaningful play.
-                </p>
-
-                <h6 class="mt-3">Nurturing Early Development</h6>
-                <p>With close and trusting relationships, our experienced team supports your baby’s wellbeing and growth in key areas:</p>
-                <ul>
-                  <li>Physical movement</li>
-                  <li>Language and communication</li>
-                  <li>Social-emotional bonding</li>
-                  <li>Creative play</li>
-                </ul>
-
-                <h6 class="mt-3">Learning Through Exploration</h6>
-                <p>Your child will enjoy soft toys, music, sensory play and nature-based materials—all designed to spark curiosity and early learning.</p>
-
-                <h6 class="mt-3">A Calm Transition</h6>
-                <p>We partner with families to create a smooth, happy start to nursery life, respecting your child’s routines and needs.</p>
+                {!! $toddlers->long_desc !!}
               </div>
 
               <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
-                <h5 class="mt-2">Welcome to Angelina’s Day Care – Two to Three’s Room</h5>
-                <p>
-                  In this room, we support your child’s growing independence. With gentle guidance, they’ll explore toilet training,
-                  self-feeding and dressing themselves. Please pack extra clothes—just in case!
-                </p>
-
-                <h6 class="mt-3">Learning Through Play</h6>
-                <p>Children enjoy:</p>
-                <ul>
-                  <li>Role play in our home corner</li>
-                  <li>Building with big blocks</li>
-                  <li>Creative sand and water play</li>
-                  <li>A cozy reading nook</li>
-                  <li>Outdoor fun for movement and balance</li>
-                </ul>
-                <p>Your child will gain confidence, curiosity, and key self-care skills—all through play!</p>
+                 {!! $twothrees->long_desc !!}
               </div>
 
               <div class="tab-pane fade" id="preschool" role="tabpanel" aria-labelledby="preschool-tab">
-                <h5 class="mt-2">Welcome to Angelina’s Day Care – Preschool Room</h5>
-                <p>
-                  Our Preschool Room nurtures your child’s growing confidence and school readiness. Children practice independence
-                  through activities like dressing, toileting, and making simple choices during the day.
-                </p>
-
-                <h6 class="mt-3">Learning Through Play</h6>
-                <p>Preschoolers enjoy:</p>
-                <ul>
-                  <li>Imaginative role play and storytelling</li>
-                  <li>Early writing and number games</li>
-                  <li>Creative arts and crafts</li>
-                  <li>Science and nature exploration</li>
-                  <li>Active outdoor play to build coordination and teamwork</li>
-                </ul>
-                <p>We help your child grow into a curious, capable, and confident learner—ready for the next big step!</p>
+                {!! $preschool->long_desc !!}
               </div>
             </div>
 
@@ -252,26 +203,21 @@
       <div class="container">
         <h2 class="menu-title">Weekly Food Menu</h2>
 
+        
+
+
       <div class="menu-grid">
-        <div class="menu-card bg1">
-          <img src="https://angelinasdaycare.co.uk/wp-content/uploads/2023/08/3-Peanut-butter-and-jelly-sandwich.jpg" alt="Week 1">
-          <div class="week-title">Week 1</div>
-        </div>
 
-        <div class="menu-card bg2">
-          <img src="https://angelinasdaycare.co.uk/wp-content/uploads/2023/08/5-pizza.jpg" alt="Week 2">
-          <div class="week-title">Week 2</div>
-        </div>
+        @foreach ($features as $key => $feature)
 
-        <div class="menu-card bg3">
-          <img src="https://angelinasdaycare.co.uk/wp-content/uploads/2023/08/4-tacos.jpg" alt="Week 3">
-          <div class="week-title">Week 3</div>
-        </div>
+            <div class="menu-card {{ ['bg1','bg2','bg3','bg4'][array_rand(['bg1','bg2','bg3','bg4'])] }}">
+              <img src="{{asset('images/service/' .$feature->image )}}" alt="{{ $feature->title }}">
+              <div class="week-title">{{ $feature->title }}</div>
+            </div>
 
-        <div class="menu-card bg4">
-          <img src="https://angelinasdaycare.co.uk/wp-content/uploads/2023/08/6-Chicken-nuggets.jpg" alt="Week 4">
-          <div class="week-title">Week 4</div>
-        </div>
+        @endforeach
+
+
       </div>
       </div>
   </section>
@@ -399,18 +345,6 @@
         <div class="position-relative">
           <img src="https://picsum.photos/seed/facility/900/600" alt="Nursery facilities" class="img-fluid rounded-3 w-100 shadow-sm">
 
-          <!-- optional overlay cards for a more "catalog" feel -->
-          <div class="facility-overlay d-none d-md-flex flex-column gap-3 position-absolute" style="right:1rem; bottom:1rem; width:220px;">
-            <div class="overlay-card p-2 rounded-3 bg-white shadow-sm">
-              <div class="fw-semibold small mb-1">Smart Board</div>
-              <small class="text-muted">Interactive learning tools in rooms.</small>
-            </div>
-
-            <div class="overlay-card p-2 rounded-3 bg-white shadow-sm">
-              <div class="fw-semibold small mb-1">Sensory Room</div>
-              <small class="text-muted">Calm space with sensory activities.</small>
-            </div>
-          </div>
         </div>
       </div>
     </div> <!-- /.row -->
@@ -430,81 +364,25 @@
     <div class="swiper roomSwiper">
       <div class="swiper-wrapper">
 
-        <!-- Room card 1 -->
-        <div class="swiper-slide">
-          <div class="room-card">
-            <div class="room-img">
-              <img src="https://picsum.photos/seed/toddler/500/350" alt="Toddler Room">
+        @foreach ($rooms as $room)
+            <div class="swiper-slide">
+              <div class="room-card">
+                <div class="room-img">
+                  <img src="{{asset('images/content/'. $room->feature_image)}}" alt="{{$room->short_title}}">
+                </div>
+                <div class="room-icon">
+                  🐻
+                </div>
+                <div class="room-content text-center">
+                  <h4 class="fw-bold mb-2">{{$room->short_title}}</h4>
+                  <p class="text-muted mb-3">
+                    {{$room->long_title}}
+                  </p>
+                  <a href="#" class="btn btn-outline-primary">Read More</a>
+                </div>
+              </div>
             </div>
-            <div class="room-icon">
-              🐻
-            </div>
-            <div class="room-content text-center">
-              <h4 class="fw-bold mb-2">Toddler Room</h4>
-              <p class="text-muted mb-3">
-                A cozy space for the youngest explorers to learn through gentle play and care.
-              </p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room card 2 -->
-        <div class="swiper-slide">
-          <div class="room-card">
-            <div class="room-img">
-              <img src="https://picsum.photos/seed/twotothree/500/350" alt="Two to Three’s">
-            </div>
-            <div class="room-icon">
-              🐰
-            </div>
-            <div class="room-content text-center">
-              <h4 class="fw-bold mb-2">Two to Three’s</h4>
-              <p class="text-muted mb-3">
-                Encouraging independence through fun, creative play and gentle guidance.
-              </p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room card 3 -->
-        <div class="swiper-slide">
-          <div class="room-card">
-            <div class="room-img">
-              <img src="https://picsum.photos/seed/preschool/500/350" alt="Preschool Room">
-            </div>
-            <div class="room-icon">
-              🦁
-            </div>
-            <div class="room-content text-center">
-              <h4 class="fw-bold mb-2">Preschool Room</h4>
-              <p class="text-muted mb-3">
-                Building confidence and curiosity to prepare for the big school journey.
-              </p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Room card 4 -->
-        <div class="swiper-slide">
-          <div class="room-card">
-            <div class="room-img">
-              <img src="https://picsum.photos/seed/outdoor/500/350" alt="Outdoor Play">
-            </div>
-            <div class="room-icon">
-              🐦
-            </div>
-            <div class="room-content text-center">
-              <h4 class="fw-bold mb-2">Outdoor Play</h4>
-              <p class="text-muted mb-3">
-                Safe outdoor fun that develops balance, teamwork, and imagination.
-              </p>
-              <a href="#" class="btn btn-outline-primary">Read More</a>
-            </div>
-          </div>
-        </div>
+        @endforeach                
 
       </div>
       <!-- Swiper controls -->
