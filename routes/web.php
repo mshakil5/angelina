@@ -16,9 +16,9 @@ Route::get('/clear', function() {
   return "Cleared!";
 });
 
- Route::fallback(function () {
-    return redirect('/');
-});
+//  Route::fallback(function () {
+//     return redirect('/');
+// });
 
 require __DIR__.'/admin.php';
 
@@ -38,6 +38,9 @@ Route::get('/content/{type}/tag/{slug}', [FrontendController::class, 'tagContent
 
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact', [FrontendController::class, 'storeContact'])->name('contact.store');
+
+
+Route::get('/food-choice', [FrontendController::class, 'foodChoice'])->name('foodChoice');
 
 Route::get('/team', [FrontendController::class, 'team'])->name('team');
 

@@ -108,8 +108,8 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
                 Settings <i class="fas fa-angle-left right"></i>
@@ -132,6 +132,12 @@
                 <a href="{{ route('admin.aboutUs') }}" class="nav-link {{ Route::is('admin.aboutUs') ? 'active' : '' }}">
                     <i class="fas fa-info-circle nav-icon"></i>
                     <p>About Us</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.foodChoice') }}" class="nav-link {{ Route::is('admin.foodChoice') ? 'active' : '' }}">
+                    <i class="fas fa-info-circle nav-icon"></i>
+                    <p>Food Choice</p>
                 </a>
             </li>
             <li class="nav-item">

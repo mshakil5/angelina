@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanyDetails;
+use App\Models\Master;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cache;
 
@@ -133,6 +134,26 @@ class CompanyDetailsController extends Controller
         $companyDetails->save();
 
         return redirect()->back()->with('success', 'About us updated successfully.');
+    }
+
+
+    public function foodChoice()
+    {       
+        $foodChoice = Master::where('name', 'foodChoice')->first();
+        return view('admin.company.foodChoice', compact('foodChoice'));
+    }
+
+    public function foodChoiceUpdate(Request $request)
+    {
+        $request->validate([
+            'foodChoice' => 'required|string',
+        ]);
+
+        $companyDetails = Master::where('name', 'foodChoice')->first();
+        $companyDetails->long_description = $request->foodChoice;
+        $companyDetails->save();
+
+        return redirect()->back()->with('success', 'Food Choice updated successfully.');
     }
 
     public function privacyPolicy()

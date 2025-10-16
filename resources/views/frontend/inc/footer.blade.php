@@ -92,8 +92,8 @@
               <div class="fw-bold">Contact Us</div>
               <div class="small text-muted">Call or email to arrange a visit</div>
               <div class="mt-2">
-                <a href="tel:+441234567890" class="d-block text-decoration-none fw-semibold">+44 1234 567 890</a>
-                <a href="mailto:info@sunny-nursery.co.uk" class="d-block text-decoration-none small text-muted">info@sunny-nursery.co.uk</a>
+                <a href="tel:{{$company->phone1}}" class="d-block text-decoration-none fw-semibold">{{$company->phone1}}</a>
+                <a href="mailto:{{$company->email1}}" class="d-block text-decoration-none small text-muted">{{$company->email1}}</a>
               </div>
             </div>
           </div>
@@ -101,10 +101,10 @@
           <!-- Social icons -->
           <div class="mb-3">
             <div class="socials d-flex gap-2 align-items-center">
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="#" aria-label="X / Twitter"><i class="bi bi-x"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->facebook}}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->instagram}}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->twitter}}" aria-label="X / Twitter"><i class="bi bi-x"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->youtube}}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
             </div>
           </div>
 
@@ -123,7 +123,7 @@
 
     <div class="row align-items-center">
       <div class="col-md-6 text-center text-md-start small text-muted">
-        © <span id="footerYear"></span> SunnyNursery. All rights reserved.
+        © <span id="footerYear"></span> {{$company->copyright}}
       </div>
       <div class="col-md-6 text-center text-md-end small text-muted">
         Built with care • <a href="#" class="text-decoration-none">Terms & Conditions</a>

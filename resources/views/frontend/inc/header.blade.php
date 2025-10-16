@@ -26,7 +26,7 @@
         </li>
 
         <li class="nav-item mx-2">
-          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('home') }}#about">
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('foodChoice') }}">
             <i class="fas fa-book" style="color: #e74c3c; font-size: 28px;"></i>
             <span>Food & Choice</span>
           </a>

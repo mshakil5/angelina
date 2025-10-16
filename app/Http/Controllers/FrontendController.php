@@ -32,7 +32,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $company = CompanyDetails::select('meta_title', 'meta_description', 'meta_keywords', 'meta_image')->first();
+        $company = CompanyDetails::select('company_name', 'fav_icon', 'google_site_verification', 'footer_content', 'facebook', 'twitter','instagram', 'youtube',  'linkedin', 'website', 'phone1', 'email1', 'address1','company_logo', 'meta_title', 'meta_description', 'meta_keywords', 'meta_image','copyright')->first();
 
         $welcome = Master::firstOrCreate(['name' => 'welcome']);
 
@@ -75,7 +75,6 @@ class FrontendController extends Controller
         $preschool = Service::where('type', 1)->where('title', 'Preschool')->first();
 
         
-        $features = Service::where('type', 2)->get();
 
         $galleries = Content::with('category')->where('type', 1)->latest()->get();
         $faqs = Cache::remember('faqs', now()->addDay(), function () {
@@ -94,7 +93,7 @@ class FrontendController extends Controller
             $company?->meta_keywords ?? '',
             $company?->meta_image ? asset('images/company/meta/' . $company->meta_image) : null
         );
-      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs' ,'toddlers','twothrees','preschool','features','rooms'));
+      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs' ,'toddlers','twothrees','preschool','features','rooms','company'));
     }
 
     public function type($slug)
@@ -285,6 +284,8 @@ class FrontendController extends Controller
         $contact->phone      = $request->input('phone');
         $contact->subject    = $request->input('subject');
         $contact->message    = $request->input('message');
+        $contact->pref_time    = $request->input('prefTime');
+        $contact->nursery    = $request->input('nursery');
         $contact->save();
 
         $contactEmails = ContactEmail::where('status', 1)->pluck('email');
@@ -430,6 +431,25 @@ class FrontendController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Your newsletter request has been sent. Thank you!')->withFragment('footer');
+    }
+
+    public function foodChoice()
+    {
+      $foodChoice = Master::firstOrCreate(['name' => 'foodChoice']);
+
+      if($foodChoice){
+          $this->seo(
+              $foodChoice->meta_title,
+              $foodChoice->meta_description,
+              $foodChoice->meta_keywords,
+              $foodChoice->meta_image ? asset('images/meta_image/' . $foodChoice->meta_image) : null
+          );
+      }
+        $features = Cache::remember('active_features', now()->addDay(), function () {
+            return Service::orderByRaw('sl = 0, sl ASC')->orderBy('id', 'desc')->where('type', 2)->where('status', 1)->get();
+        });
+      $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+      return view('frontend.foodChoice', compact('foodChoice', 'company', 'features'));
     }
 
 }
