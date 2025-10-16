@@ -678,7 +678,7 @@
             Here are some of the most common questions parents ask about our nursery environment, daily routines, and enrolment process.
           </p> -->
           <!-- <img src="https://cdn-icons-png.flaticon.com/512/3209/3209983.png" alt="Nursery FAQ illustration" class="img-fluid mt-4" style="max-width:220px;"> -->
-          <img src="images/faq.jpg" alt="Nursery FAQ illustration" class="img-fluid mt-4" >
+          <img src="{{asset('resources/frontend/images/faq.jpg')}}" alt="FAQ" class="img-fluid mt-4" >
         </div>
       </div>
 
@@ -686,75 +686,23 @@
       <div class="col-lg-7">
         <div class="accordion faq-accordion" id="faqAccordion">
 
+
+          @foreach ($faqs as $key => $faq)
+              
           <!-- Item 1 -->
           <div class="accordion-item">
-            <h2 class="accordion-header" id="faq1">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                What are your nursery opening hours?
+            <h2 class="accordion-header" id="faq-{{ $key }}">
+              <button class="{{ $key == 0 ? 'accordion-button' : 'accordion-button collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $key }}" aria-expanded="{{ $key == 0 ? 'true' : 'false' }}" aria-controls="collapse-{{ $key }}">
+                {{ $faq->question }}
               </button>
             </h2>
-            <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+            <div id="collapse-{{ $key }}" class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}" aria-labelledby="faq-{{ $key }}" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Our nursery is open <strong>Monday to Friday, 7:30 AM to 6:00 PM</strong>, excluding public holidays. We offer both full-day and half-day sessions for your convenience.
+                {!! $faq->answer !!}
               </div>
             </div>
           </div>
-
-          <!-- Item 2 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq2">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                Do you provide meals and snacks?
-              </button>
-            </h2>
-            <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Yes! We provide <strong>healthy, balanced meals and snacks</strong> freshly prepared daily. Our menus are designed to meet nutritional guidelines and cater to allergies or dietary needs.
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq3">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                How do you ensure children’s safety?
-              </button>
-            </h2>
-            <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Safety is our top priority. We maintain <strong>secure entry systems, CCTV monitoring</strong>, and <strong>qualified first-aid trained staff</strong> at all times. Regular health and safety checks are conducted daily.
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 4 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq4">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                What should I pack for my child each day?
-              </button>
-            </h2>
-            <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Please send a <strong>change of clothes, nappies, wipes, and any comfort items</strong> your child enjoys. For older children, include indoor shoes and weather-appropriate outdoor gear.
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 5 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="faq5">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                How can I register my child?
-              </button>
-            </h2>
-            <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="faq5" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">
-                Simply complete our online registration form or visit us in person. Our team will guide you through every step and provide a tour of our nursery environment.
-              </div>
-            </div>
-          </div>
+          @endforeach
 
         </div>
       </div>

@@ -450,6 +450,7 @@
 .accordion-button:not(.collapsed)::after {
   content: '–';
   transform: rotate(180deg);
+  background-image: none !important;
 }
 
 

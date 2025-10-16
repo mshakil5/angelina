@@ -67,6 +67,11 @@ class FrontendController extends Controller
 
         $galleries = Content::with('category')->where('type', 1)->latest()->get();
 
+        
+        $faqs = Cache::remember('faqs', now()->addDay(), function () {
+            return FaqQuestion::orderBy('id', 'asc')->get();
+        });
+
         $plans = Plan::where('status', 1)->get();
 
         $sections = Section::where('status', 1)
@@ -79,7 +84,7 @@ class FrontendController extends Controller
             $company?->meta_keywords ?? '',
             $company?->meta_image ? asset('images/company/meta/' . $company->meta_image) : null
         );
-      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'plans','galleries'));
+      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'plans','galleries', 'faqs'));
     }
 
     public function type($slug)
