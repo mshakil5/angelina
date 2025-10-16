@@ -1,3 +1,23 @@
+
+<style>
+  #cookie {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+  }
+
+  #cookie.active {
+    transform: translateY(0);
+  }
+</style>
+
+
 <section id="cookie" class="services-2 section cookie-consent-banner">
   <div class="container">
     <div class="row justify-content-center align-items-center" data-aos="fade-up">

@@ -17,16 +17,22 @@
       </div>
 
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="https://picsum.photos/seed/nursery1/1600/700" class="d-block w-100" alt="Play area">
-          <div class="carousel-caption text-start text-white">
-            <h1 class="display-5 fw-bold">A Brighter Future For All</h1>
-            <p class="lead">A safe, playful and caring environment where little learners thrive.</p>
-            <p><a class="btn btn-primary btn-lg" href="#about">Learn more</a></p>
-          </div>
-        </div>
 
-        <div class="carousel-item">
+        @foreach ($sliders as $key => $slider)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{'images/slider/'.$slider->image}}" class="d-block w-100" alt="Play area">
+                <div class="carousel-caption text-start text-white">
+                    {{-- <h1 class="display-5 fw-bold">A Brighter Future For All</h1>
+                    <p class="lead">A safe, playful and caring environment where little learners thrive.</p>
+                    <p><a class="btn btn-primary btn-lg" href="#about">Learn more</a></p> --}}
+                </div>
+            </div>
+        @endforeach
+
+
+        
+
+        {{-- <div class="carousel-item">
           <img src="https://picsum.photos/seed/nursery2/1600/700" class="d-block w-100" alt="Indoor play">
           <div class="carousel-caption text-white">
             <h2 class="fw-bold">Play-based Learning</h2>
@@ -40,7 +46,7 @@
             <h2 class="fw-bold">Confidence & Independence</h2>
             <p>Preparing children for their next big step — school readiness with care.</p>
           </div>
-        </div>
+        </div> --}}
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
