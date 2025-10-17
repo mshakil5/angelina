@@ -41,6 +41,7 @@ Route::post('/contact', [FrontendController::class, 'storeContact'])->name('cont
 
 
 Route::get('/food-choice', [FrontendController::class, 'foodChoice'])->name('foodChoice');
+Route::get('/fees-and-terms', [FrontendController::class, 'fees'])->name('fees');
 
 Route::get('/team', [FrontendController::class, 'team'])->name('team');
 

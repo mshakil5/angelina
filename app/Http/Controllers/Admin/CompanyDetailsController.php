@@ -156,6 +156,29 @@ class CompanyDetailsController extends Controller
         return redirect()->back()->with('success', 'Food Choice updated successfully.');
     }
 
+
+    public function fees()
+    {       
+        $fees = Master::where('name', 'fees')->first();
+        return view('admin.company.fees', compact('fees'));
+    }
+
+    public function feesUpdate(Request $request)
+    {
+        $request->validate([
+            'fees' => 'required|string',
+        ]);
+
+        $companyDetails = Master::where('name', 'fees')->first();
+        $companyDetails->long_description = $request->fees;
+        $companyDetails->save();
+
+        return redirect()->back()->with('success', 'Food Choice updated successfully.');
+    }
+
+
+
+
     public function privacyPolicy()
     {
         $companyDetails = CompanyDetails::select('privacy_policy')->first();

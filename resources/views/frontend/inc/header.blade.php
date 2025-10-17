@@ -45,7 +45,7 @@
         </li>
 
         <li class="nav-item mx-2">
-          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('home') }}#fees">
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('fees') }}">
             <i class="fas fa-coins" style="color: #f39c12; font-size: 28px;"></i>
             <span>Fees & Terms</span>
           </a>

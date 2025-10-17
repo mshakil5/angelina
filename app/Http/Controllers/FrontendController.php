@@ -452,4 +452,21 @@ class FrontendController extends Controller
       return view('frontend.foodChoice', compact('foodChoice', 'company', 'features'));
     }
 
+    public function fees()
+    {
+      $fees = Master::firstOrCreate(['name' => 'fees']);
+
+      if($fees){
+          $this->seo(
+              $fees->meta_title,
+              $fees->meta_description,
+              $fees->meta_keywords,
+              $fees->meta_image ? asset('images/meta_image/' . $fees->meta_image) : null
+          );
+      }
+      
+      $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+      return view('frontend.fees', compact('fees', 'company'));
+    }
+
 }
