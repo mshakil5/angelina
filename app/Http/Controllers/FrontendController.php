@@ -469,4 +469,23 @@ class FrontendController extends Controller
       return view('frontend.fees', compact('fees', 'company'));
     }
 
+
+
+    public function aboutUs()
+    {
+      $about1 = Master::firstOrCreate(['name' => 'about1']);
+
+      if($about1){
+          $this->seo(
+              $about1->meta_title,
+              $about1->meta_description,
+              $about1->meta_keywords,
+              $about1->meta_image ? asset('images/meta_image/' . $about1->meta_image) : null
+          );
+      }
+      
+      $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+      return view('frontend.about', compact('about1', 'company'));
+    }
+
 }

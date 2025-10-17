@@ -52,7 +52,7 @@
         </li>
 
         <li class="nav-item mx-2">
-          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('home') }}#about">
+          <a class="nav-link d-flex flex-column align-items-center" href="{{ route('aboutUs') }}">
             <i class="fas fa-info-circle" style="color: #3498db; font-size: 28px;"></i>
             <span>About</span>
           </a>
