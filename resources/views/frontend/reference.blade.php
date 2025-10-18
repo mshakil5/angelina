@@ -127,7 +127,7 @@
     .form-floating-custom textarea:focus,
     .form-floating-custom select:focus{
       outline: none;
-      border-color: rgba(233,30,99,0.55);
+      border-color: #72d672;
       box-shadow: 0 6px 18px rgba(233,30,99,0.06);
     }
     .form-floating-custom input:not(:placeholder-shown) + label,
@@ -171,6 +171,12 @@
 
     /* small responsiveness tweaks */
     .small-note { font-size:.9rem; color:var(--muted); margin-top:10px; }
+
+    .is-invalid {
+      border-color: #dc3545 !important;
+      box-shadow: 0 0 0 .1rem rgba(220,53,69,.25);
+    }
+
  
 
 </style>
@@ -200,8 +206,8 @@
           </div>
         </div>
 
-        <!-- Smart form: replace action with your endpoint -->
-        <form id="referenceForm" action="#" method="POST" novalidate>
+        <form id="referenceForm">
+          @csrf
           <div class="row g-3">
             <!-- Candidate -->
             <div class="col-md-6">
@@ -415,7 +421,7 @@
               </div>
 
               <div>
-                <button type="submit" class="btn btn-submit" id="submitBtn">
+                <button type="button" class="btn btn-submit" id="submitBtn">
                   <span id="btnLabel">Submit Reference</span>
                   <span id="btnSpinner" class="spinner-border spinner-border-sm ms-2" role="status" style="display:none" aria-hidden="true"></span>
                 </button>
@@ -432,5 +438,157 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('resources/admin/js/jquery.min.js')}}"></script>
+<script>
+$(document).ready(function () {
 
+  $.ajaxSetup({
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+  });
+
+  $('#submitBtn').on('click', function(e){
+    e.preventDefault();
+
+    // 🔹 Step 1: Clear old alerts
+    $('.alert').remove();
+
+    // 🔹 Step 2: Client-side validation
+    let isValid = true;
+    let firstError = null;
+
+    // List of required fields
+    const requiredFields = [
+      '#candidate_first',
+      '#candidate_last',
+      '#referee_first',
+      '#referee_last',
+      '#referee_email',
+      '#country',
+      '#relationship',
+      '#criteria',
+      '#permission_disclose',
+      '#disciplinary',
+      '#suitability',
+      '#re_employ',
+      '#accuracy'
+    ];
+
+    requiredFields.forEach(function(selector) {
+      const field = $(selector);
+      const value = field.val()?.trim();
+
+      // Reset any previous error state
+      field.removeClass('is-invalid');
+
+      if (!value) {
+        isValid = false;
+        field.addClass('is-invalid');
+
+        // Store first invalid field for focus/scroll
+        if (!firstError) firstError = field;
+      }
+    });
+
+    // Email format validation
+    const emailField = $('#referee_email');
+    const emailValue = emailField.val()?.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailValue && !emailPattern.test(emailValue)) {
+      isValid = false;
+      emailField.addClass('is-invalid');
+      if (!firstError) firstError = emailField;
+    }
+
+    if (!isValid) {
+      $('.reference-card').prepend(`
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          Please fill in all required fields correctly before submitting.
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `);
+      // Smooth scroll to first invalid field
+      $('html, body').animate({
+        scrollTop: firstError.offset().top - 120
+      }, 600);
+      return; // stop ajax submission
+    }
+
+    // 🔹 Step 3: AJAX submission
+    var form_data = new FormData($('#referenceForm')[0]);
+
+    $.ajax({
+      url: "{{ route('referenceStore') }}",
+      method: "POST",
+      data: form_data,
+      processData: false,
+      contentType: false,
+      beforeSend: function() {
+        $('#submitBtn').prop('disabled', true);
+        $('#btnSpinner').show();
+        $('#btnLabel').text('Submitting...');
+      },
+      success: function(res){
+        console.log(res);
+        $('.reference-card').prepend(`
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            ${res.message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `);
+        $('#referenceForm')[0].reset();
+        pageTop();
+      },
+      error: function(err){
+        $('.reference-card').prepend(`
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Error submitting form. Please try again.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `);
+        pageTop();
+      },
+      complete: function() {
+        $('#submitBtn').prop('disabled', false);
+        $('#btnSpinner').hide();
+        $('#btnLabel').text('Submit Reference');
+      }
+    });
+  });
+
+  // 🔹 Smooth scroll helper
+  function pageTop() {
+    window.scrollTo({
+      top: 130,
+      behavior: 'smooth',
+    });
+  }
+
+
+  const requiredFields = [
+    '#candidate_first',
+    '#candidate_last',
+    '#referee_first',
+    '#referee_last',
+    '#referee_email',
+    '#country',
+    '#relationship',
+    '#criteria',
+    '#permission_disclose',
+    '#disciplinary',
+    '#suitability',
+    '#re_employ',
+    '#accuracy'
+  ];
+
+  // Remove 'is-invalid' class when user starts typing or changes field value
+  requiredFields.forEach(function(selector) {
+    $(document).on('input change', selector, function() {
+      if ($(this).val().trim() !== '') {
+        $(this).removeClass('is-invalid');
+      }
+    });
+  });
+
+});
+</script>
 @endsection

@@ -26,7 +26,9 @@ use App\Models\TeamMember;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Newsletter;
+use App\Models\Reference;
 use App\Models\Subscription;
+use Illuminate\Support\Facades\Log;
 
 class FrontendController extends Controller
 {
@@ -538,6 +540,28 @@ class FrontendController extends Controller
       
         $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
         return view('frontend.reference', compact('job', 'company'));
+    }
+
+    public function referenceStore(Request $request)
+    {
+        $validated = $request->validate([
+            'candidate_first' => 'required|string|max:255',
+            'candidate_last' => 'required|string|max:255',
+            'referee_first' => 'required|string|max:255',
+            'referee_last' => 'required|string|max:255',
+            'referee_email' => 'required|email|max:255',
+            'country' => 'required|string|max:255',
+            'criteria' => 'required|string',
+        ]);
+
+        Log::info('Reference form data: ', $request->all());
+
+        Reference::create($request->all());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reference submitted successfully!'
+        ]);
     }
 
 }
