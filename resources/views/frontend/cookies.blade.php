@@ -10,6 +10,7 @@
     padding: 20px 0;
     transform: translateY(100%);
     transition: transform 0.5s ease;
+    background-color: #fff;
   }
 
   #cookie.active {
@@ -28,7 +29,7 @@
           analyse usage, and support our marketing efforts.
         </p>
         <div class="cookie-buttons mt-3">
-          <button class="btn btn-get-started" onclick="acceptCookies()">Accept</button>
+          <button class="btn btn-primary rounded-pill px-4" onclick="acceptCookies()">Accept</button>
         </div>
       </div>
     </div>
