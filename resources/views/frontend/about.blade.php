@@ -173,6 +173,14 @@ body{padding:20px 12px}
 <section class="about-section" aria-labelledby="about-heading">
   <div class="container">
     <div class="row g-4 align-items-center">
+      
+      <div class="text-center mb-5">
+        {{-- <h2>Enroll Now</h2> --}}
+        <a href="https://app.famly.co/#/customInquiryForm/c6ae31a7-6348-4f58-89df-fd12ca88e5d7/to/eb08598d-c195-4399-acdf-9ed715df343e/submit" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care" target="blank">Enroll Now
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </a>
+      </div>
+
 
 
       <!-- Left: Image -->
@@ -212,7 +220,7 @@ body{padding:20px 12px}
 
 
           <div class="mt-3">
-            <a href="https://angelinasdaycare.co.uk/contact/" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care">Contact Us
+            <a href="{{ route('home') }}#contact" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care">Contact Us
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </div>

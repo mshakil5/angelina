@@ -38,9 +38,25 @@
             <span>Age Groups</span>
           </a>
           <ul class="dropdown-menu text-center">
-            <li><a class="dropdown-item" href="#tabs-toddlers">Toddlers</a></li>
-            <li><a class="dropdown-item" href="#tabs-two">Two to Three’s</a></li>
-            <li><a class="dropdown-item" href="#tabs-preschool">Pre School</a></li>
+            @php
+                $icons = [
+                  0 => '<i class="fas fa-baby me-2" style="color:#9b59b6; font-size:16px;"></i>',
+                  1 => '<i class="fas fa-child me-2" style="color:#e67e22; font-size:16px;"></i>',
+                  2 => '<i class="fas fa-school me-2" style="color:#3498db; font-size:16px;"></i>',
+                ]
+
+            @endphp
+
+            @foreach (\App\Models\Content::where('category_id', 4)->orderby('id', 'ASC')->get() as $key => $ageGroup)
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('agegroup', $ageGroup->slug) }}">
+                  {!! $icons[$key] !!} {{ $ageGroup->short_title }}
+                </a>
+              </li>
+            @endforeach
+
+
+
           </ul>
         </li>
 

@@ -371,7 +371,7 @@
                   <img src="{{asset('images/content/'. $room->feature_image)}}" alt="{{$room->short_title}}">
                 </div>
                 <div class="room-icon">
-                  🐻
+                  {{ ['💬', '🌟', '🧸', '🏅', '👶', '🎨', '🌈', '🎭','🐻'][array_rand(['💬', '🌟', '🧸', '🏅', '👶', '🎨', '🌈', '🎭','🐻'])] }}
                 </div>
                 <div class="room-content text-center">
                   <h4 class="fw-bold mb-2">{{$room->short_title}}</h4>

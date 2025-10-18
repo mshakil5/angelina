@@ -488,4 +488,23 @@ class FrontendController extends Controller
       return view('frontend.about', compact('about1', 'company'));
     }
 
+    public function agegroup($slug)
+    {
+        
+        $agegroup = Content::with('category','images')->where('type', 1)->where('slug', $slug)->first();
+        // dd($agegroup );
+
+      if($agegroup){
+          $this->seo(
+              $agegroup->meta_title,
+              $agegroup->meta_description,
+              $agegroup->meta_keywords,
+              $agegroup->meta_image ? asset('images/meta_image/' . $agegroup->meta_image) : null
+          );
+      }
+      
+      $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+      return view('frontend.agegroup', compact('agegroup', 'company'));
+    }
+
 }
