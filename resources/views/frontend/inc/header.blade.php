@@ -82,7 +82,7 @@
         </li>
 
         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-          <a class="btn btn-primary rounded-pill px-4" href="{{ route('home') }}#visit">
+          <a class="btn btn-primary rounded-pill px-4" href="{{ route('job') }}">
             <i class="fas fa-briefcase me-2"></i> Job
           </a>
         </li>

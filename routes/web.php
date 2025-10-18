@@ -45,6 +45,12 @@ Route::get('/fees-and-terms', [FrontendController::class, 'fees'])->name('fees')
 Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/age-group/{slug}', [FrontendController::class, 'agegroup'])->name('agegroup');
 
+
+Route::get('/job', [FrontendController::class, 'job'])->name('job');
+Route::get('/reference-form', [FrontendController::class, 'reference'])->name('reference');
+
+
+
 Route::get('/team', [FrontendController::class, 'team'])->name('team');
 
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');

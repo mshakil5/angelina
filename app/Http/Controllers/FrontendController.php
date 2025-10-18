@@ -492,7 +492,6 @@ class FrontendController extends Controller
     {
         
         $agegroup = Content::with('category','images')->where('type', 1)->where('slug', $slug)->first();
-        // dd($agegroup );
 
       if($agegroup){
           $this->seo(
@@ -505,6 +504,40 @@ class FrontendController extends Controller
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
       return view('frontend.agegroup', compact('agegroup', 'company'));
+    }
+
+    public function job()
+    {
+        
+        $job = Content::with('category','images')->where('type', 1)->first();
+        if($job){
+            $this->seo(
+                $job->meta_title,
+                $job->meta_description,
+                $job->meta_keywords,
+                $job->meta_image ? asset('images/meta_image/' . $job->meta_image) : null
+            );
+        }
+      
+        $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+        return view('frontend.job', compact('job', 'company'));
+    }
+
+    public function reference()
+    {
+        
+        $job = Content::with('category','images')->where('type', 1)->first();
+        if($job){
+            $this->seo(
+                $job->meta_title,
+                $job->meta_description,
+                $job->meta_keywords,
+                $job->meta_image ? asset('images/meta_image/' . $job->meta_image) : null
+            );
+        }
+      
+        $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
+        return view('frontend.reference', compact('job', 'company'));
     }
 
 }
