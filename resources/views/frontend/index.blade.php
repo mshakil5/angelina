@@ -93,30 +93,39 @@
       </svg>
     </div>
     <div class="container">
-      <div class="row g-4 align-items-center">
+      <div class="row g-4 align-items-start">
 
         <!-- LEFT: Images area (no header title as requested) -->
-        <div class="col-lg-6">
-          <div class="about-images" aria-hidden="true">
-            <div class="about-left">
-              <!-- large left image -->
-              <div class="single">
-                <img src="{{asset('images/service/' .$toddlers->image )}}" alt="{{$toddlers->title}}">
-              </div>
+          <div class="col-lg-6">
 
-              <!-- stacked two images on the right -->
-              <div class="stack">
-                <img src="{{asset('images/service/' .$twothrees->image )}}" alt="{{$twothrees->title}}">
-                <img src="{{asset('images/service/' .$preschool->image )}}" alt="{{$preschool->title}}">
+            <div class="align-items-center text-center mb-5">
+              
+              <h2 class="big-title">Our Age Groups</h2>
+              <br><br>
+              {{-- <hr> --}}
+            </div>
+
+
+            <div class="about-images" aria-hidden="true">
+              <div class="about-left">
+                <!-- large left image -->
+                <div class="single">
+                  <img src="{{asset('images/service/' .$toddlers->image )}}" alt="{{$toddlers->title}}">
+                </div>
+
+                <!-- stacked two images on the right -->
+                <div class="stack">
+                  <img src="{{asset('images/service/' .$twothrees->image )}}" alt="{{$twothrees->title}}">
+                  <img src="{{asset('images/service/' .$preschool->image )}}" alt="{{$preschool->title}}">
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
         <!-- RIGHT: Text + small title + big title + centered tabs -->
         <div class="col-lg-6">
           <div class="px-md-3">
-            <div class="small-title">Our Age Groups</div>
+            {{-- <div class="small-title">Our Age Groups</div> --}}
             <h2 class="big-title">Child-centred care for every stage</h2>
 
             <!-- Centered tabs -->
@@ -189,39 +198,14 @@
 
             <!-- CTA -->
             <div class="mt-4">
-              <a href="#visit" class="btn btn-outline-primary">Arrange a Visit</a>
-              <a href="#contact" class="btn btn-link">Contact Us</a>
+              <a href="#visit" class="btn btn-primary btn-lg rounded-pill px-4">Arrange a Visit</a>
+              <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-4">Contact Us</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
-  <section class=" py-5 position-relative">
-      <div class="container">
-        <h2 class="menu-title">Weekly Food Menu</h2>
-
-        
-
-
-      <div class="menu-grid">
-
-        @foreach ($features as $key => $feature)
-
-            <div class="menu-card {{ ['bg1','bg2','bg3','bg4'][array_rand(['bg1','bg2','bg3','bg4'])] }}">
-              <img src="{{asset('images/service/' .$feature->image )}}" alt="{{ $feature->title }}">
-              <div class="week-title">{{ $feature->title }}</div>
-            </div>
-
-        @endforeach
-
-
-      </div>
-      </div>
-  </section>
-
 
 
 
@@ -343,7 +327,7 @@
       <!-- RIGHT: Image / gallery -->
       <div class="col-lg-6">
         <div class="position-relative">
-          <img src="https://picsum.photos/seed/facility/900/600" alt="Nursery facilities" class="img-fluid rounded-3 w-100 shadow-sm">
+          <img src="{{ asset('resources/frontend/images/facilities.jpeg')}}" alt="Nursery facilities" class="img-fluid rounded-3 w-100 shadow-sm">
 
         </div>
       </div>
@@ -498,7 +482,7 @@
 
     <!-- See more button -->
     <div class="container text-center mt-4">
-      <button id="galleryToggleBtn" class="btn btn-outline-primary">See more</button>
+      <button id="galleryToggleBtn" class="btn btn-primary btn-lg rounded-pill px-4">See more</button>
     </div>
   </div>
 
