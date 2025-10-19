@@ -121,8 +121,8 @@ class CompanyDetailsController extends Controller
 
     public function aboutUs()
     {       
-        $companyDetails = CompanyDetails::select('about_us')->first();
-        return view('admin.company.about_us', compact('companyDetails'));
+        $data = Master::where('name', 'about1')->first();
+        return view('admin.company.about_us', compact('data'));
     }
 
     public function aboutUsUpdate(Request $request)
@@ -131,9 +131,55 @@ class CompanyDetailsController extends Controller
             'about_us' => 'required|string',
         ]);
 
-        $companyDetails = CompanyDetails::first();
-        $companyDetails->about_us = $request->about_us;
-        $companyDetails->save();
+        $data = Master::where('name', 'about1')->first();
+        $data->long_description = $request->about_us;
+
+                // Image upload
+        if ($request->hasFile('image')) {
+            $uploadedFile = $request->file('image');
+            $imageName = mt_rand(10000000, 99999999) . '.webp';
+            $destinationPath = public_path('images/about/');
+
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            Image::make($uploadedFile)
+                ->resize(800, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode('webp', 80)
+                ->save($destinationPath . $imageName);
+
+            $data->image = $imageName;
+        }
+
+        // meta data update
+        $data->meta_title = $request->meta_title;
+        $data->meta_description = $request->meta_description;
+        $data->meta_keywords = $request->meta_keywords;
+        if ($request->hasFile('meta_image')) {
+            $uploadedFile = $request->file('meta_image');
+            $metaImageName = mt_rand(10000000, 99999999) . '.webp';
+            $destinationPath = public_path('images/meta_image/');
+
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            Image::make($uploadedFile)
+                ->resize(1200, 630, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->encode('webp', 80)
+                ->save($destinationPath . $metaImageName);
+
+            $data->meta_image = $metaImageName;
+        }
+        // meta data update
+        $data->save();
 
         return redirect()->back()->with('success', 'About us updated successfully.');
     }
