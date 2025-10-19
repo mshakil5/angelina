@@ -35,6 +35,7 @@
                   <option value="Age Group">Age Group</option>
                   <option value="Contact">Contact</option>
                   <option value="Fees">Fees</option>
+                  <option value="Job">Job</option>
                   <option value="Others">Others</option>
                 </select>
               </div>

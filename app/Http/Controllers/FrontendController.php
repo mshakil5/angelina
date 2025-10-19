@@ -13,6 +13,7 @@ use App\Models\Master;
 use App\Models\Contact;
 use App\Models\ContactEmail;
 use App\Mail\ContactMail;
+use App\Models\Banner;
 use App\Models\ClientReview;
 use App\Models\Service;
 use Illuminate\Support\Facades\Mail;
@@ -437,26 +438,28 @@ class FrontendController extends Controller
 
     public function foodChoice()
     {
-      $foodChoice = Master::firstOrCreate(['name' => 'foodChoice']);
+        $foodChoice = Master::firstOrCreate(['name' => 'foodChoice']);
+        $banner = Banner::where('page', 'Food & Choice')->first();
 
-      if($foodChoice){
-          $this->seo(
-              $foodChoice->meta_title,
-              $foodChoice->meta_description,
-              $foodChoice->meta_keywords,
-              $foodChoice->meta_image ? asset('images/meta_image/' . $foodChoice->meta_image) : null
-          );
-      }
+        if($foodChoice){
+            $this->seo(
+                $foodChoice->meta_title,
+                $foodChoice->meta_description,
+                $foodChoice->meta_keywords,
+                $foodChoice->meta_image ? asset('images/meta_image/' . $foodChoice->meta_image) : null
+            );
+        }
         $features = Cache::remember('active_features', now()->addDay(), function () {
             return Service::orderByRaw('sl = 0, sl ASC')->orderBy('id', 'desc')->where('type', 2)->where('status', 1)->get();
         });
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.foodChoice', compact('foodChoice', 'company', 'features'));
+      return view('frontend.foodChoice', compact('foodChoice', 'company', 'features','banner'));
     }
 
     public function fees()
     {
-      $fees = Master::firstOrCreate(['name' => 'fees']);
+        $fees = Master::firstOrCreate(['name' => 'fees']);
+        $banner = Banner::where('page', 'Fees')->first();
 
       if($fees){
           $this->seo(
@@ -468,7 +471,7 @@ class FrontendController extends Controller
       }
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.fees', compact('fees', 'company'));
+      return view('frontend.fees', compact('fees', 'company', 'banner'));
     }
 
 
@@ -477,6 +480,7 @@ class FrontendController extends Controller
     {
         $about1 = Master::firstOrCreate(['name' => 'about1']);
         $galleries = Content::with('category')->where('type', 1)->latest()->get();
+        $banner = Banner::where('page', 'Food & Choice')->first();
 
       if($about1){
           $this->seo(
@@ -488,13 +492,14 @@ class FrontendController extends Controller
       }
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.about', compact('about1', 'company','galleries'));
+      return view('frontend.about', compact('about1', 'company','galleries','banner'));
     }
 
     public function agegroup($slug)
     {
         
         $agegroup = Content::with('category','images')->where('type', 1)->where('slug', $slug)->first();
+        $banner = Banner::where('page', 'Age Group')->first();
 
       if($agegroup){
           $this->seo(
@@ -506,13 +511,14 @@ class FrontendController extends Controller
       }
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.agegroup', compact('agegroup', 'company'));
+      return view('frontend.agegroup', compact('agegroup', 'company', 'banner'));
     }
 
     public function job()
     {
         
         $job = Content::with('category','images')->where('type', 1)->first();
+        $banner = Banner::where('page', 'Food & Choice')->first();
         if($job){
             $this->seo(
                 $job->meta_title,
@@ -523,7 +529,7 @@ class FrontendController extends Controller
         }
       
         $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-        return view('frontend.job', compact('job', 'company'));
+        return view('frontend.job', compact('job', 'company', 'banner'));
     }
 
     public function reference()
