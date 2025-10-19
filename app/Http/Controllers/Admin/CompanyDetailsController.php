@@ -134,7 +134,7 @@ class CompanyDetailsController extends Controller
         $data = Master::where('name', 'about1')->first();
         $data->long_description = $request->about_us;
 
-                // Image upload
+        // Image upload
         if ($request->hasFile('image')) {
             $uploadedFile = $request->file('image');
             $imageName = mt_rand(10000000, 99999999) . '.webp';

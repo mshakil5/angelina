@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CompanyDetailsController;
@@ -180,4 +181,16 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/products/faqs/update', [ProductFaqController::class, 'update']);
     Route::get('/products/faqs/{id}', [ProductFaqController::class, 'destroy']);
     Route::post('/products/faqs/status', [ProductFaqController::class, 'toggleStatus'])->name('products.faqs.status');
+
+
+    //banner
+    Route::get('/banner', [BannerController::class,'index'])->name('banner.index');
+    Route::post('/banner', [BannerController::class,'store'])->name('banner.store');
+    Route::get('/banner/{id}/edit', [BannerController::class,'edit']);
+    Route::post('/banner-update', [BannerController::class,'update'])->name('banner.update');
+    Route::get('/banner/{id}/delete', [BannerController::class,'destroy']);
+    Route::post('/banner-status', [BannerController::class,'toggleStatus']);
+
+
+
 });
