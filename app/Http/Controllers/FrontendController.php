@@ -475,7 +475,8 @@ class FrontendController extends Controller
 
     public function aboutUs()
     {
-      $about1 = Master::firstOrCreate(['name' => 'about1']);
+        $about1 = Master::firstOrCreate(['name' => 'about1']);
+        $galleries = Content::with('category')->where('type', 1)->latest()->get();
 
       if($about1){
           $this->seo(
@@ -487,7 +488,7 @@ class FrontendController extends Controller
       }
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.about', compact('about1', 'company'));
+      return view('frontend.about', compact('about1', 'company','galleries'));
     }
 
     public function agegroup($slug)

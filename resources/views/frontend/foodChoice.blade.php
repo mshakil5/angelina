@@ -49,7 +49,7 @@
 
     /* Tables */
     .menu-table { border-collapse: collapse; width:100%; font-size:13px; }
-    .menu-table th, .menu-table td { border:1px solid rgba(0,0,0,0.08); padding:8px; text-align:left; vertical-align:top; }
+    /* .menu-table th, .menu-table td { border:1px solid rgba(0,0,0,0.08); padding:8px; text-align:left; vertical-align:top; } */
     .table-week-title { font-weight:700; padding:8px; color:#fff; text-align:center; }
 
 </style>
@@ -143,7 +143,7 @@
         <div class="mb-4 week1">
           <div class="table-week-title">Week 1 Menu — Dairy-free options available for all meals</div>
           <div class="table-responsive mt-2">
-            <table class="menu-table w-100">
+            <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
                   <th style="width:14%;">Day / Meal</th>
@@ -168,7 +168,7 @@
         <div class="mb-4 week2">
           <div class="table-week-title">Week 2 Menu — Dairy-free options available for all meals</div>
           <div class="table-responsive mt-2">
-            <table class="menu-table w-100">
+            <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
                   <th style="width:14%;">Day / Meal</th>
@@ -193,7 +193,7 @@
         <div class="mb-4 week3">
           <div class="table-week-title">Week 3 Menu — Dairy-free options available for all meals</div>
           <div class="table-responsive mt-2">
-            <table class="menu-table w-100">
+            <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
                   <th style="width:14%;">Day / Meal</th>
@@ -218,7 +218,7 @@
         <div class="mb-4 week4">
           <div class="table-week-title">Week 4 Menu — Dairy-free options available for all meals</div>
           <div class="table-responsive mt-2">
-            <table class="menu-table w-100">
+            <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
                   <th style="width:14%;">Day / Meal</th>

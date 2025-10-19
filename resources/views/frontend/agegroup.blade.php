@@ -122,25 +122,61 @@
   </div>
 </section>
 
-  <!-- Photo Gallery Section -->
-  <section class="gallery-section">
+
+  <!-- ===== Smart Full-Width Gallery ===== -->
+<section id="smart-gallery" class="py-5 bg-white">
+  <div class="container-fluid px-0">
     <div class="container">
-      <div class="section-title">
-        <h2>Photo Gallery</h2>
-      </div>
-      <div class="row g-4">
-
-        @foreach ($agegroup->images as $image)
-            <div class="col-6 col-md-3 animate__animated animate__fadeInLeft">
-              <img src="{{asset('images/content/'. $image->image)}}" alt="Baby 1">
-            </div>
-        @endforeach
-        
-
-
+      <div class="text-center mb-4">
+        <div class="section-title">
+          <h2>Photo Gallery</h2>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Gallery grid: full-width background but images contained -->
+    <div class="gallery-wrap">
+      <div class="container">
+        <div id="galleryGrid" class="row g-3">
+
+          @foreach ($agegroup->images as $image)
+              <div class="col-6 col-md-3">
+                <div class="gallery-item" data-index="0" tabindex="0">
+                  <img src="{{asset('images/content/'. $image->image)}}" alt="{{ $agegroup->short_title }}" loading="lazy" data-full="{{asset('images/content/'. $image->image)}}">
+                  <div class="thumb-overlay"><span>View</span></div>
+                </div>
+              </div>
+          @endforeach
+
+          
+
+
+        </div> <!-- /.row -->
+      </div> <!-- /.container -->
+    </div> <!-- /.gallery-wrap -->
+
+    <!-- See more button -->
+    <div class="container text-center mt-4">
+      {{-- <button id="galleryToggleBtn" class="btn btn-primary btn-lg rounded-pill px-4">See more</button> --}}
+    </div>
+  </div>
+
+  <!-- LIGHTBOX / OVERLAY -->
+  <div id="galleryLightbox" class="gallery-lightbox d-none" aria-hidden="true">
+    <button class="lb-close" aria-label="Close (Esc)">&times;</button>
+    <button class="lb-prev" aria-label="Previous (Left)">&lsaquo;</button>
+    <button class="lb-next" aria-label="Next (Right)">&rsaquo;</button>
+    <div class="lb-content">
+      <img id="lbImage" src="" alt="Full size image">
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
 
 
 @endsection
