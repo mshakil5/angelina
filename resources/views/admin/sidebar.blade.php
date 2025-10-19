@@ -81,13 +81,14 @@
             <li class="nav-item">
                 <a href="{{ route('content.index', 2) }}" class="nav-link {{ request()->routeIs('content.index') && request()->route('type') == 2 ? 'active' : '' }}">
                     <i class="fas fa-list nav-icon"></i>
-                    <p>Blogs</p>
+                    <p>Room</p>
+                    {{-- <p>Blogs</p> --}}
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('content.index', 3) }}" class="nav-link {{ request()->routeIs('content.index') && request()->route('type') == 3 ? 'active' : '' }}">
                     <i class="fas fa-list nav-icon"></i>
-                    <p>Events</p>
+                    <p>Age Group</p>
                 </a>
             </li>
             <li class="nav-item">
