@@ -36,7 +36,7 @@
 
 
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center" style="background-image: url({{ asset('resources/frontend/images/page-banner2.jpg') }});">
-  <div class="container">
+  <div class="container d-none">
     <h1 class="breadcrumb-title mb-3">
         Privacy Policy
     </h1>

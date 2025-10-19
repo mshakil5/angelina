@@ -38,7 +38,7 @@
 
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center"
     style="background-image: url('{{ $bgImage }}');">
-  <div class="container">
+  <div class="container d-none">
     <h1 class="breadcrumb-title mb-3">Food Choice</h1>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb justify-content-center mb-0">

@@ -76,13 +76,13 @@ class SliderController extends Controller
         if (!file_exists($destinationPath)) {
             mkdir($destinationPath, 0755, true);
         }
-
+        
         Image::make($uploadedFile)
             // ->resize(1000, 700, function ($constraint) {
             //     $constraint->aspectRatio();
             //     $constraint->upsize();
             // })
-            ->fit(1905, 450)
+                ->fit(1905, 720)
             ->encode('webp', 50)
             ->save($destinationPath . $randomName);
 
@@ -134,7 +134,7 @@ class SliderController extends Controller
               //     $constraint->aspectRatio();
               //     $constraint->upsize();
               // })
-                ->fit(1905, 450)
+                ->fit(1905, 720)
               ->encode('webp', 50)
               ->save($destinationPath . $randomName);
             $slider->image = $randomName;

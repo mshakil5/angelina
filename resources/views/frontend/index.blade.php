@@ -42,7 +42,7 @@
     </div>
 
     <!-- ===== Waves ===== -->
-    <svg class="waves" xmlns="http://www.w3.org/2000/svg"
+    {{-- <svg class="waves" xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
       <defs>
@@ -56,7 +56,7 @@
         <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
         <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
       </g>
-    </svg>
+    </svg> --}}
   </header>
 
   <!-- =======================
