@@ -187,37 +187,16 @@ body{padding:20px 12px}
       <div class="col-lg-6 order-1 order-lg-0">
         <div class="img-box-2 fadeInLeft" style="animation-delay:.15s">
           <!-- use decoding=async and loading=lazy for perf -->
-          <img loading="lazy" decoding="async" src="https://angelinasdaycare.co.uk/wp-content/uploads/2024/04/7-care.png" alt="Children playing at Angelina's Day Care — preschool nursery in Colchester">
+          <img loading="lazy" decoding="async" src="{{ asset('images/about/'. $about1->image)}}" alt="Children playing at Angelina's Day Care — preschool nursery in Colchester">
         </div>
       </div>
 
 
       <!-- Right: Content -->
-      <div class="col-lg-6 col-xl-5 ms-lg-auto order-0 order-lg-1">
+      <div class="col-lg-6 col-xl-5 order-0 order-lg-1">
         <div class="ps-lg-4 pe-lg-2 fadeInRight" style="animation-delay:.2s">
-          <span class="sub-title">Angelina's Day Care nursery school</span>
-          <h1 id="about-heading" class="sec-title big-title">Special Care For Your Children</h1>
-
-
-          <p class="lead-strong">Welcome to Angelina’s Day Care – A Trusted Nursery in Colchester</p>
-
-
-          <p class="fs-md text-muted-2">Angelina’s Day Care was proudly registered in 2024. From the beginning, we have welcomed <strong>every child</strong>, whether they have <strong>special educational needs</strong>, a <strong>disability</strong> or speak <strong>English as an additional language</strong>. As a leading preschool nursery in Colchester, we believe in creating an inclusive environment where each child feels valued and supported.</p>
-
-
-          <p class="fs-md text-muted-2">Choosing the right nursery is one of the most important decisions a parent can make. <strong><a href="https://angelinasdaycare.co.uk" target="_blank" rel="noopener noreferrer">At Angelina’s Day Care</a>, we strive to be the best preschool nursery in Colchester</strong>, offering a safe, welcoming and enriching space for your child to grow. Our team delivers high-quality, professional childcare while building strong, lasting relationships with both parents and children.</p>
-
-
-          <div class="info-card">
-          <p class="mb-0 fs-md text-muted-2">To support individual learning, we carry out <strong>weekly observations</strong> and include children in planning activities. This way, every child benefits from experiences that match their needs and interests. We encourage parents and carers to get involved—your input is incredibly valuable to your child’s learning journey.</p>
-          </div>
-
-
-          <p class="mt-3 fs-md text-muted-2">When you leave your child with us, you can be confident that they’re thriving in a <strong>safe, friendly, and stimulating environment</strong>. Not only are they learning, but they’re also enjoying every moment through play, exploration, and discovery.</p>
-
-
-          <p class="fs-md text-muted-2">We are proud to be known as one of the <strong>best preschool nurseries in Colchester</strong>. If you’d like to know more, <a href="https://www.instagram.com/angelinasdaycareltd" target="_blank" rel="noopener noreferrer">follow us on Instagram</a> or contact us directly—we’d love to welcome you for a visit.</p>
-
+          
+          {!! $about1->long_description !!}
 
           <div class="mt-3">
             <a href="{{ route('home') }}#contact" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care">Contact Us
