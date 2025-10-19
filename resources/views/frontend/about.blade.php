@@ -41,10 +41,10 @@
       margin:0 auto;
       background:var(--card-bg);
       border-radius:24px;
-      box-shadow:0 10px 30px rgba(18,24,33,0.06);
+      /* box-shadow:0 10px 30px rgba(18,24,33,0.06); */
       overflow:hidden;
       position:relative;
-      padding:30px;
+      padding:10px;
     }
 
     /* layout */
@@ -179,18 +179,22 @@ body{padding:20px 12px}
 </section>
 
 
+
+
 <section class="about-section" aria-labelledby="about-heading">
   <div class="container">
     <div class="row g-4 align-items-center">
-      
-      <div class="text-center mb-5">
-        {{-- <h2>Enroll Now</h2> --}}
-        <a href="https://app.famly.co/#/customInquiryForm/c6ae31a7-6348-4f58-89df-fd12ca88e5d7/to/eb08598d-c195-4399-acdf-9ed715df343e/submit" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care" target="blank">Enroll Now
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-            </a>
+      <!-- Right: Content -->
+      <div class="col-lg-12 col-xl-12 order-0 order-lg-1">
+          {!! $about1->long_title !!}
       </div>
+  </div>
+</section>
 
 
+<section class="about-section" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="row g-4 align-items-center">
 
       <!-- Left: Image -->
       <div class="col-lg-6 order-1 order-lg-0">
@@ -207,30 +211,39 @@ body{padding:20px 12px}
           
           {!! $about1->long_description !!}
 
-          <div class="mt-3">
-            <a href="{{ route('home') }}#contact" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care">Contact Us
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-
-
         </div>
       </div>
+
+
     </div>
   </div>
-
-
   
   <div class="shape-mockup shape-dog d-none d-lg-block" aria-hidden="true" style="left:6%;bottom:28%;">
   <img decoding="async" loading="lazy" src="https://angelinasdaycare.co.uk/wp-content/uploads/2022/01/dog.png" alt="playful dog illustration">
   </div>
 
-
   <div class="shape-mockup shape-star d-none d-md-block" aria-hidden="true" style="right:5%;bottom:28%;">
   <img decoding="async" loading="lazy" src="https://angelinasdaycare.co.uk/wp-content/uploads/2022/01/star.png" alt="star illustration">
   </div>
+</section>
 
 
+
+<section class="about-section" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <!-- Right: Content -->
+      <div class="col-lg-12 col-xl-12 order-0 order-lg-1">
+          {!! $about1->short_description !!}
+
+          
+          <div class="mt-3">
+            <a href="{{ route('home') }}#contact" class="vs-btn" role="button" aria-label="Contact Angelina's Day Care">Contact Us
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+      </div>
+  </div>
 </section>
 
 
