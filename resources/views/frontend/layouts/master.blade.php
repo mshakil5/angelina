@@ -3,7 +3,7 @@
 <head>
 
     @php
-        $company = App\Models\CompanyDetails::select('company_name', 'fav_icon', 'google_site_verification', 'footer_content', 'facebook', 'twitter', 'linkedin', 'website', 'phone1', 'email1', 'address1','company_logo','copyright')->first();
+        $company = App\Models\CompanyDetails::select('company_name', 'fav_icon', 'google_site_verification', 'footer_content', 'facebook', 'twitter', 'linkedin', 'website', 'phone1', 'email1', 'address1','company_logo','copyright','google_map')->first();
     @endphp
 
 
@@ -16,7 +16,7 @@
         {!! OpenGraph::generate() !!}
         {!! Twitter::generate() !!}
     <!-- SEO Meta Tags -->
-    <meta name="description" content="SunnyNursery offers outstanding childcare and early years education in Colchester. OFSTED rated, qualified staff, and age-specific learning programmes for 3 months to 5 years.">
+    <meta name="description" content="Angelinas Day Care offers outstanding childcare and early years education in Colchester. OFSTED rated, qualified staff, and age-specific learning programmes for 3 months to 5 years.">
     <meta name="keywords" content="nursery, childcare, early years, preschool, daycare, Colchester, Essex">
     
     
@@ -27,14 +27,14 @@
 
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="SunnyNursery - Top Rated Childcare in Colchester">
+    <meta property="og:title" content="Angelinas Day Care - Top Rated Childcare in Colchester">
     <meta property="og:description" content="Outstanding childcare and early years education in Colchester. OFSTED rated with qualified staff.">
     <meta property="og:image" content="{{ asset('images/company/' . $company->fav_icon) }}">
-    <meta property="og:url" content="https://sunnynursery.co.uk">
+    <meta property="og:url" content="https://Angelinas Day Care.co.uk">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SunnyNursery Colchester">
+    <meta name="twitter:title" content="Angelinas Day Care Colchester">
     <meta name="twitter:description" content="Outstanding childcare and early years education in Colchester. OFSTED rated.">
     <meta name="twitter:image" content="{{ asset('images/company/' . $company->fav_icon) }}">
 

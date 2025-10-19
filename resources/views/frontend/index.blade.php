@@ -233,7 +233,7 @@
         <div class="pe-lg-4 position-relative" style="z-index:1;">
           <!-- Main heading (adapted from Busy Bees wording) -->
           <h3 class="h5 text-uppercase text-muted mb-2">Nursery Facilities</h3>
-          <h2 class="fw-bold mb-4">Nursery Facilities at SunnyNursery</h2>
+          <h2 class="fw-bold mb-4">Nursery Facilities at Angelinas Day Care</h2>
 
           <p class="lead text-muted mb-4">
         Here's a snapshot of some of the facilities and services we offer. Click or tap any item to learn more or ask during your visit.
@@ -641,9 +641,9 @@
                       <label class="form-label visually-hidden" for="nursery">Choose Nursery</label>
                       <select id="nursery" name="nursery" class="form-select form-select-lg" required>
                         <option value="" disabled selected>Choose nursery</option>
-                        <option>SunnyNursery — Colchester</option>
-                        <option>SunnyNursery — Central</option>
-                        <option>SunnyNursery — North</option>
+                        <option>Angelinas Day Care — Colchester</option>
+                        <option>Angelinas Day Care — Central</option>
+                        <option>Angelinas Day Care — North</option>
                       </select>
                     </div>
 

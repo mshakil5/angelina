@@ -6,7 +6,7 @@
   <div class="container">
     <!-- Logo -->
     <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-      <img src="{{ asset('images/company/' . $company->company_logo) }}" alt="SunnyNursery Colchester Logo" height="60">
+      <img src="{{ asset('images/company/' . $company->company_logo) }}" alt="Angelinas Day Care Colchester Logo" height="60">
     </a>
 
     <!-- Mobile Menu Button -->

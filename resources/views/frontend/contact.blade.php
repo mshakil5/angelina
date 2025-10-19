@@ -100,9 +100,9 @@
                       <label class="form-label visually-hidden" for="nursery">Choose Nursery</label>
                       <select id="nursery" name="nursery" class="form-select form-select-lg" required>
                         <option value="" disabled selected>Choose nursery</option>
-                        <option>SunnyNursery — Colchester</option>
-                        <option>SunnyNursery — Central</option>
-                        <option>SunnyNursery — North</option>
+                        <option>Angelinas Day Care — Colchester</option>
+                        <option>Angelinas Day Care — Central</option>
+                        <option>Angelinas Day Care — North</option>
                       </select>
                     </div>
 

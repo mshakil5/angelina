@@ -35,7 +35,7 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $company = CompanyDetails::select('company_name', 'fav_icon', 'google_site_verification', 'footer_content', 'facebook', 'twitter','instagram', 'youtube',  'linkedin', 'website', 'phone1', 'email1', 'address1','company_logo', 'meta_title', 'meta_description', 'meta_keywords', 'meta_image','copyright')->first();
+        $company = CompanyDetails::select('company_name', 'fav_icon', 'google_site_verification', 'footer_content', 'facebook', 'twitter','instagram', 'youtube',  'linkedin', 'website', 'phone1', 'email1', 'address1','company_logo', 'meta_title', 'meta_description', 'meta_keywords', 'meta_image','copyright','google_map')->first();
 
         $welcome = Master::firstOrCreate(['name' => 'welcome']);
 
