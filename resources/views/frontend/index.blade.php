@@ -661,7 +661,7 @@
                       <div class="form-check">
                         <input id="consent" name="consent" class="form-check-input" type="checkbox" required>
                         <label class="form-check-label small" for="consent">
-                          I consent to my submitted data being collected and stored in accordance with the <a href="#" target="_blank" rel="noopener">Privacy Policy</a>.
+                          I consent to my submitted data being collected and stored in accordance with the <a href="{{route('privacy-policy')}}" target="_blank" rel="noopener">Privacy Policy</a>.
                         </label>
                       </div>
                     </div>

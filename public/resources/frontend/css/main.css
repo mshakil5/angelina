@@ -467,6 +467,7 @@
 
   form#callbackForm .form-control, form#callbackForm .form-select {
     border-radius: 10px;
+    font-size: 1rem;
     padding: .9rem 1rem;
     box-shadow: none;
     border: 1px solid rgba(16,24,40,0.06);
