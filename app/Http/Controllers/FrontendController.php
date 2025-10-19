@@ -498,7 +498,7 @@ class FrontendController extends Controller
     public function agegroup($slug)
     {
         
-        $agegroup = Content::with('category','images')->where('type', 1)->where('slug', $slug)->first();
+        $agegroup = Content::with('category','images')->where('type', 3)->where('slug', $slug)->first();
         $banner = Banner::where('page', 'Age Group')->first();
 
       if($agegroup){
