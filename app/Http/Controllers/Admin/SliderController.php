@@ -82,7 +82,7 @@ class SliderController extends Controller
             //     $constraint->aspectRatio();
             //     $constraint->upsize();
             // })
-            ->fit(1000, 700)
+            ->fit(1905, 450)
             ->encode('webp', 50)
             ->save($destinationPath . $randomName);
 

@@ -113,6 +113,7 @@
             <a class="text-muted text-decoration-none" href="#">Legal information</a>
             <a class="text-muted text-decoration-none" href="{{ route('privacy-policy') }}">Privacy policy</a>
             <a class="text-muted text-decoration-none" href="#">Sitemap</a>
+            <a href="{{ route('terms-and-conditions')}}" class="text-muted text-decoration-none">Terms & Conditions</a>
           </div>
         </div>
       </div>
@@ -122,12 +123,12 @@
     <hr class="my-4">
 
     <div class="row align-items-center">
-      <div class="col-md-6 text-center text-md-start small text-muted">
-        {{-- © <span id="footerYear"></span>  --}}{!! $company->copyright !!}
+      <div class="col-md-12 text-center text-md-start small text-muted">
+        {!! $company->copyright !!}
       </div>
-      <div class="col-md-6 text-center text-md-end small text-muted">
-        Built with care • <a href="{{ route('terms-and-conditions')}}" class="text-decoration-none">Terms & Conditions</a>
-      </div>
+      {{-- <div class="col-md-6 text-center text-md-end small text-muted">
+        Built with care • 
+      </div> --}}
     </div>
   </div>
 </footer>

@@ -41,13 +41,15 @@
     <li class="nav-item">
         <a href="{{ route('allservice') }}" class="nav-link {{ Route::is('allservice') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tools"></i>
-            <p>Services</p>
+            {{-- <p>Services</p> --}}
+            <p>Age Group Homepage</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="{{ route('allfeature') }}" class="nav-link {{ Route::is('allfeature') ? 'active' : '' }}">
             <i class="nav-icon fas fa-gem"></i>
-            <p>Features</p>
+            <p>Food Menu</p>
+            {{-- <p>Features</p> --}}
         </a>
     </li>
     <li class="nav-item">
