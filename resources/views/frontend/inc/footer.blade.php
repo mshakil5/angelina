@@ -111,7 +111,7 @@
           <!-- Legal / site links -->
           <div class="d-flex flex-column gap-1 small text-muted">
             <a class="text-muted text-decoration-none" href="#">Legal information</a>
-            <a class="text-muted text-decoration-none" href="#">Privacy policy</a>
+            <a class="text-muted text-decoration-none" href="{{ route('privacy-policy') }}">Privacy policy</a>
             <a class="text-muted text-decoration-none" href="#">Sitemap</a>
           </div>
         </div>
@@ -126,7 +126,7 @@
         {{-- © <span id="footerYear"></span>  --}}{!! $company->copyright !!}
       </div>
       <div class="col-md-6 text-center text-md-end small text-muted">
-        Built with care • <a href="#" class="text-decoration-none">Terms & Conditions</a>
+        Built with care • <a href="{{ route('terms-and-conditions')}}" class="text-decoration-none">Terms & Conditions</a>
       </div>
     </div>
   </div>
