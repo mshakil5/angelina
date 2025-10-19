@@ -82,7 +82,7 @@ class SliderController extends Controller
             //     $constraint->aspectRatio();
             //     $constraint->upsize();
             // })
-                ->fit(1905, 720)
+                ->fit(1905, 450)
             ->encode('webp', 50)
             ->save($destinationPath . $randomName);
 
@@ -134,7 +134,7 @@ class SliderController extends Controller
               //     $constraint->aspectRatio();
               //     $constraint->upsize();
               // })
-                ->fit(1905, 720)
+                ->fit(1905, 450)
               ->encode('webp', 50)
               ->save($destinationPath . $randomName);
             $slider->image = $randomName;
