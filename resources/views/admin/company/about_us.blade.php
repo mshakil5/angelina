@@ -28,9 +28,26 @@
           <form action="{{ route('admin.aboutUs') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-              <div class="form-group">
-                <label>About Us <span class="text-danger">*</span></label>
-                <textarea name="about_us" class="form-control summernote @error('about_us') is-invalid @enderror" rows="4">{!! $data->long_description !!}</textarea>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Top Content <span class="text-danger">*</span></label>
+                  <textarea name="top_content" class="form-control summernote @error('top_content') is-invalid @enderror" rows="4">{!! $data->long_title !!}</textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Middle Content <span class="text-danger">*</span></label>
+                  <textarea name="about_us" class="form-control summernote @error('about_us') is-invalid @enderror" rows="4">{!! $data->long_description !!}</textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Bottom Content <span class="text-danger">*</span></label>
+                  <textarea name="bottom_content" class="form-control summernote @error('bottom_content') is-invalid @enderror" rows="4">{!! $data->short_description !!}</textarea>
+                </div>
               </div>
 
               <div class="row">

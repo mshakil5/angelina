@@ -132,7 +132,9 @@ class CompanyDetailsController extends Controller
         ]);
 
         $data = Master::where('name', 'about1')->first();
+        $data->long_title = $request->top_content;
         $data->long_description = $request->about_us;
+        $data->short_description = $request->bottom_content;
 
         // Image upload
         if ($request->hasFile('image')) {
