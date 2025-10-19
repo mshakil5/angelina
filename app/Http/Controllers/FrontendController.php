@@ -480,7 +480,7 @@ class FrontendController extends Controller
     {
         $about1 = Master::firstOrCreate(['name' => 'about1']);
         $galleries = Content::with('category')->where('type', 1)->latest()->get();
-        $banner = Banner::where('page', 'Food & Choice')->first();
+        $banner = Banner::where('page', 'About')->first();
 
       if($about1){
           $this->seo(

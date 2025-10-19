@@ -163,7 +163,7 @@
 
 <section class="about-section" aria-labelledby="about-heading">
   <div class="container">
-    <div class="row g-4 align-items-center">
+    <div class="row g-4">
 
       <!-- Left: Image -->
       <div class="col-lg-6 order-1 order-lg-0">
