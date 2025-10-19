@@ -46,6 +46,7 @@ class CompanyDetailsController extends Controller
             'footer_link' => 'nullable|string|max:255',
             'currency' => 'nullable|string|max:10',
             'google_map' => 'nullable|string',
+            'copyright' => 'nullable|string',
             'company_reg_number' => 'nullable|string',
             'vat_number' => 'nullable|string',
             'fav_icon' => 'nullable|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
@@ -111,6 +112,7 @@ class CompanyDetailsController extends Controller
         $data->account_number = $request->account_number;
         $data->sort_code = $request->sort_code;
         $data->bank = $request->bank;
+        $data->copyright = $request->copyright;
 
         $data->save();
 

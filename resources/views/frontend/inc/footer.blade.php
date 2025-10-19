@@ -123,7 +123,7 @@
 
     <div class="row align-items-center">
       <div class="col-md-6 text-center text-md-start small text-muted">
-        © <span id="footerYear"></span> {{$company->copyright}}
+        {{-- © <span id="footerYear"></span>  --}}{!! $company->copyright !!}
       </div>
       <div class="col-md-6 text-center text-md-end small text-muted">
         Built with care • <a href="#" class="text-decoration-none">Terms & Conditions</a>

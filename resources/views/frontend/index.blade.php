@@ -362,7 +362,7 @@
                   <p class="text-muted mb-3">
                     {{$room->long_title}}
                   </p>
-                  <a href="#" class="btn btn-outline-primary">Read More</a>
+                  {{-- <a href="#" class="btn btn-outline-primary">Read More</a> --}}
                 </div>
               </div>
             </div>

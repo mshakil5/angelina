@@ -268,6 +268,13 @@
                         <textarea name="google_map" id="google_map" class="form-control @error('google_map') is-invalid @enderror" cols="30" rows="3">{{$data->google_map}}</textarea>
                         </div>
                     </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                        <label>Copyright</label>
+                        <textarea name="copyright" id="copyright" class="form-control summernote @error('copyright') is-invalid @enderror" cols="30" rows="3">{{$data->copyright}}</textarea>
+                        </div>
+                    </div>
       
                     <div class="col-sm-4">
                         <div class="form-group">
