@@ -890,6 +890,79 @@
 
 
 
+  .food-choice {
+  background-color: #fafafa;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.food-choice h2 {
+  color: #2a4d69;
+  font-weight: 700;
+  font-size: 1.8rem;
+  padding-left: 10px;
+}
+
+.food-choice h3 {
+  color: #3c6e71;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.food-choice p {
+  margin-bottom: 1rem;
+}
+
+.food-choice a {
+  color: #2a4d69;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.food-choice a:hover {
+  color: #1b3143;
+  text-decoration: none;
+}
+
+.food-choice ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.food-choice ul li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  color: #444;
+}
+
+.food-choice ul li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2a4d69;
+  font-weight: bold;
+}
+
+@media (max-width: 767.98px) {
+  .food-choice {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .food-choice h2 {
+    font-size: 1.5rem;
+  }
+
+  .food-choice h3 {
+    font-size: 1.2rem;
+  }
+
+
+}
+
+
+
 
 
 

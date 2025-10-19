@@ -4,26 +4,28 @@
 
 <style>
 
+
+
   
-    .week1 .table-week-title { background:#5e50a1; } /* purple */
-    .week2 .table-week-title { background:#1da77a; } /* green */
-    .week3 .table-week-title { background:#6f3ea6; } /* purple darker */
-    .week4 .table-week-title { background:#f39c12; } /* orange */
+.week1 .table-week-title { background:#5e50a1; } /* purple */
+.week2 .table-week-title { background:#1da77a; } /* green */
+.week3 .table-week-title { background:#6f3ea6; } /* purple darker */
+.week4 .table-week-title { background:#f39c12; } /* orange */
 
-    
-    /* ---------- Main content ---------- */
-    .content-wrap{ padding: 48px 0; }
-    .content h3{ font-weight:700; margin-top:18px; color:var(--deep-blue) }
-    .muted { color:var(--muted-text) }
 
-    /* Weekly menu cards row */
-    .menu-card img{ width:100%; height:140px; object-fit:cover; border-radius:6px; }
-    .menu-card .label-week{ font-size:13px; font-weight:700; margin-top:8px; color:#333; }
+/* ---------- Main content ---------- */
+.content-wrap{ padding: 48px 0; }
+.content h3{ font-weight:700; margin-top:18px; color:var(--deep-blue) }
+.muted { color:var(--muted-text) }
 
-    /* Tables */
-    .menu-table { border-collapse: collapse; width:100%; font-size:13px; }
-    /* .menu-table th, .menu-table td { border:1px solid rgba(0,0,0,0.08); padding:8px; text-align:left; vertical-align:top; } */
-    .table-week-title { font-weight:700; padding:8px; color:#fff; text-align:center; }
+/* Weekly menu cards row */
+.menu-card img{ width:100%; height:140px; object-fit:cover; border-radius:6px; }
+.menu-card .label-week{ font-size:13px; font-weight:700; margin-top:8px; color:#333; }
+
+/* Tables */
+.menu-table { border-collapse: collapse; width:100%; font-size:13px; }
+/* .menu-table th, .menu-table td { border:1px solid rgba(0,0,0,0.08); padding:8px; text-align:left; vertical-align:top; } */
+.table-week-title { font-weight:700; padding:8px; color:#fff; text-align:center; }
 
 </style>
 
@@ -53,71 +55,37 @@
   <section class=" py-5 position-relative">
       <div class="container">
         <h2 class="menu-title">Weekly Food Menu</h2>
+        <div class="menu-grid">
+          @foreach ($features as $key => $feature)
 
-        
+              <div class="menu-card {{ ['bg1','bg2','bg3','bg4'][array_rand(['bg1','bg2','bg3','bg4'])] }}">
+                <img src="{{asset('images/service/' .$feature->image )}}" alt="{{ $feature->title }}">
+                <div class="week-title">{{ $feature->title }}</div>
+              </div>
 
-
-      <div class="menu-grid">
-
-        @foreach ($features as $key => $feature)
-
-            <div class="menu-card {{ ['bg1','bg2','bg3','bg4'][array_rand(['bg1','bg2','bg3','bg4'])] }}">
-              <img src="{{asset('images/service/' .$feature->image )}}" alt="{{ $feature->title }}">
-              <div class="week-title">{{ $feature->title }}</div>
-            </div>
-
-        @endforeach
-
-
-      </div>
+          @endforeach
+        </div>
       </div>
   </section>
+
+
+<section class="food-choice py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+
+          {!! $foodChoice->long_description !!}
+
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!-- Main content -->
 <main class="content-wrap">
   <div class="container">
 
-    <!-- Intro paragraphs -->
-    {{-- <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <p class="muted">Meal Times at Angelina's Day Care</p>
-
-        <h3>Meal Times at Angelina's Day Care</h3>
-        <p class="muted">At Angelina's Day Care, a fresh food nursery in Colchester, we take pride in offering wholesome, nutritious meals throughout the day across all of our programmes. Meals are planned to support your child's growth and wellbeing.</p>
-
-        <h5 class="mt-4">Daily Meal Schedule</h5>
-        <ul>
-          <li>8:00 AM for Breakfast</li>
-          <li>10:00 AM for Mid-morning Snack</li>
-          <li>12:00 PM for Cooked Lunch</li>
-          <li>2:30 PM for Afternoon Snack</li>
-          <li>4:00 PM for Tea</li>
-        </ul>
-
-        <h5 class="mt-4">Our Nursery Food philosophy</h5>
-        <p class="muted">We carefully plan each meal to provide essential nutrients that support your child's development. Our team uses quality fresh ingredients and creates a varied seasonal menu.</p>
-      </div>
-    </div>
-
-    <!-- Sample daily menu quick block -->
-    <div class="row mt-4">
-      <div class="col-lg-10 mx-auto">
-        <h5>Sample Daily Menu</h5>
-        <p class="muted">Example menu for a regular day at the nursery:</p>
-        <ul>
-          <li><strong>Breakfast:</strong> Wholegrain cereal and milk</li>
-          <li><strong>Mid-morning snack:</strong> Crackers or fresh fruit</li>
-          <li><strong>Lunch:</strong> Chicken or veggie dishes with sides</li>
-          <li><strong>Afternoon snack:</strong> Bread, fruit, milk</li>
-          <li><strong>Tea:</strong> Sandwiches or light meal</li>
-        </ul>
-      </div>
-    </div> --}}
-
-    {!! $foodChoice->long_description !!}
-
-    
 
     <!-- Detailed weekly tables -->
     <div class="row mt-4">
