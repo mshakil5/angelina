@@ -3,76 +3,63 @@
 @section('content')
 
 <style>
-  .breadcrumb-section {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 450px;
-    position: relative;
-  }
+  .age-group {
+  background-color: #f8f9fa; /* Soft background tone */
+}
 
-  .breadcrumb-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
+.age-group p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
 
-  .breadcrumb-section .container {
-    position: relative;
-    z-index: 2;
-  }
+.age-group h3 {
+  color: #2a4d69;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
 
-  .breadcrumb-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
+.age-group ul {
+  padding-left: 1.2rem;
+}
 
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
+.age-group ul li {
+  margin-bottom: 0.7rem;
+  color: #444;
+  position: relative;
+}
 
-  .section-title {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .toddler-section {
-    padding: 60px 0;
-  }
-  .toddler-section p {
-    font-size: 16px;
-  }
-  .toddler-section ul {
-    list-style: disc;
-    padding-left: 20px;
-  }
-  .gallery-section {
-    padding: 60px 0;
-    background-color: #f9f9f9;
-  }
-  .gallery-section img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform .3s ease;
-  }
-  .gallery-section img:hover {
-    transform: scale(1.05);
-  }
+.age-group ul li::before {
+  position: absolute;
+  left: 0;
+  color: #2a4d69;
+  font-weight: bold;
+}
 
-  @keyframes flyLeft {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(-5deg); }
-      100% { transform: translateY(0) rotate(0deg); }
-  }
+.age-group img {
+  max-width: 90%;
+  transition: transform 0.3s ease;
+}
 
-  @keyframes flyRight {
-      0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(5deg); }
-      100% { transform: translateY(0) rotate(0deg); }
+.age-group img:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .age-group h3 {
+    font-size: 1.3rem;
   }
+  .age-group p {
+    font-size: 0.95rem;
+  }
+  .age-group img {
+    max-width: 100%;
+  }
+}
 
 </style>
-
 
 @php
     $bgImage = $banner && $banner->feature_image
@@ -97,38 +84,46 @@
 
 
   <!-- Butterfly top-left -->
-  <img src="{{ asset('resources/frontend/images/butterfly-left.png') }}" 
-       alt="Butterfly Left" 
-       style="position: absolute; top: 100px; left: 100px; width: 100px; height: auto; opacity: 0.9; animation: flyLeft 6s infinite ease-in-out;">
-  
-  <!-- Butterfly top-right -->
-  <img src="{{ asset('resources/frontend/images/butterfly-right.png') }}" 
-       alt="Butterfly Right" 
-       style="position: absolute; top: 50px; right: 100px; width: 100px; height: auto; opacity: 0.9; animation: flyRight 6s infinite ease-in-out;">
+<img src="{{ asset('resources/frontend/images/butterfly-left.png') }}" 
+      alt="Butterfly Left" 
+      style="position: absolute; top: 200px; left: 100px; width: 100px; height: auto; opacity: 0.9; animation: flyLeft 6s infinite ease-in-out;">
+
+<!-- Butterfly top-right -->
+<img src="{{ asset('resources/frontend/images/butterfly-right.png') }}" 
+      alt="Butterfly Right" 
+      style="position: absolute; top: 220px; right: 100px; width: 100px; height: auto; opacity: 0.9; animation: flyRight 6s infinite ease-in-out;">
 
 
+<section class="age-group py-5">
+  <div class="container">
+    <div class="row align-items-center">
 
-  <!-- Toddler Room Section -->
-<section class="toddler-section container position-relative" style="overflow: hidden;">
-
-  <div class="text-center mb-5">
-    <h2>{{ $agegroup->short_title }}</h2>
-  </div>
-
-  <div class="row align-items-center">
-    <div class="col-lg-6">
       
-      {!! $agegroup->short_description !!}
+      <div class="text-center mb-5">
+        <h2>{{ $agegroup->short_title }}</h2>
+      </div>
+      
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        
+        {!! $agegroup->short_description !!}
+      </div>
 
-
-    </div>
-
-    <div class="col-lg-6 text-center">
-      <img src="{{ asset('images/content/' . $agegroup->feature_image) }}"
-           alt="{{ $agegroup->short_title }}" class="img-fluid rounded shadow">
+      <!-- RIGHT IMAGE -->
+      <div class="col-lg-6 text-center">
+        <img  src="{{ asset('images/content/' . $agegroup->feature_image) }}"
+            alt="{{ $agegroup->short_title }}"  
+             class="img-fluid rounded shadow-sm">
+      </div>
     </div>
   </div>
 </section>
+
+
+
+
+
+
 
 
   <!-- ===== Smart Full-Width Gallery ===== -->

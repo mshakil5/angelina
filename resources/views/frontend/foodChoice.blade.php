@@ -3,33 +3,6 @@
 @section('content')
 
 <style>
-  .breadcrumb-section {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 450px;
-    position: relative;
-  }
-
-  .breadcrumb-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
-
-  .breadcrumb-section .container {
-    position: relative;
-    z-index: 2;
-  }
-
-  .breadcrumb-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
-
-  .breadcrumb a:hover {
-    text-decoration: underline;
-  }
 
   
     .week1 .table-week-title { background:#5e50a1; } /* purple */
