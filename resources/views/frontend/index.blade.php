@@ -610,7 +610,7 @@
                         <input id="first_name" 
                               name="first_name" 
                               type="text" 
-                              class="form-control form-control-lg @error('first_name') is-invalid @enderror"
+                              class="form-control @error('first_name') is-invalid @enderror"
                               placeholder="First name" 
                               value="{{ old('first_name') }}" 
                               required>
@@ -625,7 +625,7 @@
                         <input id="last_name" 
                               name="last_name" 
                               type="text" 
-                              class="form-control form-control-lg @error('last_name') is-invalid @enderror"
+                              class="form-control @error('last_name') is-invalid @enderror"
                               placeholder="Last name"
                               value="{{ old('last_name') }}">
                         @error('last_name')
@@ -639,7 +639,7 @@
                         <input id="email" 
                               name="email" 
                               type="email" 
-                              class="form-control form-control-lg @error('email') is-invalid @enderror"
+                              class="form-control @error('email') is-invalid @enderror"
                               placeholder="Email" 
                               value="{{ old('email') }}" 
                               required>
@@ -654,7 +654,7 @@
                         <input id="phone" 
                               name="phone" 
                               type="text" 
-                              class="form-control form-control-lg @error('phone') is-invalid @enderror"
+                              class="form-control  @error('phone') is-invalid @enderror"
                               placeholder="Phone" 
                               value="{{ old('phone') }}" 
                               required>
@@ -668,7 +668,7 @@
                         <label class="form-label visually-hidden" for="prefTime">Preferred time</label>
                         <select id="prefTime" 
                                 name="prefTime" 
-                                class="form-select form-select-lg @error('prefTime') is-invalid @enderror" 
+                                class="form-select  @error('prefTime') is-invalid @enderror" 
                                 required>
                           <option value="" disabled {{ old('prefTime') ? '' : 'selected' }}>Preferred time</option>
                           <option {{ old('prefTime') == 'Morning (9:00 - 11:00)' ? 'selected' : '' }}>Morning (9:00 - 11:00)</option>
