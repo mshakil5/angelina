@@ -30,6 +30,7 @@ use App\Models\Newsletter;
 use App\Models\Reference;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class FrontendController extends Controller
 {
@@ -269,8 +270,9 @@ class FrontendController extends Controller
       return view('frontend.contact', compact('contact', 'company'));
     }
 
-    public function storeContact(Request $request)
+    public function storeContact2(Request $request)
     {
+        
         $request->validate([
             'first_name' => 'required|string|min:2|max:50',
             'last_name'  => 'required|string|min:2|max:50',
@@ -301,6 +303,46 @@ class FrontendController extends Controller
 
         return back()->with('success', 'Your message has been sent successfully!');
     }
+
+
+    public function storeContact(Request $request)
+    {
+        try {
+            $request->validate([
+                'first_name' => 'required|string|min:2|max:50',
+                'last_name'  => 'required|string|min:2|max:50',
+                'email' => 'required|email|max:50',
+                'phone' => ['required'],
+                'subject' => 'nullable|string|max:255',
+                'message' => 'required|string|max:2000',
+            ]);
+
+            $contact = new Contact();
+            $contact->first_name = $request->input('first_name');
+            $contact->last_name  = $request->input('last_name');
+            $contact->email      = $request->input('email');
+            $contact->phone      = $request->input('phone');
+            $contact->subject    = $request->input('subject');
+            $contact->message    = $request->input('message');
+            $contact->pref_time  = $request->input('prefTime');
+            $contact->nursery    = $request->input('nursery');
+            $contact->save();
+
+            $contactEmails = ContactEmail::where('status', 1)->pluck('email');
+
+            // (optional mail sending)
+            // foreach ($contactEmails as $contactEmail) {
+            //     Mail::mailer('gmail')->to($contactEmail)->send(new ContactMail($contact));
+            // }
+
+            return redirect()->to(url()->previous() . '#callback')
+                            ->with('success', 'Your message has been sent successfully!');
+        } catch (ValidationException $e) {
+            throw ValidationException::withMessages($e->errors())
+                ->redirectTo(url()->previous() . '#callback');
+        }
+    }
+
 
     public function privacyPolicy()
     {

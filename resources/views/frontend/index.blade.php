@@ -100,7 +100,7 @@
 
             <div class="align-items-center text-center mb-5">
               
-              <h2 class="big-title">Our Age Groups</h2>
+              <h2 class="big-title">Best nursery in Colchester</h2>
               <br><br>
               {{-- <hr> --}}
             </div>
@@ -126,7 +126,7 @@
         <div class="col-lg-6">
           <div class="px-md-3">
             {{-- <div class="small-title">Our Age Groups</div> --}}
-            <h2 class="big-title">Child-centred care for every stage</h2>
+            <h2 class="big-title">Angelina's Day Care</h2>
 
             <!-- Centered tabs -->
             <ul class="nav nav-tabs mt-4 pb-3" id="ageTabs" role="tablist">
@@ -407,8 +407,7 @@
           <div class="small-title text-uppercase text-muted mb-2">What parents say</div>
           <h2 class="big-title mb-3">Excellent Nursery Environment</h2>
           <p class="lead text-muted">
-            We pride ourselves on creating a nurturing and stimulating environment where children feel safe, grow in confidence and discover their interests.
-            Below are a few words from the families who trust us each day.
+            We take great pride in providing a nurturing, engaging environment where every child feels safe, builds confidence, and explores their unique interests. Here are a few words from the families who place their trust in us each day.
           </p>
         </div>
       </div>
@@ -512,7 +511,7 @@
             Here are some of the most common questions parents ask about our nursery environment, daily routines, and enrolment process.
           </p> -->
           <!-- <img src="https://cdn-icons-png.flaticon.com/512/3209/3209983.png" alt="Nursery FAQ illustration" class="img-fluid mt-4" style="max-width:220px;"> -->
-          <img src="{{asset('resources/frontend/images/faq.jpg')}}" alt="FAQ" class="img-fluid mt-4" >
+          <img src="{{asset('resources/frontend/images/faq.jpeg')}}" alt="FAQ" class="img-fluid " >
         </div>
       </div>
 
@@ -587,104 +586,144 @@
                 
                 @if(session('success'))
                     <div class="alert alert-success mt-3">{{ session('success') }}</div>
-                    
+                @endif
+
+                @if ($errors->any())
+                  <div class="alert alert-danger" role="alert">
+                    <h6 class="alert-heading mb-2">Please fix the following errors:</h6>
+                    <ul class="mb-0">
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
                 @endif
 
                 <!-- Form -->
-                <form id="callbackForm" action="{{ route('contact.store') }}" method="POST" role="form" class="php-email-form">
-                  @csrf
-                  <div class="row g-3">
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="first_name">First name</label>
-                      <input id="first_name" name="first_name" type="text" class="form-control form-control-lg" placeholder="First name" required>
-                       @error('first_name')
+                <form action="{{ route('contact.store') }}" method="POST" role="form" class="php-email-form">
+                    @csrf
+                    <div class="row g-3">
+
+                      <!-- First name -->
+                      <div class="col-12 col-md-6">
+                        <label class="form-label visually-hidden" for="first_name">First name</label>
+                        <input id="first_name" 
+                              name="first_name" 
+                              type="text" 
+                              class="form-control form-control-lg @error('first_name') is-invalid @enderror"
+                              placeholder="First name" 
+                              value="{{ old('first_name') }}" 
+                              required>
+                        @error('first_name')
                           <span class="invalid-feedback">{{ $message }}</span>
-                      @enderror
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="last_name">Last name</label>
-                      <input id="last_name" name="last_name" type="text" class="form-control form-control-lg" placeholder="Last name">
-                      @error('last_name')
-                          <span class="invalid-feedback">{{ $message }}</span>
-                      @enderror
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="email">Email</label>
-                      <input id="email" name="email" type="email" class="form-control form-control-lg" placeholder="Email" required>
-                      @error('email')
-                          <span class="invalid-feedback">{{ $message }}</span>
-                      @enderror
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="phone">Phone</label>
-                      <input id="phone" name="phone" type="text" class="form-control form-control-lg" placeholder="Phone" pattern="[\d\s()+\-]{6,20}" required>
-                      @error('phone')
-                          <span class="invalid-feedback">{{ $message }}</span>
-                      @enderror
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="prefTime">Preferred time</label>
-                      <select id="prefTime" name="prefTime" class="form-select form-select-lg" required>
-                        <option value="" disabled selected>Preferred time</option>
-                        <option>Morning (9:00 - 11:00)</option>
-                        <option>Midday (11:00 - 14:00)</option>
-                        <option>Afternoon (14:00 - 16:00)</option>
-                        <option>Evening (16:00 - 18:00)</option>
-                      </select>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label visually-hidden" for="nursery">Choose Nursery</label>
-                      <select id="nursery" name="nursery" class="form-select form-select-lg" required>
-                        <option value="" disabled selected>Choose nursery</option>
-                        <option>Angelinas Day Care — Colchester</option>
-                        <option>Angelinas Day Care — Central</option>
-                        <option>Angelinas Day Care — North</option>
-                      </select>
-                    </div>
-
-                    <div class="col-12">
-                      <label class="form-label visually-hidden" for="message">Message</label>
-                      <textarea id="message" name="message" rows="4" class="form-control" placeholder="Message (optional)"></textarea>
-
-                      @error('message')
-                          <span class="invalid-feedback">{{ $message }}</span>
-                      @enderror
-
-                    </div>
-
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input id="consent" name="consent" class="form-check-input" type="checkbox" required>
-                        <label class="form-check-label small" for="consent">
-                          I consent to my submitted data being collected and stored in accordance with the <a href="{{route('privacy-policy')}}" target="_blank" rel="noopener">Privacy Policy</a>.
-                        </label>
+                        @enderror
                       </div>
-                    </div>
 
-                    <!-- CAPTCHA placeholder -->
-                    {{-- <div class="col-12" id="captchaContainer">
-                      
-                      <div class="col-auto d-flex align-items-center gap-2">
-                          <span id="captcha-question" class="fw-bold text-dark"></span>
-                          <input type="number" id="captcha-answer" class="form-control form-control-sm" style="width: 80px;" placeholder="Answer" required>
-                          <div id="captcha-error" class="text-danger d-none">Incorrect</div>
+                      <!-- Last name -->
+                      <div class="col-12 col-md-6">
+                        <label class="form-label visually-hidden" for="last_name">Last name</label>
+                        <input id="last_name" 
+                              name="last_name" 
+                              type="text" 
+                              class="form-control form-control-lg @error('last_name') is-invalid @enderror"
+                              placeholder="Last name"
+                              value="{{ old('last_name') }}">
+                        @error('last_name')
+                          <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
                       </div>
-                    </div> --}}
 
-                    <div class="col-12 d-grid">
-                      <button id="callbackSubmit" class="btn btn-primary btn-lg" type="submit">
-                        <span class="btn-text">Send</span>
-                        <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
-                      </button>
+                      <!-- Email -->
+                      <div class="col-12 col-md-6">
+                        <label class="form-label visually-hidden" for="email">Email</label>
+                        <input id="email" 
+                              name="email" 
+                              type="email" 
+                              class="form-control form-control-lg @error('email') is-invalid @enderror"
+                              placeholder="Email" 
+                              value="{{ old('email') }}" 
+                              required>
+                        @error('email')
+                          <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <!-- Phone -->
+                      <div class="col-12 col-md-6">
+                        <label class="form-label visually-hidden" for="phone">Phone</label>
+                        <input id="phone" 
+                              name="phone" 
+                              type="text" 
+                              class="form-control form-control-lg @error('phone') is-invalid @enderror"
+                              placeholder="Phone" 
+                              value="{{ old('phone') }}" 
+                              required>
+                        @error('phone')
+                          <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <!-- Preferred time -->
+                      <div class="col-12 col-md-12">
+                        <label class="form-label visually-hidden" for="prefTime">Preferred time</label>
+                        <select id="prefTime" 
+                                name="prefTime" 
+                                class="form-select form-select-lg @error('prefTime') is-invalid @enderror" 
+                                required>
+                          <option value="" disabled {{ old('prefTime') ? '' : 'selected' }}>Preferred time</option>
+                          <option {{ old('prefTime') == 'Morning (9:00 - 11:00)' ? 'selected' : '' }}>Morning (9:00 - 11:00)</option>
+                          <option {{ old('prefTime') == 'Midday (11:00 - 14:00)' ? 'selected' : '' }}>Midday (11:00 - 14:00)</option>
+                          <option {{ old('prefTime') == 'Afternoon (14:00 - 16:00)' ? 'selected' : '' }}>Afternoon (14:00 - 16:00)</option>
+                          <option {{ old('prefTime') == 'Evening (16:00 - 18:00)' ? 'selected' : '' }}>Evening (16:00 - 18:00)</option>
+                        </select>
+                        @error('prefTime')
+                          <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <!-- Message -->
+                      <div class="col-12">
+                        <label class="form-label visually-hidden" for="message">Message</label>
+                        <textarea id="message" 
+                                  name="message" 
+                                  rows="4" 
+                                  class="form-control @error('message') is-invalid @enderror" 
+                                  placeholder="Message (optional)">{{ old('message') }}</textarea>
+                        @error('message')
+                          <span class="invalid-feedback">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <!-- Consent -->
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input id="consent" 
+                                name="consent" 
+                                class="form-check-input @error('consent') is-invalid @enderror" 
+                                type="checkbox" 
+                                {{ old('consent') ? 'checked' : '' }} 
+                                required>
+                          <label class="form-check-label small" for="consent">
+                            I consent to my submitted data being collected and stored in accordance with the 
+                            <a href="{{ route('privacy-policy') }}" target="_blank" rel="noopener">Privacy Policy</a>.
+                          </label>
+                        </div>
+                        @error('consent')
+                          <span class="invalid-feedback d-block">{{ $message }}</span>
+                        @enderror
+                      </div>
+
+                      <!-- Submit button -->
+                      <div class="col-12 d-grid">
+                        <button id="callbackSubmit" class="btn btn-primary btn-lg" type="submit">
+                          <span class="btn-text">Send</span>
+                          <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                      </div>
+
                     </div>
+                  </form>
 
-                  </div>
-                </form>
 
                 <div id="formFeedback" class="mt-3" role="status" aria-live="polite"></div>
               </div>
