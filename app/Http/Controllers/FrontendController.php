@@ -560,7 +560,7 @@ class FrontendController extends Controller
     {
         
         $job = Content::with('category','images')->where('type', 1)->first();
-        $banner = Banner::where('page', 'Food & Choice')->first();
+        $banner = Banner::where('page', 'Job')->first();
         if($job){
             $this->seo(
                 $job->meta_title,

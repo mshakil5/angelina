@@ -402,12 +402,13 @@
     <div class="row align-items-center gy-4">
 
       <!-- LEFT: Title + center big title + small content -->
+
       <div class="col-lg-5">
         <div class="pe-lg-4 text-center text-lg-start">
-          <div class="small-title text-uppercase text-muted mb-2">What parents say</div>
-          <h2 class="big-title mb-3">Excellent Nursery Environment</h2>
-          <p class="lead text-muted">
-            We take great pride in providing a nurturing, engaging environment where every child feels safe, builds confidence, and explores their unique interests. Here are a few words from the families who place their trust in us each day.
+          <h3 class="h5 text-uppercase text-muted mb-2">What parents say</h3>
+          <h2 class="fw-bold mb-3">Excellent Nursery Environment</h2> 
+          <p class="text-muted">
+        We take great pride in providing a nurturing, engaging environment where every child feels safe, builds confidence, and explores their unique interests. Here are a few words from the families who place their trust in us each day.
           </p>
         </div>
       </div>

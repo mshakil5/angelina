@@ -75,7 +75,7 @@
 
     /* responsive text and spacing */
     @media(min-width:992px){
-    .about-section{padding:48px}
+    .about-section{padding:20px}
     .sec-title{font-size:40px}
     }
 
