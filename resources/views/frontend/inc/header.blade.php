@@ -40,17 +40,19 @@
           <ul class="dropdown-menu text-center">
             @php
                 $icons = [
-                  0 => '<i class="fas fa-baby me-2" style="color:#9b59b6; font-size:16px;"></i>',
-                  1 => '<i class="fas fa-child me-2" style="color:#e67e22; font-size:16px;"></i>',
-                  2 => '<i class="fas fa-school me-2" style="color:#3498db; font-size:16px;"></i>',
-                ]
-
+                          0 => '<i class="fas fa-baby me-2" style="color:#9b59b6; font-size:16px;"></i>',
+                          1 => '<i class="fas fa-child me-2" style="color:#e67e22; font-size:16px;"></i>',
+                          2 => '<i class="fas fa-school me-2" style="color:#3498db; font-size:16px;"></i>',
+                          3 => '<i class="fas fa-running me-2" style="color:#2ecc71; font-size:16px;"></i>',
+                          4 => '<i class="fas fa-graduation-cap me-2" style="color:#e74c3c; font-size:16px;"></i>',
+                          5 => '<i class="fas fa-user-graduate me-2" style="color:#f1c40f; font-size:16px;"></i>',
+          ];
             @endphp
 
             @foreach (\App\Models\Content::where('category_id', 4)->orderby('id', 'ASC')->get() as $key => $ageGroup)
               <li>
                 <a class="dropdown-item d-flex align-items-center" href="{{ route('agegroup', $ageGroup->slug) }}">
-                  {!! $icons[$key] !!} {{ $ageGroup->short_title }}
+                  {!! $icons[$key] ?? '' !!} {{ $ageGroup->short_title }}
                 </a>
               </li>
             @endforeach

@@ -94,7 +94,8 @@
       style="position: absolute; top: 220px; right: 100px; width: 100px; height: auto; opacity: 0.9; animation: flyRight 6s infinite ease-in-out;">
 
 
-<section class="age-group py-5">
+      
+<section class="age-group pt-5">
   <div class="container">
     <div class="row align-items-center">
 
@@ -104,9 +105,24 @@
       </div>
       
       <!-- LEFT CONTENT -->
-      <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="col-lg-12 mb-4 mb-lg-0">
         
         {!! $agegroup->short_description !!}
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="age-group pt-2">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- LEFT CONTENT -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        
+        {!! $agegroup->long_description !!}
       </div>
 
       <!-- RIGHT IMAGE -->

@@ -58,14 +58,22 @@
                 @endif
                 <div class="col-md-12">
                     <div class="form-group">
-                      <label>Short Description</label>
+                      <label>@if ($type == 3)
+                          Top Content
+                      @else
+                          Short Description
+                      @endif</label>
                       <textarea class="form-control summernote" id="short_description" name="short_description" placeholder=""></textarea>
                     </div>
                 </div>
                 @if($type != 1)
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>long Description</label>
+                    <label>@if ($type == 3)
+                          Middle Content
+                      @else
+                          Long Description
+                      @endif</label>
                     <textarea class="form-control summernote" id="long_description" name="long_description" placeholder=""></textarea>
                   </div>
                 </div>
