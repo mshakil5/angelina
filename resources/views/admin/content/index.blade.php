@@ -93,7 +93,7 @@
                     <label>Feature Image (1000x700) <span style="color:red">*</span></label>
                     <input type="file" class="filepond" id="feature_image" name="feature_image" required>
                   </div>
-                  @if($type == 1)
+                  @if($type == 1 || $type == 3)
                   <div class="form-group">
                     <label>Additional Images</label>
                     <input type="file" class="filepond" id="images" name="images[]" multiple>
