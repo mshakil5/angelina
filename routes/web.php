@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\User\ProfileController;
 
 // cache clear
 Route::get('/clear', function() {
@@ -72,4 +73,6 @@ Route::group(['prefix' =>'manager/', 'middleware' => ['auth', 'is_manager']], fu
 
 Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function(){
     Route::get('/dashboard', [HomeController::class, 'userHome'])->name('user.dashboard');
+    Route::post('/profile-update', [ProfileController::class, 'updateProfile'])->name('user.updateProfile');
+    Route::post('/password-update', [ProfileController::class, 'updatePassword'])->name('user.updatePassword');
 });
