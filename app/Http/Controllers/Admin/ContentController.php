@@ -56,9 +56,9 @@ class ContentController extends Controller
             'long_title' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
             'long_description' => 'nullable|string',
-            'category_id' => 'required|exists:content_categories,id',
-            'feature_image' => 'required|image|mimes:jpeg,png,webp|max:2048',
-            'images.*' => 'nullable|image|mimes:jpeg,png,webp|max:2048',
+            'category_id' => 'nullable|exists:content_categories,id',
+            'feature_image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,webp|max:4048',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id'
         ]);

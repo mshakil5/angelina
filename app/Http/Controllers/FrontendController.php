@@ -80,7 +80,7 @@ class FrontendController extends Controller
 
         
 
-        $galleries = Content::with('category')->where('type', 1)->latest()->get();
+        $galleries = Content::with('category','images')->where('type', 1)->latest()->get();
         $faqs = Cache::remember('faqs', now()->addDay(), function () {
             return FaqQuestion::orderBy('id', 'asc')->get();
         });

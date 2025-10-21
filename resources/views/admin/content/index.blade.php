@@ -77,7 +77,6 @@
                     <textarea class="form-control summernote" id="long_description" name="long_description" placeholder=""></textarea>
                   </div>
                 </div>
-                @endif
                 <div class="col-12">
                     <div class="form-group">
                         <label>Tags</label>
@@ -88,6 +87,9 @@
                         </select>
                     </div>
                 </div>
+                @endif
+                
+                
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Feature Image (1000x700) <span style="color:red">*</span></label>
@@ -100,7 +102,10 @@
                   </div>
                   @endif
                 </div>
-                <div class="col-sm-12">
+
+
+                @if($type != 1)
+                    <div class="col-sm-12">
                     <div class="form-group">
                         <label>Meta Title</label>
                         <input type="text" class="form-control" name="meta_title" id="meta_title">
@@ -126,6 +131,13 @@
                         <img id="preview-meta-image" width="200" style="margin-top:10px;">
                     </div>
                 </div>
+                @endif
+
+
+                
+
+
+
               </div>
             </form>
           </div>
@@ -225,6 +237,7 @@ $(document).ready(function () {
     const pondImages = FilePond.create(document.querySelector('#images'), { allowImagePreview:true, allowMultiple:true });
 
     $("#addBtn").click(function(){
+      
         var form_data = new FormData();
         form_data.append("short_title", $("#short_title").val());
         form_data.append("publishing_date", $("#publishing_date").val());
@@ -237,12 +250,13 @@ $(document).ready(function () {
         form_data.append("meta_keywords", $("#meta_keywords").val());
         form_data.append("id", $("#codeid").val());
 
-        let metaImageInput = document.getElementById('meta_image');
-        if (metaImageInput.files.length > 0) {
-            form_data.append("meta_image", metaImageInput.files[0]);
-        }
-
-        $("#tags").val().forEach(tag => form_data.append("tags[]", tag));
+        @if($type != 1)
+            let metaImageInput = document.getElementById('meta_image');
+            if (metaImageInput.files.length > 0) {
+          form_data.append("meta_image", metaImageInput.files[0]);
+            }
+            $("#tags").val().forEach(tag => form_data.append("tags[]", tag));
+        @endif
 
         if(pondFeature.getFiles().length > 0) form_data.append("feature_image", pondFeature.getFiles()[0].file);
         pondImages.getFiles().forEach(fileItem => form_data.append("images[]", fileItem.file));
@@ -256,12 +270,14 @@ $(document).ready(function () {
             processData:false,
             data: form_data,
             success:function(res){
+              console.log(res);
                 clearform();
                 success(res.message);
                 reloadTable();
             },
             error: function(xhr){
                 console.error(xhr.responseText);
+                console.log(xhr.responseText);
                 if(xhr.responseJSON && xhr.responseJSON.errors){
                     console.error(Object.values(xhr.responseJSON.errors)[0][0]);
                     error(Object.values(xhr.responseJSON.errors)[0][0]);
@@ -293,12 +309,6 @@ $(document).ready(function () {
             $("#addThisFormContainer").show(300);
             $("#newBtn").hide(100);
 
-            if(d.meta_image){
-                document.getElementById('preview-meta-image').src = "{{ asset('images/content') }}/" + d.meta_image;
-            } else {
-                document.getElementById('preview-meta-image').src = '';
-            }
-
             pondFeature.removeFiles();
             if(d.feature_image) pondFeature.addFile("{{ asset('images/content') }}/"+d.feature_image);
 
@@ -306,6 +316,12 @@ $(document).ready(function () {
             if(d.images && d.images.length){
                 d.images.forEach(img => pondImages.addFile("{{ asset('images/content') }}/"+img.image));
             }
+            if(d.meta_image){
+                document.getElementById('preview-meta-image').src = "{{ asset('images/content') }}/" + d.meta_image;
+            } else {
+                document.getElementById('preview-meta-image').src = '';
+            }
+
         });
     });
 

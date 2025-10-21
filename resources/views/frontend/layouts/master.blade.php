@@ -214,24 +214,6 @@
     if (e.key === 'ArrowLeft') showPrev();
   });
 
-  // Toggle see more / show less
-  let expanded = false;
-  toggleBtn.addEventListener('click', function(){
-    const moreItems = document.querySelectorAll('#galleryGrid .more-item');
-    expanded = !expanded;
-    moreItems.forEach(el => {
-      if (expanded) el.classList.remove('d-none');
-      else el.classList.add('d-none');
-    });
-    toggleBtn.textContent = expanded ? 'Show less' : 'See more';
-    // update images array because more images may have been added/removed
-    const allItems = Array.from(document.querySelectorAll('#galleryGrid .gallery-item'));
-    const newImages = allItems.map(it => it.querySelector('img').getAttribute('data-full') || it.querySelector('img').src);
-    images.length = 0; // clear
-    newImages.forEach(u=>images.push(u));
-    // reassign dataset indexes for keyboard/enter support
-    allItems.forEach((it, i)=> it.dataset.index = i);
-  });
 
 })();
 </script>
