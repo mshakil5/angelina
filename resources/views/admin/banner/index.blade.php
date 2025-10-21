@@ -36,6 +36,7 @@
                   <option value="Contact">Contact</option>
                   <option value="Fees">Fees</option>
                   <option value="Job">Job</option>
+                  <option value="User Dashboard">User Dashboard</option>
                   <option value="Others">Others</option>
                 </select>
               </div>
