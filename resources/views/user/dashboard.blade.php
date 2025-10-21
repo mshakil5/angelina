@@ -154,6 +154,11 @@
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zM18 16v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
               Notices
             </a>
+            
+            <a class="nav-link" href="#" data-target="commencement">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zM18 16v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
+              Commencement 
+            </a>
 
             <a class="nav-link" href="#" data-target="profile">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zM12 14c-4 0-7 3-7 7h14c0-4-3-7-7-7z" fill="currentColor"/></svg>
@@ -165,10 +170,13 @@
               Change Password
             </a>
 
-            <a class="nav-link text-danger" href="#" id="logoutBtn">
+            <a class="nav-link text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 13v-2H7V8l-5 4 5 4v-3h9zM20 3h-8v2h8v14h-8v2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" fill="currentColor"/></svg>
               Logout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+            </form>
           </nav>
 
         </div>
@@ -204,6 +212,7 @@
               <nav class="nav flex-column nav-vertical" id="offNav">
                 <a class="nav-link active" href="#" data-target="dashboard">Dashboard</a>
                 <a class="nav-link" href="#" data-target="notice">Notices</a>
+                <a class="nav-link" href="#" data-target="commencement">Commencement</a>
                 <a class="nav-link" href="#" data-target="profile">Profile</a>
                 <a class="nav-link" href="#" data-target="password">Change Password</a>
                 <a class="nav-link text-danger" href="#" id="logoutBtnMobile">Logout</a>
@@ -304,6 +313,15 @@
                 <a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
               </div>
             </div>
+          </section>
+
+                    <!-- Notice view -->
+          <section id="commencement" class="content-pane d-none">
+
+                @include('user.inc.commencement')
+
+
+
           </section>
 
           <!-- Profile view -->
@@ -449,15 +467,6 @@
       // initial show
       showPane('dashboard');
 
-      // Logout handlers (demo)
-      document.getElementById('logoutBtn').addEventListener('click', function(e){
-        e.preventDefault();
-        alert('Logged out (demo). Redirect to login page in real app.');
-      });
-      document.getElementById('logoutBtnMobile').addEventListener('click', function(e){
-        e.preventDefault();
-        alert('Logged out (demo). Redirect to login page in real app.');
-      });
 
       // Profile avatar preview
       const avatarInput = document.getElementById('avatarInput');
