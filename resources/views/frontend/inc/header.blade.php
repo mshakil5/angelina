@@ -85,7 +85,13 @@
 
         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
           <a class="btn btn-primary rounded-pill px-4" href="{{ route('job') }}">
-            <i class="fas fa-briefcase me-2"></i> Job
+            <i class="fas fa-briefcase me-2"></i> JOB
+          </a>
+        </li>
+
+        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+          <a class="btn btn-primary rounded-pill px-4" target="_blank" href="https://app.famly.co/#/customInquiryForm/c6ae31a7-6348-4f58-89df-fd12ca88e5d7/to/eb08598d-c195-4399-acdf-9ed715df343e/submit">
+            <i class="fa-solid fa-file me-2"></i> ENROLL NOW
           </a>
         </li>
 

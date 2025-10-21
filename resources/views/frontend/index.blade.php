@@ -200,6 +200,7 @@
             <div class="mt-4">
               <a href="#visit" class="btn btn-primary btn-lg rounded-pill px-4">Arrange a Visit</a>
               <a href="#contact" class="btn btn-primary btn-lg rounded-pill px-4">Contact Us</a>
+              <a class="btn btn-primary btn-lg rounded-pill px-4" target="_blank" href="https://app.famly.co/#/customInquiryForm/c6ae31a7-6348-4f58-89df-fd12ca88e5d7/to/eb08598d-c195-4399-acdf-9ed715df343e/submit">ENROLL NOW</a>
             </div>
           </div>
         </div>
