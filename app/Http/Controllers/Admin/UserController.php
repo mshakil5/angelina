@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyDetails;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -120,7 +121,8 @@ class UserController extends Controller
 
     public function commencement($id)
     {
-        $user = UserDocumentCompletion::where('user_id', $id)->get();
-        return view('admin.users.commencement');
+        $employee = User::with('documents')->where('id', $id)->first();
+        $company = CompanyDetails::firstOrCreate();
+        return view('admin.users.commencement', compact('employee', 'company'));
     }
 }
