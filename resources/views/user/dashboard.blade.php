@@ -93,7 +93,7 @@
                             @endphp
 
                             <label class="list-group-item list-group-item-action d-flex align-items-start gap-3 doc-item" data-url="{{ $docUrl }}" data-file="{{ $docPath }}">
-                              <input class="form-check-input mt-1 me-2 doc-checkbox" type="checkbox" value="{{ $document->id }}" data-weight="1" @checked($userDoc) />
+                                <input class="form-check-input mt-1 me-2 doc-checkbox" type="checkbox" value="{{ $document->id }}" data-weight="1" @checked($userDoc) onclick="event.stopPropagation();" />
                               <div>
                                 <div class="fw-bold">{{ $document->title }}</div>
                                 <div class="small-muted">{{ $document->description }}</div>
