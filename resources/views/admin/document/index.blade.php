@@ -261,12 +261,10 @@
             if(!confirm('Are you sure you want to delete this document ?')) return;
             codeid = $(this).data('id');
             info_url = url + '/'+codeid;
-            console.log(info_url, codeid);
             $.ajax({
                 url: info_url,
                 method: "GET",
                 success: function(res) {
-                    console.log(res);
                   clearform();
                   success(res.message);
                   pageTop();
