@@ -79,6 +79,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Status</th>
+                            <th>Commencement</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -127,6 +128,7 @@ $(document).ready(function () {
             { data: 'email', name: 'email' },
             { data: 'phone', name: 'phone' },
             { data: 'status', name: 'status', orderable:false, searchable:false },
+            { data: 'commencement', name: 'commencement', orderable:false, searchable:false },
             { data: 'action', name: 'action', orderable:false, searchable:false }
         ]
     });

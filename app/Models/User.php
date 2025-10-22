@@ -33,4 +33,9 @@ class User extends Authenticatable
             get: fn ($value) =>  ["1", "2", "3"][$value],
         );
     }
+
+    public function documents()
+    {
+        return $this->hasMany(UserDocumentCompletion::class);
+    }
 }

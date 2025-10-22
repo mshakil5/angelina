@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserDocumentCompletion;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -13,9 +15,21 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $users = User::where('is_type', 3)->latest()->get();
+            $documentsCount = Document::where('category', 'Employee Dashboard')->where('status', 1)->count();
+            $users = User::withCount('documents')->where('is_type', 3)->latest()->get();
             return DataTables::of($users)
                 ->addIndexColumn()
+                ->addColumn('commencement', function ($row) use ($documentsCount) {
+                    $docsCount = $row->documents_count;
+                    $percentage = $documentsCount > 0 ? ($docsCount / $documentsCount * 100) : 0;
+                    return '<div class="text-center">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: ' . $percentage . '%;" aria-valuenow="' . $docsCount . '" aria-valuemin="0" aria-valuemax="' . $documentsCount . '">
+                                        ' . $docsCount . '/' . $documentsCount . '
+                                    </div>
+                                </div>
+                            </div>';
+                })
                 ->addColumn('status', function ($row) {
                     $checked = $row->status == 1 ? 'checked' : '';
                     return '<div class="custom-control custom-switch">
@@ -23,12 +37,13 @@ class UserController extends Controller
                                 <label class="custom-control-label" for="customSwitchStatus' . $row->id . '"></label>
                             </div>';
                 })
-                ->addColumn('action', function($row){
-                    $editBtn = '<button class="btn btn-sm btn-info edit" data-id="'.$row->id.'"><i class="fas fa-edit"></i></button>';
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete" data-id="'.$row->id.'"><i class="fas fa-trash-alt"></i></button>';
-                    return $editBtn.' '.$deleteBtn;
+                ->addColumn('action', function($row) {
+                    $editBtn = '<button class="btn btn-sm btn-info edit" data-id="' . $row->id . '"><i class="fas fa-edit"></i></button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>';
+                    $viewBtn = '<a class="btn btn-sm btn-success" href="' . route('user.commencement', $row->id) . '"><i class="fas fa-eye"></i></a>';
+                    return $editBtn . ' ' . $deleteBtn . ' ' . $viewBtn;
                 })
-                ->rawColumns(['status','action'])
+                ->rawColumns(['commencement', 'status', 'action'])
                 ->make(true);
         }
 
@@ -101,5 +116,11 @@ class UserController extends Controller
         $user->status = $user->status == 1 ? 0 : 1;
         $user->save();
         return response()->json(['status' => 200, 'message' => 'Status updated', 'new_status' => $user->status]);
+    }
+
+    public function commencement($id)
+    {
+        $user = UserDocumentCompletion::where('user_id', $id)->get();
+        return view('admin.users.commencement');
     }
 }

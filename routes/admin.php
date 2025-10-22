@@ -39,6 +39,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::get('/user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
     Route::post('/user/status', [UserController::class, 'toggleStatus'])->name('user.status');
+    Route::get('/user/commencement/{id}', [UserController::class, 'commencement'])->name('user.commencement');
 
     Route::get('/slider', [SliderController::class, 'getSlider'])->name('allslider');
     Route::post('/slider', [SliderController::class, 'sliderStore']);
