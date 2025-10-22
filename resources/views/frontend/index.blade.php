@@ -1,7 +1,8 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
+<!-- Include Flatpickr CSS and JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <!-- =======================
        Slider / Hero Area
        ======================= -->
@@ -662,7 +663,7 @@
                 @endif
 
                 <!-- Form -->
-                <form action="{{ route('contact.store') }}" method="POST" role="form" class="php-email-form">
+                <form action="{{ route('contact.store') }}" method="POST" role="form" >
                     @csrf
                     <div class="row g-3">
 
@@ -726,7 +727,7 @@
                       </div>
 
                       <!-- Preferred time -->
-                      <div class="col-12 col-md-12">
+                      <div class="col-12 col-md-6">
                         <label class="form-label visually-hidden" for="prefTime">Preferred time</label>
                         <select id="prefTime" 
                                 name="prefTime" 
@@ -742,6 +743,20 @@
                           <span class="invalid-feedback">{{ $message }}</span>
                         @enderror
                       </div>
+
+                        <div class="col-12 col-md-6">
+                            <input id="dob" 
+                                  name="dob" 
+                                  type="text" 
+                                  class="form-control @error('dob') is-invalid @enderror"
+                                  value="{{ old('dob') }}" 
+                                  placeholder="Date of Birth"
+                                  required>
+                            @error('dob')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+
 
                       <!-- Message -->
                       <div class="col-12">
@@ -925,12 +940,17 @@ $(document).ready(function () {
     }
   });
 
-  // Debugging: Log the number of hidden items on page load
-  console.log('Total gallery items:', $('.gallery-item').length);
-  console.log('Hidden gallery items:', $('.gallery-item.hidden').length);
 });
 </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#dob", {
+        dateFormat: "Y-m-d", // Format for the submitted value
+        altInput: true, // Show a human-readable format
+        altFormat: "F j, Y", // Display format (e.g., "October 22, 2025")
+        placeholder: "Date of Birth" // Custom placeholder
+    });
+</script>
 
 @endsection

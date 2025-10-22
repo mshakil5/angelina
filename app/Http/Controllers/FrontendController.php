@@ -307,11 +307,14 @@ class FrontendController extends Controller
 
     public function storeContact(Request $request)
     {
+
+        
         try {
             $request->validate([
                 'first_name' => 'required|string|min:2|max:50',
                 'last_name'  => 'required|string|min:2|max:50',
                 'email' => 'required|email|max:50',
+                'dob' => 'required|date|before_or_equal:' . now()->subYears(6)->format('Y-m-d'),
                 'phone' => ['required'],
                 'subject' => 'nullable|string|max:255',
                 'message' => 'required|string|max:2000',
@@ -323,6 +326,7 @@ class FrontendController extends Controller
             $contact->email      = $request->input('email');
             $contact->phone      = $request->input('phone');
             $contact->subject    = $request->input('subject');
+            $contact->dob        = $request->input('dob');
             $contact->message    = $request->input('message');
             $contact->pref_time  = $request->input('prefTime');
             $contact->nursery    = $request->input('nursery');
