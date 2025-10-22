@@ -227,7 +227,7 @@
             $("#addThisFormContainer").slideUp(200);
             $("#newBtn").slideDown(200);
             $('#preview-image').attr('src', '#');
-            $("#cardTitle").text('Add new client review');
+            $("#cardTitle").text('Add new document');
         }
         
         previewImage('#image', '#preview-image');

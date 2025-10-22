@@ -1,106 +1,11 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+<link href="{{ asset('resources/frontend/css/user.css') }}" rel="stylesheet">
 
-<style>
-  
-    /* Layout */
-    .dash-shell {
-      min-height: 100vh;
-      padding: 28px 20px;
-    }
-
-    /* Sidebar */
-    .dash-aside {
-      background: linear-gradient(180deg, #fff, #fff);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 6px 18px rgba(18, 38, 63, 0.06);
-      height: 100%;
-      position: sticky;
-      top: 24px;
-    }
-
-    .brand {
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-    .brand .logo {
-      width:48px;
-      height:48px;
-      border-radius:10px;
-      background: linear-gradient(135deg,var(--accent), #ff7ab6);
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-weight:700;
-      font-size:18px;
-      box-shadow:0 6px 16px rgba(233,30,99,0.12);
-    }
-    .brand h5 { margin:0; font-weight:700; font-size:16px; }
-    .brand p { margin:0; font-size:12px; color:var(--muted); }
-
-    .nav-vertical .nav-link {
-      border-radius:8px;
-      color:#444;
-      padding:10px 12px;
-      margin-bottom:8px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      transition:all .18s;
-    }
-    .nav-vertical .nav-link:hover {
-      transform: translateY(-2px);
-      background: rgba(233,30,99,0.06);
-      color:var(--accent);
-    }
-    .nav-vertical .nav-link.active {
-      background: linear-gradient(90deg, rgba(233,30,99,0.08), rgba(255,122,182,0.03));
-      color: var(--accent);
-      box-shadow: inset 0 0 0 1px rgba(233,30,99,0.06);
-    }
-
-    /* Right content */
-    .dash-content .card {
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(18,38,63,0.06);
-    }
-
-    .stat-card {
-      padding:18px;
-      border-radius:12px;
-      background:var(--card-bg);
-    }
-    .stat-card .value { font-weight:700; font-size:20px; }
-    .stat-card .label { color:var(--muted); font-size:13px; }
-
-    /* Profile avatar preview */
-    .avatar-preview {
-      width:84px;
-      height:84px;
-      border-radius:12px;
-      background:#f1f3f5;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,0.04);
-    }
-    .avatar-preview img { width:100%; height:100%; object-fit:cover; }
-
-    /* Footer small */
-    .small-muted { color:var(--muted); font-size:13px; }
-
-    /* responsive tweaks */
-    @media (max-width: 991.98px) {
-      .dash-aside { position:relative; top:auto; margin-bottom:18px; }
-    }
-</style>
+@php
+    $documents = \App\Models\Document::where('status', 1)->get();
+@endphp
 
 @php
     $banner = \App\Models\Banner::where('page', 'User Dashboard')->first();
@@ -226,198 +131,120 @@
       <main class="col-lg-9 col-12">
         <div class="dash-content">
 
-          <!-- Dashboard view -->
+
+          <!-- ===== Dashboard view (REPLACEMENT) ===== -->
           <section id="dashboard" class="content-pane">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h3 class="mb-0">Dashboard</h3>
               <small class="small-muted">Welcome back — here's what's happening</small>
             </div>
 
-            <div class="row g-3 mb-3">
-              <div class="col-sm-6 col-md-4">
-                <div class="stat-card">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="value">12</div>
-                      <div class="label">Active Campaigns</div>
-                    </div>
-                    <div class="text-end">
-                      <small class="small-muted">Updated today</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="col-sm-6 col-md-4">
-                <div class="stat-card">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="value">5</div>
-                      <div class="label">New Notices</div>
-                    </div>
-                    <div class="text-end">
-                      <small class="small-muted">2 unread</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="col-sm-6 col-md-4">
-                <div class="stat-card">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div class="value">£1,240</div>
-                      <div class="label">Pending Balance</div>
-                    </div>
-                    <div class="text-end">
-                      <small class="small-muted">Last 7 days</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <!-- SMART PROGRESS + PDF + CHECKS -->
             <div class="card mb-3">
               <div class="card-body">
-                <h5 class="card-title">Recent activity</h5>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">You updated your profile — Oct 15, 2025</li>
-                  <li class="list-group-item">New notice published: "Holiday Schedule" — Oct 12, 2025</li>
-                  <li class="list-group-item">Payment received — Oct 10, 2025</li>
-                </ul>
+                <div class="row gy-3">
+                  <div class="col-12">
+                    <h5 class="card-title mb-2">Onboarding progress</h5>
+                    <p class="small-muted mb-3">Complete the items below to finish your onboarding. The progress bar updates automatically.</p>
+
+                    <!-- Segmented progress bar container -->
+                    <div class="mb-3">
+                      <div class="seg-progress" aria-hidden="true">
+                        <div class="seg-fill" id="segFill" style="width:0%"></div>
+                        <div class="seg-overlay" id="segOverlay"></div>
+                      </div>
+
+                      <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div class="d-flex align-items-center gap-2">
+                          <strong id="progressPercent">0%</strong>
+                          <span class="small-muted" id="progressLabel">Not started</span>
+                        </div>
+                        <div>
+                          <button class="btn btn-sm btn-outline-secondary" id="markAllBtn" type="button">Mark all</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Left: checkboxes; Right: pdf viewer (stack on mobile) -->
+                  <div class="col-lg-5">
+                    <div class="mb-2">
+                      <h6 class="mb-2">Required steps</h6>
+
+                      <form id="stepsForm" class="needs-validation" novalidate>
+                        <div class="list-group">
+
+                          @foreach ($documents as $document)
+                            <label class="list-group-item d-flex align-items-start gap-3">
+                              <input class="form-check-input mt-1" type="checkbox" value="{{$document->id}}" data-weight="1" />
+                              <div>
+                                <div class="fw-bold">{{$document->title}}</div>
+                                <div class="small-muted">{{$document->description}}</div>
+                              </div>
+                            </label>
+                          @endforeach
+
+
+                          {{-- <label class="list-group-item d-flex align-items-start gap-3">
+                            <input class="form-check-input mt-1" type="checkbox" value="1" data-weight="1" />
+                            <div>
+                              <div class="fw-bold">Read policy document</div>
+                              <div class="small-muted">Open and read the policies (PDF).</div>
+                            </div>
+                          </label> --}}
+
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="mt-3">
+                      <button class="btn btn-primary btn-sm" id="showRequiredPdf">Open policy PDF</button>
+                      <a href="#" id="downloadPdf" class="btn btn-outline-secondary btn-sm ms-2" download>Download PDF</a>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-7">
+                    <div>
+                      <h6 class="mb-2">PDF Preview</h6>
+                      <!-- Responsive PDF viewer; replace src with your PDF path -->
+                      <div class="ratio ratio-4x3 border rounded" style="min-height:220px; overflow:hidden;">
+                        <iframe id="pdfViewer" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="PDF preview" style="border:0"></iframe>
+                      </div>
+
+                      <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div id="completedBadge" class="badge bg-success align-self-end d-none">All steps complete ✓</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
+
+
           </section>
+
 
           <!-- Notice view -->
           <section id="notice" class="content-pane d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h3 class="mb-0">Notices</h3>
-              <small class="small-muted">All site notices & announcements</small>
-            </div>
-
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">Holiday Schedule</h5>
-                <p class="mb-1 small-muted">Published Oct 12, 2025</p>
-                <p>We will be closed on December 25 — normal operations resume December 26.</p>
-                <a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
-              </div>
-            </div>
-
-            <div class="card mb-3">
-              <div class="card-body">
-                <h5 class="card-title">Maintenance Notice</h5>
-                <p class="mb-1 small-muted">Published Oct 5, 2025</p>
-                <p>Scheduled maintenance on Oct 22, 2025 from 01:00 to 03:00 UTC.</p>
-                <a href="#" class="btn btn-sm btn-outline-primary">Read more</a>
-              </div>
-            </div>
+              @include('user.inc.notice')
           </section>
 
                     <!-- Notice view -->
           <section id="commencement" class="content-pane d-none">
-
-                @include('user.inc.commencement')
-
-
-
+              @include('user.inc.commencement')
           </section>
 
           <!-- Profile view -->
           <section id="profile" class="content-pane d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h3 class="mb-0">Profile</h3>
-              <small class="small-muted">Update your personal details</small>
-            </div>
-
-            <div class="card mb-3">
-              <div class="card-body">
-                <form id="profileForm" class="row g-3 needs-validation" >
-                  @csrf
-                  <div class="col-12 d-flex align-items-center gap-3">
-                    <div class="avatar-preview" id="avatarPreview">
-                      @if (Auth::user()->feature_image)
-                      <img src="{{asset('images/profile/'.Auth::user()->feature_image)}}" alt="avatar" id="avatarImg">
-                      @else
-                      <img src="{{asset('resources/frontend/images/logo.png')}}" alt="avatar" id="avatarImg">
-                          
-                      @endif
-                    </div>
-                    <div>
-                      <label class="form-label mb-1">Profile photo</label><br>
-                      <input class="form-control form-control-sm" type="file" id="avatarInput" accept="image/*">
-                      <div class="small-muted mt-1">PNG or JPG — max 2MB</div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Full name</label>
-                    <input type="text" class="form-control" id="fullName" required value="{{Auth::user()->name}}">
-                    <div class="invalid-feedback">Please enter your name.</div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required value="{{Auth::user()->email}}">
-                    <div class="invalid-feedback">Enter a valid email.</div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Phone</label>
-                    <input type="tel" class="form-control" id="phone" pattern="^\+?[0-9\s\-]{7,20}$" value="{{Auth::user()->phone}}">
-                    <div class="invalid-feedback">Enter a valid phone number.</div>
-                  </div>
-
-                  <div class="col-12 d-none">
-                    <label class="form-label">About</label>
-                    <textarea class="form-control" id="about" rows="3"></textarea>
-                  </div>
-
-                  <div class="col-12 d-flex gap-2 justify-content-end">
-                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+              @include('user.inc.profile')
           </section>
 
           <!-- Change password -->
           <section id="password" class="content-pane d-none">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h3 class="mb-0">Change Password</h3>
-              <small class="small-muted">Create a strong password</small>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <form id="passwordForm" class="row g-3 needs-validation" novalidate>
-                  <div class="col-12">
-                    <label class="form-label">Current password</label>
-                    <input type="password" class="form-control" id="currentPassword" required>
-                    <div class="invalid-feedback">Current password is required.</div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">New password</label>
-                    <input type="password" class="form-control" id="newPassword" minlength="6" required>
-                    <div class="invalid-feedback">Password must be at least 6 characters.</div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <label class="form-label">Confirm password</label>
-                    <input type="password" class="form-control" id="confirmPassword" minlength="6" required>
-                    <div class="invalid-feedback">Passwords must match.</div>
-                  </div>
-
-                  <div class="col-12 d-flex justify-content-end gap-2">
-                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                    <button type="submit" class="btn btn-primary">Change password</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+              @include('user.inc.password')
           </section>
 
         </div>
@@ -432,61 +259,61 @@
 
 <script src="{{ asset('resources/admin/js/jquery.min.js')}}"></script>
 
-  <script>
-    // Simple client-side navigation between panes
-    (function(){
-      const sideLinks = document.querySelectorAll('[data-target]');
-      const panes = document.querySelectorAll('.content-pane');
+<script>
+  // Simple client-side navigation between panes
+  (function(){
+    const sideLinks = document.querySelectorAll('[data-target]');
+    const panes = document.querySelectorAll('.content-pane');
 
-      function showPane(name){
-        panes.forEach(p => {
-          if (p.id === name) p.classList.remove('d-none');
-          else p.classList.add('d-none');
-        });
-
-        // active class for side navs (desktop and offcanvas)
-        document.querySelectorAll('.nav-vertical .nav-link').forEach(a => {
-          a.classList.toggle('active', a.getAttribute('data-target') === name);
-        });
-      }
-
-      sideLinks.forEach(a => {
-        a.addEventListener('click', function(e){
-          e.preventDefault();
-          const target = this.dataset.target;
-          if (target) showPane(target);
-
-          // if offcanvas is open, close it (mobile)
-          const off = document.querySelector('.offcanvas.show');
-          if (off) {
-            bootstrap.Offcanvas.getInstance(off).hide();
-          }
-        });
+    function showPane(name){
+      panes.forEach(p => {
+        if (p.id === name) p.classList.remove('d-none');
+        else p.classList.add('d-none');
       });
 
-      // initial show
-      showPane('dashboard');
-
-
-      // Profile avatar preview
-      const avatarInput = document.getElementById('avatarInput');
-      const avatarImg = document.getElementById('avatarImg');
-      avatarInput.addEventListener('change', function(){
-        const file = this.files[0];
-        if (!file) return;
-        if (!file.type.startsWith('image/')) { alert('Please select an image.'); return; }
-        if (file.size > 2 * 1024 * 1024) { alert('Image too large. Max 2MB.'); return; }
-        const reader = new FileReader();
-        reader.onload = e => avatarImg.src = e.target.result;
-        reader.readAsDataURL(file);
+      // active class for side navs (desktop and offcanvas)
+      document.querySelectorAll('.nav-vertical .nav-link').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('data-target') === name);
       });
+    }
 
-      
+    sideLinks.forEach(a => {
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = this.dataset.target;
+        if (target) showPane(target);
+
+        // if offcanvas is open, close it (mobile)
+        const off = document.querySelector('.offcanvas.show');
+        if (off) {
+          bootstrap.Offcanvas.getInstance(off).hide();
+        }
+      });
+    });
+
+    // initial show
+    showPane('dashboard');
+
+
+    // Profile avatar preview
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarImg = document.getElementById('avatarImg');
+    avatarInput.addEventListener('change', function(){
+      const file = this.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('Please select an image.'); return; }
+      if (file.size > 2 * 1024 * 1024) { alert('Image too large. Max 2MB.'); return; }
+      const reader = new FileReader();
+      reader.onload = e => avatarImg.src = e.target.result;
+      reader.readAsDataURL(file);
+    });
+
+    
 
 
 
-    })();
-  </script>
+  })();
+</script>
 
 
 <script>
@@ -497,7 +324,7 @@
     // Form validation and submission
     $('#profileForm').on('submit', function(e) {
         e.preventDefault();
-        
+
         // Get form and clear previous validation states
         const form = $(this);
         form[0].checkValidity();
@@ -513,12 +340,13 @@
             }
         }
 
+
         // Create FormData object for file upload
         const formData = new FormData();
         formData.append('image', avatarInput.files[0] || null);
-        formData.append('name', $('#fullName').val());
-        formData.append('email', $('#email').val());
-        formData.append('phone', $('#phone').val());
+        formData.append('name', $('#userName').val());
+        formData.append('email', $('#userEmail').val());
+        formData.append('phone', $('#userPhone').val());
         formData.append('about', $('#about').val());
 
         // AJAX request
@@ -641,6 +469,110 @@
 });
 </script>
 
+<!-- ===== Script for progress behavior ===== -->
+<script>
+  (function(){
+    const form = document.getElementById('stepsForm');
+    const checkboxes = Array.from(form.querySelectorAll('input[type="checkbox"]'));
+    const fill = document.getElementById('segFill');
+    const overlay = document.getElementById('segOverlay');
+    const percentLabel = document.getElementById('progressPercent');
+    const progressText = document.getElementById('progressLabel');
+    const markAllBtn = document.getElementById('markAllBtn');
+    const completedBadge = document.getElementById('completedBadge');
+    const showPdfBtn = document.getElementById('showRequiredPdf');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const downloadPdf = document.getElementById('downloadPdf');
 
+    // default pdf url - replace with your pdf path if needed
+    const pdfURL = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+    pdfViewer.src = pdfURL;
+    downloadPdf.href = pdfURL;
+
+    // Build segment overlay so separators align with number of checkboxes
+    function buildSegments() {
+      const count = checkboxes.length;
+      if (count <= 1) {
+        overlay.style.backgroundImage = 'none';
+        return;
+      }
+      // create vertical separators using repeating-linear-gradient
+      const sep = 100 / count;
+      // we create a gradient that puts a thin semi-transparent line between segments
+      const stops = [];
+      for (let i=1;i<count;i++){
+        const pos = (sep * i);
+        stops.push(`transparent ${pos - 0.4}%`);
+        stops.push('rgba(255,255,255,0.35) ' + pos + '%');
+        stops.push('transparent ' + (pos + 0.4) + '%');
+      }
+      overlay.style.backgroundImage = 'linear-gradient(90deg, ' + stops.join(',') + ')';
+    }
+
+    // Recompute progress based on checked items (equal weight)
+    function updateProgress() {
+      const total = checkboxes.length;
+      const checked = checkboxes.filter(c => c.checked).length;
+      const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+      fill.style.width = pct + '%';
+      percentLabel.textContent = pct + '%';
+
+      if (pct === 0) progressText.textContent = 'Not started';
+      else if (pct > 0 && pct < 30) progressText.textContent = 'Getting started';
+      else if (pct >= 30 && pct < 70) progressText.textContent = 'Making progress';
+      else if (pct >= 70 && pct < 100) progressText.textContent = 'Almost done';
+      else progressText.textContent = 'Completed';
+
+      // accessibility live announcement (screen reader friendly)
+      fill.setAttribute('aria-valuenow', pct);
+
+      if (pct === 100) completedBadge.classList.remove('d-none');
+      else completedBadge.classList.add('d-none');
+    }
+
+    // handle click on list item to toggle checkbox (better mobile UX)
+    document.querySelectorAll('.list-group-item').forEach(li => {
+      li.addEventListener('click', function(e){
+        // avoid toggling when clicking directly on nested controls like anchors
+        if (e.target.tagName.toLowerCase() === 'input') return;
+        const cb = this.querySelector('input[type="checkbox"]');
+        if (cb) {
+          cb.checked = !cb.checked;
+          cb.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+
+    // checkbox change events
+    checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+
+    // mark all helper
+    markAllBtn.addEventListener('click', function(){
+      const allChecked = checkboxes.every(c => c.checked);
+      checkboxes.forEach(c => c.checked = !allChecked);
+      updateProgress();
+    });
+
+    // show pdf button simply focuses viewer and scrolls into view on small screens
+    showPdfBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      // on mobile, scroll the viewer into view
+      const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      if (viewportWidth < 992) {
+        pdfViewer.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        // on desktop, focus iframe
+        pdfViewer.focus();
+      }
+    });
+
+    // init
+    buildSegments();
+    updateProgress();
+
+    // Rebuild segments if window resizes or number of checkboxes changes (future-proof)
+    window.addEventListener('resize', buildSegments);
+  })();
+</script>
 
 @endsection
