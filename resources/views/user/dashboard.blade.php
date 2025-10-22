@@ -32,100 +32,9 @@
 
   <div class="container dash-shell">
     <div class="row g-4">
-      <!-- Sidebar (Desktop) -->
-      <aside class="col-lg-3 d-none d-lg-block">
-        <div class="dash-aside">
-          <div class="brand">
-            <div class="logo">
-        
-                @if (Auth::user()->feature_image)
-                <img src="{{asset('images/profile/'.Auth::user()->feature_image)}}" alt="avatar"  height="50" width="50" style="border-radius: 12px;">
-                @else
-                <img src="{{asset('resources/frontend/images/logo.png')}}" alt="avatar" height="50" width="50" style="border-radius: 12px;">
-                @endif
-            </div>
-            <div>
-              <h5>{{Auth::user()->name}}</h5>
-            </div>
-          </div>
+      <!-- Sidebar -->
+      @include('user.inc.sidebar')
 
-          <nav class="nav flex-column nav-vertical mb-3" id="sideNav">
-            <a class="nav-link active" href="#" data-target="dashboard">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zM3 21h8v-6H3v6zM13 21h8V11h-8v10zM13 3v6h8V3h-8z" fill="currentColor" /></svg>
-              Dashboard
-            </a>
-
-            <a class="nav-link d-none" href="#" data-target="notice">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zM18 16v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
-              Notices
-            </a>
-            
-            <a class="nav-link" href="#" data-target="commencement">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zM18 16v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
-              Commencement 
-            </a>
-
-            <a class="nav-link" href="#" data-target="profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zM12 14c-4 0-7 3-7 7h14c0-4-3-7-7-7z" fill="currentColor"/></svg>
-              Profile
-            </a>
-
-            <a class="nav-link" href="#" data-target="password">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z" fill="currentColor"/></svg>
-              Change Password
-            </a>
-
-            <a class="nav-link text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M16 13v-2H7V8l-5 4 5 4v-3h9zM20 3h-8v2h8v14h-8v2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" fill="currentColor"/></svg>
-              Logout
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-            </form>
-          </nav>
-
-        </div>
-      </aside>
-
-      <!-- Sidebar (Mobile) -->
-      <div class="col-12 d-lg-none">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <div class="d-flex align-items-center gap-2">
-            <div class="logo" style="width:40px;height:40px;">
-              
-                @if (Auth::user()->feature_image)
-                <img src="{{asset('images/profile/'.Auth::user()->feature_image)}}" alt="avatar"  height="40" width="40" style="border-radius: 12px;">
-                @else
-                <img src="{{asset('resources/frontend/images/logo.png')}}" alt="avatar" height="40" width="40" style="border-radius: 12px;">
-                @endif
-            </div>
-            <div>
-              <strong>{{Auth::user()->name}}</strong>
-            </div>
-          </div>
-
-          <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
-            ☰
-          </button>
-
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-            <div class="offcanvas-header">
-              <h5 id="offcanvasMenuLabel">Menu</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <nav class="nav flex-column nav-vertical" id="offNav">
-                <a class="nav-link active" href="#" data-target="dashboard">Dashboard</a>
-                <a class="nav-link d-none" href="#" data-target="notice">Notices</a>
-                <a class="nav-link" href="#" data-target="commencement">Commencement</a>
-                <a class="nav-link" href="#" data-target="profile">Profile</a>
-                <a class="nav-link" href="#" data-target="password">Change Password</a>
-                <a class="nav-link text-danger" href="#" id="logoutBtnMobile">Logout</a>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- Right content -->
       <main class="col-lg-9 col-12">
@@ -177,32 +86,34 @@
                         <div class="list-group">
 
                           @foreach ($documents as $document)
-                            <label class="list-group-item d-flex align-items-start gap-3">
-                              <input class="form-check-input mt-1" type="checkbox" value="{{$document->id}}" data-weight="1" />
+                            @php
+                              $userDoc = \App\Models\UserDocumentCompletion::where('user_id', Auth::id())->where('document_id', $document->id)->first();
+                              $docPath = $document->document; 
+                              $docUrl = $docPath ? (Storage::exists($docPath) ? Storage::url($docPath) : asset('images/documents/' . $docPath)) : null;
+                            @endphp
+
+                            <label class="list-group-item list-group-item-action d-flex align-items-start gap-3 doc-item" data-url="{{ $docUrl }}" data-file="{{ $docPath }}">
+                              <input class="form-check-input mt-1 me-2 doc-checkbox" type="checkbox" value="{{ $document->id }}" data-weight="1" @checked($userDoc) />
                               <div>
-                                <div class="fw-bold">{{$document->title}}</div>
-                                <div class="small-muted">{{$document->description}}</div>
+                                <div class="fw-bold">{{ $document->title }}</div>
+                                <div class="small-muted">{{ $document->description }}</div>
                               </div>
                             </label>
                           @endforeach
 
 
-                          {{-- <label class="list-group-item d-flex align-items-start gap-3">
-                            <input class="form-check-input mt-1" type="checkbox" value="1" data-weight="1" />
-                            <div>
-                              <div class="fw-bold">Read policy document</div>
-                              <div class="small-muted">Open and read the policies (PDF).</div>
-                            </div>
-                          </label> --}}
-
                         </div>
                       </form>
                     </div>
 
-                    <div class="mt-3">
-                      <button class="btn btn-primary btn-sm" id="showRequiredPdf">Open policy PDF</button>
-                      <a href="#" id="downloadPdf" class="btn btn-outline-secondary btn-sm ms-2" download>Download PDF</a>
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                      {{-- <button class="btn btn-primary btn-sm" id="showRequiredPdf" type="button">Open selected PDF</button> --}}
+                      <button class="btn btn-primary btn-sm ms-auto" id="submitDocs" type="button">Submit completed</button>
+                      {{-- <a href="#" id="downloadPdf" class="btn btn-outline-secondary btn-sm" download target="_blank">Download PDF</a> --}}
+
+                      <!-- Submit selected checkboxes to server -->
                     </div>
+
                   </div>
 
                   <div class="col-lg-7">
@@ -210,7 +121,7 @@
                       <h6 class="mb-2">PDF Preview</h6>
                       <!-- Responsive PDF viewer; replace src with your PDF path -->
                       <div class="ratio ratio-4x3 border rounded" style="min-height:220px; overflow:hidden;">
-                        <iframe id="pdfViewer" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" title="PDF preview" style="border:0"></iframe>
+                        <iframe id="pdfViewer" src="" title="PDF preview" style="border:0"></iframe>
                       </div>
 
                       <div class="d-flex justify-content-between align-items-center mt-2">
@@ -471,108 +382,203 @@
 
 <!-- ===== Script for progress behavior ===== -->
 <script>
-  (function(){
-    const form = document.getElementById('stepsForm');
-    const checkboxes = Array.from(form.querySelectorAll('input[type="checkbox"]'));
-    const fill = document.getElementById('segFill');
-    const overlay = document.getElementById('segOverlay');
-    const percentLabel = document.getElementById('progressPercent');
-    const progressText = document.getElementById('progressLabel');
-    const markAllBtn = document.getElementById('markAllBtn');
-    const completedBadge = document.getElementById('completedBadge');
-    const showPdfBtn = document.getElementById('showRequiredPdf');
-    const pdfViewer = document.getElementById('pdfViewer');
-    const downloadPdf = document.getElementById('downloadPdf');
+(function(){
+  // Elements (guard nulls for optional elements)
+  const form = document.getElementById('stepsForm');
+  const checkboxes = form ? Array.from(form.querySelectorAll('input[type="checkbox"].doc-checkbox')) : [];
+  const fill = document.getElementById('segFill');
+  const overlay = document.getElementById('segOverlay');
+  const percentLabel = document.getElementById('progressPercent');
+  const progressText = document.getElementById('progressLabel');
+  const markAllBtn = document.getElementById('markAllBtn');
+  const completedBadge = document.getElementById('completedBadge');
+  const showPdfBtn = document.getElementById('showRequiredPdf');
+  const pdfViewer = document.getElementById('pdfViewer');
+  const downloadPdf = document.getElementById('downloadPdf');
+  const submitDocsBtn = document.getElementById('submitDocs');
 
-    // default pdf url - replace with your pdf path if needed
-    const pdfURL = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
-    pdfViewer.src = pdfURL;
-    downloadPdf.href = pdfURL;
-
-    // Build segment overlay so separators align with number of checkboxes
-    function buildSegments() {
-      const count = checkboxes.length;
-      if (count <= 1) {
-        overlay.style.backgroundImage = 'none';
-        return;
-      }
-      // create vertical separators using repeating-linear-gradient
-      const sep = 100 / count;
-      // we create a gradient that puts a thin semi-transparent line between segments
-      const stops = [];
-      for (let i=1;i<count;i++){
-        const pos = (sep * i);
-        stops.push(`transparent ${pos - 0.4}%`);
-        stops.push('rgba(255,255,255,0.35) ' + pos + '%');
-        stops.push('transparent ' + (pos + 0.4) + '%');
-      }
-      overlay.style.backgroundImage = 'linear-gradient(90deg, ' + stops.join(',') + ')';
+  // Helper: get selected doc url (first selected checkbox with data-url)
+  function getSelectedDocUrl() {
+    if (!form) return null;
+    // find first checked .doc-checkbox -> find parent .doc-item
+    const checked = form.querySelector('input[type="checkbox"].doc-checkbox:checked');
+    if (checked) {
+      const parent = checked.closest('.doc-item');
+      if (parent) return parent.dataset.url || null;
     }
+    return null;
+  }
 
-    // Recompute progress based on checked items (equal weight)
-    function updateProgress() {
-      const total = checkboxes.length;
-      const checked = checkboxes.filter(c => c.checked).length;
-      const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
-      fill.style.width = pct + '%';
-      percentLabel.textContent = pct + '%';
+  // Build segments overlay
+  function buildSegments() {
+    const count = checkboxes.length;
+    if (!overlay) return;
+    if (count <= 1) {
+      overlay.style.backgroundImage = 'none';
+      return;
+    }
+    const sep = 100 / count;
+    const stops = [];
+    for (let i = 1; i < count; i++) {
+      const pos = (sep * i);
+      stops.push(`transparent ${pos - 0.4}%`);
+      stops.push(`rgba(255,255,255,0.35) ${pos}%`);
+      stops.push(`transparent ${pos + 0.4}%`);
+    }
+    overlay.style.backgroundImage = 'linear-gradient(90deg, ' + stops.join(',') + ')';
+  }
 
+  // Progress calculation
+  function updateProgress() {
+    const total = checkboxes.length;
+    const checked = checkboxes.filter(c => c.checked).length;
+    const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+    if (fill) fill.style.width = pct + '%';
+    if (percentLabel) percentLabel.textContent = pct + '%';
+
+    if (progressText) {
       if (pct === 0) progressText.textContent = 'Not started';
       else if (pct > 0 && pct < 30) progressText.textContent = 'Getting started';
       else if (pct >= 30 && pct < 70) progressText.textContent = 'Making progress';
       else if (pct >= 70 && pct < 100) progressText.textContent = 'Almost done';
       else progressText.textContent = 'Completed';
+    }
 
-      // accessibility live announcement (screen reader friendly)
-      fill.setAttribute('aria-valuenow', pct);
-
+    if (fill) fill.setAttribute('aria-valuenow', pct);
+    if (completedBadge) {
       if (pct === 100) completedBadge.classList.remove('d-none');
       else completedBadge.classList.add('d-none');
     }
+  }
 
-    // handle click on list item to toggle checkbox (better mobile UX)
-    document.querySelectorAll('.list-group-item').forEach(li => {
-      li.addEventListener('click', function(e){
-        // avoid toggling when clicking directly on nested controls like anchors
-        if (e.target.tagName.toLowerCase() === 'input') return;
-        const cb = this.querySelector('input[type="checkbox"]');
-        if (cb) {
-          cb.checked = !cb.checked;
-          cb.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-      });
+  // Toggle checkbox when clicking list-group item for better UX
+  document.querySelectorAll('.list-group-item.doc-item').forEach(li => {
+    li.addEventListener('click', function(e){
+      const target = e.target;
+      // If user clicked a link or button inside item, ignore toggling
+      if (target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button') return;
+      const cb = this.querySelector('input[type="checkbox"].doc-checkbox');
+      if (cb) {
+        cb.checked = !cb.checked;
+        cb.dispatchEvent(new Event('change', { bubbles: true }));
+      }
     });
+  });
 
-    // checkbox change events
-    checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+  // When a doc item is clicked we also update the PDF viewer for preview (immediate visual feedback)
+  document.querySelectorAll('.list-group-item.doc-item').forEach(item => {
+    item.addEventListener('click', function(e){
+      // if click was on input, still let change handler handle, and then preview
+      setTimeout(() => {
+        const url = this.dataset.url;
+        if (url) {
+          // Set iframe src for preview, and download href (guard nulls)
+          if (pdfViewer) pdfViewer.src = url;
+          if (downloadPdf) {
+            downloadPdf.href = url;
+            downloadPdf.setAttribute('download', '');
+            downloadPdf.setAttribute('target', '_blank');
+          }
+        }
+      }, 10);
+    });
+  });
 
-    // mark all helper
+  // Checkbox change handlers
+  checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+
+  // Mark all helper
+  if (markAllBtn) {
     markAllBtn.addEventListener('click', function(){
       const allChecked = checkboxes.every(c => c.checked);
       checkboxes.forEach(c => c.checked = !allChecked);
       updateProgress();
     });
+  }
 
-    // show pdf button simply focuses viewer and scrolls into view on small screens
+  // "Open selected PDF" button: open first selected doc or show a warning
+  if (showPdfBtn) {
     showPdfBtn.addEventListener('click', function(e){
       e.preventDefault();
-      // on mobile, scroll the viewer into view
-      const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-      if (viewportWidth < 992) {
-        pdfViewer.scrollIntoView({behavior:'smooth', block:'center'});
-      } else {
-        // on desktop, focus iframe
-        pdfViewer.focus();
+      const url = getSelectedDocUrl();
+      if (!url) {
+        // If nothing selected, if there's at least one doc, open the first doc's URL
+        const firstItem = document.querySelector('.list-group-item.doc-item');
+        const fallback = firstItem && firstItem.dataset.url ? firstItem.dataset.url : null;
+        if (fallback) {
+          if (pdfViewer) pdfViewer.src = fallback;
+          if (downloadPdf) {
+            downloadPdf.href = fallback;
+            downloadPdf.setAttribute('download', '');
+            downloadPdf.setAttribute('target', '_blank');
+          }
+        } else {
+          alert('No PDF available to preview.');
+        }
+        // On small screen, scroll to viewer
+        const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        if (viewportWidth < 992 && pdfViewer) pdfViewer.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
       }
+      if (pdfViewer) pdfViewer.src = url;
+      if (downloadPdf) {
+        downloadPdf.href = url;
+        downloadPdf.setAttribute('download', '');
+        downloadPdf.setAttribute('target', '_blank');
+      }
+
+      // Scroll into view on mobile
+      const viewportWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+      if (viewportWidth < 992 && pdfViewer) pdfViewer.scrollIntoView({behavior:'smooth', block:'center'});
     });
+  }
 
-    // init
-    buildSegments();
-    updateProgress();
+  // Submit completed documents via AJAX to server
+  if (submitDocsBtn) {
+    submitDocsBtn.addEventListener('click', function(e){
+      // alert('btn'); // optional: remove noisy alerts
+      e.preventDefault();
+      const selectedIds = checkboxes.filter(c => c.checked).map(c => c.value);
+      if (selectedIds.length === 0) {
+        if (!confirm('No items selected. Do you want to submit zero items?')) return;
+      }
 
-    // Rebuild segments if window resizes or number of checkboxes changes (future-proof)
-    window.addEventListener('resize', buildSegments);
-  })();
+      console.log(selectedIds);
+
+      // AJAX POST to route 'user.submitDocuments' - ensure route exists in web.php
+      $.ajax({
+        url: '{{ route("user.submitDocuments") }}',
+        type: 'POST',
+        data: { document_ids: selectedIds },
+        success: function(res) {
+          // show success message (you already have showMessage method in other script)
+          if (typeof showMessage === 'function') {
+            showMessage('success', res.message || 'Submitted successfully');
+          } else {
+            alert(res.message || 'Submitted successfully');
+          }
+        },
+        error: function(xhr) {
+          let msg = 'Submission failed';
+          if (xhr && xhr.responseJSON && xhr.responseJSON.message) msg = xhr.responseJSON.message;
+          if (typeof showMessage === 'function') showMessage('error', msg);
+          else alert(msg);
+        }
+      });
+    });
+  } else {
+    // Helpful debug if button missing
+    console.warn('submitDocs button not found (id="submitDocs")');
+  }
+
+  // initialise
+  buildSegments();
+  updateProgress();
+
+  // Rebuild segments on resize (if number of items changes)
+  window.addEventListener('resize', buildSegments);
+})();
 </script>
+
 
 @endsection

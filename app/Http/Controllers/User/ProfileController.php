@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -67,6 +68,50 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Profile updated successfully.']);
     }
+
+    public function submitDocuments(Request $request)
+    {
+        $request->validate([
+            'document_ids' => 'nullable|array',
+            'document_ids.*' => 'integer|exists:documents,id',
+        ]);
+
+        $user = Auth::user();
+        $newIds = $request->input('document_ids', []);
+
+        // Get current saved document IDs for this user
+        $existingIds = DB::table('user_document_completions')
+            ->where('user_id', $user->id)
+            ->pluck('document_id')
+            ->toArray();
+
+        // Find which documents to add or remove
+        $toAdd = array_diff($newIds, $existingIds);
+        $toRemove = array_diff($existingIds, $newIds);
+
+        // Add newly checked documents
+        foreach ($toAdd as $docId) {
+            DB::table('user_document_completions')->updateOrInsert(
+                ['user_id' => $user->id, 'document_id' => $docId],
+                ['completed_at' => now()]
+            );
+        }
+
+        // Remove unchecked documents
+        if (!empty($toRemove)) {
+            DB::table('user_document_completions')
+                ->where('user_id', $user->id)
+                ->whereIn('document_id', $toRemove)
+                ->delete();
+        }
+
+        return response()->json([
+            'message' => 'Documents updated successfully',
+            'added' => $toAdd,
+            'removed' => $toRemove
+        ]);
+    }
+
 
 
 

@@ -75,4 +75,7 @@ Route::group(['prefix' =>'user/', 'middleware' => ['auth', 'is_user']], function
     Route::get('/dashboard', [HomeController::class, 'userHome'])->name('user.dashboard');
     Route::post('/profile-update', [ProfileController::class, 'updateProfile'])->name('user.updateProfile');
     Route::post('/password-update', [ProfileController::class, 'updatePassword'])->name('user.updatePassword');
+    // routes/web.php
+    Route::post('/user/documents/submit', [ProfileController::class, 'submitDocuments'])->name('user.submitDocuments');
+
 });
