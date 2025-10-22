@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ClientReview;
 use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 
 class ClientReviewController extends Controller

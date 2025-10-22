@@ -150,7 +150,7 @@
               Dashboard
             </a>
 
-            <a class="nav-link" href="#" data-target="notice">
+            <a class="nav-link d-none" href="#" data-target="notice">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22c1.1 0 2-.9 2-2H10c0 1.1.9 2 2 2zM18 16v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 1 0-3 0v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"/></svg>
               Notices
             </a>
@@ -211,7 +211,7 @@
             <div class="offcanvas-body">
               <nav class="nav flex-column nav-vertical" id="offNav">
                 <a class="nav-link active" href="#" data-target="dashboard">Dashboard</a>
-                <a class="nav-link" href="#" data-target="notice">Notices</a>
+                <a class="nav-link d-none" href="#" data-target="notice">Notices</a>
                 <a class="nav-link" href="#" data-target="commencement">Commencement</a>
                 <a class="nav-link" href="#" data-target="profile">Profile</a>
                 <a class="nav-link" href="#" data-target="password">Change Password</a>

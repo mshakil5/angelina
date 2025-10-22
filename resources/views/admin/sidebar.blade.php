@@ -111,8 +111,8 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
                 Settings <i class="fas fa-angle-left right"></i>
@@ -189,6 +189,12 @@
                 <a href="{{ route('banner.index') }}" class="nav-link {{ Route::is('banner.index') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-sliders-h"></i>
                     <p>Banner</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}" class="nav-link {{ Route::is('documents.index') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-sliders-h"></i>
+                    <p>Document</p>
                 </a>
             </li>
         </ul>

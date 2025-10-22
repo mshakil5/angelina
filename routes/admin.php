@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\MasterController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\FeatureContoller;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\PlanController;
@@ -190,6 +191,14 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/banner-update', [BannerController::class,'update'])->name('banner.update');
     Route::get('/banner/{id}/delete', [BannerController::class,'destroy']);
     Route::post('/banner-status', [BannerController::class,'toggleStatus']);
+
+    // necessary documents
+    Route::get('/documents', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('/documents', [DocumentController::class, 'store']);
+    Route::get('/documents/{id}/edit', [DocumentController::class, 'edit']);
+    Route::post('/documents/update', [DocumentController::class, 'update']);
+    Route::get('/documents/{id}', [DocumentController::class, 'destroy']);
+    Route::post('/documents/status', [DocumentController::class, 'toggleStatus'])->name('documents.status');
 
 
 
