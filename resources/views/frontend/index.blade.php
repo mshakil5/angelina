@@ -888,11 +888,12 @@
       <div class="col-lg-7">
         <div class="map-wrapper rounded-4 overflow-hidden shadow-sm">
           <!-- Replace src with your actual Google Map embed URL -->
-          <iframe
+          {{-- <iframe
             src="{{$company->google_map}}"
             width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          </iframe> --}}
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2920.906438335929!2d0.9131579768971765!3d51.88996748268347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d90537815d417f%3A0xfbf1efc40d0ad81a!2sAngelina&#39;s%20Day%20Nursery!5e1!3m2!1sen!2sbd!4v1761213464437!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
