@@ -314,7 +314,7 @@ class FrontendController extends Controller
                 'first_name' => 'required|string|min:2|max:50',
                 'last_name'  => 'required|string|min:2|max:50',
                 'email' => 'required|email|max:50',
-                'dob' => 'required|date|before_or_equal:' . now()->subYears(6)->format('Y-m-d'),
+                'dob' => 'required|date|before_or_equal:' . now()->subYears(5)->format('Y-m-d'),
                 'phone' => ['required'],
                 'subject' => 'nullable|string|max:255',
                 'message' => 'required|string|max:2000',
