@@ -107,6 +107,7 @@
                     </div>
 
                     <div class="mt-3 d-flex flex-wrap gap-2">
+                      <p class="small-muted mb-3">By submitting this form, you confirm that you have reviewed all the documents you marked with a tick, and that the information provided is true and correct to the best of your knowledge.</p>
                       {{-- <button class="btn btn-primary btn-sm" id="showRequiredPdf" type="button">Open selected PDF</button> --}}
                       <button class="btn btn-primary btn-sm ms-auto" id="submitDocs" type="button">Submit completed</button>
                       {{-- <a href="#" id="downloadPdf" class="btn btn-outline-secondary btn-sm" download target="_blank">Download PDF</a> --}}
