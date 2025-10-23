@@ -750,7 +750,7 @@
                                   type="text" 
                                   class="form-control @error('dob') is-invalid @enderror"
                                   value="{{ old('dob') }}" 
-                                  placeholder="Date of Birth"
+                                  placeholder="Child Date of Birth"
                                   required>
                             @error('dob')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -949,7 +949,7 @@ $(document).ready(function () {
         dateFormat: "Y-m-d", // Format for the submitted value
         altInput: true, // Show a human-readable format
         altFormat: "F j, Y", // Display format (e.g., "October 22, 2025")
-        placeholder: "Date of Birth" // Custom placeholder
+        placeholder: "Child Date of Birth" // Custom placeholder
     });
 </script>
 
