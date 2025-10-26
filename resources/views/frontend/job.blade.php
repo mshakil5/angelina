@@ -161,24 +161,29 @@
   <section class="job-filter container text-center">
     <h2>Current Job Openings</h2>
 
-    <form class="row g-3 justify-content-center">
+    <form id="jobFilterForm" class="row g-3 justify-content-center">
       <div class="col-md-4">
-        <input type="text" class="form-control" placeholder="Search jobs...">
+        <input type="text" name="search" id="search" class="form-control" placeholder="Search jobs...">
       </div>
+
       <div class="col-md-3">
-        <select class="form-select">
+        <select name="category" id="category" class="form-select">
           <option selected>All Job Categories</option>
-          <option>Apprentice</option>
-          <option>Deputy Manager</option>
-          <option>Room Leader</option>
+          @foreach($categories as $cat)
+            <option>{{ $cat }}</option>
+          @endforeach
         </select>
       </div>
+
       <div class="col-md-3">
-        <select class="form-select">
+        <select name="location" id="location" class="form-select">
           <option selected>All Locations</option>
-          <option>Colchester</option>
+          @foreach($locations as $loc)
+            <option>{{ $loc }}</option>
+          @endforeach
         </select>
       </div>
+
       <div class="col-md-2">
         <button type="submit" class="btn btn-dark w-100">Filter</button>
       </div>
@@ -187,34 +192,8 @@
 
   <!-- ===== Job Listings Section ===== -->
   <section class="container mb-5">
-    <div class="job-listings">
-      <a href="#" class="job-item">
-        <h4>Nursery Manager</h4>
-        <span class="more">More Details →</span>
-      </a>
-
-      <a href="#" class="job-item">
-        <h4>Nursery Practitioner</h4>
-        <span class="more">More Details →</span>
-      </a>
-
-      <a href="#" class="job-item">
-        <h4>Deputy Nursery Manager</h4>
-        <p class="mb-1 text-muted">Location: Colchester</p>
-        <span class="more">More Details →</span>
-      </a>
-
-      <a href="#" class="job-item">
-        <h4>Pre-School Room Leader</h4>
-        <p class="mb-1 text-muted">Location: Colchester</p>
-        <span class="more">More Details →</span>
-      </a>
-
-      <a href="#" class="job-item">
-        <h4>Child Care Apprentice</h4>
-        <p class="mb-1 text-muted">Location: Colchester</p>
-        <span class="more">More Details →</span>
-      </a>
+    <div id="jobList" class="job-listings">
+      <p class="text-center">Loading jobs...</p>
     </div>
   </section>
 
@@ -239,5 +218,44 @@
 @endsection
 
 @section('script')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    function loadJobs(filters = {}) {
+        // Build query string
+        let query = Object.keys(filters).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(filters[key])).join('&');
+        let url = '{{ route("jobs.filter") }}' + (query ? '?' + query : '');
+
+        // Show loading
+        document.getElementById('jobList').innerHTML = '<p class="text-center">Loading jobs...</p>';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('jobList').innerHTML = data.html;
+            })
+            .catch(() => {
+                document.getElementById('jobList').innerHTML = '<p class="text-center text-danger">Error loading jobs.</p>';
+            });
+    }
+
+    // Initial load without filters
+    loadJobs();
+
+    // Filter form submit
+    document.getElementById('jobFilterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let form = e.target;
+        let filters = {};
+        Array.from(form.elements).forEach(el => {
+            if (el.name && el.value) {
+                filters[el.name] = el.value;
+            }
+        });
+        loadJobs(filters);
+    });
+
+});
+</script>
 
 @endsection

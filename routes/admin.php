@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductFeatureController;
 use App\Http\Controllers\Admin\ProductFaqController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\JobListController;
 
 Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], function(){
     Route::get('/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
@@ -202,5 +203,13 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/documents/status', [DocumentController::class, 'toggleStatus'])->name('documents.status');
 
 
+    Route::get('/joblist', [JobListController::class, 'index'])->name('alljoblist');
+    Route::post('/joblist', [JobListController::class, 'store']);
+    Route::get('/joblist/{id}/edit', [JobListController::class, 'edit']);
+    Route::post('/joblist-update', [JobListController::class, 'update']);
+    Route::get('/joblist/{id}', [JobListController::class, 'destroy']);
+    Route::post('/joblist-status', [JobListController::class, 'toggleStatus']);
+
+    Route::get('/job-applications', [JobListController::class, 'jobApplications'])->name('job.applications');
 
 });

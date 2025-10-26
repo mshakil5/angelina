@@ -26,6 +26,29 @@
             <p>Sliders</p>
         </a>
     </li>
+    <li class="nav-item has-treeview {{ Route::is('alljoblist') || Route::is('job.applications') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ Route::is('alljoblist') || Route::is('job.applications') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-briefcase"></i>
+            <p>
+                Jobs
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('alljoblist') }}" class="nav-link {{ Route::is('alljoblist') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Jobs</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('job.applications') }}" class="nav-link {{ Route::is('job.applications') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Job Applications</p>
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-item">
         <a href="{{ route('allsubscriptions') }}" class="nav-link {{ Route::is('allsubscriptions') ? 'active' : '' }}">
             <i class="nav-icon fas fa-donate"></i>

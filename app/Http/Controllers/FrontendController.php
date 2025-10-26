@@ -21,6 +21,7 @@ use App\Models\Slider;
 use App\Models\Content;
 use App\Models\Tag;
 use App\Models\ContentCategory;
+use App\Models\JobList;
 use App\Models\Plan;
 use App\Models\Section;
 use App\Models\TeamMember;
@@ -31,6 +32,8 @@ use App\Models\Reference;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use App\Models\JobApplication;
+use Illuminate\Support\Facades\Validator;
 
 class FrontendController extends Controller
 {
@@ -562,20 +565,99 @@ class FrontendController extends Controller
 
     public function job()
     {
-        
-        $job = Content::with('category','images')->where('type', 1)->first();
+        $categories = JobList::whereNotNull('category')
+            ->where('category', '!=', '')
+            ->distinct()
+            ->pluck('category');
+
+        $locations = JobList::whereNotNull('location')
+            ->where('location', '!=', '')
+            ->distinct()
+            ->pluck('location');
+
+        $jobMeta = Master::firstOrCreate(['name' => 'job']);
+
         $banner = Banner::where('page', 'Job')->first();
-        if($job){
+        if($jobMeta){
             $this->seo(
-                $job->meta_title,
-                $job->meta_description,
-                $job->meta_keywords,
-                $job->meta_image ? asset('images/meta_image/' . $job->meta_image) : null
+                $jobMeta->meta_title,
+                $jobMeta->meta_description,
+                $jobMeta->meta_keywords,
+                $jobMeta->meta_image ? asset('images/meta_image/' . $jobMeta->meta_image) : null
             );
         }
       
         $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-        return view('frontend.job', compact('job', 'company', 'banner'));
+        return view('frontend.job', compact('company', 'banner', 'categories', 'locations'));
+    }
+
+    public function filterJobs(Request $request)
+    {
+        $query = JobList::where('status', 1);
+
+        if ($request->search) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->category && $request->category != 'All Job Categories') {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->location && $request->location != 'All Locations') {
+            $query->where('location', $request->location);
+        }
+
+        $jobs = $query->latest()->get();
+
+        $html = '';
+        foreach ($jobs as $job) {
+            $html .= '
+            <a href="' . route('job.show', $job->slug) . '" class="job-item">
+              <h4>' . e($job->title) . '</h4>
+              <p class="mb-1 text-muted">Location: ' . e($job->location) . '</p>
+              <span class="more">More Details →</span>
+            </a>';
+        }
+
+        return response()->json(['html' => $html ?: '<p class="text-center">No jobs found.</p>']);
+    }
+
+    public function jobDetails($slug)
+    {
+        $banner = Banner::where('page', 'Job')->first();
+        $job = JobList::where('slug', $slug)->where('status', 1)->firstOrFail();
+        return view('frontend.job-detail', compact('job', 'banner'));
+    }
+
+    public function applyJob(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'job_id' => 'required|exists:job_lists,id',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'cover_letter' => 'required|string',
+            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 422, 'errors' => $validator->errors()]);
+        }
+
+        $file = $request->file('resume');
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('images/jobs'), $fileName);
+
+        JobApplication::create([
+            'job_id' => $request->job_id,
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'cover_letter' => $request->cover_letter,
+            'resume' => $fileName,
+        ]);
+
+        return response()->json(['status' => 200, 'message' => 'Application submitted successfully!']);
     }
 
     public function reference()

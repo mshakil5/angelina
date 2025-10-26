@@ -48,6 +48,9 @@ Route::get('/age-group/{slug}', [FrontendController::class, 'agegroup'])->name('
 
 
 Route::get('/job', [FrontendController::class, 'job'])->name('job');
+Route::get('/jobs/filter', [FrontendController::class, 'filterJobs'])->name('jobs.filter');
+Route::get('/jobs/{slug}', [FrontendController::class, 'jobDetails'])->name('job.show');
+Route::post('/jobs/apply', [FrontendController::class, 'applyJob'])->name('job.apply');
 Route::get('/reference-form', [FrontendController::class, 'reference'])->name('reference');
 Route::post('/reference-form', [FrontendController::class, 'referenceStore'])->name('referenceStore');
 
