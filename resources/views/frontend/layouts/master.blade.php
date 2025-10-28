@@ -75,6 +75,73 @@
   <i class="bi bi-chevron-up"></i>
 </button> -->
 
+<a
+  href="https://wa.me/447392597296"
+  class="whatsapp-float"
+  target="_blank"
+  aria-label="Chat on WhatsApp"
+>
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+
+
+<style>
+  .whatsapp-float {
+    position: fixed;
+    bottom: 50px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff708a;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    z-index: 9999;
+    box-shadow: 0 6px 15px #ff708a;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px #ff708a;
+    color: #fff;
+  }
+
+  /* Glow animation for attention */
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 #ff708a;
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+  }
+
+  .whatsapp-float {
+    animation: pulse 2s infinite;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 576px) {
+    .whatsapp-float {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+</style>
+
+
+
 
 
   <!-- Swiper JS -->
