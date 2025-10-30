@@ -54,9 +54,6 @@ class ProfileController extends Controller
             }
 
             Image::make($uploadedFile)
-                ->fit(400, 400, function ($constraint) {
-                    $constraint->upsize();
-                }, 'center')
                 ->encode('webp', 80)
                 ->save($destinationPath . $imageName);
 
