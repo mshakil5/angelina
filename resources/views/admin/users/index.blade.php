@@ -26,7 +26,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" autofocus required>
+                                        <input type="text" class="form-control" id="name" name="name" required>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -41,6 +41,41 @@
                                         <input type="text" class="form-control" id="phone" name="phone" required>
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="address" name="address" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Emergency Name </label>
+                                        <input type="text" class="form-control" id="emergency_name" name="emergency_name">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Date of birth </label>
+                                        <input type="date" class="form-control" id="dob" name="dob">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Emergency Email </label>
+                                        <input type="email" class="form-control" id="emergency_email" name="emergency_email">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Emergency Phone </label>
+                                        <input type="text" class="form-control" id="emergency_phone" name="emergency_phone">
+                                    </div>
+                                </div>
+
+
+
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Password <span class="text-danger">*</span></label>
@@ -161,6 +196,11 @@ $(document).ready(function () {
             $("#name").val(user.name);
             $("#email").val(user.email);
             $("#phone").val(user.phone);
+            $("#address").val(user.address);
+            $("#dob").val(user.dob);
+            $("#emergency_name").val(user.emergency_name);
+            $("#emergency_email").val(user.emergency_email);
+            $("#emergency_phone").val(user.emergency_phone);
             $("#id").val(user.id);
             $("#password, #password_confirmation").prop('required', false);
             $("#addBtn").val('Update').html('Update');

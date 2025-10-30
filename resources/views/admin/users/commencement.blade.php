@@ -16,6 +16,18 @@
     }
 </style>
 
+<section class="content" id="newBtnSection">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <a href="{{route('user.index')}}" class="btn btn-secondary my-3">Back</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 <div class="container py-5">
     <div class="report-card card shadow-sm border-0" id="printArea">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3 px-4">
@@ -41,10 +53,10 @@
                     <strong>Full Name:</strong>
                     <p class="mb-0">{{ $employee->name ?? '—' }}</p>
                 </div>
-                <div class="col-md-6 mb-3">
+                {{-- <div class="col-md-6 mb-3">
                     <strong>Position:</strong>
                     <p class="mb-0">{{ $employee->position ?? '—' }}</p>
-                </div>
+                </div> --}}
                 <div class="col-md-6 mb-3">
                     <strong>Phone Number:</strong>
                     <p class="mb-0">{{ $employee->phone ?? '—' }}</p>
@@ -67,19 +79,22 @@
                 <p class="small text-muted mb-2">The employee has received and reviewed the following documents:</p>
 
                 <ul class="list-group list-group-flush mb-3">
-                    <li class="list-group-item">1. Employee Handbook</li>
-                    <li class="list-group-item">2. Health and Safety Policies</li>
-                    <li class="list-group-item">3. Code of Conduct</li>
-                    <li class="list-group-item">4. Confidentiality Agreement</li>
-                    <li class="list-group-item">5. Job Description</li>
+
+                    @foreach ($employee->documents as $key => $item)
+
+                    <li class="list-group-item">{{$key+1}}. {{$item->document->title ?? ''}}</li>
+                        
+                    @endforeach
+                    
+
                 </ul>
 
                 <div class="row">
                     <div class="col-md-6">
                         <strong>Acknowledged:</strong>
                         <p class="mb-0">
-                            <span class="badge bg-{{ ($employee->acknowledge ?? '') == 'Yes' ? 'success' : 'danger' }}">
-                                {{ $employee->acknowledge ?? 'No' }}
+                            <span class="badge bg-{{ ($employee->documents && $employee->documents->count() > 0) ? 'success' : 'danger' }}">
+                                {{ ($employee->documents && $employee->documents->count() > 0) ? 'Yes' : 'No' }}
                             </span>
                         </p>
                     </div>
@@ -102,7 +117,11 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <p class="small text-muted mb-1">Signed Date:</p>
-                        <p class="mb-0">{{ \Carbon\Carbon::parse($employee->signedDate ?? now())->format('d M, Y') }}</p>
+                        <p class="mb-0">
+                            {{ optional($employee->documents->first())->completed_at
+                                ? \Carbon\Carbon::parse(optional($employee->documents->first())->completed_at)->format('d M, Y')
+                                :  '-'}}
+                        </p>
                     </div>
                 </div>
             </div>
