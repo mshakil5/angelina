@@ -251,15 +251,30 @@
                 return;
             }
         }
+        
+        // Validate file size (max 2MB)
+        const employeesign = $('#employeesign')[0];
+        if (employeesign.files.length > 0) {
+            const employeesignfileSize = employeesign.files[0].size / 1024 / 1024; // Convert to MB
+            if (employeesignfileSize > 2) {
+                showMessage('error', 'Signature must be less than 2MB');
+                return;
+            }
+        }
 
 
         // Create FormData object for file upload
         const formData = new FormData();
         formData.append('image', avatarInput.files[0] || null);
+        formData.append('sign', employeesign.files[0] || null);
         formData.append('name', $('#userName').val());
         formData.append('email', $('#userEmail').val());
         formData.append('phone', $('#userPhone').val());
-        formData.append('about', $('#about').val());
+        formData.append('dob', $('#userdob').val());
+        formData.append('address', $('#useraddress').val());
+        formData.append('emergency_name', $('#emergency_name').val());
+        formData.append('emergency_email', $('#emergency_email').val());
+        formData.append('emergency_phone', $('#emergency_phone').val());
 
         // AJAX request
         $.ajax({

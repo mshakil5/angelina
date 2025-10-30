@@ -42,9 +42,36 @@ class ProfileController extends Controller
             $user->feature_image = $imageName;
         }
 
+        
+        
+        if ($request->hasFile('sign')) {
+            $uploadedFile = $request->file('sign');
+            $imageName = mt_rand(10000000, 99999999) . '.webp';
+            $destinationPath = public_path('images/profile/');
+
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+
+            Image::make($uploadedFile)
+                ->fit(400, 400, function ($constraint) {
+                    $constraint->upsize();
+                }, 'center')
+                ->encode('webp', 80)
+                ->save($destinationPath . $imageName);
+
+            $user->sign = $imageName;
+        }
+
+
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->address = $request->input('address');
         $user->phone = $request->input('phone');
+        $user->dob = $request->input('dob');
+        $user->emergency_name = $request->input('emergency_name');
+        $user->emergency_email = $request->input('emergency_email');
+        $user->emergency_phone = $request->input('emergency_phone');
         $user->save();
 
         return response()->json(['message' => 'Profile updated successfully.']);
