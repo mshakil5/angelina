@@ -14,10 +14,21 @@
         </a>
     </li>
 
+    
+
+    <li class="nav-item">
+        <a href="{{ route('admin.index') }}" class="nav-link {{ Route::is('admin.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-users"></i>
+            <p>Admin</p>
+        </a>
+    </li>
+
+
+
     <li class="nav-item">
         <a href="{{ route('user.index') }}" class="nav-link {{ Route::is('user.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
-            <p>Users</p>
+            <p>Employee</p>
         </a>
     </li>
     <li class="nav-item">
@@ -49,18 +60,7 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item">
-        <a href="{{ route('allsubscriptions') }}" class="nav-link {{ Route::is('allsubscriptions') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-donate"></i>
-            <p>Subscriptions</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('allplans') }}" class="nav-link {{ Route::is('allplans') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-layer-group"></i>
-            <p>Plans</p>
-        </a>
-    </li>
+    
     <li class="nav-item">
         <a href="{{ route('allservice') }}" class="nav-link {{ Route::is('allservice') ? 'active' : '' }}">
             <i class="nav-icon fas fa-tools"></i>
@@ -73,12 +73,6 @@
             <i class="nav-icon fas fa-gem"></i>
             <p>Food Menu</p>
             {{-- <p>Features</p> --}}
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('team-members.index') }}" class="nav-link {{ request()->routeIs('team-members.index') ? 'active' : '' }}">
-            <i class="fas fa-users nav-icon"></i>
-            <p>Team</p>
         </a>
     </li>
     <li class="nav-item">
@@ -114,19 +108,19 @@
                     <p>Age Group</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="{{ route('content.index', 4) }}" class="nav-link {{ request()->routeIs('content.index') && request()->route('type') == 4 ? 'active' : '' }}">
                     <i class="fas fa-list nav-icon"></i>
                     <p>News</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="{{ route('content.category.index') }}" class="nav-link {{ Route::is('content.category.index') ? 'active' : '' }}">
                     <i class="fas fa-plus nav-icon"></i>
                     <p>Categories</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="{{ route('tags.index') }}" class="nav-link {{ Route::is('tags.index') ? 'active' : '' }}">
                     <i class="fas fa-tags nav-icon"></i>
                     <p>Tags</p>
@@ -202,7 +196,7 @@
                     <p>Contact Email</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="{{ route('sections.index') }}" class="nav-link {{ Route::is('sections.index') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-sliders-h"></i>
                     <p>Section Settings</p>

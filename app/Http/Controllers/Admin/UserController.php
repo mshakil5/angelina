@@ -139,4 +139,66 @@ class UserController extends Controller
         $company = CompanyDetails::firstOrCreate();
         return view('admin.users.commencement', compact('employee', 'company'));
     }
+
+
+    public function admin(Request $request)
+    {
+        if ($request->ajax()) {
+            $users = User::withCount('documents')->where('is_type', 1)->latest()->get();
+            return DataTables::of($users)
+                ->addIndexColumn()
+                ->addColumn('status', function ($row) {
+                    $checked = $row->status == 1 ? 'checked' : '';
+                    return '<div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input toggle-status" id="customSwitchStatus' . $row->id . '" data-id="' . $row->id . '" ' . $checked . '>
+                                <label class="custom-control-label" for="customSwitchStatus' . $row->id . '"></label>
+                            </div>';
+                })
+                ->addColumn('action', function($row) {
+                    $editBtn = '<button class="btn btn-sm btn-info edit" data-id="' . $row->id . '"><i class="fas fa-edit"></i></button>';
+                    $deleteBtn = '<button class="btn btn-sm btn-danger delete" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>';
+                    return $editBtn . ' ' . $deleteBtn;
+                })
+                ->rawColumns(['status', 'action'])
+                ->make(true);
+        }
+
+        return view('admin.users.admin');
+    }
+
+    public function adminstore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|string|max:20',
+            'emergency_name' => 'nullable|string',
+            'emergency_email' => 'nullable|email|max:20',
+            'emergency_phone' => 'nullable|string|max:20',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->dob = $request->dob;
+        $user->emergency_name = $request->emergency_name;
+        $user->emergency_email = $request->emergency_email;
+        $user->emergency_phone = $request->emergency_phone;
+        $user->password = Hash::make($request->password);
+        $user->is_type = 1;
+        $user->status = 1;
+        $user->save();
+
+        return response()->json(['status' => 200, 'message' => 'User created successfully', 'user' => $user]);
+    }
+
+
+
+
+
+
 }

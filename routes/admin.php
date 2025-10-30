@@ -42,6 +42,10 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/user/status', [UserController::class, 'toggleStatus'])->name('user.status');
     Route::get('/user/commencement/{id}', [UserController::class, 'commencement'])->name('user.commencement');
 
+    
+    Route::get('/admin', [UserController::class, 'admin'])->name('admin.index');
+    Route::post('/admin', [UserController::class, 'adminstore'])->name('admin.store');
+
     Route::get('/slider', [SliderController::class, 'getSlider'])->name('allslider');
     Route::post('/slider', [SliderController::class, 'sliderStore']);
     Route::get('/slider/{id}/edit', [SliderController::class, 'sliderEdit']);

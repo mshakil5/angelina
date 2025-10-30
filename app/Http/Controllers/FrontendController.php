@@ -63,7 +63,7 @@ class FrontendController extends Controller
         });
 
         $services = Cache::remember('active_services', now()->addDay(), function () {
-            return Service::orderByRaw('sl = 0, sl ASC')->orderBy('id', 'desc')->where('type', 1)->where('status', 1)->get();
+            return Service::orderByRaw('sl = 0, sl ASC')->orderBy('id', 'asc')->where('type', 1)->limit(3)->where('status', 1)->get();
         });
 
         $service = Master::firstOrCreate(['name' => 'service']);
@@ -72,11 +72,8 @@ class FrontendController extends Controller
             return ClientReview::where('status', 1)->latest()->get();
         });
 
+        // dd($services);
 
-
-
-
-        
         $toddlers = Service::where('type', 1)->where('title', 'Toddlers')->first();
         $twothrees = Service::where('type', 1)->where('title', 'Two to Three’s')->first();
         $preschool = Service::where('type', 1)->where('title', 'Preschool')->first();

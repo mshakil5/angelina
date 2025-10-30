@@ -109,16 +109,27 @@
 
             <div class="about-images" aria-hidden="true">
               <div class="about-left">
-                <!-- large left image -->
-                <div class="single">
-                  <img src="{{asset('images/service/' .$toddlers->image )}}" alt="{{$toddlers->title}}">
-                </div>
 
-                <!-- stacked two images on the right -->
+                @foreach ($services as $key => $service)
+                     @if ($loop->first)
+                      <!-- large left image -->
+                      <div class="single">
+                        <img src="{{asset('images/service/' .$service->image )}}" alt="{{$service->title}}">
+                      </div> 
+                    @endif
+                @endforeach
+
+                  <!-- stacked two images on the right -->
                 <div class="stack">
-                  <img src="{{asset('images/service/' .$twothrees->image )}}" alt="{{$twothrees->title}}">
-                  <img src="{{asset('images/service/' .$preschool->image )}}" alt="{{$preschool->title}}">
+                    @foreach ($services as $key => $service)
+                         @if (! $loop->first)
+                            <img src="{{asset('images/service/' .$service->image )}}" alt="{{$service->title}}">
+                        @endif
+                    @endforeach
                 </div>
+                        
+
+                
               </div>
             </div>
           </div>
@@ -129,72 +140,87 @@
             {{-- <div class="small-title">Our Age Groups</div> --}}
             <h2 class="big-title">Angelina's Day Care</h2>
 
-            <!-- Centered tabs -->
+            @php
+              $tabDesigns = [
+                  0 => [
+                      'color' => '#4af396',
+                      'icon' => '
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
+                          <circle cx="12" cy="12" r="8" fill="#c9a06c"/>
+                          <ellipse cx="7.5" cy="7.5" rx="3" ry="3" fill="#c9a06c"/>
+                          <ellipse cx="16.5" cy="7.5" rx="3" ry="3" fill="#c9a06c"/>
+                          <circle cx="12" cy="14" r="2.2" fill="#fff"/>
+                          <circle cx="10.5" cy="12" r="1" fill="#333"/>
+                          <circle cx="13.5" cy="12" r="1" fill="#333"/>
+                          <ellipse cx="12" cy="16.2" rx="1.1" ry="0.7" fill="#333"/>
+                      </svg>'
+                  ],
+                  1 => [
+                      'color' => '#ffc1ab',
+                      'icon' => '
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
+                          <circle cx="12" cy="12" r="7" fill="#f7c873"/>
+                          <ellipse cx="6" cy="12" rx="2.5" ry="3.5" fill="#f7c873"/>
+                          <ellipse cx="18" cy="12" rx="2.5" ry="3.5" fill="#f7c873"/>
+                          <ellipse cx="12" cy="17" rx="3" ry="2" fill="#f7c873"/>
+                          <circle cx="12" cy="14" r="2.2" fill="#fff"/>
+                          <circle cx="10.5" cy="12.5" r="0.8" fill="#333"/>
+                          <circle cx="13.5" cy="12.5" r="0.8" fill="#333"/>
+                          <ellipse cx="12" cy="15.2" rx="0.7" ry="0.4" fill="#333"/>
+                      </svg>'
+                  ],
+                  2 => [
+                      'color' => '#c4f0ff',
+                      'icon' => '
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
+                          <ellipse cx="8" cy="14" rx="5" ry="6" fill="#e5e5e5"/>
+                          <ellipse cx="16" cy="14" rx="5" ry="6" fill="#e5e5e5"/>
+                          <ellipse cx="6" cy="7" rx="2" ry="5" fill="#e5e5e5"/>
+                          <ellipse cx="18" cy="7" rx="2" ry="5" fill="#e5e5e5"/>
+                          <circle cx="12" cy="16" r="2.2" fill="#fff"/>
+                          <circle cx="10.5" cy="14" r="0.8" fill="#333"/>
+                          <circle cx="13.5" cy="14" r="0.8" fill="#333"/>
+                          <ellipse cx="12" cy="17.2" rx="0.7" ry="0.4" fill="#333"/>
+                      </svg>'
+                  ],
+              ];
+            @endphp
+
             <ul class="nav nav-tabs mt-4 pb-3" id="ageTabs" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="toddlers-tab" data-bs-toggle="tab" data-bs-target="#toddlers" type="button" role="tab" aria-controls="toddlers" aria-selected="true" style="background-color: #4af396;">
-                  <!-- Bear SVG icon -->
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
-                    <circle cx="12" cy="12" r="8" fill="#c9a06c"/>
-                    <ellipse cx="7.5" cy="7.5" rx="3" ry="3" fill="#c9a06c"/>
-                    <ellipse cx="16.5" cy="7.5" rx="3" ry="3" fill="#c9a06c"/>
-                    <circle cx="12" cy="14" r="2.2" fill="#fff"/>
-                    <circle cx="10.5" cy="12" r="1" fill="#333"/>
-                    <circle cx="13.5" cy="12" r="1" fill="#333"/>
-                    <ellipse cx="12" cy="16.2" rx="1.1" ry="0.7" fill="#333"/>
-                  </svg>
-                  Toddlers
-                </button>
-              </li>
+                @foreach ($services as $key => $service)
+                    @php
+                        $color = $tabDesigns[$key]['color'] ?? '#f0f8ff';
+                        $icon = $tabDesigns[$key]['icon'] ?? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true"></svg>';
+                    @endphp
 
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="two-tab" data-bs-toggle="tab" data-bs-target="#two" type="button" role="tab" aria-controls="two" aria-selected="false"  style="background-color: #f0f8ff;">
-                  <!-- Rabbit SVG icon -->
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
-                    <ellipse cx="8" cy="14" rx="5" ry="6" fill="#e5e5e5"/>
-                    <ellipse cx="16" cy="14" rx="5" ry="6" fill="#e5e5e5"/>
-                    <ellipse cx="6" cy="7" rx="2" ry="5" fill="#e5e5e5"/>
-                    <ellipse cx="18" cy="7" rx="2" ry="5" fill="#e5e5e5"/>
-                    <circle cx="12" cy="16" r="2.2" fill="#fff"/>
-                    <circle cx="10.5" cy="14" r="0.8" fill="#333"/>
-                    <circle cx="13.5" cy="14" r="0.8" fill="#333"/>
-                    <ellipse cx="12" cy="17.2" rx="0.7" ry="0.4" fill="#333"/>
-                  </svg>
-                  Two to Three’s
-                </button>
-              </li>
+                    <li class="nav-item" role="presentation">
+                        <button 
+                            class="nav-link {{ $key == 0 ? 'active' : '' }}" 
+                            id="service-{{ $service->id }}-tab" 
+                            data-bs-toggle="tab" 
+                            data-bs-target="#service-{{ $service->id }}" 
+                            type="button" 
+                            role="tab" 
+                            aria-controls="service-{{ $service->id }}" 
+                            aria-selected="{{ $key == 0 ? 'true' : 'false' }}"  
+                            style="background-color: {{ $color }};">
 
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="preschool-tab" data-bs-toggle="tab" data-bs-target="#preschool" type="button" role="tab" aria-controls="preschool" aria-selected="false"  style="background-color: #ffc1ab;">
-                  <!-- Lion SVG icon -->
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="me-1" aria-hidden="true" style="vertical-align:middle;">
-                    <circle cx="12" cy="12" r="7" fill="#f7c873"/>
-                    <ellipse cx="6" cy="12" rx="2.5" ry="3.5" fill="#f7c873"/>
-                    <ellipse cx="18" cy="12" rx="2.5" ry="3.5" fill="#f7c873"/>
-                    <ellipse cx="12" cy="17" rx="3" ry="2" fill="#f7c873"/>
-                    <circle cx="12" cy="14" r="2.2" fill="#fff"/>
-                    <circle cx="10.5" cy="12.5" r="0.8" fill="#333"/>
-                    <circle cx="13.5" cy="12.5" r="0.8" fill="#333"/>
-                    <ellipse cx="12" cy="15.2" rx="0.7" ry="0.4" fill="#333"/>
-                  </svg>
-                  Pre school
-                </button>
-              </li>
+                            {!! $icon !!}
+                            {{ $service->title ?? '' }}
+                        </button>
+                    </li>
+                @endforeach
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content mt-3" id="ageTabsContent">
-              <div class="tab-pane fade show active" id="toddlers" role="tabpanel" aria-labelledby="toddlers-tab">
-                {!! $toddlers->long_desc !!}
-              </div>
 
-              <div class="tab-pane fade" id="two" role="tabpanel" aria-labelledby="two-tab">
-                 {!! $twothrees->long_desc !!}
-              </div>
+              @foreach ($services as $key => $servicedesc)
+                  <div class="tab-pane fade {{ $key == 0 ? 'show active' : '' }}" id="service-{{$servicedesc->id}}" role="tabpanel" aria-labelledby="service-{{$servicedesc->id}}-tab">
+                    {!! $servicedesc->long_desc !!}
+                  </div>
+              @endforeach
 
-              <div class="tab-pane fade" id="preschool" role="tabpanel" aria-labelledby="preschool-tab">
-                {!! $preschool->long_desc !!}
-              </div>
             </div>
 
             <!-- CTA -->
@@ -281,14 +307,14 @@
           </div>
         </div>
 
-        <div class="col-6 d-none">
+        <div class="col-6">
           <div class="feature-card p-3 rounded-3 h-100 d-flex align-items-start gap-3">
             <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center">
           <span class="bi bi-shield-lock-fill fs-5" aria-hidden="true"></span>
             </div>
             <div>
           <div class="fw-semibold">Secure Access</div>
-          <small class="text-muted d-block">Intercom and secure entry systems.</small>
+          {{-- <small class="text-muted d-block">Intercom and secure entry systems.</small> --}}
             </div>
           </div>
         </div>
