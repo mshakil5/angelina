@@ -238,7 +238,7 @@
           <h2 class="fw-bold mb-4">Nursery Facilities at Angelinas Day Care</h2>
 
           <p class="lead text-muted mb-4">
-        Here's a snapshot of some of the facilities and services we offer. Click or tap any item to learn more or ask during your visit.
+        Here's a snapshot of some of the facilities and services we offer.
           </p>
 
           <!-- Feature grid (icons + label + short) -->
@@ -248,7 +248,7 @@
           <div class="feature-card p-3 rounded-3 h-100 d-flex align-items-start gap-3">
             <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center">
           <!-- change to any icon you prefer -->
-          <span class="bi bi-car-fill fs-5" aria-hidden="true"></span>
+          <span class="fs-5" aria-hidden="true">🚗</span>
             </div>
             <div>
           <div class="fw-semibold">Parking</div>
@@ -263,8 +263,8 @@
           <span class="bi bi-basket3-fill fs-5" aria-hidden="true"></span>
             </div>
             <div>
-          <div class="fw-semibold">Meals & Snacks</div>
-          <small class="text-muted d-block">NHS accredited meals prepared on-site.</small>
+          <div class="fw-semibold">Creative & Messy Play Zone</div>
+          <small class="text-muted d-block">Children can paint, craft and explore textures in a fun</small>
             </div>
           </div>
         </div>
@@ -275,13 +275,13 @@
           <span class="bi bi-droplet-fill fs-5" aria-hidden="true"></span>
             </div>
             <div>
-          <div class="fw-semibold">Nappies & Wipes</div>
-          <small class="text-muted d-block">Included in fees where appropriate.</small>
+          <div class="fw-semibold">Learning & Activity Rooms</div>
+          <small class="text-muted d-block">Room design for early learning activities</small>
             </div>
           </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-6 d-none">
           <div class="feature-card p-3 rounded-3 h-100 d-flex align-items-start gap-3">
             <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center">
           <span class="bi bi-shield-lock-fill fs-5" aria-hidden="true"></span>
@@ -299,7 +299,7 @@
           <span class="bi bi-phone-fill fs-5" aria-hidden="true"></span>
             </div>
             <div>
-          <div class="fw-semibold">Parent App</div>
+          <div class="fw-semibold">Family App</div>
           <small class="text-muted d-block">Daily updates: photos, naps, meals & messaging.</small>
             </div>
           </div>
