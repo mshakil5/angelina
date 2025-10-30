@@ -72,14 +72,6 @@ class FrontendController extends Controller
             return ClientReview::where('status', 1)->latest()->get();
         });
 
-        // dd($services);
-
-        $toddlers = Service::where('type', 1)->where('title', 'Toddlers')->first();
-        $twothrees = Service::where('type', 1)->where('title', 'Two to Three’s')->first();
-        $preschool = Service::where('type', 1)->where('title', 'Preschool')->first();
-
-        
-
         $galleries = Content::with('category','images')->where('type', 1)->latest()->get();
         $faqs = Cache::remember('faqs', now()->addDay(), function () {
             return FaqQuestion::orderBy('id', 'asc')->get();
@@ -97,7 +89,7 @@ class FrontendController extends Controller
             $company?->meta_keywords ?? '',
             $company?->meta_image ? asset('images/company/meta/' . $company->meta_image) : null
         );
-      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs' ,'toddlers','twothrees','preschool','features','rooms','company'));
+      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs','features','rooms','company'));
     }
 
     public function type($slug)

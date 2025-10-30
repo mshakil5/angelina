@@ -350,7 +350,7 @@
       //Delete  
       
       function populateForm(data) {
-          $("#title").val(data.title).prop('readonly', true);
+          $("#title").val(data.title);
           $("#sl").val(data.sl);
           $("#amount").val(data.amount); 
           $("#short_desc").val(data.short_desc); 
