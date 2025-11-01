@@ -287,6 +287,8 @@ class FrontendController extends Controller
 
         $contactEmails = ContactEmail::where('status', 1)->pluck('email');
 
+        dd($contactEmails);
+
         foreach ($contactEmails as $contactEmail) {
             Mail::mailer('gmail')->to($contactEmail)
               ->send(new ContactMail($contact)
