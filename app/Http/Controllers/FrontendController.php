@@ -268,15 +268,9 @@ class FrontendController extends Controller
     {
 
         
-        // try {
-            
-        // } catch (ValidationException $e) {
-        //     throw ValidationException::withMessages($e->errors())
-        //         ->redirectTo(url()->previous() . '#callback');
-        // }
+        try {
 
-
-        $request->validate([
+            $request->validate([
                 'first_name' => 'required|string|min:2|max:50',
                 'last_name'  => 'required|string|min:2|max:50',
                 'email' => 'required|email|max:50',
@@ -307,6 +301,11 @@ class FrontendController extends Controller
 
             return redirect()->to(url()->previous() . '#callback')
                             ->with('success', 'Your message has been sent successfully!');
+            
+        } catch (ValidationException $e) {
+            throw ValidationException::withMessages($e->errors())
+                ->redirectTo(url()->previous() . '#callback');
+        }
 
     }
 
