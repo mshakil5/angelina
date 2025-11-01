@@ -262,41 +262,6 @@ class FrontendController extends Controller
       return view('frontend.contact', compact('contact', 'company'));
     }
 
-    public function storeContact2(Request $request)
-    {
-        
-        $request->validate([
-            'first_name' => 'required|string|min:2|max:50',
-            'last_name'  => 'required|string|min:2|max:50',
-            'email' => 'required|email|max:50',
-            'phone' => ['required', 'regex:/^(?:\+44|0)(?:7\d{9}|1\d{9}|2\d{9}|3\d{9})$/'],
-            'subject' => 'nullable|string|max:255',
-            'message' => 'required|string|max:2000'
-        ]);
-
-        $contact = new Contact();
-        $contact->first_name = $request->input('first_name');
-        $contact->last_name  = $request->input('last_name');
-        $contact->email      = $request->input('email');
-        $contact->phone      = $request->input('phone');
-        $contact->subject    = $request->input('subject');
-        $contact->message    = $request->input('message');
-        $contact->pref_time    = $request->input('prefTime');
-        $contact->nursery    = $request->input('nursery');
-        $contact->save();
-
-        $contactEmails = ContactEmail::where('status', 1)->pluck('email');
-
-        dd($contactEmails);
-
-        foreach ($contactEmails as $contactEmail) {
-            Mail::mailer('gmail')->to($contactEmail)
-              ->send(new ContactMail($contact)
-            );
-        }
-
-        return back()->with('success', 'Your message has been sent successfully!');
-    }
 
 
     public function storeContact(Request $request)
@@ -327,6 +292,9 @@ class FrontendController extends Controller
             $contact->save();
 
             $contactEmails = ContactEmail::where('status', 1)->pluck('email');
+
+            
+            dd($contactEmails);
 
             
             foreach ($contactEmails as $contactEmail) {
