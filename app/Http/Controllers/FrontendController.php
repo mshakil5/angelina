@@ -287,11 +287,11 @@ class FrontendController extends Controller
 
         $contactEmails = ContactEmail::where('status', 1)->pluck('email');
 
-        // foreach ($contactEmails as $contactEmail) {
-        //     Mail::mailer('gmail')->to($contactEmail)
-        //       ->send(new ContactMail($contact)
-        //     );
-        // }
+        foreach ($contactEmails as $contactEmail) {
+            Mail::mailer('gmail')->to($contactEmail)
+              ->send(new ContactMail($contact)
+            );
+        }
 
         return back()->with('success', 'Your message has been sent successfully!');
     }
@@ -326,10 +326,11 @@ class FrontendController extends Controller
 
             $contactEmails = ContactEmail::where('status', 1)->pluck('email');
 
-            // (optional mail sending)
-            // foreach ($contactEmails as $contactEmail) {
-            //     Mail::mailer('gmail')->to($contactEmail)->send(new ContactMail($contact));
-            // }
+            
+            foreach ($contactEmails as $contactEmail) {
+                Mail::to($contactEmail)->send(new ContactMail($contact));
+            }
+
 
             return redirect()->to(url()->previous() . '#callback')
                             ->with('success', 'Your message has been sent successfully!');
