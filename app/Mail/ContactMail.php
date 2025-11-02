@@ -28,6 +28,8 @@ class ContactMail extends Mailable
                         'last_name'  => $this->contact->last_name,
                         'email'      => $this->contact->email,
                         'phone'      => $this->contact->phone,
+                        'time'      => $this->contact->pref_time,
+                        'dob'      => $this->contact->dob,
                         'subjectText'    => $this->contact->subject ?? 'New query from website',
                         'contactMessage'    => $this->contact->message,
                     ]);

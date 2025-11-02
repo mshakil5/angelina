@@ -31,6 +31,8 @@
                             <strong>Name:</strong> {{ $first_name }} {{ $last_name }}<br>
                             <strong>Email:</strong> {{ $email }}<br>
                             <strong>Phone:</strong> {{ $phone }}<br>
+                            <strong>Preferred time:</strong> {{ $time }}<br>
+                            <strong>Date of birth:</strong> {{ $dob }}<br>
                             <strong>Message:</strong><br>
                             {!! nl2br(e($contactMessage)) !!}
                         </p>
