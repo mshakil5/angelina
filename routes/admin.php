@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\ProductFeatureController;
 use App\Http\Controllers\Admin\ProductFaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JobListController;
+use App\Http\Controllers\Admin\ReferenceController;
 
 Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], function(){
     Route::get('/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
@@ -216,4 +217,6 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('/job-applications', [JobListController::class, 'jobApplications'])->name('job.applications');
 
+    Route::get('/references', [ReferenceController::class, 'index'])->name('reference.index');
+    Route::get('/references/{id}', [ReferenceController::class, 'show'])->name('reference.show');
 });
