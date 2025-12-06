@@ -32,6 +32,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{ route('reference.index') }}" class="nav-link {{ Route::is('reference.index') || Route::is('reference.show') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-address-card"></i>
+            <p>References</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('allslider') }}" class="nav-link {{ Route::is('allslider') ? 'active' : '' }}">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>Sliders</p>
