@@ -97,19 +97,56 @@
             <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
-                  <th style="width:14%;">Day / Meal</th>
-                  <th style="width:17%">Monday</th>
-                  <th style="width:17%">Tuesday</th>
-                  <th style="width:17%">Wednesday</th>
-                  <th style="width:17%">Thursday</th>
-                  <th style="width:18%">Friday</th>
+                  <th style="width:14%;">Day</th>
+                  <th style="width:17%">Breakfast</th>
+                  <th style="width:17%">Morning Snack</th>
+                  <th style="width:17%">Lunch &amp; Dessert</th>
+                  <th style="width:17%">Afternoon Snack</th>
+                  <th style="width:18%">Tea</th>
                 </tr>
               </thead>
+              
               <tbody>
-                <tr><td><strong>Breakfast</strong></td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td></tr>
-                <tr><td><strong>Snack</strong></td><td>Grapes & pear, milk & water</td><td>Banana & bread, milk & water</td><td>Apricot & pear, milk & water</td><td>Cheese sticks & melon, milk & water</td><td>Orange & raisins, milk & water</td></tr>
-                <tr><td><strong>Lunch</strong></td><td>Veggie chili with rice & roasted veg, water</td><td>Sauteed veg & pasta, water</td><td>Roast chicken & mash, veg, water</td><td>Chicken curry with rice & veg, water</td><td>Fishcakes and potatoes, peas, water</td></tr>
-                <tr><td><strong>Tea</strong></td><td>Sandwiches & veg, water</td><td>Crackers & fruit, milk & water</td><td>Yogurt & fruit, water</td><td>Wraps with filling, water</td><td>Cheese & fruit, water</td></tr>
+                  <tr>
+                      <td>Mon</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Vegetable stir-fry noodles/Pasta, mixed veg, yogurt/fruit purée</td>
+                      <td>Fresh Fruits, Carrots</td>
+                      <td>Fish cake with gravy</td>
+                  </tr>
+                  <tr>
+                      <td>Tue</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Lamb/Quorn &amp; veg potato hot pot, carrot, rice pudding</td>
+                      <td>Fresh Fruits, Breadsticks</td>
+                      <td>Tuna mayo sandwiches with salad</td>
+                  </tr>
+                  <tr>
+                      <td>Wed</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Spaghetti bolognaises; jelly</td>
+                      <td>Fresh Fruits, Cucumber</td>
+                      <td>Beans on toast</td>
+                  </tr>
+                  <tr>
+                      <td>Thu</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Sweet &amp; sour chicken with rice</td>
+                      <td>Fresh Fruits, Brioche roll</td>
+                      <td>Wraps with chicken/veg &amp; salad</td>
+                  </tr>
+                  <tr>
+                      <td>Fri</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Couscous with roasted vegetables &amp; fruit purée</td>
+                      <td>Fresh Fruits, Rice cakes</td>
+                      <td>Homemade pizza slices with salad</td>
+                  </tr>
               </tbody>
             </table>
           </div>
@@ -122,19 +159,56 @@
             <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
-                  <th style="width:14%;">Day / Meal</th>
-                  <th style="width:17%">Monday</th>
-                  <th style="width:17%">Tuesday</th>
-                  <th style="width:17%">Wednesday</th>
-                  <th style="width:17%">Thursday</th>
-                  <th style="width:18%">Friday</th>
+                  <th style="width:14%;">Day</th>
+                  <th style="width:17%">Breakfast</th>
+                  <th style="width:17%">Morning Snack</th>
+                  <th style="width:17%">Lunch &amp; Dessert</th>
+                  <th style="width:17%">Afternoon Snack</th>
+                  <th style="width:18%">Tea</th>
                 </tr>
               </thead>
+              
               <tbody>
-                <tr><td><strong>Breakfast</strong></td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td><td>Variety of cereals & toast, milk & water</td></tr>
-                <tr><td><strong>Snack</strong></td><td>Banana & raisins, milk & water</td><td>Apple & cereal milk & water</td><td>Orange & grapes, milk & water</td><td>Pineapple & raisins, milk & water</td><td>Pear & peach, milk & water</td></tr>
-                <tr><td><strong>Lunch</strong></td><td>Macaroni cheese with veggies</td><td>Chicken pie with veg</td><td>Pitta, falafel & salad</td><td>Beef casserole & mash</td><td>Fish & veg with jacket potato</td></tr>
-                <tr><td><strong>Tea</strong></td><td>Wraps with variety of fillings</td><td>Tuna pasta bake</td><td>Cheese & chicken sandwiches</td><td>Leek, potato & carrot soup</td><td>Jacket potato with beans</td></tr>
+                  <tr>
+                      <td>Mon</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Fish with mash potato, vegetables, gravy &amp; fruit yogurt</td>
+                      <td>Veggie sticks &amp; hummus</td>
+                      <td>Potato salad with peas &amp; coleslaw</td>
+                  </tr>
+                  <tr>
+                      <td>Tue</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Spanish veg pasta with hidden veg, banana &amp; custard</td>
+                      <td>Pear slices &amp; crackers</td>
+                      <td>Build-your-own mini pittas</td>
+                  </tr>
+                  <tr>
+                      <td>Wed</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Lentil with mixed veg stew, garlic bread/naan, boiled carrot, pancake</td>
+                      <td>Banana slices &amp; rice cakes</td>
+                      <td>Veggie soup &amp; wholemeal bread</td>
+                  </tr>
+                  <tr>
+                      <td>Thu</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Butter chicken &amp; pilau rice, fruit salad/cocktail</td>
+                      <td>Veggie sticks &amp; hummus</td>
+                      <td>Sandwiches (chicken/cheese/veg)</td>
+                  </tr>
+                  <tr>
+                      <td>Fri</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Southern fried chicken, gravy, potatoes, green beans &amp; baked apple</td>
+                      <td>Apple slices &amp; crackers</td>
+                      <td>Spaghetti hoops on toast</td>
+                  </tr>
               </tbody>
             </table>
           </div>
@@ -147,19 +221,56 @@
             <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
-                  <th style="width:14%;">Day / Meal</th>
-                  <th style="width:17%">Monday</th>
-                  <th style="width:17%">Tuesday</th>
-                  <th style="width:17%">Wednesday</th>
-                  <th style="width:17%">Thursday</th>
-                  <th style="width:18%">Friday</th>
+                  <th style="width:14%;">Day</th>
+                  <th style="width:17%">Breakfast</th>
+                  <th style="width:17%">Morning Snack</th>
+                  <th style="width:17%">Lunch &amp; Dessert</th>
+                  <th style="width:17%">Afternoon Snack</th>
+                  <th style="width:18%">Tea</th>
                 </tr>
               </thead>
+              
               <tbody>
-                <tr><td><strong>Breakfast</strong></td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td></tr>
-                <tr><td><strong>Snack</strong></td><td>Grapes & pineapple</td><td>Pear & orange</td><td>Cheese sticks & crackers</td><td>Raisin & pear</td><td>Melon & banana</td></tr>
-                <tr><td><strong>Lunch</strong></td><td>Chicken & veg curry</td><td>Beef casserole & peas</td><td>Chicken pasta with veg</td><td>Cheese & vegetable pasta</td><td>Fish fingers & chips</td></tr>
-                <tr><td><strong>Tea</strong></td><td>Tuna & sweetcorn pasta salad</td><td>Jacket potato with beans</td><td>Potato salad with peas</td><td>Fish finger & bread</td><td>Sandwich with variety of fillings</td></tr>
+                  <tr>
+                      <td>Mon</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Fishcake/fish pie with gravy &amp; yogurt + peach slice</td>
+                      <td>Carrot sticks &amp; dips</td>
+                      <td>Spaghetti hoops on toast</td>
+                  </tr>
+                  <tr>
+                      <td>Tue</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Seasonal soup with baguette &amp; pancake</td>
+                      <td>Crackers &amp; apple slices</td>
+                      <td>Pancakes with fruit</td>
+                  </tr>
+                  <tr>
+                      <td>Wed</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Spaghetti bolognese, fresh fruit cocktail</td>
+                      <td>Rice cakes &amp; pear</td>
+                      <td>Sandwiches &amp; salad</td>
+                  </tr>
+                  <tr>
+                      <td>Thu</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Sweet &amp; sour chicken with rice; sponge &amp; custard</td>
+                      <td>Carrot sticks with hummus</td>
+                      <td>Homemade pizza with salad</td>
+                  </tr>
+                  <tr>
+                      <td>Fri</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Mint lamb stew with couscous &amp; veg, yogurt/fruit purée</td>
+                      <td>Crackers &amp; fruit</td>
+                      <td>Wraps with mixed fillings</td>
+                  </tr>
               </tbody>
             </table>
           </div>
@@ -172,19 +283,56 @@
             <table class="menu-table table table-striped w-100">
               <thead>
                 <tr>
-                  <th style="width:14%;">Day / Meal</th>
-                  <th style="width:17%">Monday</th>
-                  <th style="width:17%">Tuesday</th>
-                  <th style="width:17%">Wednesday</th>
-                  <th style="width:17%">Thursday</th>
-                  <th style="width:18%">Friday</th>
+                  <th style="width:14%;">Day</th>
+                  <th style="width:17%">Breakfast</th>
+                  <th style="width:17%">Morning Snack</th>
+                  <th style="width:17%">Lunch &amp; Dessert</th>
+                  <th style="width:17%">Afternoon Snack</th>
+                  <th style="width:18%">Tea</th>
                 </tr>
               </thead>
+              
               <tbody>
-                <tr><td><strong>Breakfast</strong></td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td><td>Variety of cereals & toast</td></tr>
-                <tr><td><strong>Snack</strong></td><td>Melon & banana</td><td>Apple & cereal</td><td>Orange & grapes</td><td>Peach & melon</td><td>Raisin & pear</td></tr>
-                <tr><td><strong>Lunch</strong></td><td>Meatballs & pasta with veg</td><td>Chicken & veg pasta</td><td>Vegetable stir fry with rice</td><td>Beef casserole with new potatoes</td><td>Cottage pie with peas</td></tr>
-                <tr><td><strong>Tea</strong></td><td>Apple & banana</td><td>Grapes & apricot</td><td>Crackers & cheese</td><td>Rice cake & cucumber</td><td>Fish finger & bread</td></tr>
+                  <tr>
+                      <td>Mon</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Shepherd’s pie with broccoli &amp; custard slice OR custard &amp; banana</td>
+                      <td>Apple slices &amp; breadsticks</td>
+                      <td>Jacket potato with beans &amp; cheese</td>
+                  </tr>
+                  <tr>
+                      <td>Tue</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Chicken curry &amp; rice, cauliflower, Greek yogurt &amp; fruits</td>
+                      <td>Rice cakes &amp; banana</td>
+                      <td>Wraps with salad</td>
+                  </tr>
+                  <tr>
+                      <td>Wed</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Chicken pasta with mixed vegetables &amp; fruit jelly</td>
+                      <td>Breadsticks &amp; pear</td>
+                      <td>Soup with wholemeal bread</td>
+                  </tr>
+                  <tr>
+                      <td>Thu</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Chicken chickpeas curry, couscous, green beans, peach slice &amp; cream</td>
+                      <td>Crackers &amp; cream cheese</td>
+                      <td>Sandwiches with fruit</td>
+                  </tr>
+                  <tr>
+                      <td>Fri</td>
+                      <td>Porridge, Toast, Selection of Cereal</td>
+                      <td>Fresh Fruits</td>
+                      <td>Mash potato &amp; carrot, sausage/fish, gravy &amp; fruit purée/yogurt</td>
+                      <td>Carrot sticks with dip</td>
+                      <td>Spaghetti hoops on toast</td>
+                  </tr>
               </tbody>
             </table>
           </div>
