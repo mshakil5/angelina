@@ -79,6 +79,8 @@ class FrontendController extends Controller
 
         $rooms = Content::with('category')->where('type', 2)->latest()->get();
 
+        $nurseryFacilities = Master::firstOrCreate(['name' => 'nurseryFacilities']);
+
         $sections = Section::where('status', 1)
             ->orderBy('sl', 'asc')
             ->get();
@@ -89,7 +91,7 @@ class FrontendController extends Controller
             $company?->meta_keywords ?? '',
             $company?->meta_image ? asset('images/company/meta/' . $company->meta_image) : null
         );
-      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs','features','rooms','company'));
+      return view('frontend.index', compact('welcome', 'sliders', 'about1', 'services', 'about2', 'blogs', 'features', 'service', 'reviews', 'sections', 'galleries', 'faqs','features','rooms','company','nurseryFacilities'));
     }
 
     public function type($slug)
