@@ -259,12 +259,12 @@
         " aria-hidden="true"></div>
         <div class="pe-lg-4 position-relative" style="z-index:1;">
           <!-- Main heading (adapted from Busy Bees wording) -->
-          <h3 class="h5 text-uppercase text-muted mb-2">Nursery Facilities</h3>
-          <h2 class="fw-bold mb-4">Nursery Facilities at Angelinas Day Care</h2>
+        <h3 class="h5 text-uppercase text-muted mb-2">{{ $nurseryFacilities->short_title ?? 'Nursery Facilities' }}</h3>
+        <h2 class="fw-bold mb-4">{{ $nurseryFacilities->long_title ?? 'Nursery Facilities at Angelinas Day Care' }}</h2>
 
-          <p class="lead text-muted mb-4">
-        Here's a snapshot of some of the facilities and services we offer.
-          </p>
+        <p class="lead text-muted mb-4">
+            {{ $nurseryFacilities->short_description ?? "Here's a snapshot of some of the facilities and services we offer." }}
+        </p>
 
           <!-- Feature grid (icons + label + short) -->
           <div class="row g-3">
@@ -354,8 +354,9 @@
       <!-- RIGHT: Image / gallery -->
       <div class="col-lg-6">
         <div class="position-relative">
-          <img src="{{ asset('resources/frontend/images/facilities.jpeg')}}" alt="Nursery facilities" class="img-fluid rounded-3 w-100 shadow-sm">
-
+            <img src="{{ $nurseryFacilities->meta_image ? asset('images/meta_image/'.$nurseryFacilities->meta_image) : asset('resources/frontend/images/facilities.jpeg') }}" 
+                alt="Nursery facilities" 
+                class="img-fluid rounded-3 w-100 shadow-sm">
         </div>
       </div>
     </div> <!-- /.row -->
@@ -599,7 +600,16 @@
             Here are some of the most common questions parents ask about our nursery environment, daily routines, and enrolment process.
           </p> -->
           <!-- <img src="https://cdn-icons-png.flaticon.com/512/3209/3209983.png" alt="Nursery FAQ illustration" class="img-fluid mt-4" style="max-width:220px;"> -->
-          <img src="{{asset('resources/frontend/images/faq.jpeg')}}" alt="FAQ" class="img-fluid " >
+          @php
+                $faqImage = \App\Models\Master::firstOrCreate(['name' => 'faqImage']);
+                $faqImagePath = $faqImage->meta_image 
+                                ? asset('images/meta_image/' . $faqImage->meta_image) 
+                                : asset('resources/frontend/images/faq.jpeg');
+            @endphp
+
+            <div class="faq-intro text-center text-lg-start pe-lg-4">
+                <img src="{{ $faqImagePath }}" alt="FAQ" class="img-fluid">
+            </div>
         </div>
       </div>
 
