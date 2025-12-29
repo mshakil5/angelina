@@ -276,7 +276,8 @@ class FrontendController extends Controller
                 'first_name' => 'required|string|min:2|max:50',
                 'last_name'  => 'required|string|min:2|max:50',
                 'email' => 'required|email|max:50',
-                'dob' => 'required|date|after_or_equal:' . now()->subYears(5)->format('Y-m-d'),
+                'preferred_date' => 'required|date',
+                'dob' => 'nullable|date|after_or_equal:' . now()->subYears(5)->format('Y-m-d'),
                 'phone' => ['required'],
                 'subject' => 'nullable|string|max:255',
                 'message' => 'nullable|string|max:2000',
@@ -289,6 +290,7 @@ class FrontendController extends Controller
             $contact->phone      = $request->input('phone');
             $contact->subject    = $request->input('subject');
             $contact->dob        = $request->input('dob');
+            $contact->preferred_date        = $request->input('preferred_date');
             $contact->message    = $request->input('message');
             $contact->pref_time  = $request->input('prefTime');
             $contact->nursery    = $request->input('nursery');

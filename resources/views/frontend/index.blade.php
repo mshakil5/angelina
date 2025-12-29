@@ -779,14 +779,25 @@
                         @enderror
                       </div>
 
-                        <div class="col-12 col-md-6">
+                      <div class="col-12 col-md-6">
+                          <input id="preferred_date" 
+                                name="preferred_date" 
+                                type="text" 
+                                class="form-control @error('preferred_date') is-invalid @enderror"
+                                value="{{ old('preferred_date') }}" 
+                                placeholder="Preferred date">
+                          @error('preferred_date')
+                              <span class="invalid-feedback">{{ $message }}</span>
+                          @enderror
+                      </div>
+
+                        <div class="col-12 col-md-6 d-none">
                             <input id="dob" 
                                   name="dob" 
                                   type="text" 
                                   class="form-control @error('dob') is-invalid @enderror"
                                   value="{{ old('dob') }}" 
-                                  placeholder="Child Date of Birth"
-                                  required>
+                                  placeholder="Child Date of Birth">
                             @error('dob')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -987,6 +998,15 @@ $(document).ready(function () {
         altFormat: "F j, Y", // Display format (e.g., "October 22, 2025")
         placeholder: "Child Date of Birth" // Custom placeholder
     });
+
+    
+    flatpickr("#preferred_date", {
+        dateFormat: "Y-m-d", // Format for the submitted value
+        altInput: true, // Show a human-readable format
+        altFormat: "F j, Y", // Display format (e.g., "October 22, 2025")
+        placeholder: "Preferred Date" // Custom placeholder
+    });
+
 </script>
 
 @endsection
