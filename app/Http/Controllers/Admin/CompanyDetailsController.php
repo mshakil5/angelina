@@ -201,6 +201,8 @@ class CompanyDetailsController extends Controller
 
         $companyDetails = Master::where('name', 'foodChoice')->first();
         $companyDetails->long_description = $request->foodChoice;
+        $companyDetails->short_description = $request->foodtable;
+        $companyDetails->short_title = $request->short_title;
         $companyDetails->save();
 
         return redirect()->back()->with('success', 'Food Choice updated successfully.');

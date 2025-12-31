@@ -116,282 +116,36 @@
   </div>
 </section>
 
-
+@if ($foodChoice->short_title == 'Active' )
+    
 <!-- Main content -->
 <main class="content-wrap">
   <div class="container">
 
     <!-- Detailed weekly tables -->
     <div class="row mt-4 food-choice-content">
-
-      <div class="col-lg-12 mx-auto">
-        <h1 class="text-center my-4">4-Week Healthy Meal Plan</h1>
-      </div>
-      
-        <div class="pdf-page-break"></div>
-
-
-      <div class="col-lg-12 mx-auto">
-        
-        <!-- Week 1 -->
-        <div class="table-responsive week1">
-            <h2 class="table-week-title">Week 1</h2>
-            <table class="menu-table  table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>Day</th>
-                        <th>Breakfast</th>
-                        <th>Morning Snack</th>
-                        <th>Lunch</th>
-                        <th>Afternoon Snack</th>
-                        <th>Tea (Main + Side)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="day-col">Mon</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Fruit<br>Apple slices<br>Pear slices<br>Banana</td>
-                        <td>Fish pie<br>Steamed carrots</td>
-                        <td>Vegetables<br>Vegetable sticks<br>Cucumber sticks<br>Carrot (steamed or grated)</td>
-                        <td>Lentil soup with wholemeal bread and fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Tue</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Grapes<br>Soft berries (cut safely)<br>Kiwi</td>
-                        <td>Lentil stew with potatoes<br>Mixed vegetables<br>Wholemeal Pitta</td>
-                        <td>Carrot (steamed or grated)<br>Pepper sticks<br>Cherry tomato<br>Starchy<br>Plain rice cakes (no salt)</td>
-                        <td>Chicken pasta and natural yoghurt</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Wed</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Satsuma or orange<br>Vegetables<br>Cucumber sticks<br>Carrot steamed</td>
-                        <td>Minced lamb bolognese with Spaghetti<br>Green beans</td>
-                        <td>Plain oatcakes (no salt, no egg)<br>Unsaltted breadsticks<br>Wholemeal pitta pieces (plain)</td>
-                        <td>Jacket potato with cheese and fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Thu</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Drinks<br>Water</td>
-                        <td>Chicken curry with rice<br>Cauliflower</td>
-                        <td>Wholemeal Crumpets<br>Wholemeal Bagels<br>Dip & Healthy Fats</td>
-                        <td>Vegetable soup with wholemeal pitta bread</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Fri</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Milk</td>
-                        <td>Chickpea curry with couscous<br>Mixed vegetable</td>
-                        <td>Houmous (low salt)<br>Bean Dip (low salt)<br>Mashed Avocado</td>
-                        <td>Chicken sandwich with Salad</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="pdf-page-break"></div>
-
-        <!-- Week 2 -->
-        <div class="table-responsive week2 mt-2">
-            <h2 class="table-week-title">Week 2</h2>
-            <table class="menu-table  table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>Day</th>
-                        <th>Breakfast</th>
-                        <th>Morning Snack</th>
-                        <th>Lunch</th>
-                        <th>Afternoon Snack</th>
-                        <th>Tea (Main + Side)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="day-col">Mon</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Fruit<br>Apple slices<br>Pear slices<br>Banana</td>
-                        <td>Caribbean salmon curry with rice<br>Green beans</td>
-                        <td>Vegetables<br>Vegetable sticks<br>Cucumber sticks<br>Carrot (steamed or grated)</td>
-                        <td>Lentil soup with wholemeal bread and fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Tue</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Grapes<br>Soft berries (cut safely)<br>Kiwi</td>
-                        <td>Lentil and mixed vegetable stew<br>Wholemeal pitta bread</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Starchy<br>Plain rice cakes (no salt)<br>Plain oatcakes (no salt, no egg)</td>
-                        <td>Pasta with mixed vegetables and natural yoghurt</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Wed</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Satsuma or orange<br>Vegetables<br>Cucumber sticks<br>Carrot steamed</td>
-                        <td>Spanish chicken pasta<br>Mixed vegetables</td>
-                        <td>Unsaltted breadsticks<br>Wholemeal pitta pieces (plain)</td>
-                        <td>Jacket potato with cheese and salad</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Thu</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Drinks<br>Water</td>
-                        <td>Lamb stew with potatoes<br>Steamed carrots</td>
-                        <td>Wholemeal Crumpets<br>Wholemeal Bagels<br>Dip & Healthy Fats</td>
-                        <td>Vegetable soup with wholemeal bread and fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Fri</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Milk</td>
-                        <td>Chicken curry with rice<br>Cauliflower</td>
-                        <td>Houmous (low salt)<br>Bean Dip (low salt)<br>Mashed Avocado</td>
-                        <td>Cheese sandwich with natural yoghurt</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-lg-12 mx-auto">
+            <h1 class="text-center my-4">4-Week Healthy Meal Plan</h1>
         </div>
         <div class="pdf-page-break"></div>
 
-        <!-- Week 3 -->
-        <div class="table-responsive week3">
-            <h2 class="table-week-title">Week 3</h2>
-            <table class="menu-table table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>Day</th>
-                        <th>Breakfast</th>
-                        <th>Morning Snack</th>
-                        <th>Lunch (Main + Side)</th>
-                        <th>Afternoon Snack</th>
-                        <th>Tea (Main + Side)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="day-col">Mon</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Fruit<br>Apple slices<br>Pear slices<br>Banana</td>
-                        <td>Fish with mashed potatoes and gravy<br>Cauliflower</td>
-                        <td>Vegetables<br>Vegetable sticks<br>Cucumber sticks<br>Carrot (steamed or grated)</td>
-                        <td>Lentil soup with wholemeal bread and steamed carrots</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Tue</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Grapes<br>Soft berries (cut safely)<br>Kiwi</td>
-                        <td>Spanish garlic pasta with chicken<br>Mixed vegetable</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Starchy<br>Plain rice cakes (no salt)</td>
-                        <td>Pasta with mixed vegetables and natural yoghurt</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Wed</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Satsuma or orange<br>Vegetables<br>Cucumber sticks<br>Carrot steamed</td>
-                        <td>Chicken curry with couscous<br>Cauliflower</td>
-                        <td>Plain oatcakes (no salt, no egg)<br>Unsaltted breadsticks<br>Wholemeal pitta pieces (plain)</td>
-                        <td>Jacket potato with tuna and mixed vegetables</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Thu</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Drinks<br>Water</td>
-                        <td>Mexican chicken with rice<br>Mixed vegetable</td>
-                        <td>Wholemeal Crumpets<br>Wholemeal Bagels<br>Dip & Healthy Fats</td>
-                        <td>Lentil & vegetable stew with fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Fri</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Milk</td>
-                        <td>Lentil stew with boiled potatoes<br>Cabbage</td>
-                        <td>Houmous (low salt)<br>Bean Dip (low salt)<br>Mashed Avocado</td>
-                        <td>Chicken sandwich with natural yoghurt</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
 
-        <div class="pdf-page-break"></div>
-
-        <!-- Week 4 -->
-        <div class="table-responsive week4">
-            <h2 class="table-week-title">Week 4</h2>
-            <table class="menu-table table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>Day</th>
-                        <th>Breakfast</th>
-                        <th>Morning Snack</th>
-                        <th>Lunch (Main + Side)</th>
-                        <th>Afternoon Snack</th>
-                        <th>Tea (Main + Side)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="day-col">Mon</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Fruit<br>Apple slices<br>Pear slices<br>Banana</td>
-                        <td>Salmon bake with potatoes<br>Cauliflower</td>
-                        <td>Vegetables<br>Vegetable sticks<br>Cucumber sticks<br>Carrot (steamed or grated)</td>
-                        <td>Vegetable soup with wholemeal bread with fresh fruit</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Tue</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Grapes<br>Soft berries (cut safely)<br>Kiwi</td>
-                        <td>Lentil and vegetable stew with wholemeal pitta<br>Broccoli</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Starchy<br>Plain rice cakes (no salt)</td>
-                        <td>Pasta with mixed vegetables and natural yoghurt</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Wed</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Satsuma or orange<br>Vegetables<br>Cucumber sticks<br>Carrot steamed</td>
-                        <td>Chicken casserole with baked potatoes<br>Green beans</td>
-                        <td>Plain oatcakes (no salt, no egg)<br>Unsaltted breadsticks<br>Wholemeal pitta pieces (plain)</td>
-                        <td>Jacket potato with cheese and salad</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Thu</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Pepper sticks<br>Cherry tomato<br>Drinks<br>Water</td>
-                        <td>Lamb stew with potatoes<br>Cabbage</td>
-                        <td>Wholemeal Crumpets<br>Wholemeal Bagels<br>Dip & Healthy Fats</td>
-                        <td>Lentil soup with wholemeal pitta and steamed carrots</td>
-                    </tr>
-                    <tr>
-                        <td class="day-col">Fri</td>
-                        <td>Porridge, fresh fruits, wholemeal toast, wholegrain cereal, milk, water</td>
-                        <td>Milk</td>
-                        <td>Chilli con carne with rice<br>Broccoli</td>
-                        <td>Houmous (low salt)<br>Bean Dip (low salt)<br>Mashed Avocado</td>
-                        <td>Salmon wholemeal sandwich with natural yoghurt</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        {!! $foodChoice->short_description !!}
 
 
-
-
-      </div>
     </div>
-
-    
-
   </div>
-
 </main>
 
+<div class="container text-end mt-3">
+<button id="download-pdf" class="btn btn-primary">
+    <i class="fas fa-download"></i> Download Menu as PDF
+</button>
+</div>
 
-  <div class="container text-end mt-3">
-    <button id="download-pdf" class="btn btn-primary">
-        <i class="fas fa-download"></i> Download Menu as PDF
-    </button>
-  </div>
+
+@endif
+
 
 @endsection
 
