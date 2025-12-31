@@ -134,6 +134,7 @@
 @endphp
 
 
+@if ($banner->status == 1)
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center"
     style="background-image: url('{{ $bgImage }}');">
   <div class="container d-none">
@@ -146,6 +147,7 @@
     </nav>
   </div>
 </section>
+@endif
 
 
 
@@ -262,7 +264,9 @@
 
 
 
-<!-- ===== Smart Full-Width Gallery ===== -->
+
+@if ($galleries->isNotEmpty())
+    <!-- ===== Smart Full-Width Gallery ===== -->
 <section id="smart-gallery" class="py-5 bg-white">
   <div class="container-fluid px-0">
     <div class="container">
@@ -277,24 +281,26 @@
     <div class="gallery-wrap">
       <div class="container">
         <div id="galleryGrid" class="row g-3">
-
-
+          @php $index = 0; @endphp
           @foreach ($galleries as $gallery)
+            @foreach ($gallery->images as $item)
               <div class="col-6 col-md-3">
-                <div class="gallery-item" data-index="0" tabindex="0">
-                  <img src="{{ asset('images/content/'.$gallery->feature_image)}}" alt="{{$gallery->short_title}}" loading="lazy" data-full="{{ asset('images/content/'.$gallery->feature_image)}}">
+                <div class="gallery-item {{ $index >= 4 ? 'hidden' : '' }}" data-index="{{ $index }}" tabindex="0">
+                  <img src="{{ asset('images/content/' . $item->image) }}" alt="{{ $item->short_title }}" loading="lazy" data-full="{{ asset('images/content/' . $item->image) }}">
                   <div class="thumb-overlay"><span>View</span></div>
                 </div>
               </div>
+              @php $index++; @endphp
+            @endforeach
           @endforeach
-
-          
-
-
         </div> <!-- /.row -->
       </div> <!-- /.container -->
     </div> <!-- /.gallery-wrap -->
 
+    <!-- See more button -->
+    <div class="container text-center mt-4">
+      <button id="galleryToggleBtn" class="btn btn-primary btn-lg rounded-pill px-4" style="{{ $index <= 4 ? 'display: none;' : '' }}">See more</button>
+    </div>
   </div>
 
   <!-- LIGHTBOX / OVERLAY -->
@@ -308,7 +314,12 @@
   </div>
 </section>
 
-
+<style>
+  .hidden {
+    display: none !important;
+  }
+</style>
+@endif
 
 
 
@@ -317,6 +328,25 @@
 
 @section('script')
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+  // Handle "See more" button click
+  $('#galleryToggleBtn').on('click', function () {
+    // Select the next 4 hidden gallery items
+    const hiddenItems = $('.gallery-item.hidden').slice(0, 4);
+    
+    // Show the next 4 items with a fade-in effect
+    hiddenItems.removeClass('hidden').hide().fadeIn(500);
+    
+    // Hide the button if no more hidden items remain
+    if ($('.gallery-item.hidden').length === 0) {
+      $('#galleryToggleBtn').fadeOut(300);
+    }
+  });
+
+});
+</script>
 <script>
     $(document).ready(function() {
         let num1 = Math.floor(Math.random() * 10) + 1;

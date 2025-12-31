@@ -11,6 +11,7 @@
 @endphp
 
 
+@if ($banner->status == 1)
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center"
     style="background-image: url('{{ $bgImage }}');">
   <div class="container d-none">
@@ -23,6 +24,7 @@
     </nav>
   </div>
 </section>
+@endif
 
 
 

@@ -532,7 +532,8 @@
   </div>
 </section> --}}
 
-<!-- ===== Smart Full-Width Gallery ===== -->
+@if ($galleries->isNotEmpty())
+    <!-- ===== Smart Full-Width Gallery ===== -->
 <section id="smart-gallery" class="py-5 bg-white">
   <div class="container-fluid px-0">
     <div class="container">
@@ -585,6 +586,9 @@
     display: none !important;
   }
 </style>
+@endif
+
+
 
 <!-- ===== FAQ Section ===== -->
 <section id="faq" class="faq-section py-5">

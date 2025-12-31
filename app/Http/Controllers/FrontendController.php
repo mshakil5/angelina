@@ -72,7 +72,7 @@ class FrontendController extends Controller
             return ClientReview::where('status', 1)->latest()->get();
         });
 
-        $galleries = Content::with('category','images')->where('type', 1)->latest()->get();
+        $galleries = Content::with('category','images')->where('type', 1)->where('status', 1)->latest()->get();
         $faqs = Cache::remember('faqs', now()->addDay(), function () {
             return FaqQuestion::orderBy('id', 'asc')->get();
         });
@@ -491,7 +491,7 @@ class FrontendController extends Controller
     public function aboutUs()
     {
         $about1 = Master::firstOrCreate(['name' => 'about1']);
-        $galleries = Content::with('category')->where('type', 1)->latest()->get();
+        $galleries = Content::with('category')->where('type', 1)->where('status', 1)->latest()->get();
         $banner = Banner::where('page', 'About')->first();
 
       if($about1){
