@@ -226,6 +226,42 @@ class CompanyDetailsController extends Controller
         return redirect()->back()->with('success', 'Food Choice updated successfully.');
     }
 
+    public function jobInfo()
+    {       
+        $data = Master::where('name', 'jobInfo')->first();
+        return view('admin.company.jobInfo', compact('data'));
+    }
+
+    public function jobInfoUpdate(Request $request)
+    {
+        $request->validate([
+            'long_description' => 'required|string',
+            'feature_image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:2048',
+        ]);
+
+        $companyDetails = Master::where('name', 'jobInfo')->first();
+        $companyDetails->long_description = $request->long_description;
+        $companyDetails->short_title = $request->short_title;
+
+            if ($request->hasFile('feature_image')){
+                $file = $request->file('feature_image');
+                $filename = mt_rand(100000,999999).'.webp';
+                $path = public_path('images/content/');
+                if(!file_exists($path)) mkdir($path,0755,true);
+
+                Image::make($file)
+                    ->fit(1000, 700)
+                    ->encode('webp', 70)
+                    ->save($path . $filename);
+                $companyDetails->image = $filename;
+            }
+
+
+        $companyDetails->save();
+
+        return redirect()->back()->with('success', 'Job info updated successfully.');
+    }
+
 
 
 

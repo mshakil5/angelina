@@ -549,9 +549,11 @@ class FrontendController extends Controller
                 $jobMeta->meta_image ? asset('images/meta_image/' . $jobMeta->meta_image) : null
             );
         }
+
+        $data = Master::where('name', 'jobInfo')->first();
       
         $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-        return view('frontend.job', compact('company', 'banner', 'categories', 'locations'));
+        return view('frontend.job', compact('company', 'banner', 'categories', 'locations', 'data'));
     }
 
     public function filterJobs(Request $request)

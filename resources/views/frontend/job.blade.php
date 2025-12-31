@@ -199,18 +199,27 @@
     </div>
   </section>
 
-  <!-- ===== Join Section ===== -->
-  <section class="join-section text-center container">
-    <div class="row align-items-center">
-      <div class="col-md-6 mb-4 mb-md-0">
-        <h2>Come on,<br> join with us!</h2>
-      </div>
-      <div class="col-md-6">
-        <img src="{{ asset('resources/frontend/images/job.png') }}"
-             alt="Join Us" class="img-fluid rounded shadow">
-      </div>
-    </div>
-  </section>
+  @if ( $data->short_title == 'Active' )
+        <!-- ===== Join Section ===== -->
+      <section class="join-section text-center container">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-4 mb-md-0">
+            {!! $data->long_description !!}
+          </div>
+          <div class="col-md-6">
+
+            @if ($data->image)
+              <img src="{{ asset('images/content/'. $data->image) }}" alt="Join Us" class="img-fluid rounded shadow">
+            @else
+            <img src="{{ asset('resources/frontend/images/job.png') }}"
+                alt="Join Us" class="img-fluid rounded shadow">
+            @endif
+
+          </div>
+        </div>
+      </section>
+  @endif
+
 </div>
 
 

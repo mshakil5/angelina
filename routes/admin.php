@@ -138,6 +138,10 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/fees', [CompanyDetailsController::class, 'fees'])->name('admin.fees');
     Route::post('/fees', [CompanyDetailsController::class, 'feesUpdate'])->name('admin.fees');
 
+    
+    Route::get('/job-info', [CompanyDetailsController::class, 'jobInfo'])->name('admin.jobInfo');
+    Route::post('/job-info', [CompanyDetailsController::class, 'jobInfoUpdate'])->name('admin.jobInfo');
+
     Route::get('/privacy-policy', [CompanyDetailsController::class, 'privacyPolicy'])->name('admin.privacy-policy');
     Route::post('/privacy-policy', [CompanyDetailsController::class, 'privacyPolicyUpdate'])->name('admin.privacy-policy');
 

@@ -134,8 +134,8 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('banner.index') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
                 Settings <i class="fas fa-angle-left right"></i>
@@ -170,6 +170,12 @@
                 <a href="{{ route('admin.fees') }}" class="nav-link {{ Route::is('admin.fees') ? 'active' : '' }}">
                     <i class="fas fa-info-circle nav-icon"></i>
                     <p>Fees & Terms</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.jobInfo') }}" class="nav-link {{ Route::is('admin.jobInfo') ? 'active' : '' }}">
+                    <i class="fas fa-info-circle nav-icon"></i>
+                    <p>Job</p>
                 </a>
             </li>
             <li class="nav-item">

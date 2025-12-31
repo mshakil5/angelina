@@ -189,13 +189,7 @@
     </div>
   </div>
   
-  <div class="shape-mockup shape-dog d-none d-lg-block" aria-hidden="true" style="left:6%;bottom:28%;">
-  <img decoding="async" loading="lazy" src="https://angelinasdaycare.co.uk/wp-content/uploads/2022/01/dog.png" alt="playful dog illustration">
-  </div>
 
-  <div class="shape-mockup shape-star d-none d-md-block" aria-hidden="true" style="right:5%;bottom:28%;">
-  <img decoding="async" loading="lazy" src="https://angelinasdaycare.co.uk/wp-content/uploads/2022/01/star.png" alt="star illustration">
-  </div>
 </section>
 
 
