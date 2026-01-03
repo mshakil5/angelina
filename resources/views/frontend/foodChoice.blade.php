@@ -138,9 +138,9 @@
 </main>
 
 <div class="container text-end mt-3">
-<button id="download-pdf" class="btn btn-primary">
-    <i class="fas fa-download"></i> Download Menu as PDF
-</button>
+  <button id="download-pdf" class="btn btn-primary">
+      <i class="fas fa-download"></i> Download Menu as PDF
+  </button>
 </div>
 
 

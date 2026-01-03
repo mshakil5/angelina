@@ -36,10 +36,16 @@
 
     
 
+    <a href="{{ asset('Funding policy ADC.pdf') }}" 
+      download 
+      class="btn btn-primary">
+      <i class="fas fa-download"></i> Download Funding Policy
+    </a>
 
 
   </div>
 </main>
+
 
 
 @endsection
