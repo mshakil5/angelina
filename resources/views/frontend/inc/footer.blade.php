@@ -32,56 +32,39 @@
     <div class="row gy-4">
 
       <!-- 1: About us -->
-      <div class="col-12 col-md-6 col-lg-2">
-        <h6 class="footer-heading">About us</h6>
+      <div class="col-12 col-md-6 col-lg-3">
+        <h6 class="footer-heading">Links</h6>
         <div class="footer-links d-flex flex-column gap-2">
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our story</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our values</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our guarantee</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our education programmes</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our impact</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Our safeguarding policy</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#story-hero">Our story</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#values-ethos">Our values</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#parent-resources">Parent Resources</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#meals-and-menus">Meals and Menus</a>
         </div>
       </div>
 
       <!-- 2: Parent hub -->
-      <div class="col-12 col-md-6 col-lg-2">
-        <h6 class="footer-heading">Parent hub</h6>
+      <div class="col-12 col-md-6 col-lg-3">
+        <h6 class="footer-heading">Links</h6>
         <div class="footer-links d-flex flex-column gap-2">
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Parent Resources</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Meals & Menus</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Policies</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Parent App</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Funding & Fees</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#family-app">Family App</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#funding-and-fees">Funding and Fees</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#vacancies">Current Vacancies</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#our-curriculum">Our Curriculum</a>
         </div>
       </div>
 
       <!-- 3: Careers -->
-      <div class="col-12 col-md-6 col-lg-2">
-        <h6 class="footer-heading">Careers</h6>
+      <div class="col-12 col-md-6 col-lg-3">
+        <h6 class="footer-heading">Links</h6>
         <div class="footer-links d-flex flex-column gap-2">
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Current Vacancies</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Working with us</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Training & Development</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Apprenticeships</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Apply now</a>
-        </div>
-      </div>
-
-      <!-- 4: Events -->
-      <div class="col-12 col-md-6 col-lg-2">
-        <h6 class="footer-heading">Events</h6>
-        <div class="footer-links d-flex flex-column gap-2">
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Upcoming Events</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Photo Gallery</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Holiday Clubs</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Parent Workshops</a>
-          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="#">Community</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('aboutUs')}}#safeguarding-policy">Our safeguarding policy</a>
+          <a class="btn btn-sm btn-outline-secondary rounded-pill text-start" href="{{ route('privacy-policy') }}">Privacy policy</a>
+          <a href="{{ route('terms-and-conditions')}}" class="btn btn-sm btn-outline-secondary rounded-pill text-start">Terms & Conditions</a>
         </div>
       </div>
 
       <!-- 5: Contact + Social + Legal -->
-      <div class="col-12 col-md-12 col-lg-4">
+      <div class="col-12 col-md-12 col-lg-3">
         <div class="d-flex flex-column h-100 justify-content-between">
           <!-- Top: Contact CTA -->
           <div class="d-flex align-items-center gap-3 mb-3">
@@ -101,18 +84,15 @@
           <!-- Social icons -->
           <div class="mb-3">
             <div class="socials d-flex gap-2 align-items-center">
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->facebook}}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->instagram}}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->twitter}}" aria-label="X / Twitter"><i class="bi bi-x"></i></a>
-              <a class="social-btn btn btn-outline-secondary rounded-circle" href="{{$company->youtube}}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="https://www.facebook.com/angelinasdaycare.official" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="https://www.instagram.com/angelinasdaycareltd" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a class="social-btn btn btn-outline-secondary rounded-circle" href="https://www.linkedin.com/in/angelina-s-day-care-b1aa4a315/?originalSubdomain=uk" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
           <!-- Legal / site links -->
           <div class="d-flex flex-column gap-1 small text-muted">
-            <a class="text-muted text-decoration-none" href="#">Legal information</a>
             <a class="text-muted text-decoration-none" href="{{ route('privacy-policy') }}">Privacy policy</a>
-            <a class="text-muted text-decoration-none" href="#">Sitemap</a>
             <a href="{{ route('terms-and-conditions')}}" class="text-muted text-decoration-none">Terms & Conditions</a>
           </div>
         </div>
