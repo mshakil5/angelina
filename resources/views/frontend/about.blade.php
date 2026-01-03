@@ -486,20 +486,63 @@
     <div class="row g-4 mt-2">
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="images/parent-resource-1.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Parents and children learning together" style="height: 250px; object-fit: cover;">
+          <img src="{{asset('Parent1.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Parents and children learning together" style="height: 250px; object-fit: cover;">
         </div>
       </div>
       
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="images/parent-resource-2.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="EYFS learning journey documentation" style="height: 250px; object-fit: cover;">
+          <img src="{{asset('Parent2.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="EYFS learning journey documentation" style="height: 250px; object-fit: cover;">
         </div>
       </div>
       
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="images/parent-resource-3.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Educational activities for home" style="height: 250px; object-fit: cover;">
+          <img src="{{asset('Parent3.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Educational activities for home" style="height: 250px; object-fit: cover;">
         </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section id="meals-and-menus" class="meals-section py-5 bg-white" aria-labelledby="meals-heading">
+  <div class="container">
+    
+    <div class="row mb-5 text-center">
+      <div class="col-lg-8 mx-auto">
+        <h2 id="meals-heading" class="display-6 fw-bold text-dark mb-3">Meals and Menus</h2>
+        <div class="accent-line mx-auto mb-4" style="width: 60px; height: 3px; background-color: #28a745;"></div>
+      </div>
+    </div>
+
+    {{-- <div class="row g-4 mb-5">
+      <div class="col-md-6">
+        <img src="images/children-eating.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Children enjoying healthy meals together in a social setting" style="height: 350px; object-fit: cover;">
+      </div>
+      <div class="col-md-6">
+        <img src="images/nursery-meal-plate.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="A nutritious and colorful nursery meal plate" style="height: 350px; object-fit: cover;">
+      </div>
+    </div> --}}
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        
+        <p class="lead text-dark mb-4" style="line-height: 1.8; font-weight: 500;">
+          We provide nutritious, balanced meals that support children’s health, growth, 
+          and development, in line with EYFS welfare requirements. Our menus are 
+          carefully planned to promote healthy eating habits from an early age.
+        </p>
+
+        <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; border-left: 5px solid #28a745; padding-left: 1.5rem;">
+          We cater for allergies, dietary requirements, and cultural or religious needs, 
+          ensuring every child’s needs are met safely and respectfully. Mealtimes are 
+          relaxed, social experiences that encourage independence and positive 
+          attitudes towards food.
+        </p>
+
       </div>
     </div>
 
@@ -520,12 +563,12 @@
     <div class="row g-4 mb-5">
       <div class="col-md-6">
         <div class="app-visual-wrapper">
-          <img src="images/app-interface-1.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Family App dashboard showing daily updates" style="height: 300px; object-fit: cover;">
+          <img src="{{asset('familyapp1.png')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Family App dashboard showing daily updates" style="height: 300px; object-fit: cover;">
         </div>
       </div>
       <div class="col-md-6">
         <div class="app-visual-wrapper">
-          <img src="images/app-interface-2.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Real-time parent communication portal" style="height: 300px; object-fit: cover;">
+          <img src="{{asset('familyapp2.png')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Real-time parent communication portal" style="height: 300px; object-fit: cover;">
         </div>
       </div>
     </div>
@@ -551,47 +594,6 @@
   </div>
 </section>
 
-
-<section id="meals-and-menus" class="meals-section py-5 bg-white" aria-labelledby="meals-heading">
-  <div class="container">
-    
-    <div class="row mb-5 text-center">
-      <div class="col-lg-8 mx-auto">
-        <h2 id="meals-heading" class="display-6 fw-bold text-dark mb-3">Meals and Menus</h2>
-        <div class="accent-line mx-auto mb-4" style="width: 60px; height: 3px; background-color: #28a745;"></div>
-      </div>
-    </div>
-
-    <div class="row g-4 mb-5">
-      <div class="col-md-6">
-        <img src="images/children-eating.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Children enjoying healthy meals together in a social setting" style="height: 350px; object-fit: cover;">
-      </div>
-      <div class="col-md-6">
-        <img src="images/nursery-meal-plate.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="A nutritious and colorful nursery meal plate" style="height: 350px; object-fit: cover;">
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        
-        <p class="lead text-dark mb-4" style="line-height: 1.8; font-weight: 500;">
-          We provide nutritious, balanced meals that support children’s health, growth, 
-          and development, in line with EYFS welfare requirements. Our menus are 
-          carefully planned to promote healthy eating habits from an early age.
-        </p>
-
-        <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; border-left: 5px solid #28a745; padding-left: 1.5rem;">
-          We cater for allergies, dietary requirements, and cultural or religious needs, 
-          ensuring every child’s needs are met safely and respectfully. Mealtimes are 
-          relaxed, social experiences that encourage independence and positive 
-          attitudes towards food.
-        </p>
-
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <section id="funding-and-fees" class="funding-section py-5 bg-light" aria-labelledby="funding-heading">
   <div class="container">
