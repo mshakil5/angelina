@@ -248,7 +248,7 @@
 
 
 
-<section class="process-section">
+<section class="process-section mb-5">
 <div class="text-center mb-4">
 <span class="sub-title">Work Process</span>
 <h2 class="sec-title">How We Manage Our Kids Education</h2>
