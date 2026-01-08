@@ -13,6 +13,7 @@ use App\Models\Master;
 use App\Models\Contact;
 use App\Models\ContactEmail;
 use App\Mail\ContactMail;
+use App\Models\About;
 use App\Models\Banner;
 use App\Models\ClientReview;
 use App\Models\Service;
@@ -494,17 +495,30 @@ class FrontendController extends Controller
         $galleries = Content::with('category')->where('type', 1)->where('status', 1)->latest()->get();
         $banner = Banner::where('page', 'About')->first();
 
-      if($about1){
-          $this->seo(
-              $about1->meta_title,
-              $about1->meta_description,
-              $about1->meta_keywords,
-              $about1->meta_image ? asset('images/meta_image/' . $about1->meta_image) : null
-          );
-      }
+        if($about1){
+            $this->seo(
+                $about1->meta_title,
+                $about1->meta_description,
+                $about1->meta_keywords,
+                $about1->meta_image ? asset('images/meta_image/' . $about1->meta_image) : null
+            );
+        }
+
+        $our_story = About::where('section', 'our_story')->first();
+        $our_values = About::where('section', 'our_values')->first();
+        $safeguarding = About::where('section', 'safeguarding')->first();
+        $parent_resource = About::where('section', 'parent_resource')->first();
+        $meals = About::where('section', 'meals')->first();
+        $family_app = About::where('section', 'family_app')->first();
+        $funding_fees = About::where('section', 'funding_fees')->first();
+        $current_values = About::where('section', 'current_values')->first();
+        $our_curriculamn = About::where('section', 'our_curriculamn')->first();
+        $social_link = About::where('section', 'social_link')->first();
+
+        // dd($social_link);
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
-      return view('frontend.about', compact('about1', 'company','galleries','banner'));
+      return view('frontend.about', compact('about1', 'company','galleries','banner', 'our_story','our_values','safeguarding', 'parent_resource','meals','family_app', 'funding_fees','current_values','our_curriculamn','social_link'));
     }
 
     public function agegroup($slug)

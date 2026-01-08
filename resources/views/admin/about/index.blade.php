@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="content" id="newBtnSection">
+<section class="content d-none" id="newBtnSection">
   <div class="container-fluid">
     <div class="row">
       <div class="col-2">
@@ -133,7 +133,7 @@
   </div>
 </section>
 
-<section class="content" id="contentContainer">
+<section class="content pt-3" id="contentContainer">
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
@@ -214,6 +214,7 @@ $(document).ready(function () {
         $(this).closest('.field-row').remove();
     });
 
+        $("#addThisFormContainer").hide();
     // 5. Form Toggle
     $("#newBtn").click(function(){
         clearform();

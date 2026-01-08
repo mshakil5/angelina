@@ -316,16 +316,15 @@
 @endif
 
 
-
-<!--Our Story -->
+@if ($our_story->status == 1)
+    <!--Our Story -->
 <section id="story-hero" class="hero-section position-relative overflow-hidden py-2 bg-light" aria-labelledby="hero-heading">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-12 mx-auto text-center">
-        <h2 id="ethos-heading" class="display-5 fw-bold text-dark mb-4" style="letter-spacing: -1px;">Our Story</h2>
+        <h2 id="ethos-heading" class="display-5 fw-bold text-dark mb-4" style="letter-spacing: -1px;"> {{ $our_story->title }} </h2>
         <p class="text-muted">
-          Dedicated to giving every child the best possible start in life through warmth, 
-          inclusion, and high-quality early years education.
+            {!! $our_story->short_description !!}
         </p>
       </div>
       {{-- <div class="col-lg-6">
@@ -344,34 +343,29 @@
         <img src="images/practitioner-child-level.jpg" class="img-fluid rounded-circle border border-5 border-white shadow" alt="Practitioner interacting warmly with a child at their level">
       </div> --}}
       <div class="col-lg-12 order-lg-0">
-        <h2 id="intro-heading" class="mb-4">Welcome to Angelina’s Day Care Nursery</h2>
+        <h2 id="intro-heading" class="mb-4"> {{ $our_story->sub_title }}  </h2>
         <div class="content-text">
-          <p>
-            Angelina’s Day Care Nursery is a warm, nurturing, and inclusive early years setting dedicated to 
-            giving every child the best possible start in life. We provide high-quality care and education 
-            for children from birth to five years, guided by the <strong>Early Years Foundation Stage (EYFS)</strong> 
-            statutory framework.
-          </p>
-          <p>
-            Our approach is child-centred and play-based, recognising that children learn best through 
-            positive relationships, exploration, and meaningful experiences. We celebrate each child as 
-            a unique individual and work closely with families to support learning, development, and 
-            wellbeing both at nursery and at home.
-          </p>
+           {!! $our_story->long_description !!}
         </div>
       </div>
     </div>
   </div>
 </section>
+@endif
+
+
 
 <hr class="container my-5 text-muted opacity-25">
 
-<section id="values-ethos" class="values-section py-2 bg-white" aria-labelledby="ethos-heading">
+
+
+@if ($our_values->status == 1)
+  <section id="values-ethos" class="values-section py-2 bg-white" aria-labelledby="ethos-heading">
   <div class="container">
     
     <div class="row mb-5">
       <div class="col-lg-8 mx-auto text-center">
-        <h2 id="ethos-heading" class="display-5 fw-bold text-dark mb-4" style="letter-spacing: -1px;">Our Values & Ethos</h2>
+        <h2 id="ethos-heading" class="display-5 fw-bold text-dark mb-4" style="letter-spacing: -1px;">{{$our_values->title}}</h2>
         <div class="accent-line mx-auto mb-4" style="width: 80px; height: 4px; background-color: #ffca2c; border-radius: 2px;"></div>
       </div>
     </div>
@@ -379,53 +373,48 @@
     <div class="row g-5">
       <div class="col-lg-6">
         
-        <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1.1rem;">
-          At Angelina’s Day Care Nursery, we believe every child is unique and deserves a safe, caring, and stimulating environment in which to learn and grow. Our ethos is rooted in kindness, respect, and high-quality early years practice.
-        </p>
+        {!! $our_values->long_description !!}
 
-        <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1.1rem;">
-          We follow the Early Years Foundation Stage (EYFS) framework to support children’s learning and development through play, positive relationships, and well-planned experiences. Children’s wellbeing, safety, and individual needs are at the heart of everything we do.
-        </p>
       </div>
 
       <div class="col-lg-6">
 
-        <p class="lead fw-normal text-secondary mb-4" style="line-height: 1.8; border-left: 4px solid #ffca2c; padding-left: 1.5rem;">
-          
-          We value strong partnerships with parents and carers and work closely together to support each child’s progress and happiness. Our inclusive approach ensures that all children feel welcomed, supported, and confident, regardless of background or ability.
-        </p>
+          <p class="lead fw-normal text-secondary mb-4" style="line-height: 1.8; border-left: 4px solid #ffca2c; padding-left: 1.5rem;">
+            
+            {!! $our_values->right_top !!}
+            
+          </p>
 
-        <p class="mb-0 fw-medium text-dark" style="line-height: 1.7; font-size: 1.1rem; background-color: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
-          Our dedicated staff are committed to providing high standards of care, helping children develop confidence, independence, and a love of learning as they prepare for the next stage of their journey.
-        </p>
+          <p class="mb-0 fw-medium text-dark p-3" style="line-height: 1.7; font-size: 1.1rem; background-color: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+            {!! $our_values->right_bottom !!}
+          </p>
       </div>
     </div>
 
   </div>
-</section>
+</section>  
+@endif
 
+
+
+
+@if ($safeguarding->status == 1)
 <section id="safeguarding-policy" class="safeguarding-section py-5 bg-white" aria-labelledby="safeguarding-heading">
   <div class="container">
     <div class="row g-5 align-items-center">
       
       <div class="col-lg-7">
-        <h2 id="safeguarding-heading" class="display-6 fw-bold text-dark mb-4">Safeguarding Policy</h2>
+        <h2 id="safeguarding-heading" class="display-6 fw-bold text-dark mb-4"> 
+          {{ $safeguarding->title }} 
+        </h2>
         
         <p class="lead fw-bold text-primary mb-4" style="line-height: 1.6;">
-          At Angelina’s Day Care Nursery, safeguarding and promoting the welfare of children is our highest priority.
+           {{ $safeguarding->sub_title }} 
         </p>
 
-        <p class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-          We follow robust safeguarding procedures in line with <strong>DfE guidance</strong>, 
-          <strong>Ofsted requirements</strong>, and the <strong>EYFS statutory framework</strong> 
-          to ensure every child is safe, protected, and supported.
-        </p>
-
-        <p class="mb-0 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-          All staff are trained in safeguarding and understand their responsibility to act in the 
-          best interests of the child. Our policies clearly outline how concerns are identified, 
-          recorded, and reported, and how we work in partnership with parents and external agencies.
-        </p>
+        <div class="long-description">
+          {!! $safeguarding->long_description !!}
+        </div>
       </div>
 
       <div class="col-lg-5">
@@ -433,17 +422,20 @@
           <h3 class="h5 fw-bold mb-4 text-dark text-center text-lg-start">Important Resources</h3>
           
           <div class="d-grid gap-3">
-            <a href="path-to-policy.pdf" class="btn btn-danger py-3 fw-bold d-flex align-items-center justify-content-center" target="_blank">
-              View Safeguarding & Child Protection Policy (PDF)
-            </a>
-            
-            <a href="#dsl-contact" class="btn btn-outline-dark py-3 fw-bold">
-              Our Designated Safeguarding Lead
-            </a>
-            
-            <a href="#safety-measures" class="btn btn-outline-dark py-3 fw-bold">
-              How We Keep Children Safe
-            </a>
+            @php
+              // Decode the JSON string into an array
+              $buttons = json_decode($safeguarding->button, true);
+            @endphp
+
+            @if(!empty($buttons))
+              @foreach($buttons as $index => $btn)
+                <a href="{{ $btn['link'] }}" 
+                   class="btn {{ $index == 0 ? 'btn-danger' : 'btn-outline-dark' }} py-3 fw-bold d-flex align-items-center justify-content-center" 
+                   target="_blank">
+                   {{ $btn['name'] }}
+                </a>
+              @endforeach
+            @endif
           </div>
           
           <p class="mt-4 small text-center text-muted">
@@ -454,173 +446,205 @@
 
     </div>
   </div>
-</section>
+</section>   
+@endif
 
+
+
+
+@if ($parent_resource->status == 1)
 <section id="parent-resources" class="resources-section py-5 bg-light" aria-labelledby="resources-heading">
   <div class="container">
     
     <div class="row mb-5">
       <div class="col-lg-8 mx-auto text-center">
-        <h2 id="resources-heading" class="display-6 fw-bold text-dark mb-3">Parent Resources</h2>
+        <h2 id="resources-heading" class="display-6 fw-bold text-dark mb-3">
+          {{ $parent_resource->title }}
+        </h2>
         <div class="accent-line mx-auto mb-4" style="width: 70px; height: 4px; background-color: #f39c12; border-radius: 2px;"></div>
+        
+        @if($parent_resource->sub_title)
+          <p class="text-muted">{{ $parent_resource->sub_title }}</p>
+        @endif
       </div>
     </div>
 
     <div class="row justify-content-center mb-5">
       <div class="col-lg-10">
-        <p class="lead fw-bold text-dark text-center mb-4" style="line-height: 1.6;">
-          We believe strong partnerships with parents are essential to children’s learning and development.
-        </p>
-        
-        <p class="text-muted text-center mb-4" style="line-height: 1.8; font-size: 1.1rem;">
-          Our parent resources provide clear, accessible information to help families understand the 
-          <strong>Early Years Foundation Stage (EYFS)</strong> and how we support their child’s progress. 
-          We are committed to transparency and open communication in every step of your child's journey.
-        </p>
-
-        <p class="text-muted text-center mb-0" style="line-height: 1.8; font-size: 1.1rem;">
-          Parents are encouraged to engage with their child’s learning journey and use our resources 
-          to extend learning at home, support transitions, and promote wellbeing. Together, we can 
-          create a consistent and supportive environment for your child to thrive.
-        </p>
+        <div class="resource-long-description">
+          {!! $parent_resource->long_description !!}
+        </div>
       </div>
     </div>
 
+    @php
+        $buttons = json_decode($parent_resource->button, true);
+    @endphp
+
+
     <div class="row g-4 mt-2">
+      @if($parent_resource->image1)
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="{{asset('Parent1.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Parents and children learning together" style="height: 250px; object-fit: cover;">
+          <img src="{{ asset('images/about/' . $parent_resource->image1) }}" 
+               class="img-fluid rounded-4 shadow-sm w-100" 
+               alt="Parent Resource Image 1" 
+               style="height: 250px; object-fit: cover;">
         </div>
       </div>
+      @endif
       
+      @if($parent_resource->image2)
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="{{asset('Parent2.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="EYFS learning journey documentation" style="height: 250px; object-fit: cover;">
+          <img src="{{ asset('images/about/' . $parent_resource->image2) }}" 
+               class="img-fluid rounded-4 shadow-sm w-100" 
+               alt="Parent Resource Image 2" 
+               style="height: 250px; object-fit: cover;">
         </div>
       </div>
+      @endif
       
+      @if($parent_resource->image3)
       <div class="col-md-4">
         <div class="resource-image-wrapper">
-          <img src="{{asset('Parent3.jpg')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Educational activities for home" style="height: 250px; object-fit: cover;">
+          <img src="{{ asset('images/about/' . $parent_resource->image3) }}" 
+               class="img-fluid rounded-4 shadow-sm w-100" 
+               alt="Parent Resource Image 3" 
+               style="height: 250px; object-fit: cover;">
         </div>
       </div>
+      @endif
     </div>
 
   </div>
-</section>
+</section> 
+@endif
 
 
 
+
+@if ($meals->status == 1)
 <section id="meals-and-menus" class="meals-section py-5 bg-white" aria-labelledby="meals-heading">
   <div class="container">
     
     <div class="row mb-5 text-center">
       <div class="col-lg-8 mx-auto">
-        <h2 id="meals-heading" class="display-6 fw-bold text-dark mb-3">Meals and Menus</h2>
+        <h2 id="meals-heading" class="display-6 fw-bold text-dark mb-3">
+          {{ $meals->title }}
+        </h2>
         <div class="accent-line mx-auto mb-4" style="width: 60px; height: 3px; background-color: #28a745;"></div>
+        
+        @if($meals->sub_title)
+           <p class="text-muted">{{ $meals->sub_title }}</p>
+        @endif
       </div>
     </div>
-
-    {{-- <div class="row g-4 mb-5">
-      <div class="col-md-6">
-        <img src="images/children-eating.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="Children enjoying healthy meals together in a social setting" style="height: 350px; object-fit: cover;">
-      </div>
-      <div class="col-md-6">
-        <img src="images/nursery-meal-plate.jpg" class="img-fluid rounded-4 shadow-sm w-100" alt="A nutritious and colorful nursery meal plate" style="height: 350px; object-fit: cover;">
-      </div>
-    </div> --}}
 
     <div class="row justify-content-center">
       <div class="col-lg-10">
         
-        <p class="lead text-dark mb-4" style="line-height: 1.8; font-weight: 500;">
-          We provide nutritious, balanced meals that support children’s health, growth, 
-          and development, in line with EYFS welfare requirements. Our menus are 
-          carefully planned to promote healthy eating habits from an early age.
-        </p>
+        @if($meals->short_description)
+        <div class="lead text-dark mb-4" style="line-height: 1.8; font-weight: 500;">
+          {!! $meals->short_description !!}
+        </div>
+        @endif
 
-        <p class="text-muted" style="line-height: 1.8; font-size: 1.15rem; border-left: 5px solid #28a745; padding-left: 1.5rem;">
-          We cater for allergies, dietary requirements, and cultural or religious needs, 
-          ensuring every child’s needs are met safely and respectfully. Mealtimes are 
-          relaxed, social experiences that encourage independence and positive 
-          attitudes towards food.
-        </p>
+        @if($meals->long_description)
+        <div class="text-muted" style="line-height: 1.8; font-size: 1.15rem; border-left: 5px solid #28a745; padding-left: 1.5rem;">
+          {!! $meals->long_description !!}
+        </div>
+        @endif
+
 
       </div>
     </div>
 
   </div>
-</section>
+</section>   
+@endif
 
 
+
+
+
+@if ($family_app->status == 1)
 <section id="family-app" class="app-section py-5 bg-white" aria-labelledby="app-heading">
   <div class="container">
     
     <div class="row mb-5 text-center">
       <div class="col-12">
-        <h2 id="app-heading" class="display-6 fw-bold text-dark">Family App</h2>
+        <h2 id="app-heading" class="display-6 fw-bold text-dark">
+          {{ $family_app->title }}
+        </h2>
         <div class="accent-line mx-auto mt-3" style="width: 60px; height: 4px; background-color: #17a2b8; border-radius: 2px;"></div>
+        
+        @if($family_app->sub_title)
+          <p class="text-muted mt-3">{{ $family_app->sub_title }}</p>
+        @endif
       </div>
     </div>
 
     <div class="row g-4 mb-5">
+      @if($family_app->image1)
       <div class="col-md-6">
         <div class="app-visual-wrapper">
-          <img src="{{asset('familyapp1.png')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Family App dashboard showing daily updates" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('images/about/' . $family_app->image1) }}" 
+               class="img-fluid rounded-4 shadow-sm w-100" 
+               alt="Family App Interface 1" 
+               style="height: 350px; object-fit: cover;">
         </div>
       </div>
+      @endif
+
+      @if($family_app->image2)
       <div class="col-md-6">
         <div class="app-visual-wrapper">
-          <img src="{{asset('familyapp2.png')}}" class="img-fluid rounded-4 shadow-sm w-100" alt="Real-time parent communication portal" style="height: 300px; object-fit: cover;">
+          <img src="{{ asset('images/about/' . $family_app->image2) }}" 
+               class="img-fluid rounded-4 shadow-sm w-100" 
+               alt="Family App Interface 2" 
+               style="height: 350px; object-fit: cover;">
         </div>
       </div>
+      @endif
     </div>
 
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="p-4 rounded-4" style="background-color: #f0fbfc; border-left: 6px solid #17a2b8;">
-          <p class="lead fw-bold text-dark mb-3" style="line-height: 1.6;">
-            Our secure Family App helps parents stay connected with their child’s nursery experience. 
-            Through regular updates, observations, and messages, families remain informed and involved 
-            in their child’s learning and care.
-          </p>
-          
-          <p class="text-muted mb-0" style="line-height: 1.8; font-size: 1.1rem;">
-            The app supports continuity between home and nursery and strengthens communication while 
-            ensuring all information is shared securely and confidentially. It’s our way of making 
-            sure you never miss a milestone in your child's development.
-          </p>
+          <div class="app-description-text">
+            {!! $family_app->long_description !!}
+          </div>
         </div>
       </div>
     </div>
 
+
   </div>
-</section>
+</section>   
+@endif
 
 
-<section id="funding-and-fees" class="funding-section py-5 bg-light" aria-labelledby="funding-heading">
+
+
+
+@if ($funding_fees->status == 1)
+  <section id="funding-and-fees" class="funding-section py-5 bg-light" aria-labelledby="funding-heading">
   <div class="container">
     
     <div class="row mb-5">
       <div class="col-lg-8">
-        <h2 id="funding-heading" class="display-6 fw-bold text-dark mb-3">Funding and Fees</h2>
+        <h2 id="funding-heading" class="display-6 fw-bold text-dark mb-3">{{$funding_fees->title}}</h2>
         <div class="accent-line mb-4" style="width: 70px; height: 4px; background-color: #0d6efd; border-radius: 2px;"></div>
       </div>
     </div>
 
     <div class="row g-5">
       <div class="col-lg-7">
-        <p class="lead fw-bold text-dark mb-4" style="line-height: 1.6;">
-          Angelina’s Day Care Nursery offers government-funded early education places in line with DfE guidance and local authority requirements.
-        </p>
         
-        <p class="text-muted mb-4" style="line-height: 1.8; font-size: 1.1rem;">
-          Eligible families may access <strong>15-hour or 30-hour funding</strong> for two-, three-, and four-year-olds. We are committed to making high-quality childcare accessible and support families in navigating the available options.
-        </p>
+        {!! $funding_fees->long_description !!}
 
-        <p class="text-muted mb-0" style="line-height: 1.8; font-size: 1.1rem;">
-          Our fees are transparent and clearly explained. We work closely with families to help them understand their funding entitlement, booking options, and any additional charges, ensuring there are no surprises.
-        </p>
+
       </div>
 
       <div class="col-lg-5">
@@ -661,26 +685,29 @@
     </div>
 
   </div>
-</section>
+</section>  
+@endif
 
-<section id="vacancies" class="vacancies-section py-5 bg-white" aria-labelledby="vacancies-heading">
+
+
+
+
+
+@if ($current_values->status == 1)
+   <section id="vacancies" class="vacancies-section py-5 bg-white" aria-labelledby="vacancies-heading">
   <div class="container">
     <div class="row g-5 align-items-center">
       
       <div class="col-lg-7">
-        <h2 id="vacancies-heading" class="display-6 fw-bold text-dark mb-4">Current Vacancies</h2>
+        <h2 id="vacancies-heading" class="display-6 fw-bold text-dark mb-4">{{ $current_values->title }}</h2>
         
         <p class="lead text-primary fw-medium mb-4" style="line-height: 1.7;">
-          We are always interested in hearing from passionate and dedicated individuals who share our commitment to high-quality early years care and education.
+          {{$current_values->sub_title}}
         </p>
 
-        <p class="mb-4 text-muted" style="line-height: 1.8;">
-          All recruitment follows <strong>safer recruitment procedures</strong> in line with <strong>DfE and EYFS requirements</strong>. We are committed to safeguarding and promoting the welfare of children and expect all staff to share this commitment.
-        </p>
+           {!! $current_values->long_description !!}
 
-        <p class="mb-0 text-muted" style="line-height: 1.8;">
-          We value professionalism, ongoing training, and reflective practice, offering opportunities for development within a supportive team environment. Whether you are an experienced practitioner or looking to start your career in childcare, we would love to hear from you.
-        </p>
+
       </div>
 
       <div class="col-lg-5">
@@ -689,98 +716,106 @@
           <p class="small text-muted mb-4">Ready to make a difference in a child's life? Explore our current openings or send us your CV for future opportunities.</p>
           
           <div class="d-grid gap-3">
-            <a href="#vacancies-list" class="btn btn-primary py-3 fw-bold">View Current Openings</a>
+            <a href="{{route('job')}}" class="btn btn-primary py-3 fw-bold" target="_blank">View Current Openings</a>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-</section>
+</section> 
+@endif
 
+
+
+
+@if ($our_curriculamn->status == 1)
+ 
 <section id="our-curriculum" class="curriculum-section py-5 bg-white" aria-labelledby="curriculum-heading">
   <div class="container">
     
     <div class="row mb-5">
       <div class="col-lg-8">
-        <h2 id="curriculum-heading" class="display-6 fw-bold text-dark mb-3">Our Curriculum</h2>
+        <h2 id="curriculum-heading" class="display-6 fw-bold text-dark mb-3"> {{ $our_curriculamn->title}} </h2>
         <div class="accent-line mb-4" style="width: 70px; height: 4px; background-color: #6f42c1; border-radius: 2px;"></div>
       </div>
     </div>
 
     <div class="row g-5">
       <div class="col-lg-7">
-        <p class="lead fw-bold text-dark mb-4" style="line-height: 1.6;">
-          At Angelina’s Day Care (ADC), our curriculum provides a secure, inclusive, and nurturing foundation for early learning, enabling children to develop as confident, curious, and capable learners.
-        </p>
         
-        <p class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-          We recognise that every child is unique, arriving with different experiences, languages, cultures, and abilities. Our curriculum prioritises <strong>communication and language</strong>, <strong>personal, social and emotional development</strong>, and <strong>physical development</strong> as the foundations for learning, wellbeing, and future success.
-        </p>
+        {!! $our_curriculamn->long_description !!}
 
-        <p class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-          Learning at ADC is play-based, purposeful, and responsive, shaped by children’s interests, developmental needs, and real-life experiences. Children learn through a balance of child-initiated play, adult-guided activities, and everyday routines, supported by warm relationships and consistent structures.
-        </p>
-
-        <p class="mb-0 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
-          Seasonal learning, cultural and religious celebrations, and community experiences are woven into the curriculum to promote curiosity, respect, and a strong sense of belonging, while supporting progression across all areas of learning.
-        </p>
       </div>
 
       <div class="col-lg-5">
         <div class="p-4 rounded-4" style="background-color: #f8f0ff; border-left: 6px solid #6f42c1;">
-          <h3 class="h5 fw-bold mb-3 text-dark">Inclusion & Support</h3>
-          <p class="small text-muted mb-4" style="line-height: 1.7;">
-            Inclusion is central to our approach. Children with <strong>English as an Additional Language (EAL)</strong> and <strong>Special Educational Needs and Disabilities (SEND)</strong> are supported through adaptive teaching and inclusive environments.
-          </p>
-          <p class="small text-muted mb-0" style="line-height: 1.7;">
-            Ongoing observation ensures children make progress from their starting points, develop confidence and independence, and leave ADC well prepared for the next stage of their learning journey.
-          </p>
+          
+          {!! $our_curriculamn->right_top !!}
+
         </div>
         
         <div class="mt-4 px-2">
-          <ul class="list-unstyled">
-            <li class="mb-2">✅ Communication & Language</li>
-            <li class="mb-2">✅ Personal & Social Development</li>
-            <li class="mb-2">✅ Physical Development</li>
-          </ul>
+
+          {!! $our_curriculamn->right_bottom !!}
+
         </div>
       </div>
     </div>
   </div>
-</section>
+</section>   
+@endif
 
+
+
+@php
+    // Decode the social links from the button attribute
+    $social_links = json_decode($social_link->button, true);
+@endphp
+
+@if ($social_link->status == 1)
 <section id="social-connect" class="py-5 bg-dark text-white">
   <div class="container">
     <div class="row align-items-center">
       
       <div class="col-md-6 mb-4 mb-md-0 text-center text-md-start">
-        <h3 class="fw-bold mb-2">Connect With Us</h3>
-        <p class="text-white-50 mb-0">Stay updated with daily life at Angelina’s Day Care</p>
+        <h3 class="fw-bold mb-2">{{ $social_link->title }}</h3>
+        @if($social_link->sub_title)
+            <p class="text-white-50 mb-0">{{ $social_link->sub_title }}</p>
+        @endif
       </div>
 
       <div class="col-md-6">
-        <div class="d-flex justify-content-center justify-content-md-end gap-3">
+        <div class="d-flex justify-content-center justify-content-md-end gap-3 flex-wrap">
           
-          <a href="https://www.facebook.com/angelinasdaycare.official" class="btn btn-outline-light px-3 py-2" target="_blank" aria-label="Facebook">
-            <span class="fw-bold">Facebook</span>
-          </a>
+          @if(!empty($social_links))
+            @foreach($social_links as $link)
+                <a href="{{ $link['link'] }}" 
+                   class="btn btn-outline-light px-3 py-2 d-flex align-items-center gap-2" 
+                   target="_blank" 
+                   aria-label="{{ $link['name'] }}">
+                   
+                   {{-- Optional: Add icons based on the name --}}
+                   @if(Str::contains(strtolower($link['name']), 'facebook'))
+                       <i class="fab fa-facebook-f"></i>
+                   @elseif(Str::contains(strtolower($link['name']), 'instagram'))
+                       <i class="fab fa-instagram"></i>
+                   @elseif(Str::contains(strtolower($link['name']), 'linkedin'))
+                       <i class="fab fa-linkedin-in"></i>
+                   @endif
 
-          <a href="https://www.instagram.com/angelinasdaycareltd/" class="btn btn-outline-light px-3 py-2" target="_blank" aria-label="Instagram">
-            <span class="fw-bold">Instagram</span>
-          </a>
-
-          <a href="https://www.linkedin.com/in/angelina-s-day-care-b1aa4a315/?originalSubdomain=uk" class="btn btn-outline-light px-3 py-2" target="_blank" aria-label="LinkedIn">
-            <span class="fw-bold">LinkedIn</span>
-          </a>
+                   <span class="fw-bold">{{ $link['name'] }}</span>
+                </a>
+            @endforeach
+          @endif
 
         </div>
-        
       </div>
 
     </div>
   </div>
 </section>
+@endif
 
 @endsection
 
