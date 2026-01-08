@@ -35,7 +35,7 @@
 
 
 
-<section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center" style="background-image: url({{ asset('resources/frontend/images/page-banner2.jpg') }});">
+<section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center d-none" style="background-image: url({{ asset('resources/frontend/images/page-banner2.jpg') }});">
   <div class="container d-none">
     <h1 class="breadcrumb-title mb-3">
         Privacy Policy
@@ -54,7 +54,7 @@
 <main class="content-wrap">
   <div class="container">
 
-    {!! $companyPrivacy->long_description !!}
+    {!! $companyPrivacy->privacy_policy !!}
 
   </div>
 </main>

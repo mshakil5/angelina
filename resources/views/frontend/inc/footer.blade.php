@@ -91,7 +91,7 @@
           </div>
 
           <!-- Legal / site links -->
-          <div class="d-flex flex-column gap-1 small text-muted">
+          <div class="d-flex flex-column gap-1 small text-muted d-none">
             <a class="text-muted text-decoration-none" href="{{ route('privacy-policy') }}">Privacy policy</a>
             <a href="{{ route('terms-and-conditions')}}" class="text-muted text-decoration-none">Terms & Conditions</a>
           </div>

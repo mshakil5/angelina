@@ -149,10 +149,45 @@
 </section>
 @endif
 
+@if ($our_curriculamn->status == 1)
+ 
+<section id="our-curriculum" class="curriculum-section py-5 bg-white" aria-labelledby="curriculum-heading">
+  <div class="container">
+    
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <h2 id="curriculum-heading" class="display-6 fw-bold text-dark mb-3"> {{ $our_curriculamn->title}} </h2>
+        <div class="accent-line mb-4" style="width: 70px; height: 4px; background-color: #6f42c1; border-radius: 2px;"></div>
+      </div>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-lg-7">
+        
+        {!! $our_curriculamn->long_description !!}
+
+      </div>
+
+      <div class="col-lg-5">
+        <div class="p-4 rounded-4" style="background-color: #f8f0ff; border-left: 6px solid #6f42c1;">
+          
+          {!! $our_curriculamn->right_top !!}
+
+        </div>
+        
+        <div class="mt-4 px-2">
+
+          {!! $our_curriculamn->right_bottom !!}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>   
+@endif
 
 
-
-<section class="about-section" aria-labelledby="about-heading">
+<section class="about-section d-none" aria-labelledby="about-heading">
   <div class="container">
     <div class="row g-4 align-items-center">
       <!-- Right: Content -->
@@ -163,7 +198,7 @@
 </section>
 
 
-<section class="about-section" aria-labelledby="about-heading">
+<section class="about-section d-none" aria-labelledby="about-heading">
   <div class="container">
     <div class="row g-4">
 
@@ -194,7 +229,7 @@
 
 
 
-<section class="about-section" aria-labelledby="about-heading">
+<section class="about-section  d-none" aria-labelledby="about-heading">
   <div class="container">
     <div class="row g-4 align-items-center">
       <!-- Right: Content -->
@@ -729,42 +764,7 @@
 
 
 
-@if ($our_curriculamn->status == 1)
- 
-<section id="our-curriculum" class="curriculum-section py-5 bg-white" aria-labelledby="curriculum-heading">
-  <div class="container">
-    
-    <div class="row mb-5">
-      <div class="col-lg-8">
-        <h2 id="curriculum-heading" class="display-6 fw-bold text-dark mb-3"> {{ $our_curriculamn->title}} </h2>
-        <div class="accent-line mb-4" style="width: 70px; height: 4px; background-color: #6f42c1; border-radius: 2px;"></div>
-      </div>
-    </div>
 
-    <div class="row g-5">
-      <div class="col-lg-7">
-        
-        {!! $our_curriculamn->long_description !!}
-
-      </div>
-
-      <div class="col-lg-5">
-        <div class="p-4 rounded-4" style="background-color: #f8f0ff; border-left: 6px solid #6f42c1;">
-          
-          {!! $our_curriculamn->right_top !!}
-
-        </div>
-        
-        <div class="mt-4 px-2">
-
-          {!! $our_curriculamn->right_bottom !!}
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>   
-@endif
 
 
 

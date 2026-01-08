@@ -329,6 +329,7 @@ class FrontendController extends Controller
         $companyDetails = Cache::rememberForever('company_terms', function () {
             return CompanyDetails::select('terms_and_conditions')->first();
         });
+        
         return view('frontend.terms', compact('companyDetails'));
     }
 

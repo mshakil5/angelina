@@ -43,26 +43,26 @@
 
                 <div class="col-12"><hr class="my-3"></div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="shortDescWrapper">
                   <div class="form-group">
                     <label><i class="fas fa-align-left mr-1"></i> Short Description</label>
                     <textarea class="form-control summernote" id="short_description" name="short_description"></textarea>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="longDescWrapper">
                   <div class="form-group">
                     <label><i class="fas fa-align-justify mr-1"></i> Long Description</label>
                     <textarea class="form-control summernote" id="long_description" name="long_description"></textarea>
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="rightTopWrapper">
                   <div class="form-group">
                     <label class="badge badge-info mb-2">Right Column (Top)</label>
                     <textarea class="form-control summernote" id="right_top" name="right_top"></textarea>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="rightBottomWrapper">
                   <div class="form-group">
                     <label class="badge badge-info mb-2">Right Column (Bottom)</label>
                     <textarea class="form-control summernote" id="right_bottom" name="right_bottom"></textarea>
@@ -71,7 +71,7 @@
 
                 <div class="col-12"><hr class="my-3"></div>
 
-                <div class="col-md-12 bg-light p-3 rounded mb-4">
+                <div class="col-md-12 bg-light p-3 rounded mb-4" id="dynamicFieldsWrapper">
                   <label class="text-secondary font-weight-bold mb-3">Resource Links & Call-to-Actions</label>
                   <div id="dynamicFields">
                     <div class="row align-items-end field-row mb-3">
@@ -92,7 +92,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12" id="imageSectionWrapper">
                    <label class="text-secondary font-weight-bold mb-3">Media Assets (Images)</label>
                    <div class="row">
                       <div class="col-md-4">
@@ -115,6 +115,7 @@
                       </div>
                    </div>
                 </div>
+
               </div>
             </form>
           </div>
@@ -261,9 +262,11 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function(res){
-                success(res.message);
-                clearform();
-                table.ajax.reload(null, false);
+              success(res.message);
+              clearform();
+              setTimeout(function(){
+                location.reload();
+              }, 3000);
             },
             error: function(xhr){
                 let errorMsg = xhr.responseJSON?.errors ? Object.values(xhr.responseJSON.errors)[0][0] : 'Error occurred';
@@ -273,48 +276,148 @@ $(document).ready(function () {
     });
 
     // 7. Edit Logic
-    $("#contentContainer").on('click','.edit', function(){
+    $("#contentContainer").on('click', '.edit', function() {
         let id = $(this).data('id');
-        $.get(url+'/'+id+'/edit', function(d){
+        $.get(url + '/' + id + '/edit', function(d) {
             $("#codeid").val(d.id);
             $("#title").val(d.title);
             $("#sub_title").val(d.sub_title);
-            
-            // Set Summernote
-            $('#short_description').summernote('code', d.short_description);
-            $('#long_description').summernote('code', d.long_description);
-            $('#right_top').summernote('code', d.right_top);
-            $('#right_bottom').summernote('code', d.right_bottom);
 
-            // Handle Dynamic Fields
-            $('#dynamicFields').html(''); // Clear existing
-            if(d.links && d.links.length > 0) {
-                d.links.forEach((val, index) => {
-                    // Logic to populate d.link[] and d.name[] based on your DB structure
-                });
+            // Short Description
+            if (d.short_description && d.short_description.trim() !== "") {
+                $("#shortDescWrapper").show();
+                $('#short_description').summernote('code', d.short_description);
+            } else {
+                $("#shortDescWrapper").hide();
             }
 
-            // Handle Images
-            pond1.removeFiles(); 
-            if(d.image1) pond1.addFile("{{ asset('images/about') }}/"+d.image1);
-            
+            // Long Description
+            if (d.long_description && d.long_description.trim() !== "") {
+                $("#longDescWrapper").show();
+                $('#long_description').summernote('code', d.long_description);
+            } else {
+                $("#longDescWrapper").hide();
+            }
+
+            // Right Top
+            if (d.right_top && d.right_top.trim() !== "") {
+                $("#rightTopWrapper").show(); // Assuming you added this ID to the HTML
+                $('#right_top').summernote('code', d.right_top);
+            } else {
+                $("#rightTopWrapper").hide();
+            }
+
+            // Right Bottom
+            if (d.right_bottom && d.right_bottom.trim() !== "") {
+                $("#rightBottomWrapper").show(); // Assuming you added this ID to the HTML
+                $('#right_bottom').summernote('code', d.right_bottom);
+            } else {
+                $("#rightBottomWrapper").hide();
+            }
+
+            $('#dynamicFields').empty(); 
+            let buttons = [];
+            try {
+                buttons = d.button ? JSON.parse(d.button) : [];
+            } catch (e) {
+                buttons = [];
+            }
+
+            if (Array.isArray(buttons) && buttons.length > 0) {
+                $("#dynamicFieldsWrapper").show(); // Show section if data exists
+                buttons.forEach((btn, index) => {
+                    let row = `
+                    <div class="row align-items-end field-row mb-3">
+                        <div class="col-md-5">
+                            <label class="small text-muted">Link / URL</label>
+                            <input type="text" name="link[]" value="${btn.link}" class="form-control">
+                        </div>
+                        <div class="col-md-5">
+                            <label class="small text-muted">Button Label / Name</label>
+                            <input type="text" name="name[]" value="${btn.name}" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            ${index === 0 
+                                ? '<button type="button" class="btn btn-success btn-block addRow"><i class="fas fa-plus"></i></button>' 
+                                : '<button type="button" class="btn btn-danger btn-block removeRow"><i class="fas fa-minus"></i></button>'}
+                        </div>
+                    </div>`;
+                    $('#dynamicFields').append(row);
+                });
+            } else {
+                $("#dynamicFieldsWrapper").hide(); // Hide section if no data
+            }
+
+            // --- Images Condition ---
+            pond1.removeFiles();
+            pond2.removeFiles();
+            pond3.removeFiles();
+
+            // Check if at least one image exists
+            if (d.image1 || d.image2 || d.image3) {
+                $("#imageSectionWrapper").show();
+                if (d.image1) pond1.addFile("{{ asset('images/about') }}/" + d.image1);
+                if (d.image2) pond2.addFile("{{ asset('images/about') }}/" + d.image2);
+                if (d.image3) pond3.addFile("{{ asset('images/about') }}/" + d.image3);
+            } else {
+                $("#imageSectionWrapper").hide();
+            }
+
+            // UI Changes
             $("#addBtn").val('Update').text('Update');
-            $("#cardTitle").text('Update Content');
-            $("#addThisFormContainer").show();
-            $("#newBtn").hide();
-            window.scrollTo(0,0);
+            $("#cardTitle").html('<i class="fas fa-edit mr-2"></i>Update Content');
+            $("#addThisFormContainer").fadeIn();
+            $("#newBtnSection").addClass('d-none'); // Hide the "Add New" button row
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 
-    function clearform(){
-        $('#createThisForm')[0].reset();
-        $('.summernote').summernote('reset');
-        pond1.removeFiles();
-        pond2.removeFiles();
-        pond3.removeFiles();
-        $("#addBtn").val('Create').text('Create');
-        $("#cardTitle").text('Add new Content');
+    function addDefaultRow() {
+        let row = `
+        <div class="row align-items-end field-row mb-3">
+            <div class="col-md-5">
+                <label class="small text-muted">Link / URL</label>
+                <input type="text" name="link[]" class="form-control" placeholder="https://...">
+            </div>
+            <div class="col-md-5">
+                <label class="small text-muted">Button Label / Name</label>
+                <input type="text" name="name[]" class="form-control" placeholder="Name">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success btn-block addRow"><i class="fas fa-plus"></i> Add</button>
+            </div>
+        </div>`;
+        $('#dynamicFields').append(row);
     }
+
+    $(document).on('change','.toggle-status', function(){
+        let id = $(this).data('id');
+        let status = $(this).prop('checked') ? 1 : 0;
+        $.post(url+'/status', {id:id,status:status}, function(res){ success(res.message); reloadTable(); });
+    });
+
+    function clearform(){
+      $('#createThisForm')[0].reset();
+      $('.summernote').summernote('reset');
+      
+      // Reset Visibility for Create Mode
+      $("#shortDescWrapper, #longDescWrapper, #rightTopWrapper, #rightBottomWrapper").show();
+      $("#dynamicFieldsWrapper, #imageSectionWrapper").show();
+      
+      // Reset Dynamic Fields to one default row
+      $('#dynamicFields').empty();
+      addDefaultRow();
+      
+      // Clear FilePond
+      pond1.removeFiles();
+      pond2.removeFiles();
+      pond3.removeFiles();
+      
+      $("#addBtn").val('Create').text('Create');
+      $("#cardTitle").text('Add New Content');
+  }
+
+
 });
 </script>
 @endsection
