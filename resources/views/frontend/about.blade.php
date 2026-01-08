@@ -378,17 +378,20 @@
 
     <div class="row g-5">
       <div class="col-lg-6">
-        <p class="lead fw-normal text-secondary mb-4" style="line-height: 1.8; border-left: 4px solid #ffca2c; padding-left: 1.5rem;">
+        
+        <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1.1rem;">
           At Angelina’s Day Care Nursery, we believe every child is unique and deserves a safe, caring, and stimulating environment in which to learn and grow. Our ethos is rooted in kindness, respect, and high-quality early years practice.
         </p>
-        
+
         <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1.1rem;">
           We follow the Early Years Foundation Stage (EYFS) framework to support children’s learning and development through play, positive relationships, and well-planned experiences. Children’s wellbeing, safety, and individual needs are at the heart of everything we do.
         </p>
       </div>
 
       <div class="col-lg-6">
-        <p class="mb-4 text-muted" style="line-height: 1.7; font-size: 1.1rem;">
+
+        <p class="lead fw-normal text-secondary mb-4" style="line-height: 1.8; border-left: 4px solid #ffca2c; padding-left: 1.5rem;">
+          
           We value strong partnerships with parents and carers and work closely together to support each child’s progress and happiness. Our inclusive approach ensures that all children feel welcomed, supported, and confident, regardless of background or ability.
         </p>
 

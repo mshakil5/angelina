@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
@@ -223,4 +224,14 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('/references', [ReferenceController::class, 'index'])->name('reference.index');
     Route::get('/references/{id}', [ReferenceController::class, 'show'])->name('reference.show');
+
+    
+    Route::get('about', [AboutController::class,'index'])->name('about.index');
+    Route::post('about', [AboutController::class,'store']);
+    Route::get('about/{id}/edit', [AboutController::class,'edit']);
+    Route::post('about/update', [AboutController::class,'update']);
+    Route::get('about/{id}/delete', [AboutController::class,'delete']);
+    Route::post('about/status', [AboutController::class,'toggleStatus']);
+
+
 });
