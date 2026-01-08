@@ -154,7 +154,7 @@
                     <p>SEO</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item d-none">
                 <a href="{{ route('admin.aboutUs') }}" class="nav-link {{ Route::is('admin.aboutUs') ? 'active' : '' }}">
                     <i class="fas fa-info-circle nav-icon"></i>
                     <p>About Us</p>

@@ -515,8 +515,6 @@ class FrontendController extends Controller
         $current_values = About::where('section', 'current_values')->first();
         $our_curriculamn = About::where('section', 'our_curriculamn')->first();
         $social_link = About::where('section', 'social_link')->first();
-
-        // dd($social_link);
       
       $company = CompanyDetails::select('address1', 'phone1', 'email1')->first();
       return view('frontend.about', compact('about1', 'company','galleries','banner', 'our_story','our_values','safeguarding', 'parent_resource','meals','family_app', 'funding_fees','current_values','our_curriculamn','social_link'));
