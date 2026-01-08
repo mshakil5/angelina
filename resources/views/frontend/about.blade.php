@@ -353,7 +353,7 @@
 
 @if ($our_story->status == 1)
     <!--Our Story -->
-<section id="story-hero" class="hero-section position-relative overflow-hidden py-2 bg-light" aria-labelledby="hero-heading">
+<section id="story-hero" class="hero-section position-relative overflow-hidden py-2 bg-light mt-3" aria-labelledby="hero-heading">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-12 mx-auto text-center">
