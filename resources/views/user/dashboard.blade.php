@@ -97,27 +97,13 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="col-lg-7">
+                                <div class="col-lg-7">
                                     <h6 class="mb-2" id="previewTitle">Preview</h6>
                                     <div class="ratio ratio-4x3 border rounded bg-dark" style="min-height:300px; overflow:hidden;">
                                         <iframe id="pdfViewer" src="" title="Media preview" allowfullscreen style="border:0"></iframe>
                                     </div>
                                     <div id="completedBadge" class="badge bg-success mt-2 d-none w-100 py-2">All onboarding steps complete ✓</div>
-                                </div> --}}
-                                <div class="col-lg-7">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <h6 class="mb-0" id="previewTitle">Preview</h6>
-                                        <a href="#" id="downloadPdfBtn" class="btn btn-xs btn-outline-primary d-none" download target="_blank">
-                                            <i class="fas fa-download mr-1"></i> Download PDF
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="ratio ratio-4x3 border rounded bg-dark" style="min-height:300px; overflow:hidden;">
-                                        <iframe id="pdfViewer" src="" title="Media preview" allowfullscreen style="border:0"></iframe>
-                                    </div>
-                                    <div id="completedBadge" class="badge bg-success mt-2 d-none w-100 py-2">All onboarding steps complete ✓</div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
