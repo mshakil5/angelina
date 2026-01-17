@@ -59,7 +59,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|max:20',
             'emergency_name' => 'nullable|string',
-            'emergency_email' => 'nullable|email|max:20',
+            'emergency_email' => 'nullable|email|max:80',
             'emergency_phone' => 'nullable|string|max:20',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -114,7 +114,7 @@ class UserController extends Controller
         $user->emergency_name2 = $request->emergency_name2;
         $user->emergency_email2 = $request->emergency_email2;
         $user->emergency_phone2 = $request->emergency_phone2;
-        
+
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }

@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Work Email <span class="text-danger">*</span></label>
+                                        <label for="email">Employee Email <span class="text-danger">*</span></label>
                                         <input type="email" class="form-control form-control-border" id="email" name="email" placeholder="email@company.com" required>
                                     </div>
                                 </div>
