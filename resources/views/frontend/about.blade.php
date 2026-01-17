@@ -713,7 +713,7 @@
           </div>
 
           <div class="mt-4 pt-3 border-top text-center">
-            <a href="#fee-structure" class="btn btn-primary px-4 py-2 fw-bold">View Our Fee Structure</a>
+            <a href="{{ route('fees') }}" class="btn btn-primary px-4 py-2 fw-bold">View Our Fee Structure</a>
           </div>
         </div>
       </div>

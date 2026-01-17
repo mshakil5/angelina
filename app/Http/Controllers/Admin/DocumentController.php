@@ -34,6 +34,14 @@ class DocumentController extends Controller
                 ->addColumn('sl', function ($row) {
                     return $row->sl ?? '';
                 })
+                ->addColumn('link', function($row) {
+                    if ($row->link) {
+                        return '<a href="'.$row->link.'" target="_blank" class="btn btn-sm btn-outline-danger">
+                                    <i class="fab fa-youtube mr-1"></i> Watch Video
+                                </a>';
+                    }
+                    return '<span class="text-muted small">No Link</span>';
+                })
                 ->addColumn('status', function($row) {
                     $checked = $row->status == 1 ? 'checked' : '';
                     return '<div class="custom-control custom-switch">
@@ -47,7 +55,7 @@ class DocumentController extends Controller
                       <button class="btn btn-sm btn-danger delete" data-id="'.$row->id.'"><i class="fas fa-trash-alt"></i></button>
                     ';
                 })
-                ->rawColumns(['document', 'status', 'action'])
+                ->rawColumns(['document', 'link', 'status', 'action'])
                 ->make(true);
         }
 
@@ -58,7 +66,7 @@ class DocumentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'document' => 'required|file|mimes:pdf|max:5048',
+            'document' => 'nullable|file|mimes:pdf|max:5048',
             'description' => 'nullable|string',
         ]);
 
@@ -73,6 +81,7 @@ class DocumentController extends Controller
         $data->title = $request->title;
         $data->category = $request->category;
         $data->description = $request->description;
+        $data->link = $request->link;
         $data->sl = $request->sl ?? 0;
         $data->created_by = auth()->id();
 
@@ -119,7 +128,7 @@ class DocumentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'document' => 'required|file|mimes:pdf|max:5048',
+            'document' => 'nullable|file|mimes:pdf|max:5048',
             'description' => 'nullable|string',
         ]);
 
@@ -142,6 +151,7 @@ class DocumentController extends Controller
         $data->title = $request->title;
         $data->category = $request->category;
         $data->description = $request->description;
+        $data->link = $request->link;
         $data->sl = $request->sl ?? 0;
         $data->updated_by = auth()->id();
 

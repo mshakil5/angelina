@@ -73,6 +73,10 @@ class UserController extends Controller
         $user->emergency_name = $request->emergency_name;
         $user->emergency_email = $request->emergency_email;
         $user->emergency_phone = $request->emergency_phone;
+
+        $user->emergency_name2 = $request->emergency_name2;
+        $user->emergency_email2 = $request->emergency_email2;
+        $user->emergency_phone2 = $request->emergency_phone2;
         $user->password = Hash::make($request->password);
         $user->is_type = 3;
         $user->status = 1;
@@ -106,6 +110,11 @@ class UserController extends Controller
         $user->emergency_name = $request->emergency_name;
         $user->emergency_email = $request->emergency_email;
         $user->emergency_phone = $request->emergency_phone;
+
+        $user->emergency_name2 = $request->emergency_name2;
+        $user->emergency_email2 = $request->emergency_email2;
+        $user->emergency_phone2 = $request->emergency_phone2;
+        
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }

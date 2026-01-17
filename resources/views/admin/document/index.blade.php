@@ -12,64 +12,92 @@
     </div>
 </section>
 
-<section class="content mt-3" id="addThisFormContainer">
+<section class="content pt-4" id="addThisFormContainer">
     <div class="container-fluid">
-        <div class="row justify-content-md-center">
-            <div class="col-md-10">
-                <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title" id="cardTitle">Add new documents</h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12">
+                <div class="card card-outline card-secondary shadow-sm">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold" id="cardTitle">
+                            <i class="fas fa-file-upload mr-2 text-secondary"></i>Add New Documents
+                        </h3>
                     </div>
-                    <div class="card-body">
-                        <form id="createThisForm">
+                    
+                    <form id="createThisForm" enctype="multipart/form-data">
+                        <div class="card-body">
                             @csrf
-                            <input type="hidden" class="form-control" id="codeid" name="codeid">
+                            <input type="hidden" id="codeid" name="codeid">
                             
                             <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label>Category <span class="text-danger">*</span></label>
-                                    <select name="category" id="category" class="form-control">
-                                      <option value="Employee Dashboard">Employee Dashboard</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Title <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                                        <label for="category">Category <span class="text-danger">*</span></label>
+                                        <select name="category" id="category" class="form-control select2 custom-select">
+                                            <option value="Employee Dashboard">Employee Dashboard</option>
+                                            <option value="Policy Manuals">Policy Manuals</option>
+                                            <option value="Training Material">Training Material</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="title">Document Title <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="title" name="title" placeholder="e.g. Q3 Security Guidelines">
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label for="sl">Sort Order</label>
+                                        <input type="number" class="form-control" id="sl" name="sl" value="0" min="0">
                                     </div>
                                 </div>
                             </div>
 
-                            
                             <div class="form-group">
-                                <label>Note</label>
-                                <textarea class="form-control" id="description" name="description" rows="5" placeholder="Enter description"></textarea>
+                                <label for="description">Note / Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Provide a brief context for this document..."></textarea>
                             </div>
-                            
-                            <div class="row">
+
+                            <div class="row bg-light p-3 rounded border">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Document (PDF only)</label>
-                                        <input type="file" class="form-control-file" id="document" name="document" accept="application/pdf">
+                                        <label for="document">Upload PDF</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="document" name="document" accept=".pdf">
+                                                <label class="custom-file-label" for="document">Choose file</label>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted"><i class="fas fa-info-circle mr-1"></i> PDF format only</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Sort Order</label>
-                                        <input type="number" class="form-control" id="sl" name="sl" value="0">
+                                        <label for="link">YouTube Reference Link</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-danger text-white border-danger">
+                                                    <i class="fab fa-youtube"></i>
+                                                </span>
+                                            </div>
+                                            <input type="url" class="form-control" id="link" name="link" placeholder="https://youtube.com/watch?v=...">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="row mt-3">
+                                
+                            </div>
+                        </div>
 
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" id="addBtn" class="btn btn-secondary" value="Create">Create</button>
-                        <button type="submit" id="FormCloseBtn" class="btn btn-default">Cancel</button>
-                    </div>
+                        <div class="card-footer bg-white border-top text-right">
+                            <button type="button" id="FormCloseBtn" class="btn btn-default px-4 mr-2">Cancel</button>
+                            <button type="submit" id="addBtn" class="btn btn-secondary px-5 shadow-sm">
+                                <i class="fas fa-check-circle mr-2"></i>Save Document
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -92,7 +120,7 @@
                                     <th>Category</th>
                                     <th>Title</th>
                                     <th>Documents</th>
-                                    <th>Sort No.</th>
+                                    <th>Video Link</th> <th>Sort No.</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -133,6 +161,7 @@
             form_data.append("category", $("#category").val());
             form_data.append("description", $("#description").val());
             form_data.append("sl", $("#sl").val());
+            form_data.append("link", $("#link").val());
 
             // Handle pdf upload
             var imageInput = document.getElementById('document');
@@ -293,12 +322,13 @@
             },
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                {data: 'category', name: 'category'},
-                {data: 'title', name: 'title'},
-                {data: 'document', name: 'document', orderable: false, searchable: false},
-                {data: 'sl', name: 'sl'},
-                {data: 'status', name: 'status', orderable: false, searchable: false},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
+                { data: 'category', name: 'category' },
+                { data: 'title', name: 'title' },
+                { data: 'document', name: 'document', orderable: false, searchable: false },
+                { data: 'link', name: 'link', orderable: false }, // New Link Column
+                { data: 'sl', name: 'sl' },
+                { data: 'status', name: 'status', orderable: false, searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
             ],
             responsive: true,
             lengthChange: false,
