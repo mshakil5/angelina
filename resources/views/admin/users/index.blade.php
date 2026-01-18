@@ -66,39 +66,46 @@
                                 <div class="col-12 border-bottom mb-3 mt-2">
                                     <h5 class="text-muted"><i class="fas fa-id-card-alt mr-2"></i>Emergency Contacts</h5>
                                 </div>
+
+                                <div class="col-12 border-bottom mb-3 mt-2">
+                                    <h6 class="text-muted">Contact One</h6>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase">Primary Contact Name</label>
+                                        <label class="small text-uppercase"> Contact Name</label>
                                         <input type="text" class="form-control shadow-sm" id="emergency_name" name="emergency_name">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase">Primary Email</label>
+                                        <label class="small text-uppercase"> Email</label>
                                         <input type="email" class="form-control shadow-sm" id="emergency_email" name="emergency_email">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase">Primary Phone</label>
+                                        <label class="small text-uppercase"> Phone</label>
                                         <input type="text" class="form-control shadow-sm" id="emergency_phone" name="emergency_phone">
                                     </div>
                                 </div>
+                                <div class="col-12 border-bottom mb-3 mt-2">
+                                    <h6 class="text-muted">Contact Two</h6>
+                                </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase text-muted">Secondary Contact Name</label>
+                                        <label class="small text-uppercase text-muted"> Contact Name</label>
                                         <input type="text" class="form-control shadow-sm" id="emergency_name2" name="emergency_name2">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase text-muted">Secondary Email</label>
+                                        <label class="small text-uppercase text-muted"> Email</label>
                                         <input type="email" class="form-control shadow-sm" id="emergency_email2" name="emergency_email2">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="small text-uppercase text-muted">Secondary Phone</label>
+                                        <label class="small text-uppercase text-muted"> Phone</label>
                                         <input type="text" class="form-control shadow-sm" id="emergency_phone2" name="emergency_phone2">
                                     </div>
                                 </div>
