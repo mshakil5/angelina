@@ -1,139 +1,188 @@
 @extends('admin.master')
-@section('title', 'Reference Details')
+@section('title', 'Full Reference Report')
 
 @section('content')
-<style>
-    body {
-        background-color: #f8f9fa;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .report-card {
-        max-width: 1000px;
-        margin: 40px auto;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-    .card-header {
-        background: linear-gradient(135deg, #0d6efd, #1e40af);
-        color: #fff;
-        padding: 30px 40px;
-    }
-    .section-title {
-        text-transform: uppercase;
-        font-size: 1rem;
-        font-weight: 700;
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd20;
-        padding-bottom: 5px;
-        margin-bottom: 20px;
-    }
-    .info-row strong { display:block; color:#495057; }
-    .info-row p { margin-bottom:10px; color:#212529; }
-    .footer-note { font-size:0.85rem; color:#6c757d; margin-top:15px; border-top:1px solid #dee2e6; padding-top:10px; }
 
+<style>
+    /* --- SCREEN DISPLAY --- */
+    .report-container { 
+        max-width: 1000px; margin: 20px auto; background: #fff; padding: 40px; 
+        border: 1px solid #e1e5eb; border-radius: 12px; 
+    }
+    .header-box { border-bottom: 3px solid #1e40af; padding-bottom: 20px; margin-bottom: 30px; }
+    .section-banner { 
+        background: #f8fafc; color: #1e40af; padding: 10px 15px; font-weight: 700; 
+        border-left: 5px solid #1e40af; margin: 25px 0 15px 0; text-transform: uppercase; font-size: 0.9rem; 
+    }
+    .data-row { border-bottom: 1px solid #f1f5f9; padding: 10px 0; }
+    .data-label { font-weight: 600; color: #64748b; font-size: 0.85rem; }
+    .data-value { color: #1e293b; font-weight: 500; }
+
+    /* --- PRINT FIXES --- */
     @media print {
-        #backBtn, #printBtn { display: none !important; }
-        body {
-            font-size: 13px !important;
-            line-height: 1.3;
+        /* 1. Hide Dashboard UI */
+        .no-print, .main-sidebar, .main-footer, .navbar, .content-header, .btn { 
+            display: none !important; 
         }
-        .report-card {
-            box-shadow: none !important;
-            margin: 0 !important;
+
+        /* 2. Reset Layout Constraints */
+        body, .wrapper, .content-wrapper { 
+            background: #fff !important; margin: 0 !important; padding: 0 !important; min-height: auto !important;
         }
-        .row {
-            display: flex;
-            flex-wrap: wrap;
+        
+        .report-container { 
+            border: none !important; box-shadow: none !important; width: 100% !important; 
+            max-width: 100% !important; margin: 0 !important; padding: 0 !important;
         }
-        .col-md-6 {
-            flex: 0 0 50%;
-            max-width: 50%;
+
+        /* 3. Force Colors & Backgrounds */
+        * { 
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important; 
+            color-adjust: exact !important;
         }
-        .col-md-12 {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-        .info-row p {
-            margin-bottom: 4px !important;
-            font-size: 13px !important;
-        }
-        h4, h6 {
-            font-size: 14px !important;
-        }
-        small {
-            font-size: 11px !important;
-        }
+
+        /* 4. FIX: Stop Bootstrap columns from stacking vertically */
+        .row { display: flex !important; flex-wrap: wrap !important; }
+        .col-md-3 { width: 25% !important; flex: 0 0 25% !important; max-width: 25% !important; }
+        .col-md-4 { width: 33.333% !important; flex: 0 0 33.333% !important; max-width: 33.333% !important; }
+        .col-md-6 { width: 50% !important; flex: 0 0 50% !important; max-width: 50% !important; }
+        .col-md-12 { width: 100% !important; flex: 0 0 100% !important; }
+
+        /* 5. Typography */
+        .data-value { color: #000 !important; font-size: 11pt !important; }
+        .data-label { color: #333 !important; font-size: 9pt !important; }
+        
+        /* 6. Page Settings */
+        @page { size: A4; margin: 1.5cm; }
+        
+        /* Prevent splitting sections across pages */
+        .section-banner, .data-row { page-break-inside: avoid; }
     }
 </style>
 
-<div class="container py-4">
-    <div class="text-start mb-3">
-        <a href="{{ route('reference.index') }}" id="backBtn" class="btn btn-secondary">Back</a>
-        <button onclick="window.print()" id="printBtn" class="btn btn-primary">Print</button>
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 no-print">
+        <a href="{{ route('reference.index') }}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
+        <button onclick="window.print()" class="btn btn-primary"><i class="fas fa-print"></i> Print PDF Report</button>
     </div>
 
-    <div class="report-card" id="printArea">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="report-container shadow-sm">
+        <div class="header-box d-flex justify-content-between align-items-center">
             <div>
-                <h4 class="mb-1">{{ $company->company_name ?? 'Company Name' }}</h4>
-                <small>Reference Report</small>
+                <h2 class="fw-bold text-primary mb-1">{{ $company->company_name ?? 'Angelina\'s Day Care' }}</h2>
+                <p class="text-muted mb-0">Employment & Character Reference Record</p>
             </div>
-            @if(isset($company->company_logo))
-                <img src="{{ asset('images/company/'.$company->company_logo) }}" width="75" height="75" class="rounded-circle bg-white p-1">
-            @endif
+            <div class="text-end">
+                <span class="badge bg-info text-white mb-2">ID: #{{ $reference->id }}</span><br>
+                <small class="text-muted">Submitted: {{ $reference->created_at->format('d M, Y H:i') }}</small>
+            </div>
         </div>
 
-        <div class="report-section p-4">
-            <h6 class="section-title">Candidate Information</h6>
-            <div class="row info-row mb-3">
-                <div class="col-md-6"><strong>First Name:</strong><p>{{ $reference->candidate_first }}</p></div>
-                <div class="col-md-6"><strong>Last Name:</strong><p>{{ $reference->candidate_last }}</p></div>
-            </div>
-
-            <h6 class="section-title">Referee Information</h6>
-            <div class="row info-row mb-3">
-                <div class="col-md-6"><strong>First Name:</strong><p>{{ $reference->referee_first }}</p></div>
-                <div class="col-md-6"><strong>Last Name:</strong><p>{{ $reference->referee_last }}</p></div>
-                <div class="col-md-6"><strong>Email:</strong><p>{{ $reference->referee_email }}</p></div>
-                <div class="col-md-6"><strong>Company:</strong><p>{{ $reference->referee_company }}</p></div>
-                <div class="col-md-6"><strong>Address:</strong><p>{{ $reference->org_address }}</p></div>
-                <div class="col-md-6"><strong>City:</strong><p>{{ $reference->city }}</p></div>
-                <div class="col-md-6"><strong>County:</strong><p>{{ $reference->county }}</p></div>
-                <div class="col-md-6"><strong>Postcode:</strong><p>{{ $reference->postcode }}</p></div>
-                <div class="col-md-6"><strong>Country:</strong><p>{{ $reference->country }}</p></div>
-                <div class="col-md-6"><strong>Phone:</strong><p>{{ $reference->phone }}</p></div>
-                <div class="col-md-6"><strong>Relationship:</strong><p>{{ $reference->relationship }}</p></div>
-            </div>
-
-            <h6 class="section-title">Employment Information</h6>
-            <div class="row info-row mb-3">
-                <div class="col-md-6"><strong>Start Date:</strong>
-                    <p>{{ $reference->start_date ? \Carbon\Carbon::parse($reference->start_date)->format('d-m-y') : '' }}</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-banner">1. Candidate Information</div>
+                <div class="px-2">
+                    <div class="data-row">
+                        <div class="data-label">First Name</div>
+                        <div class="data-value">{{ $reference->candidate_first }}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Last Name</div>
+                        <div class="data-value">{{ $reference->candidate_last }}</div>
+                    </div>
                 </div>
-                <div class="col-md-6"><strong>End Date:</strong>
-                    <p>{{ $reference->end_date ? \Carbon\Carbon::parse($reference->end_date)->format('d-m-y') : '' }}</p>
+            </div>
+
+            <div class="col-md-6">
+                <div class="section-banner">2. Referee Details</div>
+                <div class="px-2">
+                    <div class="data-row">
+                        <div class="data-label">Referee Name</div>
+                        <div class="data-value">{{ $reference->referee_first ?? $reference->digital_signature ?? 'N/A' }} {{ $reference->referee_last }}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Company</div>
+                        <div class="data-value">{{ $reference->referee_company ?? 'Not Specified' }}</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="data-label">Relationship Capacity</div>
+                        <div class="data-value">{{ $reference->relationship_type ?? $reference->relationship ?? 'N/A' }}</div>
+                    </div>
                 </div>
-                <div class="col-md-6"><strong>Position:</strong><p>{{ $reference->position }}</p></div>
-                <div class="col-md-12"><strong>Role & Responsibilities:</strong><p>{{ $reference->role_responsibilities }}</p></div>
-                <div class="col-md-12"><strong>Reason for Leaving:</strong><p>{{ $reference->reason_leaving }}</p></div>
             </div>
+        </div>
 
-            <h6 class="section-title">Reference Assessment</h6>
-            <div class="row info-row mb-3">
-                <div class="col-md-12"><strong>Criteria:</strong><p>{{ $reference->criteria }}</p></div>
-                <div class="col-md-6"><strong>Sick Days:</strong><p>{{ $reference->sick_days }}</p></div>
-                <div class="col-md-6"><strong>Permission to Disclose:</strong><p>{{ $reference->permission_disclose }}</p></div>
-                <div class="col-md-6"><strong>Disciplinary Record:</strong><p>{{ $reference->disciplinary }}</p></div>
-                <div class="col-md-6"><strong>Re-employable:</strong><p>{{ $reference->re_employ }}</p></div>
-                <div class="col-md-6"><strong>Suitability:</strong><p>{{ $reference->suitability }}</p></div>
-                <div class="col-md-12"><strong>Suitability Details:</strong><p>{{ $reference->suitability_details }}</p></div>
-                <div class="col-md-12"><strong>Accuracy Confirmation:</strong><p>{{ $reference->accuracy }}</p></div>
+        <div class="section-banner">3. Contact & Location Details</div>
+        <div class="row px-2">
+            <div class="col-md-4 data-row"><div class="data-label">Email</div><div class="data-value">{{ $reference->referee_email }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Phone</div><div class="data-value">{{ $reference->phone ?? 'N/A' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Country</div><div class="data-value">{{ $reference->country ?? 'N/A' }}</div></div>
+            <div class="col-md-12 data-row"><div class="data-label">Address</div><div class="data-value">{{ $reference->org_address }}, {{ $reference->city }}, {{ $reference->postcode }}</div></div>
+        </div>
+
+        <div class="section-banner">4. Employment History</div>
+        <div class="row px-2">
+            <div class="col-md-3 data-row"><div class="data-label">Start Date</div><div class="data-value">{{ $reference->start_date ?? 'N/A' }}</div></div>
+            <div class="col-md-3 data-row"><div class="data-label">End Date</div><div class="data-value">{{ $reference->end_date ?? 'N/A' }}</div></div>
+            <div class="col-md-6 data-row"><div class="data-label">Position Held</div><div class="data-value">{{ $reference->position ?? 'N/A' }}</div></div>
+            
+            <div class="col-md-4 data-row"><div class="data-label">Timekeeping</div><div class="data-value">{{ $reference->timekeeping_standard ?? 'N/A' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Attendance</div><div class="data-value">{{ $reference->attendance_standard ?? 'N/A' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Sick Days (2 Yrs)</div><div class="data-value">{{ $reference->sick_days ?? '0' }}</div></div>
+            
+            <div class="col-md-12 data-row">
+                <div class="data-label">Role Responsibilities</div>
+                <div class="data-value">{{ $reference->role_responsibilities ?? 'None provided' }}</div>
             </div>
+        </div>
 
-            <div class="footer-note">
-                <small>Submitted on: {{ \Carbon\Carbon::parse($reference->created_at)->format('d-m-y') }}</small>
+        <div class="section-banner" style="background: #fff1f2; color: #be123c; border-left-color: #be123c;">5. Safeguarding & Regulatory Compliance</div>
+        <div class="row px-2">
+            <div class="col-md-6 data-row">
+                <div class="data-label">Disciplinary Record?</div>
+                <div class="data-value @if($reference->disciplinary == 'Yes') text-danger fw-bold @endif">{{ $reference->disciplinary ?? 'No' }}</div>
+            </div>
+            <div class="col-md-6 data-row">
+                <div class="data-label">Suitability for Early Years/Children?</div>
+                <div class="data-value @if($reference->suitability_children == 'Yes') text-danger fw-bold @endif">{{ $reference->suitability_children ?? 'No' }}</div>
+            </div>
+            <div class="col-md-12 data-row">
+                <div class="data-label">Suitability Details</div>
+                <div class="data-value">{{ $reference->suitability_details ?? 'No concerns disclosed' }}</div>
+            </div>
+            <div class="col-md-6 data-row">
+                <div class="data-label">Would you re-employ?</div>
+                <div class="data-value">{{ $reference->re_employ ?? 'N/A' }}</div>
+            </div>
+            <div class="col-md-6 data-row">
+                <div class="data-label">Accuracy Confirmation</div>
+                <div class="data-value">{{ $reference->accuracy ?? 'Confirmed' }}</div>
+            </div>
+        </div>
+
+        @if($reference->character_assessment)
+        <div class="section-banner">6. Professional Character Assessment</div>
+        <div class="px-2">
+            <div class="data-row">
+                <div class="data-label">Assessment Details</div>
+                <div class="data-value" style="white-space: pre-line;">{{ $reference->character_assessment }}</div>
+            </div>
+        </div>
+        @endif
+
+        <div class="mt-5 border-top pt-4">
+            <div class="row">
+                <div class="col-6">
+                    <p class="mb-0 data-label">Digital Signature</p>
+                    <h4 style="font-family: 'Brush Script MT', cursive;">{{ $reference->digital_signature ?? $reference->signature_name ?? 'Digitally Signed' }}</h4>
+                </div>
+                <div class="col-6 text-end">
+                    <p class="mb-0 data-label">Form Status</p>
+                    <span class="badge {{ $reference->status == 1 ? 'bg-success' : 'bg-warning' }}">
+                        {{ $reference->status == 1 ? 'Verified' : 'Pending Review' }}
+                    </span>
+                </div>
             </div>
         </div>
     </div>

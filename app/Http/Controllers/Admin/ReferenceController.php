@@ -17,19 +17,25 @@ class ReferenceController extends Controller
 
             return DataTables::of($references)
                 ->addIndexColumn()
+                // Combine First and Last Name for the Candidate
+                ->addColumn('candidate_name', function ($row) {
+                    return $row->candidate_first . ' ' . $row->candidate_last;
+                })
+                // Combine First and Last Name for the Referee (THIS FIXES THE ERROR)
+                ->addColumn('referee_name', function ($row) {
+                    return $row->referee_first . ' ' . $row->referee_last;
+                })
                 ->addColumn('created_at', function ($row) {
-                    return \Carbon\Carbon::parse($row->created_at)->format('d-m-y');
+                    return \Carbon\Carbon::parse($row->created_at)->format('d-m-Y');
                 })
                 ->addColumn('action', function ($row) {
-                    $viewBtn = '<a href="' . route('reference.show', $row->id) . '" class="btn btn-sm btn-success">
-                                    <i class="fas fa-eye"></i>
-                                </a>';
-                    return $viewBtn;
+                    return '<a href="' . route('reference.show', $row->id) . '" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> View Report
+                            </a>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
         return view('admin.references.index');
     }
 

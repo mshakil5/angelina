@@ -1,23 +1,22 @@
 @extends('admin.master')
-@section('title', 'References')
+@section('title', 'References List')
 
 @section('content')
 <div class="container-fluid pt-3">
-    <div class="card card-secondary">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">All References</h5>
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">All Reference Submissions</h5>
         </div>
         <div class="card-body">
-            <table id="referenceTable" class="table table-bordered table-striped">
-                <thead>
+            <table id="referenceTable" class="table table-hover table-bordered w-100">
+                <thead class="bg-light">
                     <tr>
                         <th>#</th>
                         <th>Date</th>
-                        <th>Candidate Name</th>
+                        <th>Candidate</th>
                         <th>Referee Name</th>
+                        <th>Capacity</th>
                         <th>Email</th>
-                        <th>Country</th>
-                        <th>Criteria</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,11 +36,10 @@ $(function () {
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'created_at', name: 'created_at'},
-            { data: 'candidate_first', name: 'candidate_first' },
-            { data: 'referee_first', name: 'referee_first' },
+            { data: 'candidate_name', name: 'candidate_name' }, // matches addColumn
+            { data: 'referee_name', name: 'referee_name' },     // matches addColumn
+            { data: 'relationship_type', name: 'relationship_type' },
             { data: 'referee_email', name: 'referee_email' },
-            { data: 'country', name: 'country' },
-            { data: 'criteria', name: 'criteria' },
             { data: 'action', name: 'action', orderable: false, searchable: false },
         ]
     });
