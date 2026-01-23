@@ -657,24 +657,35 @@ class FrontendController extends Controller
 
     public function referenceStore(Request $request)
     {
+        // 1. Validation - Match these keys to your new form 'name' attributes
         $validated = $request->validate([
-            'candidate_first' => 'required|string|max:255',
-            'candidate_last' => 'required|string|max:255',
-            'referee_first' => 'required|string|max:255',
-            'referee_last' => 'required|string|max:255',
-            'referee_email' => 'required|email|max:255',
-            'country' => 'required|string|max:255',
-            'criteria' => 'required|string',
+            'candidate_first'   => 'required|string|max:255',
+            'candidate_last'    => 'required|string|max:255',
+            'referee_name'      => 'required|string|max:255', // Changed to match new form
+            'referee_email'     => 'required|email|max:255',
+            'relationship_type' => 'required|in:Employer,Colleague',
+            'digital_signature' => 'required|string|max:255',
+            'sig_tick'          => 'required', // Ensures they checked the declaration
+            
+            // Safeguarding validation
+            'suitability_children' => 'required',
+            're_employ'            => 'required',
         ]);
 
-        Log::info('Reference form data: ', $request->all());
+        // 2. Logging for audit trails
+        Log::info('New Reference Submission: ', $request->except(['_token']));
 
-        Reference::create($request->all());
+        // 3. Save to Database
+        $data = $request->all();
+    
+        // Provide a default value for the old required field
+        $data['criteria'] = $data['criteria'] ?? 'N/A'; 
+        $data['accuracy'] = $data['accuracy'] ?? 'Yes';
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Reference submitted successfully!'
-        ]);
+        Reference::create($data);
+
+        // 4. Redirect back with a Flash Message
+        return redirect()->back()->with('success', 'Thank you! The reference has been securely submitted.');
     }
 
 }
