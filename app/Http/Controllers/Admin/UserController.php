@@ -58,31 +58,33 @@ class UserController extends Controller
             'address' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|max:20',
-            'emergency_name' => 'nullable|string',
-            'emergency_email' => 'nullable|email|max:80',
-            'emergency_phone' => 'nullable|string|max:20',
             'password' => 'required|string|min:6|confirmed',
+            // New Field Validations
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'hourly_rate' => 'nullable|numeric',
+            'ni_number' => 'nullable|string|max:50',
+            'p45_provided' => 'nullable|boolean',
+            'position' => 'nullable|string|max:100',
+            'contractual_hour' => 'nullable|numeric',
+            'holiday_entitle' => 'nullable|numeric',
         ]);
 
         $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->dob = $request->dob;
-        $user->emergency_name = $request->emergency_name;
-        $user->emergency_email = $request->emergency_email;
-        $user->emergency_phone = $request->emergency_phone;
-
-        $user->emergency_name2 = $request->emergency_name2;
-        $user->emergency_email2 = $request->emergency_email2;
-        $user->emergency_phone2 = $request->emergency_phone2;
+        
+        // Using fill to handle all request data at once
+        $user->fill($request->except(['password', 'password_confirmation']));
+        
         $user->password = Hash::make($request->password);
         $user->is_type = 3;
         $user->status = 1;
         $user->save();
 
-        return response()->json(['status' => 200, 'message' => 'User created successfully', 'user' => $user]);
+        return response()->json([
+            'status' => 200, 
+            'message' => 'Employee created successfully', 
+            'user' => $user
+        ]);
     }
 
     public function edit($id)
@@ -99,30 +101,31 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $request->id,
             'phone' => 'required|string|max:20',
             'password' => 'nullable|string|min:6|confirmed',
+            // New Field Validations
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+            'hourly_rate' => 'nullable|numeric',
+            'ni_number' => 'nullable|string|max:50',
+            'p45_provided' => 'nullable|boolean',
+            'position' => 'nullable|string|max:100',
+            'contractual_hour' => 'nullable|numeric',
+            'holiday_entitle' => 'nullable|numeric',
         ]);
 
         $user = User::findOrFail($request->id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->address = $request->address;
-        $user->dob = $request->dob;
-        $user->emergency_name = $request->emergency_name;
-        $user->emergency_email = $request->emergency_email;
-        $user->emergency_phone = $request->emergency_phone;
+        
+        // Update all fields except password
+        $user->fill($request->except(['password', 'password_confirmation']));
 
-        $user->emergency_name2 = $request->emergency_name2;
-        $user->emergency_email2 = $request->emergency_email2;
-        $user->emergency_phone2 = $request->emergency_phone2;
-
-        if ($request->password) {
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+        
         $user->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'User updated successfully',
+            'message' => 'Employee updated successfully',
             'user' => $user
         ]);
     }

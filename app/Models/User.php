@@ -14,6 +14,16 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    protected $fillable = [
+        'name', 'email', 'phone', 'address', 'dob', 'is_type', 'status',
+        'emergency_name', 'emergency_email', 'emergency_phone',
+        'emergency_name2', 'emergency_email2', 'emergency_phone2',
+        'start_date', 'end_date', 'hourly_rate', 'ni_number', 
+        'p45_provided', 'position', 'contractual_hour', 
+        'holiday_hour_taken', 'holiday_amount_paid', 
+        'holiday_remaining', 'holiday_entitle', 'other_comments'
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
