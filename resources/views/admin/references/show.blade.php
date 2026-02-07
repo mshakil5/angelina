@@ -99,7 +99,7 @@
                 <div class="px-2">
                     <div class="data-row">
                         <div class="data-label">Referee Name</div>
-                        <div class="data-value">{{ $reference->referee_first ?? $reference->digital_signature ?? 'N/A' }} {{ $reference->referee_last }}</div>
+                        <div class="data-value">{{ $reference->referee_first ?? $reference->digital_signature ?? ' ' }} {{ $reference->referee_last }}</div>
                     </div>
                     <div class="data-row">
                         <div class="data-label">Company</div>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="data-row">
                         <div class="data-label">Relationship Capacity</div>
-                        <div class="data-value">{{ $reference->relationship_type ?? $reference->relationship ?? 'N/A' }}</div>
+                        <div class="data-value">{{ $reference->relationship_type ?? $reference->relationship ?? '' }}</div>
                     </div>
                 </div>
             </div>
@@ -116,19 +116,19 @@
         <div class="section-banner">3. Contact & Location Details</div>
         <div class="row px-2">
             <div class="col-md-4 data-row"><div class="data-label">Email</div><div class="data-value">{{ $reference->referee_email }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Phone</div><div class="data-value">{{ $reference->phone ?? 'N/A' }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Country</div><div class="data-value">{{ $reference->country ?? 'N/A' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Phone</div><div class="data-value">{{ $reference->phone ?? '' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Country</div><div class="data-value">{{ $reference->country ?? '' }}</div></div>
             <div class="col-md-12 data-row"><div class="data-label">Address</div><div class="data-value">{{ $reference->org_address }}, {{ $reference->city }}, {{ $reference->postcode }}</div></div>
         </div>
 
         <div class="section-banner">4. Employment History</div>
         <div class="row px-2">
-            <div class="col-md-3 data-row"><div class="data-label">Start Date</div><div class="data-value">{{ $reference->start_date ?? 'N/A' }}</div></div>
-            <div class="col-md-3 data-row"><div class="data-label">End Date</div><div class="data-value">{{ $reference->end_date ?? 'N/A' }}</div></div>
-            <div class="col-md-6 data-row"><div class="data-label">Position Held</div><div class="data-value">{{ $reference->position ?? 'N/A' }}</div></div>
+            <div class="col-md-3 data-row"><div class="data-label">Start Date</div><div class="data-value">{{ $reference->start_date ?? '' }}</div></div>
+            <div class="col-md-3 data-row"><div class="data-label">End Date</div><div class="data-value">{{ $reference->end_date ?? '' }}</div></div>
+            <div class="col-md-6 data-row"><div class="data-label">Position Held</div><div class="data-value">{{ $reference->position ?? '' }}</div></div>
             
-            <div class="col-md-4 data-row"><div class="data-label">Timekeeping</div><div class="data-value">{{ $reference->timekeeping_standard ?? 'N/A' }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Attendance</div><div class="data-value">{{ $reference->attendance_standard ?? 'N/A' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Timekeeping</div><div class="data-value">{{ $reference->timekeeping_standard ?? '' }}</div></div>
+            <div class="col-md-4 data-row"><div class="data-label">Attendance</div><div class="data-value">{{ $reference->attendance_standard ?? '' }}</div></div>
             <div class="col-md-4 data-row"><div class="data-label">Sick Days (2 Yrs)</div><div class="data-value">{{ $reference->sick_days ?? '0' }}</div></div>
             
             <div class="col-md-12 data-row">
@@ -141,11 +141,11 @@
         <div class="row px-2">
             <div class="col-md-6 data-row">
                 <div class="data-label">Disciplinary Record?</div>
-                <div class="data-value @if($reference->disciplinary == 'Yes') text-danger fw-bold @endif">{{ $reference->disciplinary ?? 'No' }}</div>
+                <div class="data-value @if($reference->disciplinary == 'Yes') text-danger fw-bold @endif">{{ $reference->disciplinary ?? ' ' }}</div>
             </div>
             <div class="col-md-6 data-row">
                 <div class="data-label">Suitability for Early Years/Children?</div>
-                <div class="data-value @if($reference->suitability_children == 'Yes') text-danger fw-bold @endif">{{ $reference->suitability_children ?? 'No' }}</div>
+                <div class="data-value @if($reference->suitability_children == 'Yes') text-danger fw-bold @endif">{{ $reference->suitability_children ?? ' ' }}</div>
             </div>
             <div class="col-md-12 data-row">
                 <div class="data-label">Suitability Details</div>
@@ -153,7 +153,7 @@
             </div>
             <div class="col-md-6 data-row">
                 <div class="data-label">Would you re-employ?</div>
-                <div class="data-value">{{ $reference->re_employ ?? 'N/A' }}</div>
+                <div class="data-value">{{ $reference->re_employ ?? '' }}</div>
             </div>
             <div class="col-md-6 data-row">
                 <div class="data-label">Accuracy Confirmation</div>
@@ -175,12 +175,12 @@
             <div class="row">
                 <div class="col-6">
                     <p class="mb-0 data-label">Digital Signature</p>
-                    <h4 style="font-family: 'Brush Script MT', cursive;">{{ $reference->digital_signature ?? $reference->signature_name ?? 'Digitally Signed' }}</h4>
+                    <h4 style="font-family: 'Brush Script MT', cursive;">{{ $reference->digital_signature ?? $reference->signature_name ?? $reference->candidate_first . ' ' . $reference->candidate_last }}</h4>
                 </div>
                 <div class="col-6 text-end">
                     <p class="mb-0 data-label">Form Status</p>
-                    <span class="badge {{ $reference->status == 1 ? 'bg-success' : 'bg-warning' }}">
-                        {{ $reference->status == 1 ? 'Verified' : 'Pending Review' }}
+                    <span class="">
+                        {{ $reference->status == 1 ? 'Verified' : 'In Review' }}
                     </span>
                 </div>
             </div>
