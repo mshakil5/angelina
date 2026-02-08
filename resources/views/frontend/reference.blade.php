@@ -1,6 +1,166 @@
 @extends('frontend.layouts.master')
 
 @section('content')
+<style>
+    :root {
+        --primary-color: #0b2540;
+        --accent-color: #1a73e8;
+        --error-color: #dc3545;
+        --bg-light: #f8fbff;
+        --border-color: #e0e6ed;
+    }
+
+    .breadcrumb-section {
+        background-size: cover;
+        background-position: center;
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-image: url('{{ asset("resources/frontend/images/page-banner2.jpg") }}');
+    }
+
+    .page-hero {
+        background: var(--bg-light);
+        padding: 60px 0;
+    }
+
+    .reference-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        padding: 40px;
+        border: 1px solid var(--border-color);
+    }
+
+    .form-header {
+        border-bottom: 2px solid #f0f0f0;
+        margin-bottom: 35px;
+        padding-bottom: 20px;
+    }
+
+    .form-header h1 {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent-color);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        margin: 30px 0 20px 0;
+    }
+
+    .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+
+    .form-group-custom {
+        margin-bottom: .5rem;
+    }
+
+    .form-group-custom label {
+        display: block;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+
+    .form-group-custom label span {
+        color: var(--error-color);
+    }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 6px 9px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.2s;
+        background-color: #fff;
+    }
+
+    .form-control-custom:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.1);
+        outline: none;
+    }
+
+    .capacity-toggle {
+        background: #f1f3f5;
+        padding: 5px;
+        border-radius: 10px;
+        display: inline-flex;
+        width: 100%;
+    }
+
+    .capacity-toggle input[type="radio"] {
+        display: none;
+    }
+
+    .capacity-toggle label {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-bottom: 0;
+        transition: 0.3s;
+        font-weight: 600;
+        color: #666;
+    }
+
+    .capacity-toggle input[type="radio"]:checked + label {
+        background: #fff;
+        color: var(--accent-color);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .safeguarding-box {
+        background: #fff5f5;
+        border: 1px solid #ffe3e3;
+        padding: 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+
+    .btn-submit-pro {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        padding: 16px;
+        border-radius: 8px;
+        font-weight: 700;
+        width: 100%;
+        transition: transform 0.2s, background 0.2s;
+        margin-top: 20px;
+    }
+
+    .btn-submit-pro:hover {
+        background: #143a63;
+        transform: translateY(-2px);
+    }
+
+    .signature-area {
+        border: 1px dashed #cbd5e0;
+        padding: 20px;
+        border-radius: 8px;
+        background: #fcfcfc;
+    }
+</style>
 
 <section class="breadcrumb-section text-center text-white">
     <div class="container">
