@@ -53,6 +53,11 @@
             background-color: #2c3e50 !important;
             color: #fff !important;
         }
+
+        .gap{
+            margin-top: 160px !important;
+            margin-bottom: 160px !important;
+        }
     }
 </style>
 
@@ -241,6 +246,9 @@
                 <div class="field"><label>Overall recommendation for employment:</label><span class="data-span">{{ $reference->overall_recommendation ?? 'N/A' }}</span></div>
             </div>
 
+
+            <div style="margin-bottom: 40px;" class="gap"></div>
+            <br><br>
             <h3 class="section-title">Section 5: Formal Regulatory Declarations</h3>
             <div class="table-section">
                 <table>

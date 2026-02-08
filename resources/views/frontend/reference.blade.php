@@ -239,7 +239,7 @@
                         <textarea name="org_address" class="form-control-custom" rows="2">{{ old('org_address') }}</textarea>
                     </div>
                     <div class="col-md-12 form-group-custom">
-                        <label>Street Address</label>
+                        <label>Street </label>
                         <input type="text" name="street" class="form-control-custom" value="{{ old('street') }}">
                     </div>
                     <div class="col-md-6 form-group-custom">
