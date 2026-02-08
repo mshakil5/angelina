@@ -60,7 +60,7 @@
 <style>
     /* --- INTEGRATED NEW DESIGN CSS --- */
     .report-container-wrapper {
-        background-color: #f9f9f9;
+        background-color: #fff;
         padding: 20px;
         font-family: "Segoe UI", Arial, sans-serif;
     }
@@ -70,7 +70,6 @@
         margin: 0 auto;
         padding: 50px;
         background: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .main-header {
