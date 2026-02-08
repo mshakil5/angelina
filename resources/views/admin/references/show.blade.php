@@ -1,190 +1,338 @@
 @extends('admin.master')
-@section('title', 'Full Reference Report')
+@section('title', 'Reference Report - ' . $reference->candidate_first)
 
 @section('content')
 
+
 <style>
-    /* --- SCREEN DISPLAY --- */
-    .report-container { 
-        max-width: 1000px; margin: 20px auto; background: #fff; padding: 40px; 
-        border: 1px solid #e1e5eb; border-radius: 12px; 
-    }
-    .header-box { border-bottom: 3px solid #1e40af; padding-bottom: 20px; margin-bottom: 30px; }
-    .section-banner { 
-        background: #f8fafc; color: #1e40af; padding: 10px 15px; font-weight: 700; 
-        border-left: 5px solid #1e40af; margin: 25px 0 15px 0; text-transform: uppercase; font-size: 0.9rem; 
-    }
-    .data-row { border-bottom: 1px solid #f1f5f9; padding: 10px 0; }
-    .data-label { font-weight: 600; color: #64748b; font-size: 0.85rem; }
-    .data-value { color: #1e293b; font-weight: 500; }
+
 
     /* --- PRINT FIXES --- */
     @media print {
-        /* 1. Hide Dashboard UI */
-        .no-print, .main-sidebar, .main-footer, .navbar, .content-header, .btn { 
+        /* 1. Ensure the header and logo are visible */
+        .main-header { 
+            display: block !important; 
+            visibility: visible !important; 
+            border-bottom: 3px double #2c3e50 !important;
+        }
+        
+        .logo-img { 
+            display: block !important; 
+            visibility: visible !important;
+            margin: 0 auto 15px auto !important;
+        }
+
+        /* 2. Force browser to render colors and images */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* 3. Hide dashboard UI but keep report content */
+        .no-print, .main-sidebar, .main-footer, .navbar, .content-header { 
             display: none !important; 
         }
 
-        /* 2. Reset Layout Constraints */
+        /* 4. Reset layout for A4 */
         body, .wrapper, .content-wrapper { 
-            background: #fff !important; margin: 0 !important; padding: 0 !important; min-height: auto !important;
-        }
-        
-        .report-container { 
-            border: none !important; box-shadow: none !important; width: 100% !important; 
-            max-width: 100% !important; margin: 0 !important; padding: 0 !important;
+            background: #fff !important; 
+            margin: 0 !important; 
+            padding: 0 !important; 
         }
 
-        /* 3. Force Colors & Backgrounds */
-        * { 
-            -webkit-print-color-adjust: exact !important; 
-            print-color-adjust: exact !important; 
-            color-adjust: exact !important;
+        .report-wrapper { 
+            box-shadow: none !important; 
+            border: none !important; 
+            width: 100% !important; 
+            max-width: 100% !important; 
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
-        /* 4. FIX: Stop Bootstrap columns from stacking vertically */
-        .row { display: flex !important; flex-wrap: wrap !important; }
-        .col-md-3 { width: 25% !important; flex: 0 0 25% !important; max-width: 25% !important; }
-        .col-md-4 { width: 33.333% !important; flex: 0 0 33.333% !important; max-width: 33.333% !important; }
-        .col-md-6 { width: 50% !important; flex: 0 0 50% !important; max-width: 50% !important; }
-        .col-md-12 { width: 100% !important; flex: 0 0 100% !important; }
-
-        /* 5. Typography */
-        .data-value { color: #000 !important; font-size: 11pt !important; }
-        .data-label { color: #333 !important; font-size: 9pt !important; }
-        
-        /* 6. Page Settings */
-        @page { size: A4; margin: 1.5cm; }
-        
-        /* Prevent splitting sections across pages */
-        .section-banner, .data-row { page-break-inside: avoid; }
+        .section-title {
+            background-color: #2c3e50 !important;
+            color: #fff !important;
+        }
     }
 </style>
 
-<div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4 no-print">
-        <a href="{{ route('reference.index') }}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back to List</a>
-        <button onclick="window.print()" class="btn btn-primary"><i class="fas fa-print"></i> Print PDF Report</button>
+
+<style>
+    /* --- INTEGRATED NEW DESIGN CSS --- */
+    .report-container-wrapper {
+        background-color: #f9f9f9;
+        padding: 20px;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .report-wrapper {
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 50px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .main-header {
+        text-align: center;
+        margin-bottom: 40px;
+        border-bottom: 3px double #2c3e50;
+        padding-bottom: 20px;
+    }
+
+    .logo-img {
+        max-width: 120px;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .main-header h1 {
+        font-size: 26px;
+        margin: 0;
+        color: #2c3e50;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .main-header h2 {
+        font-size: 18px;
+        margin: 5px 0 0 0;
+        color: #7f8c8d;
+        font-weight: normal;
+    }
+
+    .section-title {
+        font-size: 14px;
+        color: #fff;
+        background: #2c3e50;
+        padding: 8px 15px;
+        margin: 30px 0 15px 0;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
+
+    .field-stack {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .field {
+        display: flex;
+        margin-bottom: 12px;
+        align-items: flex-end;
+    }
+
+    .field label {
+        font-weight: 600;
+        margin-right: 15px;
+        margin-left: 10px;
+        min-width: 280px;
+        color: #444;
+        font-size: 13px;
+    }
+
+    .field .data-span {
+        flex: 1;
+        border-bottom: 1px dotted #999;
+        padding: 3px 0;
+        font-size: 14px;
+        color: #000;
+        min-height: 20px;
+    }
+
+    /* Professional Table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        font-size: 13px;
+    }
+
+    th {
+        background: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .yn-th { width: 60px; text-align: center; }
+    .check-cell { text-align: center; font-weight: bold; font-size: 16px; color: #2c3e50; }
+
+    .sub-head {
+        background: #fcfcfc;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .details-row td {
+        background: #fff9f9;
+        font-style: italic;
+        font-size: 12px;
+        padding-left: 30px;
+    }
+
+    .report-footer {
+        margin-top: 60px;
+        text-align: center;
+        font-size: 11px;
+        color: #7f8c8d;
+        border-top: 1px solid #eee;
+        padding-top: 20px;
+    }
+
+
+</style>
+
+<div class="report-container-wrapper">
+    <div class="d-flex justify-content-between mb-3 no-print">
+        <a href="{{ route('reference.index') }}" class="btn btn-secondary">Back to List</a>
+        <button onclick="window.print()" class="btn btn-primary">Print PDF Report</button>
     </div>
 
-    <div class="report-container shadow-sm">
-        <div class="header-box d-flex justify-content-between align-items-center">
-            <div>
-                <h2 class="fw-bold text-primary mb-1">{{ $company->company_name ?? 'Angelina\'s Day Care' }}</h2>
-                <p class="text-muted mb-0">Employment & Character Reference Record</p>
-            </div>
-            <div class="text-end">
-                <span class="badge bg-info text-white mb-2">ID: #{{ $reference->id }}</span><br>
-                <small class="text-muted">Submitted: {{ $reference->created_at->format('d M, Y H:i') }}</small>
-            </div>
-        </div>
+    <div class="report-wrapper">
+        <header class="main-header">
+            @if($company && $company->logo)
+                <img src="{{ asset('uploads/company/' . $company->logo) }}" alt="Logo" class="logo-img">
+            @endif
+            <h1>{{ $company->company_name ?? "Angelina's Day Care" }}</h1>
+            <h2>Employee Reference Request Form</h2>
+        </header>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="section-banner">1. Candidate Information</div>
-                <div class="px-2">
-                    <div class="data-row">
-                        <div class="data-label">First Name</div>
-                        <div class="data-value">{{ $reference->candidate_first }}</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="data-label">Last Name</div>
-                        <div class="data-value">{{ $reference->candidate_last }}</div>
-                    </div>
-                </div>
+        <section>
+            <h3 class="section-title">Section 1: Candidate Details</h3>
+            <div class="field-stack">
+                <div class="field"><label>Candidate First Name:</label><span class="data-span">{{ $reference->candidate_first }}</span></div>
+                <div class="field"><label>Candidate Last Name:</label><span class="data-span">{{ $reference->candidate_last }}</span></div>
             </div>
 
-            <div class="col-md-6">
-                <div class="section-banner">2. Referee Details</div>
-                <div class="px-2">
-                    <div class="data-row">
-                        <div class="data-label">Referee Name</div>
-                        <div class="data-value">{{ $reference->referee_first ?? $reference->digital_signature ?? ' ' }} {{ $reference->referee_last }}</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="data-label">Company</div>
-                        <div class="data-value">{{ $reference->referee_company ?? 'Not Specified' }}</div>
-                    </div>
-                    <div class="data-row">
-                        <div class="data-label">Relationship Capacity</div>
-                        <div class="data-value">{{ $reference->relationship_type ?? $reference->relationship ?? '' }}</div>
-                    </div>
-                </div>
+            <h3 class="section-title">Section 2: Referee Information</h3>
+            <div class="field-stack">
+                <div class="field"><label>Referee Full Name:</label><span class="data-span">{{ $reference->referee_first }} {{ $reference->referee_last }}</span></div>
+                <div class="field"><label>Job Title / Position:</label><span class="data-span">{{ $reference->relationship_capacity }}</span></div>
+                <div class="field"><label>Company/Organisation:</label><span class="data-span">{{ $reference->referee_company }}</span></div>
+                <div class="field"><label>Email Address:</label><span class="data-span">{{ $reference->referee_email }}</span></div>
+                <div class="field"><label>Telephone Number:</label><span class="data-span">{{ $reference->phone }}</span></div>
+                <div class="field"><label>Street Address:</label><span class="data-span">{{ $reference->street }}</span></div>
+                <div class="field"><label>City, State, ZIP:</label><span class="data-span">{{ $reference->city }}, {{ $reference->state_region }}, {{ $reference->zip_code }}</span></div>
             </div>
-        </div>
 
-        <div class="section-banner">3. Contact & Location Details</div>
-        <div class="row px-2">
-            <div class="col-md-4 data-row"><div class="data-label">Email</div><div class="data-value">{{ $reference->referee_email }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Phone</div><div class="data-value">{{ $reference->phone ?? '' }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Country</div><div class="data-value">{{ $reference->country ?? '' }}</div></div>
-            <div class="col-md-12 data-row"><div class="data-label">Address</div><div class="data-value">{{ $reference->org_address }}, {{ $reference->city }}, {{ $reference->postcode }}</div></div>
-        </div>
+            <h3 class="section-title">Section 3: Employment History & Relationship</h3>
+            <div class="field-stack">
+                <div class="field"><label>Duration of acquaintance:</label><span class="data-span">{{ $reference->acquaintance_duration }}</span></div>
+                <div class="field"><label>In what capacity do you know them?:</label><span class="data-span">{{ $reference->relationship_type }}</span></div>
+                <div class="field"><label>Employment Start Date:</label><span class="data-span">{{ $reference->start_date }}</span></div>
+                <div class="field"><label>Employment End Date:</label><span class="data-span">{{ $reference->end_date }}</span></div>
+                <div class="field"><label>Position held by applicant:</label><span class="data-span">{{ $reference->position }}</span></div>
+                <div class="field"><label>Reason for leaving:</label><span class="data-span">{{ $reference->reason_for_leaving }}</span></div>
+                <div class="field"><label>Assessment of Timekeeping:</label><span class="data-span">{{ $reference->timekeeping_standard }}</span></div>
+                <div class="field"><label>Assessment of Attendance:</label><span class="data-span">{{ $reference->attendance_standard }}</span></div>
+            </div>
 
-        <div class="section-banner">4. Employment History</div>
-        <div class="row px-2">
-            <div class="col-md-3 data-row"><div class="data-label">Start Date</div><div class="data-value">{{ $reference->start_date ?? '' }}</div></div>
-            <div class="col-md-3 data-row"><div class="data-label">End Date</div><div class="data-value">{{ $reference->end_date ?? '' }}</div></div>
-            <div class="col-md-6 data-row"><div class="data-label">Position Held</div><div class="data-value">{{ $reference->position ?? '' }}</div></div>
-            
-            <div class="col-md-4 data-row"><div class="data-label">Timekeeping</div><div class="data-value">{{ $reference->timekeeping_standard ?? '' }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Attendance</div><div class="data-value">{{ $reference->attendance_standard ?? '' }}</div></div>
-            <div class="col-md-4 data-row"><div class="data-label">Sick Days (2 Yrs)</div><div class="data-value">{{ $reference->sick_days ?? '0' }}</div></div>
-            
-            <div class="col-md-12 data-row">
-                <div class="data-label">Role Responsibilities</div>
-                <div class="data-value">{{ $reference->role_responsibilities ?? 'None provided' }}</div>
-            </div>
-        </div>
+            <div class="page-break"></div>
 
-        <div class="section-banner" style="background: #fff1f2; color: #be123c; border-left-color: #be123c;">5. Safeguarding & Regulatory Compliance</div>
-        <div class="row px-2">
-            <div class="col-md-6 data-row">
-                <div class="data-label">Disciplinary Record?</div>
-                <div class="data-value @if($reference->disciplinary == 'Yes') text-danger fw-bold @endif">{{ $reference->disciplinary ?? ' ' }}</div>
+            <h3 class="section-title">Section 4: Professional Competency & Character</h3>
+            <div class="field-stack">
+                <div class="field"><label>How do you describe their professional character?:</label><span class="data-span">{{ $reference->character_assessment ?? 'N/A' }}</span></div>
+                <div class="field"><label>Suitability for the specific role applied for:</label><span class="data-span">{{ $reference->suitability_role }}</span></div>
+                <div class="field"><label>Key strengths and areas for development:</label><span class="data-span">{{ $reference->qualities_characteristics ?? 'N/A' }}</span></div>
+                <div class="field"><label>Overall recommendation for employment:</label><span class="data-span">{{ $reference->overall_recommendation ?? 'N/A' }}</span></div>
             </div>
-            <div class="col-md-6 data-row">
-                <div class="data-label">Suitability for Early Years/Children?</div>
-                <div class="data-value @if($reference->suitability_children == 'Yes') text-danger fw-bold @endif">{{ $reference->suitability_children ?? ' ' }}</div>
-            </div>
-            <div class="col-md-12 data-row">
-                <div class="data-label">Suitability Details</div>
-                <div class="data-value">{{ $reference->suitability_details ?? 'No concerns disclosed' }}</div>
-            </div>
-            <div class="col-md-6 data-row">
-                <div class="data-label">Would you re-employ?</div>
-                <div class="data-value">{{ $reference->re_employ ?? '' }}</div>
-            </div>
-            <div class="col-md-6 data-row">
-                <div class="data-label">Accuracy Confirmation</div>
-                <div class="data-value">{{ $reference->accuracy ?? 'Confirmed' }}</div>
-            </div>
-        </div>
 
-        @if($reference->character_assessment)
-        <div class="section-banner">6. Professional Character Assessment</div>
-        <div class="px-2">
-            <div class="data-row">
-                <div class="data-label">Assessment Details</div>
-                <div class="data-value" style="white-space: pre-line;">{{ $reference->character_assessment }}</div>
-            </div>
-        </div>
-        @endif
+            <h3 class="section-title">Section 5: Formal Regulatory Declarations</h3>
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="main-th">Declaration Query</th>
+                            <th class="yn-th">Yes</th>
+                            <th class="yn-th">No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- Confidentiality --}}
+                        <tr>
+                            <td>Did the applicant maintain strict confidentiality?</td>
+                            <td class="check-cell">{{ $reference->confidentiality_maintenance == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->confidentiality_maintenance == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        @if($reference->confidentiality_no_reasons)
+                        <tr class="details-row">
+                            <td colspan="3"><strong>Reason:</strong> {{ $reference->confidentiality_no_reasons }}</td>
+                        </tr>
+                        @endif
+                        
+                        {{-- Disciplinary --}}
+                        <tr>
+                            <td>Was the applicant subject to any formal disciplinary procedures?</td>
+                            <td class="check-cell">{{ $reference->disciplinary_procedures == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->disciplinary_procedures == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        @if($reference->disciplinary_details)
+                        <tr class="details-row">
+                            <td colspan="3"><strong>Details:</strong> {{ $reference->disciplinary_details }}</td>
+                        </tr>
+                        @endif
 
-        <div class="mt-5 border-top pt-4">
-            <div class="row">
-                <div class="col-6">
-                    <p class="mb-0 data-label">Digital Signature</p>
-                    <h4 style="font-family: 'Brush Script MT', cursive;">{{ $reference->digital_signature ?? $reference->signature_name ?? $reference->candidate_first . ' ' . $reference->candidate_last }}</h4>
-                </div>
-                <div class="col-6 text-end">
-                    <p class="mb-0 data-label">Form Status</p>
-                    <span class="">
-                        {{ $reference->status == 1 ? 'Verified' : 'In Review' }}
+                        <tr class="sub-head"><td colspan="3">Suitability for Early Years (Children's Safeguarding)</td></tr>
+                        <tr>
+                            <td>Do you have any concerns about their suitability to work with children?</td>
+                            <td class="check-cell">{{ $reference->suitability_children == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->suitability_children == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Is there any reason why they should not work in an Early Years setting?</td>
+                            <td class="check-cell">{{ $reference->not_work_early_years == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->not_work_early_years == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Would you be willing to re-employ this person?</td>
+                            <td class="check-cell">{{ $reference->re_employ == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->re_employ == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        
+                        <tr class="sub-head"><td colspan="3">Consent and Data Protection</td></tr>
+                        <tr>
+                            <td>Permission to disclose this reference to the applicant if requested?</td>
+                            <td class="check-cell">{{ $reference->permission_disclose == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->permission_disclose == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>I confirm the information provided is accurate and true.</td>
+                            <td class="check-cell">{{ $reference->accuracy_confirmation == 'Yes' ? '✔' : '' }}</td>
+                            <td class="check-cell">{{ $reference->accuracy_confirmation == 'No' ? '✔' : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="section-title">Section 6: Authorization</h3>
+            <div class="signature-block">
+                <div class="field">
+                    <label>Signature of Referee:</label>
+                    <span class="data-span" style="font-family: 'Brush Script MT', cursive; font-size: 20px;">
+                        {{ $reference->referee_signature }}
                     </span>
                 </div>
+                <div class="field">
+                    <label>Printed Name:</label>
+                    <span class="data-span">{{ $reference->referee_first }} {{ $reference->referee_last }}</span>
+                </div>
+                <div class="field">
+                    <label>Date of Signing:</label>
+                    <span class="data-span">{{ $reference->created_at->format('d/m/Y') }}</span>
+                </div>
             </div>
-        </div>
+
+            <footer class="report-footer">
+                <p><strong>{{ $company->company_name ?? "Angelina's Day Care Limited" }}</strong></p>
+                <p>Ensuring a safe and nurturing environment for every child.</p>
+                <p>Confidential Document &copy; {{ date('Y') }}</p>
+            </footer>
+        </section>
     </div>
 </div>
 @endsection

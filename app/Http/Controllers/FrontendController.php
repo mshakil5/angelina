@@ -657,34 +657,40 @@ class FrontendController extends Controller
 
     public function referenceStore(Request $request)
     {
-        // 1. Validation - Match these keys to your new form 'name' attributes
+        // 1. Validation - All 'required' fields from your HTML must be here
         $validated = $request->validate([
-            'candidate_first'   => 'required|string|max:255',
-            'candidate_last'    => 'required|string|max:255',
-            'referee_name'      => 'required|string|max:255', // Changed to match new form
-            'referee_email'     => 'required|email|max:255',
-            'relationship_type' => 'required|in:Employer,Colleague',
-            'digital_signature' => 'required|string|max:255',
-            'sig_tick'          => 'required', // Ensures they checked the declaration
+            'candidate_first'       => 'required|string|max:255',
+            'candidate_last'        => 'required|string|max:255',
+            'referee_first'         => 'required|string|max:255',
+            'referee_email'        => 'required|email|max:255',
+            'relationship_type'    => 'required|in:Employer,Colleague',
             
-            // Safeguarding validation
-            'suitability_children' => 'required',
-            're_employ'            => 'required',
+            // Safeguarding
+            'confidentiality_maintenance' => 'required',
+            'disciplinary_procedures'     => 'required',
+            'suitability_children'        => 'required',
+            'not_work_early_years'        => 'required',
+            're_employ'                   => 'required',
+            'permission_disclose'         => 'required',
+            'accuracy_confirmation'       => 'required',
+            
+            // Declaration
+            'sig_tick'             => 'required',
+            'referee_signature'    => 'required|string|max:255',
         ]);
 
-        // 2. Logging for audit trails
-        Log::info('New Reference Submission: ', $request->except(['_token']));
+        // 2. Data Preparation
+        $data = $request->except(['_token', 'sig_tick']);
 
-        // 3. Save to Database
-        $data = $request->all();
-    
-        // Provide a default value for the old required field
-        $data['criteria'] = $data['criteria'] ?? 'N/A'; 
-        $data['accuracy'] = $data['accuracy'] ?? 'Yes';
+        // Handle checkboxes/defaults if your DB requires specific old fields
+        $data['criteria'] = $request->input('job_criteria', 'N/A'); 
+        $data['accuracy'] = $request->input('accuracy_confirmation', 'Yes');
 
+        // 3. Save
         Reference::create($data);
 
-        // 4. Redirect back with a Flash Message
+        Log::info('New Reference Submission for: ' . $request->candidate_first . ' ' . $request->candidate_last);
+
         return redirect()->back()->with('success', 'Thank you! The reference has been securely submitted.');
     }
 

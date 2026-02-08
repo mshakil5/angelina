@@ -42,10 +42,7 @@ class ReferenceController extends Controller
     public function show($id)
     {
         $reference = Reference::findOrFail($id);
-
         // dd($reference);
-
-
         $company = CompanyDetails::first();
         return view('admin.references.show', compact('reference', 'company'));
     }
