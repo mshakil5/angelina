@@ -15,6 +15,24 @@
 
 <section class="content">
     <div class="container-fluid">
+
+
+        {{-- Validation Error Message Block --}}
+        @if ($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
+                <h5 class="mb-2"><i class="fas fa-exclamation-triangle mr-2"></i> Whoops! There were some problems:</h5>
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+
         <form action="{{ route('reference.update', $reference->id) }}" method="POST">
             @csrf
             @method('PUT')
