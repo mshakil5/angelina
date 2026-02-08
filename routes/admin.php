@@ -224,6 +224,8 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     Route::get('/references', [ReferenceController::class, 'index'])->name('reference.index');
     Route::get('/references/{id}', [ReferenceController::class, 'show'])->name('reference.show');
+    Route::get('/references/{id}/edit', [ReferenceController::class, 'edit'])->name('reference.edit');
+    Route::put('/references/{id}/update', [ReferenceController::class, 'update'])->name('reference.update');
 
     
     Route::get('about', [AboutController::class,'index'])->name('about.index');

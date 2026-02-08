@@ -3,6 +3,18 @@
 
 @section('content')
 <div class="container-fluid pt-3">
+
+    {{-- Success Message Alert --}}
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-3" role="alert">
+            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+
     <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">
             <h5 class="mb-0">All Reference Submissions</h5>
