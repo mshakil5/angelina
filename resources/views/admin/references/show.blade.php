@@ -194,8 +194,8 @@
 
     <div class="report-wrapper">
         <header class="main-header">
-            @if($company && $company->logo)
-                <img src="{{ asset('uploads/company/' . $company->logo) }}" alt="Logo" class="logo-img">
+            @if($company && $company->company_logo)
+                <img src="{{ asset('images/company/' . $company->company_logo) }}" alt="Logo" class="logo-img">
             @endif
             <h1>{{ $company->company_name ?? "Angelina's Day Care" }}</h1>
             <h2>Employee Reference Request Form</h2>
