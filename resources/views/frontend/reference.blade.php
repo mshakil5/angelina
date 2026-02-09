@@ -227,6 +227,10 @@
                         <input type="text" name="referee_last" class="form-control-custom" placeholder="Last Name" value="{{ old('referee_last') }}" required>
                     </div>
                     <div class="col-md-6 form-group-custom">
+                        <label>Submission Date</label>
+                        <input type="date" name="submission_date" class="form-control-custom" value="{{ old('submission_date') }}">
+                    </div>
+                    <div class="col-md-6 form-group-custom">
                         <label>Email Address <span>*</span></label>
                         <input type="email" name="referee_email" class="form-control-custom" value="{{ old('referee_email') }}" required>
                     </div>
@@ -234,10 +238,10 @@
                         <label>Company / Organisation</label>
                         <input type="text" name="referee_company" class="form-control-custom" value="{{ old('referee_company') }}">
                     </div>
-                    <div class="col-md-12 form-group-custom">
+                    {{-- <div class="col-md-12 form-group-custom">
                         <label>Organisation Address</label>
                         <textarea name="org_address" class="form-control-custom" rows="2">{{ old('org_address') }}</textarea>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12 form-group-custom">
                         <label>Street </label>
                         <input type="text" name="street" class="form-control-custom" value="{{ old('street') }}">
@@ -285,6 +289,10 @@
                             <label>Capacity of Relationship</label>
                             <input type="text" name="relationship_capacity" class="form-control-custom" value="{{ old('relationship_capacity') }}">
                         </div>
+                        <div class="col-md-12 form-group-custom">
+                            <label> Employment Details </label>
+                            <input type="text" name="employment_details" class="form-control-custom" value="{{ old('employment_details') }}">
+                        </div>
                         <div class="col-md-6 form-group-custom">
                             <label>Start Date</label>
                             <input type="date" name="start_date" class="form-control-custom" value="{{ old('start_date') }}">
@@ -308,6 +316,10 @@
                         <div class="col-md-12 form-group-custom">
                             <label>Reason for Leaving</label>
                             <input type="text" name="reason_for_leaving" class="form-control-custom" value="{{ old('reason_for_leaving') }}">
+                        </div>
+                        <div class="col-md-12 form-group-custom">
+                            <label>Performance and conduct</label>
+                            <input type="text" name="performance_and_conduct" class="form-control-custom" value="{{ old('performance_and_conduct') }}">
                         </div>
                         <div class="col-md-4 form-group-custom">
                             <label>Timekeeping</label>
@@ -340,11 +352,11 @@
                 <div id="colleague_section" style="display:none;">
                     <div class="row">
                         <div class="col-md-6 form-group-custom">
-                            <label>How you know them</label>
+                            <label>How you know them individual</label>
                             <input type="text" name="how_known" class="form-control-custom" value="{{ old('how_known') }}">
                         </div>
                         <div class="col-md-6 form-group-custom">
-                            <label>Capacity</label>
+                            <label>Capacity in which you know them</label>
                             <input type="text" name="relationship_capacity_col" class="form-control-custom" value="{{ old('relationship_capacity_col') }}">
                         </div>
                         <div class="col-md-12 form-group-custom">
@@ -366,6 +378,10 @@
                         <div class="col-md-12 form-group-custom">
                             <label>Overall Recommendation</label>
                             <textarea name="overall_recommendation" class="form-control-custom" rows="2">{{ old('overall_recommendation') }}</textarea>
+                        </div>
+                        <div class="col-md-12 form-group-custom">
+                            <label>Willingness to provide further information</label>
+                            <input type="text" name="further_information" class="form-control-custom" value="{{ old('further_information') }}">
                         </div>
                         <div class="col-md-6 form-group-custom">
                             <label>Referee Signature <span>*</span></label>
