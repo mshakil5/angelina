@@ -215,41 +215,68 @@
 
             <h3 class="section-title">Section 2: Referee Information</h3>
             <div class="field-stack">
-                <div class="field"><label>Referee Full Name:</label><span class="data-span">{{ $reference->referee_first }} {{ $reference->referee_last }}</span></div>
-                <div class="field"><label>Job Title / Position:</label><span class="data-span">{{ $reference->relationship_capacity }}</span></div>
-                <div class="field"><label>Company/Organisation:</label><span class="data-span">{{ $reference->referee_company }}</span></div>
+                <div class="field"><label>First Name:</label><span class="data-span"> {{ $reference->referee_first }}</span></div>
+                <div class="field"><label>Last Name:</label><span class="data-span"> {{ $reference->referee_last }}</span></div>
                 <div class="field"><label>Email Address:</label><span class="data-span">{{ $reference->referee_email }}</span></div>
+                <div class="field"><label>Company/Organisation:</label><span class="data-span">{{ $reference->referee_company }}</span></div>
+                {{-- <div class="field"><label>Job Title / Position:</label><span class="data-span">{{ $reference->relationship_capacity }}</span></div> --}}
+
+                <div class="field"><label>Street:</label><span class="data-span">{{ $reference->street }}</span></div>
+                <div class="field"><label>City:</label><span class="data-span">{{ $reference->city }}</span></div>
+                <div class="field"><label>State/Region::</label><span class="data-span">{{ $reference->state_region }}</span></div>
+                <div class="field"><label>ZIP/Postal Code:</label><span class="data-span">{{ $reference->zip_code }}</span></div>
+                <div class="field"><label>Country:</label><span class="data-span">{{ $reference->country }}</span></div>
                 <div class="field"><label>Telephone Number:</label><span class="data-span">{{ $reference->phone }}</span></div>
-                <div class="field"><label>Street Address:</label><span class="data-span">{{ $reference->street }}</span></div>
-                <div class="field"><label>City, State, ZIP:</label><span class="data-span">{{ $reference->city }}, {{ $reference->state_region }}, {{ $reference->zip_code }}</span></div>
+
             </div>
 
             <h3 class="section-title">Section 3: Employment History & Relationship</h3>
             <div class="field-stack">
                 <div class="field"><label>Duration of acquaintance:</label><span class="data-span">{{ $reference->acquaintance_duration }}</span></div>
                 <div class="field"><label>In what capacity do you know them?:</label><span class="data-span">{{ $reference->relationship_type }}</span></div>
+                <div class="field"><label>Employment details:</label><span class="data-span">{{ $reference->employment_details }}</span></div>
                 <div class="field"><label>Employment Start Date:</label><span class="data-span">{{ $reference->start_date }}</span></div>
                 <div class="field"><label>Employment End Date:</label><span class="data-span">{{ $reference->end_date }}</span></div>
                 <div class="field"><label>Position held by applicant:</label><span class="data-span">{{ $reference->position }}</span></div>
+
+                <div class="field"><label>Role and responsibilities:</label><span class="data-span">{{ $reference->roles_responsibilities }}</span></div>
                 <div class="field"><label>Reason for leaving:</label><span class="data-span">{{ $reference->reason_for_leaving }}</span></div>
+                <div class="field"><label>Final salary: </label><span class="data-span">{{ $reference->final_salary }}</span></div>
+                <div class="field"><label>Performance and conduct: </label><span class="data-span">{{ $reference->performance_and_conduct }}</span></div>
                 <div class="field"><label>Assessment of Timekeeping:</label><span class="data-span">{{ $reference->timekeeping_standard }}</span></div>
                 <div class="field"><label>Assessment of Attendance:</label><span class="data-span">{{ $reference->attendance_standard }}</span></div>
+
+
+                <div class="field"><label>Sick days in the last 2 years:</label><span class="data-span">{{ $reference->sick_days }}</span></div>
+                <div class="field"><label>Job criteria meeting:</label><span class="data-span">{{ $reference->job_criteria }}</span></div>
             </div>
+
+
 
             <div class="page-break"></div>
 
-            <h3 class="section-title">Section 4: Professional Competency & Character</h3>
+            <div style="margin-bottom: 40px;" class="gap"></div> <br> <br>
+            <h3 class="section-title">Section 4: Relationship to Candidate: Colleague</h3>
             <div class="field-stack">
-                <div class="field"><label>How do you describe their professional character?:</label><span class="data-span">{{ $reference->character_assessment ?? 'N/A' }}</span></div>
-                <div class="field"><label>Suitability for the specific role applied for:</label><span class="data-span">{{ $reference->suitability_role }}</span></div>
-                <div class="field"><label>Key strengths and areas for development:</label><span class="data-span">{{ $reference->qualities_characteristics ?? 'N/A' }}</span></div>
-                <div class="field"><label>Overall recommendation for employment:</label><span class="data-span">{{ $reference->overall_recommendation ?? 'N/A' }}</span></div>
+
+
+                <div class="field"><label>How you know the individual</label><span class="data-span">{{ $reference->how_known ?? '' }}</span></div>
+                <div class="field"><label>Capacity in which you know them</label><span class="data-span">{{ $reference->relationship_capacity_col ?? '' }}</span></div>
+                <div class="field"><label>Character assessment</label><span class="data-span">{{ $reference->character_assessment ?? '' }}</span></div>
+                <div class="field"><label>Qualities and characteristics</label><span class="data-span">{{ $reference->qualities_characteristics ?? '' }}</span></div>
+
+
+                <div class="field"><label>Examples and evidence</label><span class="data-span">{{ $reference->examples_evidence ?? '' }}</span></div>
+                <div class="field"><label>Suitability for position/role</label><span class="data-span">{{ $reference->suitability_role ?? '' }}</span></div>
+                <div class="field"><label>Conclusion</label><span class="data-span">{{ $reference->extra1 ?? '' }}</span></div>
+                <div class="field"><label>Overall recommendation</label><span class="data-span">{{ $reference->overall_recommendation ?? '' }}</span></div>
+                <div class="field"><label>Willingness to provide further information</label><span class="data-span">{{ $reference->further_information ?? '' }}</span></div>
+                <div class="field"><label>Signature of the Referee</label><span class="data-span">{{ $reference->referee_signature ?? '' }}</span></div>
+                <div class="field"><label>Printed Name</label><span class="data-span">{{ $reference->printed_name ?? '' }}</span></div>
             </div>
 
 
-            <div style="margin-bottom: 40px;" class="gap"></div>
-            <br><br>
-            <h3 class="section-title">Section 5: Formal Regulatory Declarations</h3>
+            <h3 class="section-title">Section 5: Insert your comments </h3>
             <div class="table-section">
                 <table>
                     <thead>
@@ -262,7 +289,7 @@
                     <tbody>
                         {{-- Confidentiality --}}
                         <tr>
-                            <td>Did the applicant maintain strict confidentiality?</td>
+                            <td>Confidentiality Maintenance (Yes/No):</td>
                             <td class="check-cell">{{ $reference->confidentiality_maintenance == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->confidentiality_maintenance == 'No' ? '✔' : '' }}</td>
                         </tr>
@@ -274,7 +301,7 @@
                         
                         {{-- Disciplinary --}}
                         <tr>
-                            <td>Was the applicant subject to any formal disciplinary procedures?</td>
+                            <td>Formal Disciplinary Procedures (Yes/No):</td>
                             <td class="check-cell">{{ $reference->disciplinary_procedures == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->disciplinary_procedures == 'No' ? '✔' : '' }}</td>
                         </tr>
@@ -301,14 +328,14 @@
                             <td class="check-cell">{{ $reference->re_employ == 'No' ? '✔' : '' }}</td>
                         </tr>
                         
-                        <tr class="sub-head"><td colspan="3">Consent and Data Protection</td></tr>
+                        <tr class="sub-head"><td colspan="3">Permission and Confirmation:</td></tr>
                         <tr>
-                            <td>Permission to disclose this reference to the applicant if requested?</td>
+                            <td>Permission to Disclose Details to Applicant (Yes/No):</td>
                             <td class="check-cell">{{ $reference->permission_disclose == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->permission_disclose == 'No' ? '✔' : '' }}</td>
                         </tr>
                         <tr>
-                            <td>I confirm the information provided is accurate and true.</td>
+                            <td>Information Accuracy Confirmation (Yes/No):</td>
                             <td class="check-cell">{{ $reference->accuracy_confirmation == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->accuracy_confirmation == 'No' ? '✔' : '' }}</td>
                         </tr>
@@ -337,7 +364,6 @@
             <footer class="report-footer">
                 <p><strong>{{ $company->company_name ?? "Angelina's Day Care Limited" }}</strong></p>
                 <p>Ensuring a safe and nurturing environment for every child.</p>
-                <p>Confidential Document &copy; {{ date('Y') }}</p>
             </footer>
         </section>
     </div>

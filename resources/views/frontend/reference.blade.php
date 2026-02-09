@@ -376,6 +376,10 @@
                             <textarea name="suitability_role" class="form-control-custom" rows="2">{{ old('suitability_role') }}</textarea>
                         </div>
                         <div class="col-md-12 form-group-custom">
+                            <label>Conclusion</label>
+                            <textarea name="extra1" class="form-control-custom" rows="2">{{ old('extra1') }}</textarea>
+                        </div>
+                        <div class="col-md-12 form-group-custom">
                             <label>Overall Recommendation</label>
                             <textarea name="overall_recommendation" class="form-control-custom" rows="2">{{ old('overall_recommendation') }}</textarea>
                         </div>
