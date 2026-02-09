@@ -356,7 +356,7 @@ or line manager, teacher, or even a client) </h3>
                 </table>
             </div>
 
-            <h3 class="section-title">Section 6: Authorization</h3>
+            <h3 class="section-title">Section 5: Authorization</h3>
             <div class="signature-block">
                 <div class="field">
                     <label>Signature of Referee:</label>
