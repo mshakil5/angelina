@@ -230,53 +230,51 @@
 
             </div>
 
-            <h3 class="section-title">Section 3: Employment History & Relationship</h3>
-            <div class="field-stack">
-                <div class="field"><label>Duration of acquaintance:</label><span class="data-span">{{ $reference->acquaintance_duration }}</span></div>
-                <div class="field"><label>In what capacity do you know them?:</label><span class="data-span">{{ $reference->relationship_type }}</span></div>
-                <div class="field"><label>Employment details:</label><span class="data-span">{{ $reference->employment_details }}</span></div>
-                <div class="field"><label>Employment Start Date:</label><span class="data-span">{{ $reference->start_date }}</span></div>
-                <div class="field"><label>Employment End Date:</label><span class="data-span">{{ $reference->end_date }}</span></div>
-                <div class="field"><label>Position held by applicant:</label><span class="data-span">{{ $reference->position }}</span></div>
+            @if($reference->relationship_type == 'Employer')
+                <h3 class="section-title">Section 3: Relationship to Candidate: Employer (complete this section if you were an employer)</h3>
+                <div class="field-stack">
+                    <div class="field"><label>Duration of acquaintance:</label><span class="data-span">{{ $reference->acquaintance_duration }}</span></div>
+                    <div class="field"><label>In what capacity do you know them?:</label><span class="data-span">{{ $reference->relationship_type }}</span></div>
+                    <div class="field"><label>Employment details:</label><span class="data-span">{{ $reference->employment_details }}</span></div>
+                    <div class="field"><label>Employment Start Date:</label><span class="data-span">{{ $reference->start_date }}</span></div>
+                    <div class="field"><label>Employment End Date:</label><span class="data-span">{{ $reference->end_date }}</span></div>
+                    <div class="field"><label>Position held by applicant:</label><span class="data-span">{{ $reference->position }}</span></div>
 
-                <div class="field"><label>Role and responsibilities:</label><span class="data-span">{{ $reference->roles_responsibilities }}</span></div>
-                <div class="field"><label>Reason for leaving:</label><span class="data-span">{{ $reference->reason_for_leaving }}</span></div>
-                <div class="field"><label>Final salary: </label><span class="data-span">{{ $reference->final_salary }}</span></div>
-                <div class="field"><label>Performance and conduct: </label><span class="data-span">{{ $reference->performance_and_conduct }}</span></div>
-                <div class="field"><label>Assessment of Timekeeping:</label><span class="data-span">{{ $reference->timekeeping_standard }}</span></div>
-                <div class="field"><label>Assessment of Attendance:</label><span class="data-span">{{ $reference->attendance_standard }}</span></div>
+                    <div class="field"><label>Role and responsibilities:</label><span class="data-span">{{ $reference->roles_responsibilities }}</span></div>
+                    <div class="field"><label>Reason for leaving:</label><span class="data-span">{{ $reference->reason_for_leaving }}</span></div>
+                    <div class="field"><label>Final salary: </label><span class="data-span">{{ $reference->final_salary }}</span></div>
+                    <div class="field"><label>Performance and conduct: </label><span class="data-span">{{ $reference->performance_and_conduct }}</span></div>
+                    <div class="field"><label>Assessment of Timekeeping:</label><span class="data-span">{{ $reference->timekeeping_standard }}</span></div>
+                    <div class="field"><label>Assessment of Attendance:</label><span class="data-span">{{ $reference->attendance_standard }}</span></div>
 
+                    <div class="field"><label>Sick days in the last 2 years:</label><span class="data-span">{{ $reference->sick_days }}</span></div>
+                    <div class="field"><label>Job criteria meeting:</label><span class="data-span">{{ $reference->job_criteria }}</span></div>
+                </div>
+            @endif
 
-                <div class="field"><label>Sick days in the last 2 years:</label><span class="data-span">{{ $reference->sick_days }}</span></div>
-                <div class="field"><label>Job criteria meeting:</label><span class="data-span">{{ $reference->job_criteria }}</span></div>
-            </div>
+            @if($reference->relationship_type == 'Colleague')
+                <div class="page-break"></div>
+                <h3 class="section-title">Section 3: Relationship to Candidate: Colleague (complete this section if you are a colleague, supervisor
+or line manager, teacher, or even a client) </h3>
+                <div class="field-stack">
+                    <div class="field"><label>How you know the individual</label><span class="data-span">{{ $reference->how_known ?? '' }}</span></div>
+                    <div class="field"><label>Capacity in which you know them</label><span class="data-span">{{ $reference->relationship_capacity_col ?? '' }}</span></div>
+                    <div class="field"><label>Character assessment</label><span class="data-span">{{ $reference->character_assessment ?? '' }}</span></div>
+                    <div class="field"><label>Qualities and characteristics</label><span class="data-span">{{ $reference->qualities_characteristics ?? '' }}</span></div>
 
-
-
-            <div class="page-break"></div>
-
-            <div style="margin-bottom: 40px;" class="gap"></div> <br> <br>
-            <h3 class="section-title">Section 4: Relationship to Candidate: Colleague</h3>
-            <div class="field-stack">
-
-
-                <div class="field"><label>How you know the individual</label><span class="data-span">{{ $reference->how_known ?? '' }}</span></div>
-                <div class="field"><label>Capacity in which you know them</label><span class="data-span">{{ $reference->relationship_capacity_col ?? '' }}</span></div>
-                <div class="field"><label>Character assessment</label><span class="data-span">{{ $reference->character_assessment ?? '' }}</span></div>
-                <div class="field"><label>Qualities and characteristics</label><span class="data-span">{{ $reference->qualities_characteristics ?? '' }}</span></div>
-
-
-                <div class="field"><label>Examples and evidence</label><span class="data-span">{{ $reference->examples_evidence ?? '' }}</span></div>
-                <div class="field"><label>Suitability for position/role</label><span class="data-span">{{ $reference->suitability_role ?? '' }}</span></div>
-                <div class="field"><label>Conclusion</label><span class="data-span">{{ $reference->extra1 ?? '' }}</span></div>
-                <div class="field"><label>Overall recommendation</label><span class="data-span">{{ $reference->overall_recommendation ?? '' }}</span></div>
-                <div class="field"><label>Willingness to provide further information</label><span class="data-span">{{ $reference->further_information ?? '' }}</span></div>
-                <div class="field"><label>Signature of the Referee</label><span class="data-span">{{ $reference->referee_signature ?? '' }}</span></div>
-                <div class="field"><label>Printed Name</label><span class="data-span">{{ $reference->printed_name ?? '' }}</span></div>
-            </div>
+                    <div class="field"><label>Examples and evidence</label><span class="data-span">{{ $reference->examples_evidence ?? '' }}</span></div>
+                    <div class="field"><label>Suitability for position/role</label><span class="data-span">{{ $reference->suitability_role ?? '' }}</span></div>
+                    <div class="field"><label>Conclusion</label><span class="data-span">{{ $reference->extra1 ?? '' }}</span></div>
+                    <div class="field"><label>Overall recommendation</label><span class="data-span">{{ $reference->overall_recommendation ?? '' }}</span></div>
+                    <div class="field"><label>Willingness to provide further information</label><span class="data-span">{{ $reference->further_information ?? '' }}</span></div>
+                    <div class="field"><label>Signature of the Referee</label><span class="data-span">{{ $reference->referee_signature ?? '' }}</span></div>
+                    <div class="field"><label>Printed Name</label><span class="data-span">{{ $reference->printed_name ?? '' }}</span></div>
+                </div>
+            @endif
 
 
-            <h3 class="section-title">Section 5: Insert your comments </h3>
+                <div style="margin-bottom: 40px;" class="gap"></div> <br> <br>
+            <h3 class="section-title">Section 4: Insert your comments </h3>
             <div class="table-section">
                 <table>
                     <thead>
@@ -313,20 +311,35 @@
 
                         <tr class="sub-head"><td colspan="3">Suitability for Early Years (Children's Safeguarding)</td></tr>
                         <tr>
-                            <td>Do you have any concerns about their suitability to work with children?</td>
+                            <td>Any Concerns About Suitability to Work with Children (Yes/No):</td>
                             <td class="check-cell">{{ $reference->suitability_children == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->suitability_children == 'No' ? '✔' : '' }}</td>
                         </tr>
+                        @if($reference->suitability_details)
+                        <tr class="details-row">
+                            <td colspan="3"><strong>Details:</strong> {{ $reference->suitability_details }}</td>
+                        </tr>
+                        @endif
                         <tr>
-                            <td>Is there any reason why they should not work in an Early Years setting?</td>
+                            <td>Any Reason Applicant Should Not Work in Early Years Setting (Yes/No):</td>
                             <td class="check-cell">{{ $reference->not_work_early_years == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->not_work_early_years == 'No' ? '✔' : '' }}</td>
                         </tr>
+                        @if($reference->not_work_details)
+                        <tr class="details-row">
+                            <td colspan="3"><strong>Details:</strong> {{ $reference->not_work_details }}</td>
+                        </tr>
+                        @endif
                         <tr>
-                            <td>Would you be willing to re-employ this person?</td>
+                            <td>Willingness to Re-employ (Yes/No):</td>
                             <td class="check-cell">{{ $reference->re_employ == 'Yes' ? '✔' : '' }}</td>
                             <td class="check-cell">{{ $reference->re_employ == 'No' ? '✔' : '' }}</td>
                         </tr>
+                        @if($reference->re_employ_no_reasons)
+                        <tr class="details-row">
+                            <td colspan="3"><strong>Reasons:</strong> {{ $reference->re_employ_no_reasons }}</td>
+                        </tr>
+                        @endif
                         
                         <tr class="sub-head"><td colspan="3">Permission and Confirmation:</td></tr>
                         <tr>
