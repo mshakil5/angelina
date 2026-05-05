@@ -36,6 +36,8 @@
                                             <option value="Employee Dashboard">Employee Dashboard</option>
                                             <option value="Policy Manuals">Policy Manuals</option>
                                             <option value="Training Material">Training Material</option>
+                                            <option value="Staff">Staff</option>
+                                            <option value="Child">Child</option>
                                         </select>
                                     </div>
                                 </div>
