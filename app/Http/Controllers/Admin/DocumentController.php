@@ -15,6 +15,10 @@ class DocumentController extends Controller
     {
         if ($request->ajax()) {
             $data = Document::latest();
+            if (!empty($request->category_filter)) {
+                $data->where('category', $request->category_filter);
+            }
+        
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('document', function($row) {

@@ -111,8 +111,19 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-secondary">
-                    <div class="card-header">
-                        <h3 class="card-title">All Documents</h3>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">All Documents</h3>
+                        <div class="d-flex align-items-center">
+                            <label class="mb-0 mr-2 font-weight-bold text-sm">Filter by Category:</label>
+                            <select name="category_filter" id="category_filter" class="form-control form-control-sm" style="width: 200px;">
+                                <option value="">All Categories</option>
+                                <option value="Employee Dashboard">Employee Dashboard</option>
+                                <option value="Policy Manuals">Policy Manuals</option>
+                                <option value="Training Material">Training Material</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Child">Child</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table cell-border table-striped">
@@ -122,7 +133,8 @@
                                     <th>Category</th>
                                     <th>Title</th>
                                     <th>Documents</th>
-                                    <th>Video Link</th> <th>Sort No.</th>
+                                    <th>Video Link</th>
+                                    <th>Sort No.</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -165,14 +177,12 @@
             form_data.append("sl", $("#sl").val());
             form_data.append("link", $("#link").val());
 
-            // Handle pdf upload
             var imageInput = document.getElementById('document');
             if(imageInput.files && imageInput.files[0]) {
                 form_data.append("document", imageInput.files[0]);
             }
 
             if($(this).val() == 'Create') {
-                // Create
                 $.ajax({
                     url: url,
                     method: "POST",
@@ -195,9 +205,7 @@
                     }
                 });
             } else {
-                // Update
                 form_data.append("codeid", $("#codeid").val());
-                
                 $.ajax({
                     url: upurl,
                     type: "POST",
@@ -239,12 +247,6 @@
             $("#description").val(data.description);
             $("#sl").val(data.sl);
             $("#codeid").val(data.id);
-            
-            // Set preview image
-            if (data.image) {
-                $("#preview-image").attr("src", '/images/documents/' + data.image).show();
-            }
-
             $("#addBtn").val('Update');
             $("#addBtn").html('Update');
             $("#addThisFormContainer").show(300);
@@ -257,11 +259,8 @@
             $("#addBtn").html('Create');
             $("#addThisFormContainer").slideUp(200);
             $("#newBtn").slideDown(200);
-            $('#preview-image').attr('src', '#');
             $("#cardTitle").text('Add new document');
         }
-        
-        previewImage('#image', '#preview-image');
 
         // Status toggle
         $(document).on('change', '.toggle-status', function() {
@@ -312,12 +311,16 @@
             });
         });
 
+        // ✅ FIXED: Added data function and change event
         var table = $('#example1').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
                 url: "{{ route('documents.index') }}",
                 type: "GET",
+                data: function (d) {
+                    d.category_filter = $('#category_filter').val();
+                },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
                 }
@@ -327,7 +330,7 @@
                 { data: 'category', name: 'category' },
                 { data: 'title', name: 'title' },
                 { data: 'document', name: 'document', orderable: false, searchable: false },
-                { data: 'link', name: 'link', orderable: false }, // New Link Column
+                { data: 'link', name: 'link', orderable: false },
                 { data: 'sl', name: 'sl' },
                 { data: 'status', name: 'status', orderable: false, searchable: false },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
@@ -337,8 +340,13 @@
             autoWidth: false,
         });
 
+        // ✅ FIXED: Add change event listener
+        $('#category_filter').on('change', function () {
+            table.draw();
+        });
+
         function reloadTable() {
-          table.ajax.reload(null, false);
+            table.ajax.reload(null, false);
         }
     });
 </script>
