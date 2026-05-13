@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\ProductFaqController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JobListController;
 use App\Http\Controllers\Admin\ReferenceController;
+use App\Http\Controllers\DBSController;
 
 Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], function(){
     Route::get('/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
@@ -234,6 +235,12 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('about/update', [AboutController::class,'update']);
     Route::get('about/{id}/delete', [AboutController::class,'delete']);
     Route::post('about/status', [AboutController::class,'toggleStatus']);
+
+    Route::get('/dbs', [DBSController::class, 'index'])->name('dbs.index');
+    Route::get('/dbs/{id}', [DBSController::class, 'show'])->name('dbs.show');
+    Route::get('/dbs/{id}/edit', [DBSController::class, 'edit'])->name('dbs.edit');
+    Route::put('/dbs/{id}/update', [DBSController::class, 'update'])->name('dbs.update');
+    Route::post('/dbs/{id}/delete-file', [DBSController::class, 'deleteFile'])->name('dbs.delete-file');
 
 
 });

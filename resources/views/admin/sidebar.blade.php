@@ -38,6 +38,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{ route('dbs.index') }}" class="nav-link {{ Route::is('dbs.index') || Route::is('dbs.show') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-address-card"></i>
+            <p>DBS Form</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('allslider') }}" class="nav-link {{ Route::is('allslider') ? 'active' : '' }}">
             <i class="nav-icon fas fa-sliders-h"></i>
             <p>Sliders</p>
