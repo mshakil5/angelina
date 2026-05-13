@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactContoller;
+use App\Http\Controllers\DBSController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FrontendController;
@@ -53,6 +54,9 @@ Route::get('/jobs/{slug}', [FrontendController::class, 'jobDetails'])->name('job
 Route::post('/jobs/apply', [FrontendController::class, 'applyJob'])->name('job.apply');
 Route::get('/reference-form', [FrontendController::class, 'reference'])->name('reference');
 Route::post('/reference-form', [FrontendController::class, 'referenceStore'])->name('referenceStore');
+
+Route::get('/dbs-form', [DBSController::class, 'dbsForm'])->name('dbsForm');
+Route::post('/dbs-form', [DBSController::class, 'dbsStore'])->name('dbsStore');
 
 
 
