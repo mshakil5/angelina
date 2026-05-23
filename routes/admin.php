@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductFeatureController;
 use App\Http\Controllers\Admin\ProductFaqController;
+use App\Http\Controllers\Admin\UserDocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JobListController;
 use App\Http\Controllers\Admin\ReferenceController;
@@ -44,6 +45,12 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/user/{id}/delete', [UserController::class, 'destroy'])->name('user.destroy');
     Route::post('/user/status', [UserController::class, 'toggleStatus'])->name('user.status');
     Route::get('/user/commencement/{id}', [UserController::class, 'commencement'])->name('user.commencement');
+
+    // Employee documents
+    Route::get('/user/{id}/documents',            [UserDocumentController::class, 'index'])->name('user.document.index');
+    Route::post('/user/{id}/documents',           [UserDocumentController::class, 'store'])->name('user.document.store');
+    Route::get('/user/documents/{doc}/download',  [UserDocumentController::class, 'download'])->name('user.document.download');
+    Route::delete('/user/documents/{doc}',        [UserDocumentController::class, 'destroy'])->name('user.document.destroy');
 
     
     Route::get('/admin', [UserController::class, 'admin'])->name('admin.index');

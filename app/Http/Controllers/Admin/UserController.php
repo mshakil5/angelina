@@ -39,10 +39,11 @@ class UserController extends Controller
                             </div>';
                 })
                 ->addColumn('action', function($row) {
-                    $editBtn = '<button class="btn btn-sm btn-info edit" data-id="' . $row->id . '"><i class="fas fa-edit"></i></button>';
-                    $deleteBtn = '<button class="btn btn-sm btn-danger delete" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>';
-                    $viewBtn = '<a class="btn btn-sm btn-success" href="' . route('user.commencement', $row->id) . '"><i class="fas fa-eye"></i></a>';
-                    return $editBtn . ' ' . $deleteBtn . ' ' . $viewBtn;
+                    $editBtn     = '<button class="btn btn-sm btn-info edit" data-id="' . $row->id . '"><i class="fas fa-edit"></i></button>';
+                    $deleteBtn   = '<button class="btn btn-sm btn-danger delete" data-id="' . $row->id . '"><i class="fas fa-trash-alt"></i></button>';
+                    $viewBtn     = '<a class="btn btn-sm btn-success" href="' . route('user.commencement', $row->id) . '"><i class="fas fa-eye"></i></a>';
+                    $documentBtn = '<a class="btn btn-sm btn-warning" href="' . route('user.document.index', $row->id) . '" title="Documents"><i class="fas fa-folder-open"></i></a>';
+                    return $editBtn . ' ' . $deleteBtn . ' ' . $viewBtn . ' ' . $documentBtn;
                 })
                 ->rawColumns(['commencement', 'status', 'action'])
                 ->make(true);
