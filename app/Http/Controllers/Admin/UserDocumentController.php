@@ -69,4 +69,30 @@ class UserDocumentController extends Controller
         return redirect()->route('user.document.index', $userId)
                          ->with('success', 'Document deleted.');
     }
+
+    public function preview(EmployeeDocument $doc)
+    {
+        $fullPath = public_path($doc->file_path);
+
+        abort_unless(file_exists($fullPath), 404);
+
+        $extension = strtolower(pathinfo($doc->file_path, PATHINFO_EXTENSION));
+
+        $mimeMap = [
+            'pdf'  => 'application/pdf',
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png'  => 'image/png',
+        ];
+
+        // doc/docx can't be previewed in browser — fallback to download
+        if (!isset($mimeMap[$extension])) {
+            return response()->download($fullPath, $doc->original_name);
+        }
+
+        return response()->file($fullPath, [
+            'Content-Type'        => $mimeMap[$extension],
+            'Content-Disposition' => 'inline; filename="' . $doc->original_name . '"',
+        ]);
+    }
 }

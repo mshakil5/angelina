@@ -51,7 +51,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('/user/{id}/documents',           [UserDocumentController::class, 'store'])->name('user.document.store');
     Route::get('/user/documents/{doc}/download',  [UserDocumentController::class, 'download'])->name('user.document.download');
     Route::delete('/user/documents/{doc}',        [UserDocumentController::class, 'destroy'])->name('user.document.destroy');
-
+    Route::get('user/document/{doc}/preview', [UserDocumentController::class, 'preview'])->name('user.document.preview');
     
     Route::get('/admin', [UserController::class, 'admin'])->name('admin.index');
     Route::post('/admin', [UserController::class, 'adminstore'])->name('admin.store');

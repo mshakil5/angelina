@@ -78,7 +78,7 @@
                     <th>File Name</th>
                     <th>Notes</th>
                     <th>Uploaded</th>
-                    <th class="text-center" style="width:120px">Actions</th>
+                    <th class="text-center" style="width:150px">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -92,6 +92,26 @@
                       <td class="text-muted small">{{ $doc->notes ?? '—' }}</td>
                       <td class="text-muted small">{{ $doc->created_at->format('d M Y') }}</td>
                       <td class="text-center">
+
+                        {{-- Preview: images + PDF only --}}
+                        @php
+                            $ext = strtolower(pathinfo($doc->file_path, PATHINFO_EXTENSION));
+                            $previewable = in_array($ext, ['pdf','jpg','jpeg','png']);
+                        @endphp
+
+                        @if($previewable)
+                            <a href="{{ route('user.document.preview', $doc->id) }}"
+                              target="_blank"
+                              class="btn btn-sm btn-outline-primary" title="Preview">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        @else
+                            {{-- doc/docx: no browser preview, show disabled eye --}}
+                            <button class="btn btn-sm btn-outline-secondary" disabled title="No preview available">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        @endif
+
                         <a href="{{ route('user.document.download', $doc->id) }}"
                            class="btn btn-sm btn-outline-secondary" title="Download">
                           <i class="fas fa-download"></i>
