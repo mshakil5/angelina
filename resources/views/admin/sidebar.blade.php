@@ -140,8 +140,8 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('about.index') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('about.index') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('documents.index') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'active' : '' }}">
+    <li class="nav-item dropdown {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('about.index') || Route::is('admin.aboutUs') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy')  || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link dropdown-toggle {{ Route::is('admin.companyDetails') || Route::is('admin.company.seo-meta') || Route::is('admin.aboutUs') || Route::is('about.index') || Route::is('admin.foodChoice') || Route::is('admin.fees') || Route::is('admin.privacy-policy') || Route::is('admin.terms-and-conditions') || Route::is('allFaq') || Route::is('allcontactemail') || Route::is('sections.index') || Route::is('admin.jobInfo') || Route::is('banner.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-cog"></i>
             <p>
                 Settings <i class="fas fa-angle-left right"></i>
@@ -234,10 +234,52 @@
                     <p>Banner</p>
                 </a>
             </li>
+        </ul>
+    </li>
+
+    <li class="nav-item has-treeview {{ Route::is('documents.index') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ Route::is('documents.index') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-folder-open"></i>
+            <p>
+                Documents
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('documents.index') }}" class="nav-link {{ Route::is('documents.index') ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-sliders-h"></i>
-                    <p>Document</p>
+                <a href="{{ route('documents.index') }}" class="nav-link {{ Route::is('documents.index') && !request('category_filter') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>All Documents</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}?category_filter=Employee+Dashboard" class="nav-link {{ Route::is('documents.index') && request('category_filter') == 'Employee Dashboard' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon text-info"></i>
+                    <p>Employee Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}?category_filter=Policy+Manuals" class="nav-link {{ Route::is('documents.index') && request('category_filter') == 'Policy Manuals' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon text-warning"></i>
+                    <p>Policy Manuals</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}?category_filter=Training+Material" class="nav-link {{ Route::is('documents.index') && request('category_filter') == 'Training Material' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon text-success"></i>
+                    <p>Training Material</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}?category_filter=Staff" class="nav-link {{ Route::is('documents.index') && request('category_filter') == 'Staff' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon text-primary"></i>
+                    <p>Staff</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('documents.index') }}?category_filter=Child" class="nav-link {{ Route::is('documents.index') && request('category_filter') == 'Child' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon text-danger"></i>
+                    <p>Child</p>
                 </a>
             </li>
         </ul>

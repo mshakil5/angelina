@@ -117,11 +117,11 @@
                             <label class="mb-0 mr-2 font-weight-bold text-sm">Filter by Category:</label>
                             <select name="category_filter" id="category_filter" class="form-control form-control-sm" style="width: 200px;">
                                 <option value="">All Categories</option>
-                                <option value="Employee Dashboard">Employee Dashboard</option>
-                                <option value="Policy Manuals">Policy Manuals</option>
-                                <option value="Training Material">Training Material</option>
-                                <option value="Staff">Staff</option>
-                                <option value="Child">Child</option>
+                                <option value="Employee Dashboard" {{ request('category_filter') == 'Employee Dashboard' ? 'selected' : '' }}>Employee Dashboard</option>
+                                <option value="Policy Manuals" {{ request('category_filter') == 'Policy Manuals' ? 'selected' : '' }}>Policy Manuals</option>
+                                <option value="Training Material" {{ request('category_filter') == 'Training Material' ? 'selected' : '' }}>Training Material</option>
+                                <option value="Staff" {{ request('category_filter') == 'Staff' ? 'selected' : '' }}>Staff</option>
+                                <option value="Child" {{ request('category_filter') == 'Child' ? 'selected' : '' }}>Child</option>
                             </select>
                         </div>
                     </div>
@@ -338,7 +338,14 @@
             responsive: true,
             lengthChange: false,
             autoWidth: false,
+            initComplete: function() {
+                // Auto-draw with initial filter if category_filter exists in URL
+                if ($('#category_filter').val()) {
+                    table.draw();
+                }
+            }
         });
+
 
         // ✅ FIXED: Add change event listener
         $('#category_filter').on('change', function () {
