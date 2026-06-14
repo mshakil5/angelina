@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\CentralRecordController;
 use App\Http\Controllers\Admin\EventCategoryController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\Admin\ContentController;
@@ -248,6 +249,14 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('/dbs/{id}/edit', [DBSController::class, 'edit'])->name('dbs.edit');
     Route::put('/dbs/{id}/update', [DBSController::class, 'update'])->name('dbs.update');
     Route::post('/dbs/{id}/delete-file', [DBSController::class, 'deleteFile'])->name('dbs.delete-file');
+
+    // Central Records (Under DBS grouping if desired)
+    Route::get('/central-records', [CentralRecordController::class, 'index'])->name('central-records.index');
+    Route::post('/central-records', [CentralRecordController::class, 'store']);
+    Route::get('/central-records/{id}/edit', [CentralRecordController::class, 'edit']);
+    Route::post('/central-records/update', [CentralRecordController::class, 'update']);
+    Route::get('/central-records/{id}', [CentralRecordController::class, 'destroy']);
+    Route::get('/central-records-details/{id}', [CentralRecordController::class, 'show'])->name('central-records.show');
 
 
 });
