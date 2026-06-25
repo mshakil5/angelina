@@ -64,12 +64,12 @@
 </style>
 
 @php
-    $bgImage = $banner && $banner->feature_image
+    $bgImage = $banner?->feature_image
         ? asset('images/banner/' . $banner->feature_image)
         : asset('resources/frontend/images/page-banner2.jpg');
 @endphp
 
-@if ($banner->status == 1)
+@if($banner?->status == 1)
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center"
     style="background-image: url('{{ $bgImage }}');">
   <div class="container d-none">
@@ -85,6 +85,8 @@
   </div>
 </section>
 @endif
+
+
 
 
   <section class=" py-5 position-relative">
