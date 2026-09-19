@@ -37,11 +37,21 @@ class HomeController extends Controller
 
     public function userHome()
     {
-        $documents = \App\Models\Document::where('status', 1)->orderBy('sl', 'asc')->get();
+        // Define the allowed categories
+        $allowedCategories = ['Policy Manuals', 'Training Material'];
+
+        // Fetch only documents that belong to these categories
+        $documents = \App\Models\Document::where('status', 1)
+                        ->whereIn('category', $allowedCategories)
+                        ->orderBy('sl', 'asc')
+                        ->get();
+        
         $groupedDocuments = $documents->groupBy('category');
+        
         $userDocIds = \App\Models\UserDocumentCompletion::where('user_id', Auth::id())
-            ->pluck('document_id')
-            ->toArray();
+                        ->pluck('document_id')
+                        ->toArray();
+                        
         $banner = \App\Models\Banner::where('page', 'User Dashboard')->first();
 
         return view('user.dashboard', compact('groupedDocuments', 'userDocIds', 'banner'));
