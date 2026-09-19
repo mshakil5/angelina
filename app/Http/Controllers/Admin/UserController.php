@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $documentsCount = Document::where('category', 'Employee Dashboard')->where('status', 1)->count();
+            $documentsCount = Document::where('status', 1)->count();
             $users = User::withCount('documents')->where('is_type', 3)->latest()->get();
             return DataTables::of($users)
                 ->addIndexColumn()
