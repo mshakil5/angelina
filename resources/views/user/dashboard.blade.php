@@ -4,12 +4,162 @@
 <link href="{{ asset('resources/frontend/css/user.css') }}" rel="stylesheet">
 
 @php
-    $documents = \App\Models\Document::where('status', 1)->orderBy('sl', 'asc')->get();
-    $banner = \App\Models\Banner::where('page', 'User Dashboard')->first();
     $bgImage = $banner && $banner->feature_image
         ? asset('images/banner/' . $banner->feature_image)
         : asset('resources/frontend/images/page-banner2.jpg');
+
+    $catIcons = [
+        'Employee Dashboard' => 'fa-tachometer-alt',
+        'Policy Manuals'     => 'fa-book-open',
+        'Training Material'  => 'fa-graduation-cap',
+        'Staff'              => 'fa-users',
+        'Child'              => 'fa-child',
+    ];
 @endphp
+
+<style>
+    :root {
+        --theme-color: #FF7C8E;
+        --theme-dark: #f55f73;
+        --theme-light: #fff0f3;
+    }
+
+    .dash-shell { padding-top: 1.5rem; padding-bottom: 2rem; }
+
+    /* Progress Bar */
+    .seg-progress {
+        height: 12px;
+        background: #e3e6f0;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+    .seg-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--theme-dark), var(--theme-color));
+        border-radius: 1rem;
+        transition: width 0.5s ease;
+    }
+    .small-muted { color: #858796; font-size: 0.85rem; }
+
+    /* Category Accordion */
+    .category-block { 
+        margin-bottom: 1.5rem; 
+        border: 1px solid #f0f0f0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+    .cat-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        background: #fff;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.2s;
+    }
+    .cat-title-wrapper:hover { background: #fafafa; }
+    .cat-icon-circle {
+        width: 40px; height: 40px;
+        background: var(--theme-light);
+        color: var(--theme-dark);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem; flex-shrink: 0;
+    }
+    .cat-name { font-size: 1.1rem; font-weight: 700; color: #333; margin: 0; }
+    .cat-badge {
+        background: var(--theme-color); color: #fff;
+        border-radius: 1rem; padding: 0.2rem 0.75rem;
+        font-size: 0.75rem; font-weight: 600;
+    }
+    .cat-badge.all-done { background: #1cc88a; }
+    .btn-toggle-accordion {
+        background: transparent; border: none; color: #858796;
+        font-size: 1rem; cursor: pointer; padding: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    .category-block.collapsed .btn-toggle-accordion {
+        transform: rotate(-90deg);
+    }
+    .cat-body {
+        padding: 1.25rem;
+        background: #fdfdfd;
+        border-top: 1px solid #f0f0f0;
+        display: block;
+    }
+    .category-block.collapsed .cat-body { display: none; }
+
+    /* Document Cards */
+    .doc-card {
+        border: 1px solid #f0f0f0;
+        border-radius: 0.75rem;
+        height: 100%;
+        transition: all 0.3s ease;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        border-left: 4px solid transparent;
+    }
+    .doc-card:hover {
+        box-shadow: 0 0.5rem 1.5rem rgba(255, 124, 142, 0.15);
+        transform: translateY(-4px);
+        border-left-color: var(--theme-color);
+    }
+    .doc-card.is-completed {
+        border-left-color: #1cc88a;
+        background-color: #f8fffc;
+    }
+    .doc-card-body { padding: 1.25rem; }
+    .doc-card-header {
+        display: flex; justify-content: space-between;
+        align-items: flex-start; margin-bottom: 0.75rem;
+    }
+    .doc-icon { font-size: 1.5rem; }
+    .doc-checkbox {
+        width: 22px; height: 22px; cursor: pointer;
+        accent-color: var(--theme-color);
+    }
+    .doc-title {
+        font-size: 0.95rem; font-weight: 700; color: #2c3e50;
+        line-height: 1.4; margin-bottom: 0.5rem; word-wrap: break-word;
+    }
+    .doc-desc {
+        font-size: 0.8rem; color: #6c757d; margin-bottom: 1.25rem;
+        display: -webkit-box; -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; overflow: hidden; min-height: 42px;
+    }
+    .doc-actions { display: flex; gap: 0.5rem; }
+    .btn-view-doc {
+        flex: 1; background: var(--theme-light); color: var(--theme-dark);
+        border: 1px solid #ffe0e6; font-weight: 600; padding: 0.5rem;
+        border-radius: 0.5rem; transition: all 0.2s; text-align: center;
+    }
+    .btn-view-doc:hover {
+        background: var(--theme-color); color: #fff; border-color: var(--theme-color);
+    }
+    .btn-download-doc {
+        background: #f8f9fc; color: #858796;
+        border: 1px solid #e3e6f0; padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-download-doc:hover {
+        background: #eaecf4; color: var(--theme-dark);
+    }
+
+    /* Modal Viewer */
+    .doc-modal .modal-dialog { max-width: 90vw; }
+    .doc-modal .modal-body { padding: 0; background: #333; height: 85vh; position: relative; }
+    .doc-modal iframe, .doc-modal img {
+        width: 100%; height: 100%; border: 0; object-fit: contain;
+    }
+
+    .text-theme { color: var(--theme-color) !important; }
+    .btn-theme { background-color: var(--theme-color); border-color: var(--theme-color); color: #fff; }
+    .btn-theme:hover { background-color: var(--theme-dark); border-color: var(--theme-dark); color: #fff; }
+    .btn-outline-theme { border-color: var(--theme-color); color: var(--theme-color); }
+    .btn-outline-theme:hover { background-color: var(--theme-color); color: #fff; }
+</style>
 
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center"
     style="background-image: url('{{ $bgImage }}');">
@@ -30,208 +180,317 @@
                         <h3 class="mb-0">Dashboard</h3>
                         <small class="small-muted">Welcome back — here's what's happening</small>
                     </div>
+                    <div id="ajaxMessage" class="alert d-none mb-3" role="alert"></div>
 
-                    <div class="card mb-3">
+                    {{-- Top Progress Bar --}}
+                    <div class="card mb-4 shadow-sm">
                         <div class="card-body">
-                            <div class="row gy-3">
-                                <div class="col-12">
-                                    <h5 class="card-title mb-2">Onboarding progress</h5>
-                                    <p class="small-muted mb-3">Complete the items below to finish your onboarding. The progress bar updates automatically.</p>
-
-                                    <div class="mb-3">
-                                        <div class="seg-progress" aria-hidden="true">
-                                            <div class="seg-fill" id="segFill" style="width:0%"></div>
-                                            <div class="seg-overlay" id="segOverlay"></div>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <strong id="progressPercent">0%</strong>
-                                                <span class="small-muted" id="progressLabel">Not started</span>
-                                            </div>
-                                            <div>
-                                                <button class="btn btn-sm btn-outline-secondary" id="markAllBtn" type="button">Mark all</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h5 class="card-title mb-1">Onboarding Progress</h5>
+                                    <p class="small-muted mb-0">Complete the items below to finish your onboarding.</p>
                                 </div>
+                                <button class="btn btn-sm btn-outline-theme" id="markAllBtn" type="button">
+                                    <i class="fas fa-check-double"></i> Mark all
+                                </button>
+                            </div>
 
-                                <div class="col-lg-5">
-                                    <div class="mb-2">
-                                        <h6 class="mb-2">Required steps</h6>
-                                        <form id="stepsForm" class="needs-validation" novalidate>
-                                            <div class="list-group">
-                                                @foreach ($documents as $document)
-                                                    @php
-                                                        $userDoc = \App\Models\UserDocumentCompletion::where('user_id', Auth::id())
-                                                                    ->where('document_id', $document->id)
-                                                                    ->first();
-                                                        
-                                                        // Determine if we show PDF or Video
-                                                        $mediaUrl = $document->link ?? ($document->document ? asset('images/documents/' . $document->document) : null);
-                                                        $isVideo = !empty($document->link);
-                                                    @endphp
+                            <div class="seg-progress mb-2" aria-hidden="true">
+                                <div class="seg-fill" id="segFill" style="width:0%"></div>
+                            </div>
 
-                                                    <label class="list-group-item list-group-item-action d-flex align-items-start gap-3 doc-item" 
-                                                           data-url="{{ $mediaUrl }}" 
-                                                           data-type="{{ $isVideo ? 'video' : 'pdf' }}">
-                                                        <input class="form-check-input mt-1 me-2 doc-checkbox" type="checkbox" 
-                                                               value="{{ $document->id }}" @checked($userDoc) data-prevalue="{{ $userDoc }}"
-                                                               onclick="event.stopPropagation();" />
-                                                        <div>
-                                                            <div class="fw-bold text-truncate" style="max-width: 250px;">
-                                                                @if($isVideo) <i class="fab fa-youtube text-danger mr-1"></i> @else <i class="fas fa-file-pdf text-info mr-1"></i> @endif
-                                                                {{ $document->title }}
-                                                            </div>
-                                                            <div class="small-muted text-truncate" style="max-width: 250px;">{{ $document->description }}</div>
-                                                        </div>
-                                                    </label>
-                                                @endforeach
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="mt-3">
-                                        <p class="small-muted mb-3">Confirm that you have reviewed all marked documents.</p>
-                                        <button class="btn btn-primary btn-sm w-100" id="submitDocs" type="button">Submit completed</button>
-                                    </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center gap-2">
+                                    <strong id="progressPercent" class="text-theme" style="font-size:1.1rem;">0%</strong>
+                                    <span class="small-muted" id="progressLabel">Not started</span>
                                 </div>
-
-                                <div class="col-lg-7">
-                                    <h6 class="mb-2" id="previewTitle">Preview</h6>
-                                    <div class="ratio ratio-4x3 border rounded bg-dark" style="min-height:300px; overflow:hidden;">
-                                        <iframe id="pdfViewer" src="" title="Media preview" allowfullscreen style="border:0"></iframe>
-                                    </div>
-                                    <div id="completedBadge" class="badge bg-success mt-2 d-none w-100 py-2">All onboarding steps complete ✓</div>
-                                </div>
+                                <span class="badge bg-light text-muted" id="totalCounter">0 / 0</span>
+                            </div>
+                            <div id="completedBadge" class="alert alert-success mt-3 mb-0 py-2 text-center d-none">
+                                <i class="fas fa-check-circle"></i> All onboarding steps complete!
                             </div>
                         </div>
                     </div>
+
+                    {{-- Documents Grid --}}
+                    <form id="stepsForm" novalidate>
+                        @foreach ($groupedDocuments as $category => $docs)
+                            @php
+                                $catSlug = preg_replace('/[^a-z0-9]+/', '-', strtolower($category));
+                                $catTotal = $docs->count();
+                                $catCompleted = 0;
+                                foreach ($docs as $d) {
+                                    if (in_array($d->id, $userDocIds)) $catCompleted++;
+                                }
+                                $catIcon = $catIcons[$category] ?? 'fa-folder';
+                            @endphp
+
+                            <div class="category-block" data-cat="{{ $catSlug }}">
+                                <div class="cat-title-wrapper" id="header-{{ $catSlug }}">
+                                    <div class="cat-icon-circle">
+                                        <i class="fas {{ $catIcon }}"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="cat-name">{{ $category }}</h4>
+                                        <small class="text-muted">{{ $catTotal }} Documents</small>
+                                    </div>
+                                    <div class="ms-auto d-flex align-items-center gap-2">
+                                        <span class="cat-badge {{ $catCompleted === $catTotal ? 'all-done' : '' }}" id="badge-{{ $catSlug }}">
+                                            {{ $catCompleted }}/{{ $catTotal }} Completed
+                                        </span>
+                                        <button type="button" class="btn-toggle-accordion">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="cat-body" id="cat-{{ $catSlug }}">
+                                    <div class="row g-4">
+                                        @foreach ($docs as $document)
+                                            @php
+                                                $isVideo = !empty($document->link);
+                                                $isDone  = in_array($document->id, $userDocIds);
+                                                $isImage = false;
+                                                $mediaUrl = null;
+                                                $downloadUrl = null;
+                                                $fileExt = '';
+
+                                                if ($isVideo) {
+                                                    $mediaUrl = $document->link;
+                                                } elseif ($document->document) {
+                                                    $mediaUrl = asset('images/documents/' . $document->document);
+                                                    $downloadUrl = $mediaUrl; // Local files can be downloaded
+                                                    $fileExt = strtolower(pathinfo($document->document, PATHINFO_EXTENSION));
+                                                    if (in_array($fileExt, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                                                        $isImage = true;
+                                                    }
+                                                }
+                                                
+                                                $fileIcon = $isVideo ? 'fa-play-circle text-danger' : ($isImage ? 'fa-file-image text-primary' : 'fa-file-pdf text-info');
+                                            @endphp
+
+                                            <div class="col-md-6 col-xl-4">
+                                                <div class="doc-card {{ $isDone ? 'is-completed' : '' }}" data-cat="{{ $catSlug }}">
+                                                    <div class="doc-card-body">
+                                                        <div class="doc-card-header">
+                                                            <i class="fas {{ $fileIcon }} doc-icon"></i>
+                                                            <input type="checkbox" class="form-check-input doc-checkbox" value="{{ $document->id }}" @checked($isDone) />
+                                                        </div>
+                                                        <h6 class="doc-title">{{ $document->title }}</h6>
+                                                        
+                                                        <div class="doc-actions">
+                                                            <button type="button" class="btn btn-view-doc open-doc-modal" 
+                                                                data-url="{{ $mediaUrl }}" 
+                                                                data-type="{{ $isVideo ? 'video' : ($isImage ? 'image' : 'pdf') }}"
+                                                                data-title="{{ $document->title }}">
+                                                                <i class="fas fa-eye"></i> View
+                                                            </button>
+                                                            
+                                                            @if($downloadUrl)
+                                                            <a href="{{ $downloadUrl }}" download class="btn btn-download-doc" title="Download">
+                                                                <i class="fas fa-download"></i>
+                                                            </a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </form>
+
+                    {{-- Submit Button --}}
+                    <div class="text-end mt-4 mb-5">
+                        <button class="btn btn-theme btn-lg px-5" id="submitDocs" type="button">
+                            <i class="fas fa-paper-plane"></i> Submit Completed
+                        </button>
+                    </div>
+
                 </section>
 
-                <section id="notice" class="content-pane d-none">@include('user.inc.notice')</section>
-                <section id="commencement" class="content-pane d-none">@include('user.inc.commencement')</section>
-                <section id="profile" class="content-pane d-none">@include('user.inc.profile')</section>
-                <section id="password" class="content-pane d-none">@include('user.inc.password')</section>
+                <section id="notice"        class="content-pane d-none">@include('user.inc.notice')</section>
+                <section id="commencement"  class="content-pane d-none">@include('user.inc.commencement')</section>
+                <section id="profile"       class="content-pane d-none">@include('user.inc.profile')</section>
+                <section id="password"      class="content-pane d-none">@include('user.inc.password')</section>
 
             </div>
         </main>
     </div>
 </div>
+
+{{-- PDF / Image / Video Modal --}}
+<div class="modal fade doc-modal" id="docViewerModal" tabindex="-1" aria-labelledby="docViewerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="docViewerModalLabel">Document Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="modalIframe" src="" allowfullscreen style="display:none;"></iframe>
+                <img id="modalImage" src="" alt="Document Image" style="display:none;" />
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
-<script src="{{ asset('resources/admin/js/jquery.min.js')}}"></script>
+<script src="{{ asset('resources/admin/js/jquery.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-$(document).ready(function() {
+ $(document).ready(function() {
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
 
-    // --- Navigation Logic ---
-    const sideLinks = $('[data-target]');
-    const panes = $('.content-pane');
-
-    function showPane(name){
+    // Sidebar Navigation
+    var panes = $('.content-pane');
+    $('[data-target]').on('click', function(e) {
+        e.preventDefault();
+        var name = $(this).data('target');
         panes.addClass('d-none');
-        $(`#${name}`).removeClass('d-none');
-        $('.nav-vertical .nav-link').each(function() {
-            $(this).toggleClass('active', $(this).data('target') === name);
+        $('#' + name).removeClass('d-none');
+        $('.nav-vertical .nav-link').removeClass('active');
+        $('.nav-vertical .nav-link[data-target="' + name + '"]').addClass('active');
+    });
+
+    // Accordion Toggle
+    $('.cat-title-wrapper').on('click', function() {
+        $(this).closest('.category-block').toggleClass('collapsed');
+    });
+
+    // Onboarding Progress
+    var checkboxes = $('.doc-checkbox');
+    var fill = $('#segFill');
+
+    function updateProgress() {
+        var total = checkboxes.length;
+        var checked = checkboxes.filter(':checked').length;
+        var pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+
+        fill.css('width', pct + '%');
+        $('#progressPercent').text(pct + '%');
+        $('#totalCounter').text(checked + ' / ' + total);
+
+        var labels = [[0, 'Not started'], [1, 'Getting started'], [30, 'Making progress'], [70, 'Almost done'], [100, 'Completed']];
+        var text = labels[0][1];
+        for (var i = labels.length - 1; i >= 0; i--) {
+            if (pct >= labels[i][0]) { text = labels[i][1]; break; }
+        }
+        $('#progressLabel').text(text);
+        $('#completedBadge').toggleClass('d-none', pct < 100);
+
+        // Update Card UI
+        checkboxes.each(function() {
+            var $card = $(this).closest('.doc-card');
+            $card.toggleClass('is-completed', $(this).is(':checked'));
+        });
+
+        // Per-category badges
+        $('.category-block').each(function() {
+            var catCheckboxes = $(this).find('.doc-checkbox');
+            var catChecked = catCheckboxes.filter(':checked').length;
+            var catTotal = catCheckboxes.length;
+            var slug = $(this).data('cat');
+            var $badge = $('#badge-' + slug);
+            $badge.text(catChecked + '/' + catTotal + ' Completed');
+            $badge.toggleClass('all-done', catChecked === catTotal && catTotal > 0);
         });
     }
 
-    sideLinks.on('click', function(e){
-        e.preventDefault();
-        showPane($(this).data('target'));
-    });
-
-    // --- Onboarding Logic ---
-    const checkboxes = $('.doc-checkbox');
-    const fill = $('#segFill');
-    const overlay = $('#segOverlay');
-
-    function updateProgress() {
-        const total = checkboxes.length;
-        const checked = checkboxes.filter(':checked').length;
-        const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
-        
-        fill.css('width', pct + '%');
-        $('#progressPercent').text(pct + '%');
-
-        const labels = { 0: 'Not started', 1: 'Getting started', 30: 'Making progress', 70: 'Almost done', 100: 'Completed' };
-        let text = labels[0];
-        if(pct > 0) text = labels[1];
-        if(pct >= 30) text = labels[30];
-        if(pct >= 70) text = labels[70];
-        if(pct === 100) text = labels[100];
-        
-        $('#progressLabel').text(text);
-        $('#completedBadge').toggleClass('d-none', pct < 100);
-    }
-
-    // --- Media Preview Handler (PDF vs YouTube) ---
-    $('.doc-item').on('click', function(e) {
-        if ($(e.target).is('input')) return;
-
-        const url = $(this).data('url');
-        const type = $(this).data('type');
-        const $viewer = $('#pdfViewer');
-        
-        $('.doc-item').removeClass('bg-light border-primary');
-        $(this).addClass('bg-light border-primary');
-
-        if (!url) return;
-
-        if (type === 'video') {
-            // Convert standard YouTube link to Embed link
-            let videoId = '';
-            if (url.includes('v=')) {
-                videoId = url.split('v=')[1].split('&')[0];
-            } else if (url.includes('youtu.be/')) {
-                videoId = url.split('youtu.be/')[1];
-            }
-            $viewer.attr('src', `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`);
-            $('#previewTitle').html('<i class="fab fa-youtube text-danger"></i> Video Preview');
-        } else {
-            // Load PDF
-            $viewer.attr('src', url + '#toolbar=0');
-            $('#previewTitle').html('<i class="fas fa-file-pdf text-info"></i> Document Preview');
-        }
-        
-        // Mobile scroll
-        if ($(window).width() < 992) {
-            $viewer[0].scrollIntoView({behavior:'smooth', block:'center'});
-        }
-    });
-
     checkboxes.on('change', updateProgress);
-    
-    $('#markAllBtn').on('click', function(){
-        const allChecked = checkboxes.filter(':not(:checked)').length === 0;
+
+    $('#markAllBtn').on('click', function() {
+        var allChecked = checkboxes.filter(':not(:checked)').length === 0;
         checkboxes.prop('checked', !allChecked);
         updateProgress();
     });
 
-    $('#submitDocs').on('click', function(e){
+    $('#submitDocs').on('click', function(e) {
         e.preventDefault();
-        const selectedIds = checkboxes.filter(':checked').map(function(){ return $(this).val(); }).get();
-        
-        $.ajax({
+        var selectedIds = checkboxes.filter(':checked').map(function() { return $(this).val(); }).get();
+
+        if (selectedIds.length === 0) {
+            alert('Please select at least one document before submitting.');
+            return;
+        }
+
+         $.ajax({
             url: '{{ route("user.submitDocuments") }}',
             type: 'POST',
             data: { document_ids: selectedIds },
-            success: function(res) {
-                alert(res.message || 'Submission successful');
+            success: function(res) { 
+                showMessage(res.message || 'Submission successful!', 'success');
             },
-            error: function(xhr) {
-                alert(xhr.responseJSON?.message || 'Error submitting documents');
+            error: function(xhr) { 
+                showMessage(xhr.responseJSON?.message || 'Error submitting documents', 'error');
             }
         });
     });
 
-    // Initial load
+    // Helper function to display the message
+    function showMessage(message, type) {
+        var $alertDiv = $('#ajaxMessage');
+        $alertDiv.removeClass('d-none alert-success alert-danger')
+                .addClass(type === 'success' ? 'alert-success' : 'alert-danger')
+                .html(message);
+                
+        // Scroll to the message so the user sees it
+        $('html, body').animate({ scrollTop: $alertDiv.offset().top - 100 }, 500);
+        
+        // Hide the message after 5 seconds
+        setTimeout(function() {
+            $alertDiv.addClass('d-none');
+        }, 5000);
+    }
+
+    // Modal Viewer Logic
+    var docModal = new bootstrap.Modal(document.getElementById('docViewerModal'));
+    
+    $('.open-doc-modal').on('click', function() {
+        var url = $(this).data('url');
+        var type = $(this).data('type');
+        var title = $(this).data('title');
+        
+        var $iframe = $('#modalIframe');
+        var $img = $('#modalImage');
+
+        $('#docViewerModalLabel').text(title);
+        $iframe.hide().attr('src', '');
+        $img.hide().attr('src', '');
+
+        if (!url) {
+            alert('No media available for this document.');
+            return;
+        }
+
+        if (type === 'video') {
+            var videoId = '';
+            if (url.indexOf('v=') !== -1) {
+                videoId = url.split('v=')[1].split('&')[0];
+            } else if (url.indexOf('youtu.be/') !== -1) {
+                videoId = url.split('youtu.be/')[1];
+            }
+            $iframe.attr('src', 'https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1').show();
+        } else if (type === 'image') {
+            $img.attr('src', url).show();
+        } else { // PDF
+            $iframe.attr('src', url + '#toolbar=0').show();
+        }
+        
+        docModal.show();
+    });
+
+    // Clear media sources when modal closes
+    document.getElementById('docViewerModal').addEventListener('hidden.bs.modal', function () {
+        $('#modalIframe').attr('src', '').hide();
+        $('#modalImage').attr('src', '').hide();
+    });
+
     updateProgress();
-    // Load first item into preview if exists
-    $('.doc-item').first().trigger('click');
 });
 </script>
 @endsection
