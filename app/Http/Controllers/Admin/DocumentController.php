@@ -18,7 +18,7 @@ class DocumentController extends Controller
             if (!empty($request->category_filter)) {
                 $data->where('category', $request->category_filter);
             }
-        
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('document', function($row) {
@@ -69,9 +69,12 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'document' => 'nullable|file|mimes:pdf|max:5048',
+            'title'       => 'required|string|max:255',
+            'category'    => 'nullable|string|max:255',
+            'document'    => 'nullable|file|mimes:pdf|max:5048',
             'description' => 'nullable|string',
+            'link'        => 'nullable|url|max:255',
+            'sl'          => 'nullable|integer|min:0',
         ]);
 
         if ($validator->fails()) {
@@ -82,19 +85,18 @@ class DocumentController extends Controller
         }
 
         $data = new Document();
-        $data->title = $request->title;
-        $data->category = $request->category;
+        $data->title       = $request->title;
+        $data->category    = $request->category;
         $data->description = $request->description;
-        $data->link = $request->link;
-        $data->sl = $request->sl ?? 0;
-        $data->created_by = auth()->id();
+        $data->link        = $request->link;
+        $data->sl          = $request->sl ?? 0;
+        $data->created_by  = auth()->id();
 
         if ($request->hasFile('document')) {
-            $file = $request->file('document');
+            $file     = $request->file('document');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path('images/documents/');
+            $path     = public_path('images/documents/');
 
-            // Create folder if not exists
             if (!file_exists($path)) {
                 mkdir($path, 0755, true);
             }
@@ -102,18 +104,17 @@ class DocumentController extends Controller
             $data->document = $filename;
         }
 
-
         if ($data->save()) {
             return response()->json([
-                'status' => 200,
-                'message' => 'Client review created successfully.'
-            ], 201);
-        } else {
-            return response()->json([
-                'status' => 500,
-                'message' => 'Server error.'
-            ], 500);
+                'status'  => 200,
+                'message' => 'Document created successfully.'
+            ], 200);
         }
+
+        return response()->json([
+            'status'  => 500,
+            'message' => 'Server error.'
+        ], 500);
     }
 
     public function edit($id)
@@ -121,7 +122,7 @@ class DocumentController extends Controller
         $review = Document::find($id);
         if (!$review) {
             return response()->json([
-                'status' => 404,
+                'status'  => 404,
                 'message' => 'Document not found'
             ], 404);
         }
@@ -131,9 +132,12 @@ class DocumentController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'document' => 'nullable|file|mimes:pdf|max:5048',
+            'title'       => 'required|string|max:255',
+            'category'    => 'nullable|string|max:255',
+            'document'    => 'nullable|file|mimes:pdf|max:5048',
             'description' => 'nullable|string',
+            'link'        => 'nullable|url|max:255',
+            'sl'          => 'nullable|integer|min:0',
         ]);
 
         if ($validator->fails()) {
@@ -143,32 +147,30 @@ class DocumentController extends Controller
             ], 422);
         }
 
-
         $data = Document::find($request->codeid);
         if (!$data) {
             return response()->json([
-                'status' => 404,
+                'status'  => 404,
                 'message' => 'Document not found'
             ], 404);
         }
 
-        $data->title = $request->title;
-        $data->category = $request->category;
+        $data->title       = $request->title;
+        $data->category    = $request->category;
         $data->description = $request->description;
-        $data->link = $request->link;
-        $data->sl = $request->sl ?? 0;
-        $data->updated_by = auth()->id();
+        $data->link        = $request->link;
+        $data->sl          = $request->sl ?? 0;
+        $data->updated_by  = auth()->id();
 
         if ($request->hasFile('document')) {
             // Delete old document if exists
             if ($data->document && file_exists(public_path('images/documents/' . $data->document))) {
                 unlink(public_path('images/documents/' . $data->document));
             }
-            $file = $request->file('document');
+            $file     = $request->file('document');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path('images/documents/');
+            $path     = public_path('images/documents/');
 
-            // Create folder if not exists
             if (!file_exists($path)) {
                 mkdir($path, 0755, true);
             }
@@ -177,49 +179,63 @@ class DocumentController extends Controller
         }
 
         if ($data->save()) {
-            
             return response()->json([
-                'status' => 200,
+                'status'  => 200,
                 'message' => 'Document updated successfully.'
             ], 200);
-        } else {
-            return response()->json([
-                'status' => 500,
-                'message' => 'Server error.'
-            ], 500);
         }
+
+        return response()->json([
+            'status'  => 500,
+            'message' => 'Server error.'
+        ], 500);
     }
 
     public function destroy($id)
     {
         $data = Document::find($id);
-        
+
         if (!$data) {
-            return response()->json(['success' => false, 'message' => 'Document not found.'], 404);
+            return response()->json([
+                'success' => false,
+                'message'  => 'Document not found.'
+            ], 404);
         }
 
-        // Delete image if exists
+        // Delete file if exists
         if ($data->document && file_exists(public_path('images/documents/' . $data->document))) {
             unlink(public_path('images/documents/' . $data->document));
         }
 
         if ($data->delete()) {
-            
-            return response()->json(['success' => true, 'message' => 'Data deleted successfully.']);
+            return response()->json([
+                'success' => true,
+                'message' => 'Data deleted successfully.'
+            ]);
         }
 
-        return response()->json(['success' => false, 'message' => 'Failed to delete Document.'], 500);
+        return response()->json([
+            'success' => false,
+            'message' => 'Failed to delete Document.'
+        ], 500);
     }
 
     public function toggleStatus(Request $request)
     {
         $review = Document::find($request->review_id);
         if (!$review) {
-            return response()->json(['status' => 404, 'message' => 'Document not found']);
+            return response()->json([
+                'status'  => 404,
+                'message' => 'Document not found'
+            ], 404);
         }
 
         $review->status = $request->status;
         $review->save();
-        return response()->json(['status' => 200, 'message' => 'Status updated successfully']);
+
+        return response()->json([
+            'status'  => 200,
+            'message' => 'Status updated successfully'
+        ]);
     }
 }
