@@ -129,14 +129,25 @@
         display: -webkit-box; -webkit-line-clamp: 2;
         -webkit-box-orient: vertical; overflow: hidden; min-height: 42px;
     }
-    .doc-actions { display: flex; gap: 0.5rem; }
-    .btn-view-doc {
-        flex: 1; background: var(--theme-light); color: var(--theme-dark);
-        border: 1px solid #ffe0e6; font-weight: 600; padding: 0.5rem;
+    .doc-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .btn-view-doc, .btn-video-doc {
+        flex: 1; font-weight: 600; padding: 0.5rem;
         border-radius: 0.5rem; transition: all 0.2s; text-align: center;
+        border: 1px solid; min-width: 100px;
+    }
+    .btn-view-doc {
+        background: var(--theme-light); color: var(--theme-dark);
+        border-color: #ffe0e6;
     }
     .btn-view-doc:hover {
         background: var(--theme-color); color: #fff; border-color: var(--theme-color);
+    }
+    .btn-video-doc {
+        background: #fff0f0; color: #dc3545;
+        border-color: #ffcccc;
+    }
+    .btn-video-doc:hover {
+        background: #dc3545; color: #fff; border-color: #dc3545;
     }
     .btn-download-doc {
         background: #f8f9fc; color: #858796;
@@ -248,25 +259,26 @@
                                     <div class="row g-4">
                                         @foreach ($docs as $document)
                                             @php
-                                                $isVideo = !empty($document->link);
                                                 $isDone  = in_array($document->id, $userDocIds);
+                                                
+                                                // Separate File and Video logic
+                                                $fileUrl = null;
                                                 $isImage = false;
-                                                $mediaUrl = null;
                                                 $downloadUrl = null;
-                                                $fileExt = '';
-
-                                                if ($isVideo) {
-                                                    $mediaUrl = $document->link;
-                                                } elseif ($document->document) {
-                                                    $mediaUrl = asset('images/documents/' . $document->document);
-                                                    $downloadUrl = $mediaUrl; // Local files can be downloaded
+                                                
+                                                if ($document->document) {
+                                                    $fileUrl = asset('images/documents/' . $document->document);
+                                                    $downloadUrl = $fileUrl;
                                                     $fileExt = strtolower(pathinfo($document->document, PATHINFO_EXTENSION));
                                                     if (in_array($fileExt, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
                                                         $isImage = true;
                                                     }
                                                 }
+
+                                                $videoUrl = !empty($document->link) ? $document->link : null;
                                                 
-                                                $fileIcon = $isVideo ? 'fa-play-circle text-danger' : ($isImage ? 'fa-file-image text-primary' : 'fa-file-pdf text-info');
+                                                // Icon priority: Video > Image > PDF
+                                                $fileIcon = $videoUrl ? 'fa-play-circle text-danger' : ($isImage ? 'fa-file-image text-primary' : 'fa-file-pdf text-info');
                                             @endphp
 
                                             <div class="col-md-6 col-xl-4">
@@ -279,13 +291,23 @@
                                                         <h6 class="doc-title">{{ $document->title }}</h6>
                                                         
                                                         <div class="doc-actions">
+                                                            @if($fileUrl)
                                                             <button type="button" class="btn btn-view-doc open-doc-modal" 
-                                                                data-url="{{ $mediaUrl }}" 
-                                                                data-type="{{ $isVideo ? 'video' : ($isImage ? 'image' : 'pdf') }}"
+                                                                data-url="{{ $fileUrl }}" 
+                                                                data-type="{{ $isImage ? 'image' : 'pdf' }}"
                                                                 data-title="{{ $document->title }}">
-                                                                <i class="fas fa-eye"></i> View
+                                                                <i class="fas fa-eye"></i> View Doc
                                                             </button>
+                                                            @endif
                                                             
+                                                            @if($videoUrl)
+                                                            <button type="button" class="btn btn-video-doc open-video-modal" 
+                                                                data-url="{{ $videoUrl }}" 
+                                                                data-title="{{ $document->title }}">
+                                                                <i class="fab fa-youtube"></i> Watch Video
+                                                            </button>
+                                                            @endif
+
                                                             @if($downloadUrl)
                                                             <a href="{{ $downloadUrl }}" download class="btn btn-download-doc" title="Download">
                                                                 <i class="fas fa-download"></i>
@@ -321,7 +343,7 @@
     </div>
 </div>
 
-{{-- PDF / Image / Video Modal --}}
+{{-- PDF / Image Modal --}}
 <div class="modal fade doc-modal" id="docViewerModal" tabindex="-1" aria-labelledby="docViewerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -332,6 +354,21 @@
             <div class="modal-body">
                 <iframe id="modalIframe" src="" allowfullscreen style="display:none;"></iframe>
                 <img id="modalImage" src="" alt="Document Image" style="display:none;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- YouTube Video Modal --}}
+<div class="modal fade doc-modal" id="videoViewerModal" tabindex="-1" aria-labelledby="videoViewerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoViewerModalLabel">Video Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="videoIframe" src="" allowfullscreen style="width:100%; height:100%; border:0;"></iframe>
             </div>
         </div>
     </div>
@@ -414,7 +451,7 @@
         var selectedIds = checkboxes.filter(':checked').map(function() { return $(this).val(); }).get();
 
         if (selectedIds.length === 0) {
-            alert('Please select at least one document before submitting.');
+            showMessage('Please select at least one document before submitting.', 'error');
             return;
         }
 
@@ -447,7 +484,7 @@
         }, 5000);
     }
 
-    // Modal Viewer Logic
+    // ====== Document Modal Logic (PDF/Image) ======
     var docModal = new bootstrap.Modal(document.getElementById('docViewerModal'));
     
     $('.open-doc-modal').on('click', function() {
@@ -463,19 +500,11 @@
         $img.hide().attr('src', '');
 
         if (!url) {
-            alert('No media available for this document.');
+            showMessage('No document file available.', 'error');
             return;
         }
 
-        if (type === 'video') {
-            var videoId = '';
-            if (url.indexOf('v=') !== -1) {
-                videoId = url.split('v=')[1].split('&')[0];
-            } else if (url.indexOf('youtu.be/') !== -1) {
-                videoId = url.split('youtu.be/')[1];
-            }
-            $iframe.attr('src', 'https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1').show();
-        } else if (type === 'image') {
+        if (type === 'image') {
             $img.attr('src', url).show();
         } else { // PDF
             $iframe.attr('src', url + '#toolbar=0').show();
@@ -484,10 +513,45 @@
         docModal.show();
     });
 
-    // Clear media sources when modal closes
     document.getElementById('docViewerModal').addEventListener('hidden.bs.modal', function () {
         $('#modalIframe').attr('src', '').hide();
         $('#modalImage').attr('src', '').hide();
+    });
+
+    // ====== Video Modal Logic (YouTube) ======
+    var videoModal = new bootstrap.Modal(document.getElementById('videoViewerModal'));
+    
+    $('.open-video-modal').on('click', function() {
+        var url = $(this).data('url');
+        var title = $(this).data('title');
+        
+        var $iframe = $('#videoIframe');
+
+        $('#videoViewerModalLabel').text(title);
+        $iframe.attr('src', ''); // Clear previous
+
+        if (!url) {
+            showMessage('No video link available.', 'error');
+            return;
+        }
+
+        // Parse YouTube URL
+        var videoId = '';
+        if (url.indexOf('v=') !== -1) {
+            videoId = url.split('v=')[1].split('&')[0];
+        } else if (url.indexOf('youtu.be/') !== -1) {
+            videoId = url.split('youtu.be/')[1];
+        } else {
+            videoId = url; // Fallback if it's already an ID or embed link
+        }
+        
+        $iframe.attr('src', 'https://www.youtube.com/embed/' + videoId + '?rel=0&autoplay=1');
+        videoModal.show();
+    });
+
+    // Stop video playback when modal is closed
+    document.getElementById('videoViewerModal').addEventListener('hidden.bs.modal', function () {
+        $('#videoIframe').attr('src', '');
     });
 
     updateProgress();
