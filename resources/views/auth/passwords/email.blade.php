@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 
 @section('content')
 <section class="pricing section light-background">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="text-center mt-4">
-              <button type="submit" class="btn-buy w-100">Send Password Reset Link</button>
+              <button type="submit" class="btn btn-primary rounded-pill px-4 w-100">Send Password Reset Link</button>
             </div>
 
             <div class="text-center mt-3">

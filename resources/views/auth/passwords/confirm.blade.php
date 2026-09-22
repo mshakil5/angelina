@@ -1,4 +1,4 @@
-@extends('frontend.master')
+@extends('frontend.layouts.master')
 
 @section('content')
 <section class="pricing section light-background">
