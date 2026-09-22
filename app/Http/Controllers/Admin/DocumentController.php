@@ -71,9 +71,9 @@ class DocumentController extends Controller
         $validator = Validator::make($request->all(), [
             'title'       => 'required|string|max:255',
             'category'    => 'nullable|string|max:255',
-            'document'    => 'nullable|file|mimes:pdf|max:5048',
+            'document'    => 'nullable|file|mimes:pdf|max:15048',
             'description' => 'nullable|string',
-            'link'        => 'nullable|url|max:255',
+            'link'        => 'nullable',
             'sl'          => 'nullable|integer|min:0',
         ]);
 
@@ -134,9 +134,9 @@ class DocumentController extends Controller
         $validator = Validator::make($request->all(), [
             'title'       => 'required|string|max:255',
             'category'    => 'nullable|string|max:255',
-            'document'    => 'nullable|file|mimes:pdf|max:5048',
+            'document'    => 'nullable|file|mimes:pdf|max:15048',
             'description' => 'nullable|string',
-            'link'        => 'nullable|url|max:255',
+            'link'        => 'nullable',
             'sl'          => 'nullable|integer|min:0',
         ]);
 
