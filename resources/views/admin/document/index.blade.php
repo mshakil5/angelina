@@ -70,7 +70,7 @@
                                                 <label class="custom-file-label" for="document">Choose file</label>
                                             </div>
                                         </div>
-                                        <small class="text-muted"><i class="fas fa-info-circle mr-1"></i> PDF format only</small>
+                                        <small class="text-danger"><i class="fas fa-info-circle mr-1"></i> PDF format only. Max size 15048 KB.</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -168,11 +168,55 @@
         var url   = "{{ URL::to('/admin/documents') }}";
         var upurl = "{{ URL::to('/admin/documents/update') }}";
 
+        // ===================== LOADER / SPINNER HELPERS =====================
+        function showLoader($btn) {
+            $btn.data('original-html', $btn.html());
+            $btn.prop('disabled', true)
+                .html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Saving...');
+        }
+
+        function hideLoader($btn) {
+            var original = $btn.data('original-html');
+            if (original) {
+                $btn.html(original);
+            }
+            $btn.prop('disabled', false);
+        }
+
+        // ===================== ERROR MESSAGE EXTRACTOR =====================
+        // Pulls the most useful message out of an XHR response
+        function extractErrorMessage(xhr) {
+            if (!xhr) return 'Something went wrong. Please try again.';
+
+            // Laravel validation errors (422) -> grab the first one
+            if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                var errs = xhr.responseJSON.errors;
+                var firstKey = Object.keys(errs)[0];
+                if (firstKey && errs[firstKey][0]) {
+                    return errs[firstKey][0];
+                }
+            }
+
+            // Standard JSON error with `message`
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                return xhr.responseJSON.message;
+            }
+
+            // Generic fallback based on status code
+            if (xhr.status === 0)   return 'Network error. Please check your connection.';
+            if (xhr.status === 404) return 'The requested resource was not found.';
+            if (xhr.status === 419) return 'Session expired. Please reload the page.';
+            if (xhr.status >= 500)  return 'Server error. Please try again later.';
+
+            return 'Something went wrong. Please try again.';
+        }
+
         // ===================== CREATE / UPDATE =====================
         $("#addBtn").click(function(e){
-            e.preventDefault();  // ✅ CRITICAL: stops the browser from doing a normal form submit
+            e.preventDefault();
 
-            var btn_val = $(this).val();  // "Create" or "Update"
+            var $btn    = $(this);
+            var btn_val = $btn.val();  // "Create" or "Update"
 
             var form_data = new FormData();
             form_data.append("title",       $("#title").val());
@@ -186,6 +230,9 @@
                 form_data.append("document", imageInput.files[0]);
             }
 
+            // 🔵 Show spinner on Save button
+            showLoader($btn);
+
             if (btn_val === 'Create') {
                 $.ajax({
                     url: url,
@@ -194,18 +241,17 @@
                     processData: false,
                     data: form_data,
                     success: function(res) {
+                        hideLoader($btn);
                         clearform();
-                        success(res.message);
+                        success(res.message || 'Document created successfully.');
                         pageTop();
                         reloadTable();
                     },
                     error: function(xhr) {
+                        hideLoader($btn);
                         console.error(xhr.responseText);
                         pageTop();
-                        if (xhr.responseJSON && xhr.responseJSON.errors)
-                            error(Object.values(xhr.responseJSON.errors)[0][0]);
-                        else
-                            error();
+                        error(extractErrorMessage(xhr));
                     }
                 });
             } else {
@@ -218,18 +264,17 @@
                     processData: false,
                     data: form_data,
                     success: function(res) {
+                        hideLoader($btn);
                         clearform();
-                        success(res.message);
+                        success(res.message || 'Document updated successfully.');
                         pageTop();
                         reloadTable();
                     },
                     error: function(xhr) {
+                        hideLoader($btn);
                         console.error(xhr.responseText);
                         pageTop();
-                        if (xhr.responseJSON && xhr.responseJSON.errors)
-                            error(Object.values(xhr.responseJSON.errors)[0][0]);
-                        else
-                            error();
+                        error(extractErrorMessage(xhr));
                     }
                 });
             }
@@ -242,12 +287,14 @@
             var info_url = url + '/' + codeid + '/edit';
             $.get(info_url, {}, function(d){
                 populateForm(d);
+            }).fail(function(xhr){
+                error(extractErrorMessage(xhr));
             });
         });
 
         function populateForm(data){
             $("#title").val(data.title);
-            $("#category").val(data.category).trigger('change');  // ✅ trigger change for Select2
+            $("#category").val(data.category).trigger('change');
             $("#description").val(data.description);
             $("#sl").val(data.sl);
             $("#link").val(data.link);
@@ -262,7 +309,6 @@
 
         function clearform(){
             $('#createThisForm')[0].reset();
-            // ✅ Re-select the category that matches the current URL filter
             var filterCat = "{{ request('category_filter') }}";
             if (filterCat) {
                 $("#category").val(filterCat).trigger('change');
@@ -279,8 +325,10 @@
 
         // ===================== STATUS TOGGLE =====================
         $(document).on('change', '.toggle-status', function() {
+            var $switch  = $(this);
             var review_id = $(this).data('id');
-            var status = $(this).prop('checked') ? 1 : 0;
+            var status    = $(this).prop('checked') ? 1 : 0;
+            var prevChecked = !status; // previous state for rollback
 
             $.ajax({
                 url: '/admin/documents/status',
@@ -291,12 +339,14 @@
                     _token: "{{ csrf_token() }}"
                 },
                 success: function(res) {
-                    success(res.message);
+                    success(res.message || 'Status updated successfully');
                     reloadTable();
                 },
                 error: function(xhr) {
                     console.error(xhr.responseText);
-                    error('Failed to update status');
+                    // rollback UI on failure
+                    $switch.prop('checked', prevChecked);
+                    error(extractErrorMessage(xhr) || 'Failed to update status');
                 }
             });
         });
@@ -304,24 +354,36 @@
         // ===================== DELETE =====================
         $("#contentContainer").on('click', '.delete', function(){
             if (!confirm('Are you sure you want to delete this document?')) return;
-            var codeid = $(this).data('id');
+
+            var $btn    = $(this);
+            var codeid  = $(this).data('id');
             var info_url = url + '/' + codeid;
+
+            // small loading state on delete button
+            var originalHtml = $btn.html();
+            $btn.prop('disabled', true)
+                .html('<span class="spinner-border spinner-border-sm"></span>');
+
             $.ajax({
                 url: info_url,
-                method: "GET",   // matches Route::get('/documents/{id}', [DocumentController::class, 'destroy'])
+                method: "GET",
                 success: function(res) {
+                    $btn.prop('disabled', false).html(originalHtml);
                     clearform();
-                    success(res.message);
+                    // ✅ controller returns { success, message } here
+                    if (res.success) {
+                        success(res.message || 'Data deleted successfully.');
+                    } else {
+                        error(res.message || 'Failed to delete document.');
+                    }
                     pageTop();
                     reloadTable();
                 },
                 error: function(xhr) {
+                    $btn.prop('disabled', false).html(originalHtml);
                     console.error(xhr.responseText);
                     pageTop();
-                    if (xhr.responseJSON && xhr.responseJSON.errors)
-                        error(Object.values(xhr.responseJSON.errors)[0][0]);
-                    else
-                        error();
+                    error(extractErrorMessage(xhr));
                 }
             });
         });
@@ -358,7 +420,6 @@
         // ===================== FILTER CHANGE =====================
         $('#category_filter').on('change', function () {
             var val = $(this).val();
-            // ✅ Also sync the create form's category dropdown
             $('#category').val(val).trigger('change');
             table.draw();
         });
