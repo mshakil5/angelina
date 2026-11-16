@@ -87,6 +87,7 @@
     }
 </style>
 
+<section class="mt-3"></section>
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center d-none" style="background-image: url({{ asset('resources/frontend/images/page-banner2.jpg') }});">
   <div class="container d-none">
     <h1 class="breadcrumb-title mb-3">
@@ -103,16 +104,16 @@
 
 
 <!-- Main content -->
-<main class="content-wrap mt-3">
+<main class="content-wrap mt-5">
   <div class="container">
 
-    {{-- {!! $companyDetails->terms_and_conditions !!} --}}
+    {!! $companyDetails->terms_and_conditions !!}
 
   </div>
 </main>
 
 
-<div class="container">
+<div class="container  d-none">
     <div class="tc-container">
         <div class="text-center mb-5">
             <h1>Angelina’s Day Care Nursery</h1>
