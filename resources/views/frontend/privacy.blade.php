@@ -94,6 +94,8 @@
     }
 </style>
 
+<section class="mt-3"></section>
+
 <section class="breadcrumb-section text-center text-white d-flex align-items-center justify-content-center d-none" style="background-image: url({{ asset('resources/frontend/images/page-banner2.jpg') }});">
   <div class="container d-none">
     <h1 class="breadcrumb-title mb-3">
@@ -110,8 +112,8 @@
 
 
 <!-- Main content -->
-<main class="content-wrap mt- 3">
-  <div class="container">
+<main class="content-wrap mt-5">
+  <div class="container mb-4">
 
     {!! $companyPrivacy->privacy_policy !!}
 
