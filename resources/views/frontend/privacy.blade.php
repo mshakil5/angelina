@@ -113,13 +113,13 @@
 <main class="content-wrap mt- 3">
   <div class="container">
 
-    {{-- {!! $companyPrivacy->privacy_policy !!} --}}
+    {!! $companyPrivacy->privacy_policy !!}
 
   </div>
 </main>
 
 
-<div class="container">
+<div class="container d-none">
     <div class="policy-container">
         <div class="text-center mb-5">
             <h1>Angelina’s Day Care Nursery</h1>
