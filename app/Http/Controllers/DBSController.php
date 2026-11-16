@@ -53,15 +53,25 @@ class DBSController extends Controller
                 }
 
                 foreach ($request->file('supporting_docs') as $file) {
-                    $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                    // Capture all metadata from the temp file BEFORE moving it.
+                    $originalName = $file->getClientOriginalName();
+                    $extension    = $file->getClientOriginalExtension();
+                    $size         = $file->getSize();      // stat() works now — temp file still exists
+                    $mimeType     = $file->getMimeType();  // optional, also stat-based on some drivers
+
+                    $filename = time() . '_' . uniqid() . '.' . $extension;
+
                     $file->move($destinationPath, $filename);
+
                     $docPaths[] = [
                         'file'     => $filename,
-                        'original' => $file->getClientOriginalName(),
-                        'size'     => $file->getSize(),
+                        'original' => $originalName,
+                        'size'     => $size,
                     ];
+
                     Log::info('File saved', ['file' => $filename, 'path' => 'images/dbs/' . $filename]);
                 }
+                
             } else {
                 Log::info('No files uploaded');
             }
